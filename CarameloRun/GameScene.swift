@@ -10,13 +10,17 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    var robot = Robot()
-    var joystick = Joystick()
-    var jumpButton = JumpButton()
+    let robot = Player()
+    let joystick = Joystick()
+    let jumpButton = JumpButton()
+    let ground = Ground()
     
    
     override func didMove(to view: SKView){
         backgroundColor = .white
+        
+        ground.position(x: view.frame.midX, y: view.frame.minY)
+        addChild(ground.node)
         
         robot.position(x: view.frame.midX, y: view.frame.minY)
         addChild(robot.node)
@@ -32,8 +36,13 @@ class GameScene: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
             let location = t.location(in: self)
+            
             if(joystick.node.frame.contains(location)) {
                 joystick.touchMoved(touch: t)
+            }
+            
+            if(jumpButton.node.frame.contains(location)) {
+                jumpButton.buttonTapped(robot)
             }
         }
     }

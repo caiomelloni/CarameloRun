@@ -13,9 +13,10 @@
 		F82786F32AC59B170047111D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F82786F12AC59B170047111D /* Main.storyboard */; };
 		F82786F52AC59B180047111D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F82786F42AC59B180047111D /* Assets.xcassets */; };
 		F82786F82AC59B180047111D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F82786F62AC59B180047111D /* LaunchScreen.storyboard */; };
-		F82787012AC5A2F20047111D /* Robot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82787002AC5A2F20047111D /* Robot.swift */; };
+		F82787012AC5A2F20047111D /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82787002AC5A2F20047111D /* Player.swift */; };
 		F82787032AC5A8250047111D /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82787022AC5A8250047111D /* Joystick.swift */; };
 		F82787052AC5B8CB0047111D /* JumpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82787042AC5B8CB0047111D /* JumpButton.swift */; };
+		F8B81A2B2AC8A92C0081324E /* Ground.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B81A2A2AC8A92C0081324E /* Ground.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,9 +27,10 @@
 		F82786F22AC59B170047111D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F82786F42AC59B180047111D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F82786F72AC59B180047111D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		F82787002AC5A2F20047111D /* Robot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Robot.swift; sourceTree = "<group>"; };
+		F82787002AC5A2F20047111D /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		F82787022AC5A8250047111D /* Joystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
 		F82787042AC5B8CB0047111D /* JumpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpButton.swift; sourceTree = "<group>"; };
+		F8B81A2A2AC8A92C0081324E /* Ground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ground.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,9 +77,10 @@
 		F82786FF2AC5A2DD0047111D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F82787002AC5A2F20047111D /* Robot.swift */,
+				F82787002AC5A2F20047111D /* Player.swift */,
 				F82787022AC5A8250047111D /* Joystick.swift */,
 				F82787042AC5B8CB0047111D /* JumpButton.swift */,
+				F8B81A2A2AC8A92C0081324E /* Ground.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -153,8 +156,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F82787012AC5A2F20047111D /* Robot.swift in Sources */,
+				F82787012AC5A2F20047111D /* Player.swift in Sources */,
 				F82786EE2AC59B170047111D /* GameScene.swift in Sources */,
+				F8B81A2B2AC8A92C0081324E /* Ground.swift in Sources */,
 				F82787032AC5A8250047111D /* Joystick.swift in Sources */,
 				F82787052AC5B8CB0047111D /* JumpButton.swift in Sources */,
 				F82786F02AC59B170047111D /* GameViewController.swift in Sources */,
