@@ -14,7 +14,6 @@ class GameScene: SKScene {
     let joystick = Joystick()
     let jumpButton = JumpButton()
     let ground = Ground()
-    
    
     override func didMove(to view: SKView){
         backgroundColor = .white
@@ -30,6 +29,8 @@ class GameScene: SKScene {
        
         jumpButton.position(x: view.frame.maxX, y: view.frame.minY)
         addChild(jumpButton.node)
+        
+
     }
     
    

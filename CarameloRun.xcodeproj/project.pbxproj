@@ -17,6 +17,7 @@
 		F82787032AC5A8250047111D /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82787022AC5A8250047111D /* Joystick.swift */; };
 		F82787052AC5B8CB0047111D /* JumpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82787042AC5B8CB0047111D /* JumpButton.swift */; };
 		F8B81A2B2AC8A92C0081324E /* Ground.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B81A2A2AC8A92C0081324E /* Ground.swift */; };
+		F8F97E382ACB08350006A4BA /* Background.sks in Resources */ = {isa = PBXBuildFile; fileRef = F8F97E372ACB08350006A4BA /* Background.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		F82787022AC5A8250047111D /* Joystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
 		F82787042AC5B8CB0047111D /* JumpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpButton.swift; sourceTree = "<group>"; };
 		F8B81A2A2AC8A92C0081324E /* Ground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ground.swift; sourceTree = "<group>"; };
+		F8F97E372ACB08350006A4BA /* Background.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Background.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 		F82786E62AC59B170047111D /* CarameloRun */ = {
 			isa = PBXGroup;
 			children = (
+				F8F97E342ACB07F50006A4BA /* Scenes */,
 				F82786FF2AC5A2DD0047111D /* Models */,
 				F82786E72AC59B170047111D /* AppDelegate.swift */,
 				F82786ED2AC59B170047111D /* GameScene.swift */,
@@ -83,6 +86,14 @@
 				F8B81A2A2AC8A92C0081324E /* Ground.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		F8F97E342ACB07F50006A4BA /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				F8F97E372ACB08350006A4BA /* Background.sks */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F82786F32AC59B170047111D /* Main.storyboard in Resources */,
+				F8F97E382ACB08350006A4BA /* Background.sks in Resources */,
 				F82786F52AC59B180047111D /* Assets.xcassets in Resources */,
 				F82786F82AC59B180047111D /* LaunchScreen.storyboard in Resources */,
 			);
