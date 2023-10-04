@@ -23,6 +23,8 @@ class Player {
         body.allowsRotation = false
         
         node.physicsBody = body
+        
+        node.zPosition = Zposition.player.rawValue
     }
     
     func nextSprite() {

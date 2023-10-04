@@ -16,18 +16,22 @@ class Joystick {
     
     
     init() {
-        left.size = CGSize(width: 50, height: 50)
-        right.size = CGSize(width: 50, height: 50)
+        
+        node.zPosition = Zposition.joystick.rawValue
+        
+        let size = CGSize(width: Dimensions.buttonWidth.rawValue, height: Dimensions.buttonHeight.rawValue)
+        left.size = size
+        right.size = size
         
         node.addChild(left)
         node.addChild(right)
-        node.size = CGSize(width: left.frame.width + right.frame.width + 10, height: right.frame.height + left.frame.height)
+        node.size = CGSize(width: 2 * size.width + 10, height: size.height)
         right.position = CGPoint(x: node.frame.midX + 5 + right.frame.width / 2, y: node.frame.midY)
         left.position = CGPoint(x: node.frame.midX - 5 - left.frame.width / 2, y: node.frame.midY)
     }
     
     func position(x: Double, y: Double) {
-        node.position = CGPoint(x: x + 40 + node.frame.width / 2, y: y + 30 + node.frame.height)
+        node.position = CGPoint(x: x + 100 + node.frame.width / 2, y: y + 30 + node.frame.height)
     }
     
     func touchMoved(touch: UITouch) {

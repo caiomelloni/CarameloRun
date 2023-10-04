@@ -11,11 +11,11 @@ class JumpButton {
     var node = SKSpriteNode(texture: SKTexture(image: UIImage(systemName: "chevron.up.circle.fill")!))
     
     init() {
-        node.size = CGSize(width: 50, height: 50)
+        node.size = CGSize(width: Dimensions.buttonWidth.rawValue, height: Dimensions.buttonHeight.rawValue)
     }
     
     func position(x: Double, y: Double) {
-        node.position = CGPoint(x: x - node.frame.width - 100, y: y + 70 + node.frame.height)
+        node.position = CGPoint(x: x - node.frame.width - 100, y: y + 30 + node.frame.height)
     }
     
     func buttonTapped(_ player: Player) {

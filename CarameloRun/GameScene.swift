@@ -32,11 +32,14 @@ class GameScene: SKScene {
     }
     
     func positionJoysticksAndJumpBtn() {
-        
-        joystick.position(x: sceneCamera.position.x - frame.maxX, y: sceneCamera.position.y - frame.maxY)
-
-        
-        jumpButton.position(x: sceneCamera.position.x + frame.maxX, y: sceneCamera.position.y - frame.maxY)
+        joystick.position(
+            x: sceneCamera.position.x - frame.maxX,
+            y: sceneCamera.position.y - frame.maxY
+        )
+        jumpButton.position(
+            x: sceneCamera.position.x + frame.maxX,
+            y: sceneCamera.position.y - frame.maxY
+        )
     }
     
    

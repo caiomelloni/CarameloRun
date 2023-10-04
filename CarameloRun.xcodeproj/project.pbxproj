@@ -16,6 +16,8 @@
 		F82787012AC5A2F20047111D /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82787002AC5A2F20047111D /* Player.swift */; };
 		F82787032AC5A8250047111D /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82787022AC5A8250047111D /* Joystick.swift */; };
 		F82787052AC5B8CB0047111D /* JumpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82787042AC5B8CB0047111D /* JumpButton.swift */; };
+		F898070F2ACDA1880044D237 /* Zposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F898070E2ACDA1880044D237 /* Zposition.swift */; };
+		F89807112ACDA4130044D237 /* Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89807102ACDA4130044D237 /* Dimensions.swift */; };
 		F8B81A2B2AC8A92C0081324E /* Ground.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B81A2A2AC8A92C0081324E /* Ground.swift */; };
 		F8F97E382ACB08350006A4BA /* Background.sks in Resources */ = {isa = PBXBuildFile; fileRef = F8F97E372ACB08350006A4BA /* Background.sks */; };
 /* End PBXBuildFile section */
@@ -31,6 +33,8 @@
 		F82787002AC5A2F20047111D /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		F82787022AC5A8250047111D /* Joystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
 		F82787042AC5B8CB0047111D /* JumpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpButton.swift; sourceTree = "<group>"; };
+		F898070E2ACDA1880044D237 /* Zposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zposition.swift; sourceTree = "<group>"; };
+		F89807102ACDA4130044D237 /* Dimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dimensions.swift; sourceTree = "<group>"; };
 		F8B81A2A2AC8A92C0081324E /* Ground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ground.swift; sourceTree = "<group>"; };
 		F8F97E372ACB08350006A4BA /* Background.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Background.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,14 +69,13 @@
 		F82786E62AC59B170047111D /* CarameloRun */ = {
 			isa = PBXGroup;
 			children = (
+				F898070D2ACDA1510044D237 /* Utils */,
+				F898070C2ACDA0D60044D237 /* Files */,
 				F8F97E342ACB07F50006A4BA /* Scenes */,
 				F82786FF2AC5A2DD0047111D /* Models */,
 				F82786E72AC59B170047111D /* AppDelegate.swift */,
 				F82786ED2AC59B170047111D /* GameScene.swift */,
 				F82786EF2AC59B170047111D /* GameViewController.swift */,
-				F82786F12AC59B170047111D /* Main.storyboard */,
-				F82786F42AC59B180047111D /* Assets.xcassets */,
-				F82786F62AC59B180047111D /* LaunchScreen.storyboard */,
 			);
 			path = CarameloRun;
 			sourceTree = "<group>";
@@ -86,6 +89,25 @@
 				F8B81A2A2AC8A92C0081324E /* Ground.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		F898070C2ACDA0D60044D237 /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				F82786F12AC59B170047111D /* Main.storyboard */,
+				F82786F42AC59B180047111D /* Assets.xcassets */,
+				F82786F62AC59B180047111D /* LaunchScreen.storyboard */,
+			);
+			name = Files;
+			sourceTree = "<group>";
+		};
+		F898070D2ACDA1510044D237 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F898070E2ACDA1880044D237 /* Zposition.swift */,
+				F89807102ACDA4130044D237 /* Dimensions.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		F8F97E342ACB07F50006A4BA /* Scenes */ = {
@@ -169,12 +191,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F82787012AC5A2F20047111D /* Player.swift in Sources */,
+				F898070F2ACDA1880044D237 /* Zposition.swift in Sources */,
 				F82786EE2AC59B170047111D /* GameScene.swift in Sources */,
 				F8B81A2B2AC8A92C0081324E /* Ground.swift in Sources */,
 				F82787032AC5A8250047111D /* Joystick.swift in Sources */,
 				F82787052AC5B8CB0047111D /* JumpButton.swift in Sources */,
 				F82786F02AC59B170047111D /* GameViewController.swift in Sources */,
 				F82786E82AC59B170047111D /* AppDelegate.swift in Sources */,
+				F89807112ACDA4130044D237 /* Dimensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
