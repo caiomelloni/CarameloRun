@@ -27,7 +27,7 @@ class Joystick {
     }
     
     func position(x: Double, y: Double) {
-        node.position = CGPoint(x: x + 30 + node.frame.height / 2, y: y + 5 + node.frame.width / 2)
+        node.position = CGPoint(x: x + 40 + node.frame.width / 2, y: y + 30 + node.frame.height)
     }
     
     func touchMoved(touch: UITouch) {

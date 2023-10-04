@@ -13,24 +13,30 @@ class GameScene: SKScene {
     let robot = Player()
     let joystick = Joystick()
     let jumpButton = JumpButton()
-    let ground = Ground()
+    let sceneCamera = SKCameraNode()
    
     override func didMove(to view: SKView){
         backgroundColor = .white
         
-        ground.position(x: view.frame.midX, y: view.frame.minY)
-        addChild(ground.node)
+        camera = sceneCamera
         
         robot.position(x: view.frame.midX, y: view.frame.minY)
         addChild(robot.node)
         
-        joystick.position(x: view.frame.minX, y: view.frame.minY)
         addChild(joystick.node)
        
-        jumpButton.position(x: view.frame.maxX, y: view.frame.minY)
         addChild(jumpButton.node)
         
+        positionJoysticksAndJumpBtn()
+        
+    }
+    
+    func positionJoysticksAndJumpBtn() {
+        
+        joystick.position(x: sceneCamera.position.x - frame.maxX, y: sceneCamera.position.y - frame.maxY)
 
+        
+        jumpButton.position(x: sceneCamera.position.x + frame.maxX, y: sceneCamera.position.y - frame.maxY)
     }
     
    
@@ -63,9 +69,17 @@ class GameScene: SKScene {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
     
+    func updateCameraPosition() {
+        camera?.position.x = robot.node.position.x
+        camera?.position.y = robot.node.position.y
+    }
+    
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+        
+        updateCameraPosition()
+        positionJoysticksAndJumpBtn()
         
         robot.addMovementX(joystick.velocityX)
         

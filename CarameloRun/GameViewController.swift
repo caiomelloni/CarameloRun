@@ -35,7 +35,7 @@ class GameViewController: UIViewController {
         if UIDevice.current.userInterfaceIdiom == .phone {
             return .landscape
         } else {
-            return .all
+            return .landscape
         }
     }
 

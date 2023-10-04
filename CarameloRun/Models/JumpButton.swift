@@ -15,7 +15,7 @@ class JumpButton {
     }
     
     func position(x: Double, y: Double) {
-        node.position = CGPoint(x: x - node.frame.width, y: y + node.frame.height)
+        node.position = CGPoint(x: x - node.frame.width - 100, y: y + 70 + node.frame.height)
     }
     
     func buttonTapped(_ player: Player) {
