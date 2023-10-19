@@ -77,7 +77,6 @@
 				F898070C2ACDA0D60044D237 /* Files */,
 				F8F97E342ACB07F50006A4BA /* Scenes */,
 				F82786FF2AC5A2DD0047111D /* Models */,
-				F82786E72AC59B170047111D /* AppDelegate.swift */,
 				F82786ED2AC59B170047111D /* GameScene.swift */,
 				F82786EF2AC59B170047111D /* GameViewController.swift */,
 			);
@@ -114,6 +113,7 @@
 		F898070C2ACDA0D60044D237 /* Files */ = {
 			isa = PBXGroup;
 			children = (
+				F82786E72AC59B170047111D /* AppDelegate.swift */,
 				F82786F42AC59B180047111D /* Assets.xcassets */,
 			);
 			name = Files;

@@ -17,7 +17,7 @@ final class GameCenterHelper: NSObject, GKLocalPlayerListener {
   weak var delegate: GameCenterHelperDelegate?
   private let minPlayers: Int = 2
   private let maxPlayers: Int = 2
-  private let inviteMessage = "Write your default invite message!"
+  private let inviteMessage = "You were invited to play CarameloRun!"
   private var currentVC: GKMatchmakerViewController?
   var isAuthenticated: Bool {
     return GKLocalPlayer.local.isAuthenticated

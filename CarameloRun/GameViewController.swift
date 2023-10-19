@@ -8,8 +8,20 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import GameKit
 
 class GameViewController: UIViewController {
+    
+    var match: GKMatch
+    
+    init(match: GKMatch) {
+        self.match = match
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         self.view = SKView()
@@ -33,6 +45,9 @@ class GameViewController: UIViewController {
             view.showsNodeCount = true
         }
         
+        match.delegate = self
+     
+        
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -45,5 +60,11 @@ class GameViewController: UIViewController {
 
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+}
+
+extension GameViewController: GKMatchDelegate {
+    func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
+        <#code#>
     }
 }

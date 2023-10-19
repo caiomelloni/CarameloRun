@@ -66,6 +66,11 @@ extension MenuInicialViewController: GameCenterHelperDelegate {
     self.present(vc, animated: true)
   }
   func presentGame(match: GKMatch) {
-    performSegue(withIdentifier: "showGame", sender: match)
+//    performSegue(withIdentifier: "showGame", sender: match)
+      print("aqui")
+      
+      self.navigationController?.isNavigationBarHidden = true
+      self.navigationController?.popViewController(animated: true)
+      self.navigationController?.pushViewController(GameViewController(match: match), animated: true)
   }
 }
