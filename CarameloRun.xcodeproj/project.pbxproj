@@ -14,6 +14,8 @@
 		F82787012AC5A2F20047111D /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82787002AC5A2F20047111D /* Player.swift */; };
 		F82787032AC5A8250047111D /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82787022AC5A8250047111D /* Joystick.swift */; };
 		F82787052AC5B8CB0047111D /* JumpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82787042AC5B8CB0047111D /* JumpButton.swift */; };
+		F854918A2AE16F71004EA5B1 /* MenuInicial.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85491892AE16F71004EA5B1 /* MenuInicial.swift */; };
+		F854918D2AE174A8004EA5B1 /* GameCenterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F854918C2AE174A8004EA5B1 /* GameCenterHelper.swift */; };
 		F898070F2ACDA1880044D237 /* Zposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F898070E2ACDA1880044D237 /* Zposition.swift */; };
 		F89807112ACDA4130044D237 /* Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89807102ACDA4130044D237 /* Dimensions.swift */; };
 		F8B81A2B2AC8A92C0081324E /* Ground.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B81A2A2AC8A92C0081324E /* Ground.swift */; };
@@ -29,6 +31,9 @@
 		F82787002AC5A2F20047111D /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		F82787022AC5A8250047111D /* Joystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
 		F82787042AC5B8CB0047111D /* JumpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpButton.swift; sourceTree = "<group>"; };
+		F85491892AE16F71004EA5B1 /* MenuInicial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInicial.swift; sourceTree = "<group>"; };
+		F854918C2AE174A8004EA5B1 /* GameCenterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterHelper.swift; sourceTree = "<group>"; };
+		F854918E2AE1767F004EA5B1 /* CarameloRun.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CarameloRun.entitlements; sourceTree = "<group>"; };
 		F898070E2ACDA1880044D237 /* Zposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zposition.swift; sourceTree = "<group>"; };
 		F89807102ACDA4130044D237 /* Dimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dimensions.swift; sourceTree = "<group>"; };
 		F8B81A2A2AC8A92C0081324E /* Ground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ground.swift; sourceTree = "<group>"; };
@@ -65,6 +70,9 @@
 		F82786E62AC59B170047111D /* CarameloRun */ = {
 			isa = PBXGroup;
 			children = (
+				F854918E2AE1767F004EA5B1 /* CarameloRun.entitlements */,
+				F854918B2AE17490004EA5B1 /* GameCenter */,
+				F85491882AE16EA3004EA5B1 /* Views */,
 				F898070D2ACDA1510044D237 /* Utils */,
 				F898070C2ACDA0D60044D237 /* Files */,
 				F8F97E342ACB07F50006A4BA /* Scenes */,
@@ -85,6 +93,22 @@
 				F8B81A2A2AC8A92C0081324E /* Ground.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		F85491882AE16EA3004EA5B1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F85491892AE16F71004EA5B1 /* MenuInicial.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F854918B2AE17490004EA5B1 /* GameCenter */ = {
+			isa = PBXGroup;
+			children = (
+				F854918C2AE174A8004EA5B1 /* GameCenterHelper.swift */,
+			);
+			path = GameCenter;
 			sourceTree = "<group>";
 		};
 		F898070C2ACDA0D60044D237 /* Files */ = {
@@ -183,7 +207,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F82787012AC5A2F20047111D /* Player.swift in Sources */,
+				F854918D2AE174A8004EA5B1 /* GameCenterHelper.swift in Sources */,
 				F898070F2ACDA1880044D237 /* Zposition.swift in Sources */,
+				F854918A2AE16F71004EA5B1 /* MenuInicial.swift in Sources */,
 				F82786EE2AC59B170047111D /* GameScene.swift in Sources */,
 				F8B81A2B2AC8A92C0081324E /* Ground.swift in Sources */,
 				F82787032AC5A8250047111D /* Joystick.swift in Sources */,
@@ -316,6 +342,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CarameloRun/CarameloRun.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = A7BY7494NB;
@@ -343,6 +370,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CarameloRun/CarameloRun.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = A7BY7494NB;
