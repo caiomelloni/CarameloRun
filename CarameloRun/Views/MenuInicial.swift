@@ -7,15 +7,20 @@
 
 import Foundation
 import UIKit
+import GameKit
 
 class MenuInicialViewController: UIViewController {
     let stackView = UIStackView()
-    let label = UILabel()
+    let button = UIButton(type: .system)
+    let gameCenterHelper = GameCenterHelper()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        button.isEnabled = false
         style()
         layout()
+        gameCenterHelper.delegate = self
+        gameCenterHelper.authenticatePlayer()
     }
 }
 
@@ -25,13 +30,13 @@ extension MenuInicialViewController {
         stackView.axis = .vertical
         stackView.spacing = 20
         
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Welcome"
-        label.font = UIFont.preferredFont(forTextStyle: .title1)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Iniciar jogo", for: .normal)
+        button.addTarget(self, action: #selector(initGame), for: .touchUpInside)
     }
     
     func layout() {
-        stackView.addArrangedSubview(label)
+        stackView.addArrangedSubview(button)
         
         view.addSubview(stackView)
         
@@ -40,4 +45,27 @@ extension MenuInicialViewController {
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
     }
+    
+    @objc func initGame() {
+        gameCenterHelper.presentMatchmaker()
+    }
+}
+
+
+extension MenuInicialViewController: GameCenterHelperDelegate {
+  func didChangeAuthStatus(isAuthenticated: Bool) {
+      print("changed status is auth: \(isAuthenticated)")
+    button.isEnabled = isAuthenticated
+  }
+  func presentGameCenterAuth(viewController: UIViewController?) {
+    guard let vc = viewController else {return}
+    self.present(vc, animated: true)
+  }
+  func presentMatchmaking(viewController: UIViewController?) {
+    guard let vc = viewController else {return}
+    self.present(vc, animated: true)
+  }
+  func presentGame(match: GKMatch) {
+    performSegue(withIdentifier: "showGame", sender: match)
+  }
 }
