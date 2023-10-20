@@ -13,6 +13,7 @@ import GameKit
 class GameViewController: UIViewController {
     
     var match: GKMatch
+    var gameScene: GameScene?
     
     init(match: GKMatch) {
         self.match = match
@@ -31,7 +32,10 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "Background") {
+            if let scene = GameScene(fileNamed: "Background") {
+                gameScene = scene
+                scene.controllerDelegate = self
+                
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
                 
@@ -46,8 +50,6 @@ class GameViewController: UIViewController {
         }
         
         match.delegate = self
-     
-        
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -65,6 +67,28 @@ class GameViewController: UIViewController {
 
 extension GameViewController: GKMatchDelegate {
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
-        <#code#>
+        print("match data received")
+        let dataJsonString = String(decoding: data, as: UTF8.self)
+        print(dataJsonString)
+        
+        let jsonData = dataJsonString.data(using: .utf8)!
+        let playerState: PlayerState = try! JSONDecoder().decode(PlayerState.self, from: jsonData)
+        
+        gameScene?.updatePlayersPosition(x: playerState.positionX, y: playerState.positionY)
+    }
+}
+
+protocol GameControllerDelegate {
+    func sendPlayerState(_ state: PlayerState)
+}
+
+extension GameViewController: GameControllerDelegate {
+    func sendPlayerState(_ state: PlayerState) {
+        do {
+            let data = try JSONEncoder().encode(state)
+            try match.sendData(toAllPlayers: data, with: GKMatch.SendDataMode.unreliable)
+        } catch {
+            print("error sending data")
+        }
     }
 }
