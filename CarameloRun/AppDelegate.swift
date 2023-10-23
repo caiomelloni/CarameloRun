@@ -19,13 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.backgroundColor = .systemBackground
-        window?.rootViewController = MenuInicialViewController()
+        window?.rootViewController = UINavigationController(rootViewController: MenuInicialViewController())
         
         return true
     }
     
     /// set orientations you want to be allowed in this property by default
-    var orientationLock = UIInterfaceOrientationMask.portrait
+    var orientationLock = UIInterfaceOrientationMask.landscape
 
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
             return self.orientationLock
