@@ -7,6 +7,7 @@
 
 struct PlayerState: Codable {
     let name: String
+    let playerNumber: Int
     let positionX: Double
     let positionY: Double
 }

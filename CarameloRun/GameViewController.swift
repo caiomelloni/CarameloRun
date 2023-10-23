@@ -74,7 +74,7 @@ extension GameViewController: GKMatchDelegate {
         let jsonData = dataJsonString.data(using: .utf8)!
         let playerState: PlayerState = try! JSONDecoder().decode(PlayerState.self, from: jsonData)
         
-        gameScene?.updatePlayersPosition(x: playerState.positionX, y: playerState.positionY)
+        gameScene?.updatePlayersPosition(playerState)
     }
 }
 

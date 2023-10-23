@@ -12,7 +12,7 @@ import GameKit
 class GameScene: SKScene {
     
     var robot: Player?
-    var robot2: Player?
+    var robots = [Int:Player]()
     let joystick = Joystick()
     let jumpButton = JumpButton()
     let sceneCamera = SKCameraNode()
@@ -23,11 +23,15 @@ class GameScene: SKScene {
         let players = controllerDelegate?.getPlayers()
         
         robot = players?.localPlayer
-        robot2 = players?.otherPlayers[0]
         
-        if let robot = robot, let robot2 = robot2 {
-            robot2.node.physicsBody?.affectedByGravity = false
-            addChild(robot2.node)
+        
+        if let robot = robot, let robotsArray = players?.otherPlayers {
+            for otherPlayer in robotsArray {
+                robots[otherPlayer.playerNumber] = otherPlayer
+                otherPlayer.node.physicsBody?.affectedByGravity = false
+                addChild(otherPlayer.node)
+            }
+            
             
             let spawnNode = scene?.childNode(withName: "spawn\(robot.playerNumber)")
             
@@ -37,7 +41,7 @@ class GameScene: SKScene {
             print("ERROR: NULL PLAYERS")
         }
         
-
+        
         
         
         camera = sceneCamera
@@ -97,9 +101,9 @@ class GameScene: SKScene {
         camera?.position.y = robot!.node.position.y
     }
     
-    func updatePlayersPosition(x: Double, y: Double) {
-       let newPosition = CGPoint(x: x, y: y)
-        robot2!.node.position = newPosition
+    func updatePlayersPosition(_ playerState: PlayerState) {
+        let newPosition = CGPoint(x: playerState.positionX, y: playerState.positionY)
+        robots[playerState.playerNumber]?.node.position = newPosition
     }
     
     
@@ -110,11 +114,12 @@ class GameScene: SKScene {
         positionJoysticksAndJumpBtn()
         
         robot!.addMovementX(joystick.velocityX)
-            
+        
         let playerState = PlayerState(name: GKLocalPlayer.local.displayName,
-                                          positionX: robot!.node.position.x,
-                                          positionY: robot!.node.position.y)
-            
+                                      playerNumber: robot!.playerNumber,
+                                      positionX: robot!.node.position.x,
+                                      positionY: robot!.node.position.y)
+        
         controllerDelegate?.sendPlayerState(playerState)
         
         if(joystick.inUse){
