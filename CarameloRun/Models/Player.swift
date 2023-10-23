@@ -16,8 +16,10 @@ class Player {
     var node = SKSpriteNode(texture: SKTexture(imageNamed: "robot1"))
     private var currentPlayerSprite = 0
     var playerDirection: Direction = .right
+    let playerNumber: Int
+    let displayName: String
     
-    init() {
+    init(displayName: String, playerNumber: Int) {
         let body = SKPhysicsBody(rectangleOf: node.size)
         body.affectedByGravity = true
         body.allowsRotation = false
@@ -25,6 +27,9 @@ class Player {
         node.physicsBody = body
         
         node.zPosition = Zposition.player.rawValue
+        
+        self.displayName = displayName
+        self.playerNumber = playerNumber
     }
     
     func nextSprite() {

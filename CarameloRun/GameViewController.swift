@@ -68,7 +68,6 @@ class GameViewController: UIViewController {
 
 extension GameViewController: GKMatchDelegate {
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
-        print("match data received")
         let dataJsonString = String(decoding: data, as: UTF8.self)
         print(dataJsonString)
         
@@ -81,10 +80,11 @@ extension GameViewController: GKMatchDelegate {
 
 protocol GameControllerDelegate {
     func sendPlayerState(_ state: PlayerState)
-    func getPlayerNumber() -> Int
+    func getPlayers() -> (otherPlayers: [Player], localPlayer: Player)
 }
 
 extension GameViewController: GameControllerDelegate {
+    
     func sendPlayerState(_ state: PlayerState) {
         do {
             let data = try JSONEncoder().encode(state)
@@ -94,22 +94,37 @@ extension GameViewController: GameControllerDelegate {
         }
     }
     
-    func getPlayerNumber() -> Int {
-        var players = match.players
-        players.sort { p1, p2 in
+    func getPlayers() -> (otherPlayers: [Player], localPlayer: Player) {
+        var gameCenterPlayers = match.players
+        gameCenterPlayers.sort { p1, p2 in
             p1.displayName < p2.displayName
         }
         
+        var otherPlayers = [Player]()
+        
         var playerNumber = 2
+        
         let localPlayerName = GKLocalPlayer.local.displayName
-        for i in 0..<players.count {
-            if localPlayerName < players[i].displayName {
+        
+        for i in 0..<gameCenterPlayers.count {
+            if localPlayerName < gameCenterPlayers[i].displayName {
                 playerNumber = i + 1
                 break
             }
         }
-        print("my player number is: \(playerNumber)")
         
-        return playerNumber
+        let localPlayer = Player(displayName: localPlayerName, playerNumber: playerNumber)
+        
+        for i in 0..<gameCenterPlayers.count {
+            var remotePlayerNumber = i + 1
+            if localPlayerName < gameCenterPlayers[i].displayName {
+                remotePlayerNumber = i + 2
+            }
+            
+            otherPlayers.append(Player(displayName: gameCenterPlayers[i].displayName, playerNumber: remotePlayerNumber))
+        }
+        
+        return (otherPlayers: otherPlayers, localPlayer: localPlayer)
+        
     }
 }

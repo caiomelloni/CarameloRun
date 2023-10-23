@@ -11,27 +11,37 @@ import GameKit
 
 class GameScene: SKScene {
     
-    let robot = Player()
-    let robot2 = Player()
+    var robot: Player?
+    var robot2: Player?
     let joystick = Joystick()
     let jumpButton = JumpButton()
     let sceneCamera = SKCameraNode()
     var controllerDelegate: GameControllerDelegate?
-    var playerNumber: Int?
     
     override func didMove(to view: SKView){
         backgroundColor = .white
+        let players = controllerDelegate?.getPlayers()
         
-        playerNumber = controllerDelegate!.getPlayerNumber()
-        robot2.node.physicsBody?.affectedByGravity = false
-        addChild(robot2.node)
+        robot = players?.localPlayer
+        robot2 = players?.otherPlayers[0]
         
-        let spawnNode = scene?.childNode(withName: "spawn\(playerNumber!)")
+        if let robot = robot, let robot2 = robot2 {
+            robot2.node.physicsBody?.affectedByGravity = false
+            addChild(robot2.node)
+            
+            let spawnNode = scene?.childNode(withName: "spawn\(robot.playerNumber)")
+            
+            robot.position(x: spawnNode!.position.x, y: spawnNode!.position.y)
+            addChild(robot.node)
+        } else {
+            print("ERROR: NULL PLAYERS")
+        }
+        
+
+        
         
         camera = sceneCamera
         
-        robot.position(x: spawnNode!.position.x, y: spawnNode!.position.y)
-        addChild(robot.node)
         
         addChild(joystick.node)
         
@@ -62,7 +72,7 @@ class GameScene: SKScene {
             }
             
             if(jumpButton.node.frame.contains(location)) {
-                jumpButton.buttonTapped(robot)
+                jumpButton.buttonTapped(robot!)
             }
         }
     }
@@ -83,13 +93,13 @@ class GameScene: SKScene {
     }
     
     func updateCameraPosition() {
-        camera?.position.x = robot.node.position.x
-        camera?.position.y = robot.node.position.y
+        camera?.position.x = robot!.node.position.x
+        camera?.position.y = robot!.node.position.y
     }
     
     func updatePlayersPosition(x: Double, y: Double) {
        let newPosition = CGPoint(x: x, y: y)
-        robot2.node.position = newPosition
+        robot2!.node.position = newPosition
     }
     
     
@@ -99,16 +109,16 @@ class GameScene: SKScene {
         updateCameraPosition()
         positionJoysticksAndJumpBtn()
         
-        robot.addMovementX(joystick.velocityX)
+        robot!.addMovementX(joystick.velocityX)
             
         let playerState = PlayerState(name: GKLocalPlayer.local.displayName,
-                                          positionX: robot.node.position.x,
-                                          positionY: robot.node.position.y)
+                                          positionX: robot!.node.position.x,
+                                          positionY: robot!.node.position.y)
             
         controllerDelegate?.sendPlayerState(playerState)
         
         if(joystick.inUse){
-            robot.nextSprite()
+            robot!.nextSprite()
         }
     }
 }
