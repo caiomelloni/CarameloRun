@@ -11,6 +11,7 @@ import GameKit
 
 class GameScene: SKScene {
     
+    
     let robot = Player()
     let robot2 = Player()
     let joystick = Joystick()
@@ -18,6 +19,7 @@ class GameScene: SKScene {
     let sceneCamera = SKCameraNode()
     var controllerDelegate: GameControllerDelegate?
     var playerNumber: Int?
+    
     
     override func didMove(to view: SKView){
         backgroundColor = .white
@@ -91,7 +93,6 @@ class GameScene: SKScene {
         robot2.position(x: x, y: y)
     }
     
-    
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         
@@ -107,7 +108,6 @@ class GameScene: SKScene {
             
             controllerDelegate?.sendPlayerState(playerState)
         }
-        
         
         if(joystick.inUse){
             robot.nextSprite()
