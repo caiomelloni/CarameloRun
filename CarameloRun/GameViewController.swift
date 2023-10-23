@@ -34,6 +34,7 @@ class GameViewController: UIViewController {
             // Load the SKScene from 'GameScene.sks'
             if let scene = GameScene(fileNamed: "Background") {
                 gameScene = scene
+                
                 scene.controllerDelegate = self
                 
                 // Set the scale mode to scale to fit the window
@@ -80,6 +81,7 @@ extension GameViewController: GKMatchDelegate {
 
 protocol GameControllerDelegate {
     func sendPlayerState(_ state: PlayerState)
+    func getPlayerNumber() -> Int
 }
 
 extension GameViewController: GameControllerDelegate {
@@ -90,5 +92,24 @@ extension GameViewController: GameControllerDelegate {
         } catch {
             print("error sending data")
         }
+    }
+    
+    func getPlayerNumber() -> Int {
+        var players = match.players
+        players.sort { p1, p2 in
+            p1.displayName < p2.displayName
+        }
+        
+        var playerNumber = 2
+        let localPlayerName = GKLocalPlayer.local.displayName
+        for i in 0..<players.count {
+            if localPlayerName < players[i].displayName {
+                playerNumber = i + 1
+                break
+            }
+        }
+        print("my player number is: \(playerNumber)")
+        
+        return playerNumber
     }
 }

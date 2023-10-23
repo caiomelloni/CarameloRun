@@ -17,16 +17,21 @@ class GameScene: SKScene {
     let jumpButton = JumpButton()
     let sceneCamera = SKCameraNode()
     var controllerDelegate: GameControllerDelegate?
+    var playerNumber: Int?
     
     override func didMove(to view: SKView){
         backgroundColor = .white
         
+        playerNumber = controllerDelegate!.getPlayerNumber()
+        robot2.node.physicsBody?.affectedByGravity = false
+        addChild(robot2.node)
+        
+        let spawnNode = scene?.childNode(withName: "spawn\(playerNumber!)")
+        
         camera = sceneCamera
         
-        robot.position(x: view.frame.midX, y: view.frame.minY)
+        robot.position(x: spawnNode!.position.x, y: spawnNode!.position.y)
         addChild(robot.node)
-        
-        addChild(robot2.node)
         
         addChild(joystick.node)
         
@@ -93,13 +98,16 @@ class GameScene: SKScene {
         updateCameraPosition()
         positionJoysticksAndJumpBtn()
         
-        robot.addMovementX(joystick.velocityX)
+        if joystick.velocityX != 0 {
+            robot.addMovementX(joystick.velocityX)
+            
+            let playerState = PlayerState(name: GKLocalPlayer.local.displayName,
+                                          positionX: robot.node.position.x,
+                                          positionY: robot.node.position.y)
+            
+            controllerDelegate?.sendPlayerState(playerState)
+        }
         
-        let playerState = PlayerState(name: GKLocalPlayer.local.displayName,
-                                      positionX: robot.node.position.x,
-                                      positionY: robot.node.position.y)
-        
-        controllerDelegate?.sendPlayerState(playerState)
         
         if(joystick.inUse){
             robot.nextSprite()
