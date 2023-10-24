@@ -69,7 +69,7 @@ class GameViewController: UIViewController {
 extension GameViewController: GKMatchDelegate {
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
         let dataJsonString = String(decoding: data, as: UTF8.self)
-        print(dataJsonString)
+        //print(dataJsonString)
         
         let jsonData = dataJsonString.data(using: .utf8)!
         let playerState: PlayerState = try! JSONDecoder().decode(PlayerState.self, from: jsonData)

@@ -39,21 +39,28 @@ class Player {
             currentPlayerSprite = 0
         }
     }
-
-    func position(x: Double, y: Double) {
-        node.position = CGPoint(x: x + node.size.width / 2, y: y + node.size.height / 2)
-    }
-
-    func addMovementX(_ velocityX: Double) {
-        node.position.x += velocityX
     
-        if velocityX > 0 {
-            node.xScale = 1
-            playerDirection = .right
-        } else if velocityX < 0 {
-            node.xScale = -1
-            playerDirection = .left
+    func position(x: Double, y: Double) {
+        node.position = CGPoint(x: x, y: y)
+    }
+    
+    func addVelocity(dx: Double? = nil, dy: Double? = nil) {
+        if let dx = dx {
+            node.physicsBody?.velocity.dx = dx
+            if dx > 0 {
+                node.xScale = 1
+                playerDirection = .right
+            } else if dx < 0 {
+                node.xScale = -1
+                playerDirection = .left
+            }
         }
+        
+        if let dy = dy {
+            node.physicsBody?.velocity.dy = dy
+        }
+        
+        
     }
     
 }

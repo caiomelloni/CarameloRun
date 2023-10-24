@@ -14,6 +14,9 @@ class Joystick {
     var inUse = false
     var velocityX = 0.0
     
+    //valor padrão adicionado pelo joystick
+    let defaultVelocity: Double = 100
+    
     
     init() {
         

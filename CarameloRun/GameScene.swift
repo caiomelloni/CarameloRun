@@ -115,7 +115,9 @@ class GameScene: SKScene {
         updateCameraPosition()
         positionJoysticksAndJumpBtn()
         
-        robot!.addMovementX(joystick.velocityX)
+        if joystick.velocityX != 0 {
+            robot?.addVelocity(dx: joystick.velocityX)
+        }
         
         let playerState = PlayerState(name: GKLocalPlayer.local.displayName,
                                       playerNumber: robot!.playerNumber,
