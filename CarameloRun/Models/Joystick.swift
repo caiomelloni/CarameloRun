@@ -41,9 +41,9 @@ class Joystick {
         let location = touch.location(in: node)
         inUse = true
         if right.frame.contains(location) {
-            velocityX = 10
+            velocityX = defaultVelocity
         } else if left.frame.contains(location) {
-            velocityX = -10
+            velocityX = -1 * defaultVelocity
         }
     }
     
