@@ -16,7 +16,7 @@ class Player {
     var node = SKSpriteNode(texture: SKTexture(imageNamed: "robot1"))
     private var currentPlayerSprite = 0
     var playerDirection: Direction = .right
-    let playerNumber: Int
+    var playerNumber: Int
     let displayName: String
     
     init(displayName: String, playerNumber: Int) {

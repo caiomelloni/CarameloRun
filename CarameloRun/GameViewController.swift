@@ -80,7 +80,7 @@ extension GameViewController: GKMatchDelegate {
 
 protocol GameControllerDelegate {
     func sendPlayerState(_ state: PlayerState)
-    func getPlayers() -> (otherPlayers: [Player], localPlayer: Player)
+    func getAllPlayers() -> [Player]
 }
 
 extension GameViewController: GameControllerDelegate {
@@ -94,37 +94,32 @@ extension GameViewController: GameControllerDelegate {
         }
     }
     
-    func getPlayers() -> (otherPlayers: [Player], localPlayer: Player) {
-        var gameCenterPlayers = match.players
-        gameCenterPlayers.sort { p1, p2 in
-            p1.displayName < p2.displayName
-        }
+    func getAllPlayers() -> [Player] {
+        let localPlayer = Player(displayName: GKLocalPlayer.local.displayName, playerNumber: 0)
+        var players = [localPlayer]
         
-        var otherPlayers = [Player]()
+        let gameCenterPlayers = match.players
         
-        var playerNumber = 2
-        
-        let localPlayerName = GKLocalPlayer.local.displayName
-        
-        for i in 0..<gameCenterPlayers.count {
-            if localPlayerName < gameCenterPlayers[i].displayName {
-                playerNumber = i + 1
-                break
+        for player in gameCenterPlayers {
+            for i in 0..<players.count {
+                if player.displayName < players[i].displayName {
+                    players.insert(Player(displayName: player.displayName, playerNumber: 0), at: i)
+                    break
+                }
+                
+                if i == players.count - 1 {
+                    players.append(Player(displayName: player.displayName, playerNumber: 0))
+                }
+                
             }
         }
         
-        let localPlayer = Player(displayName: localPlayerName, playerNumber: playerNumber)
-        
-        for i in 0..<gameCenterPlayers.count {
-            var remotePlayerNumber = i + 1
-            if localPlayerName < gameCenterPlayers[i].displayName {
-                remotePlayerNumber = i + 2
-            }
-            
-            otherPlayers.append(Player(displayName: gameCenterPlayers[i].displayName, playerNumber: remotePlayerNumber))
+        for i in 0..<players.count {
+            players[i].playerNumber = i + 1
         }
         
-        return (otherPlayers: otherPlayers, localPlayer: localPlayer)
+        
+        return players
         
     }
 }

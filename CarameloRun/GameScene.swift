@@ -20,23 +20,25 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView){
         backgroundColor = .white
-        let players = controllerDelegate?.getPlayers()
-        
-        robot = players?.localPlayer
+        let players = controllerDelegate?.getAllPlayers()
         
         
-        if let robot = robot, let robotsArray = players?.otherPlayers {
-            for otherPlayer in robotsArray {
-                robots[otherPlayer.playerNumber] = otherPlayer
-                otherPlayer.node.physicsBody?.affectedByGravity = false
-                addChild(otherPlayer.node)
+        if let players = players {
+            for player in players {
+                if player.displayName == GKLocalPlayer.local.displayName {
+                    robot = Player(displayName: player.displayName, playerNumber: player.playerNumber)
+                    
+                    let spawnNode = scene?.childNode(withName: "spawn\(robot!.playerNumber)")
+                    
+                    robot!.position(x: spawnNode!.position.x, y: spawnNode!.position.y)
+                    addChild(robot!.node)
+                    continue
+                }
+                
+                robots[player.playerNumber] = player
+                player.node.physicsBody?.affectedByGravity = false
+                addChild(player.node)
             }
-            
-            
-            let spawnNode = scene?.childNode(withName: "spawn\(robot.playerNumber)")
-            
-            robot.position(x: spawnNode!.position.x, y: spawnNode!.position.y)
-            addChild(robot.node)
         } else {
             print("ERROR: NULL PLAYERS")
         }
