@@ -11,6 +11,7 @@ import GameplayKit
 import GameKit
 
 class GameViewController: UIViewController {
+
     
     var match: GKMatch
     var gameScene: GameScene?
@@ -48,6 +49,8 @@ class GameViewController: UIViewController {
             
             view.showsFPS = true
             view.showsNodeCount = true
+            
+            view.isMultipleTouchEnabled = true
         }
         
         match.delegate = self
