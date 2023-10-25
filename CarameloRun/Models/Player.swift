@@ -19,6 +19,12 @@ class Player {
     var playerNumber: Int
     let displayName: String
     
+    var position: CGPoint {
+        get {
+            node.position
+        }
+    }
+    
     init(displayName: String, playerNumber: Int) {
         let body = SKPhysicsBody(rectangleOf: node.size)
         body.affectedByGravity = true

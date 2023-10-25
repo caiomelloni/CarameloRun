@@ -16,6 +16,7 @@ class GameScene: SKScene {
     let joystick = Joystick()
     let jumpButton = JumpButton()
     let sceneCamera = SKCameraNode()
+    let positionHistory = PositionHistory()
     var controllerDelegate: GameControllerDelegate?
     
     override func didMove(to view: SKView){
@@ -25,19 +26,19 @@ class GameScene: SKScene {
         
         if let players = players {
             for player in players {
+                
+                let spawnNode = scene?.childNode(withName: "spawn\(player.playerNumber)")
+                player.position(x: spawnNode!.position.x, y: spawnNode!.position.y)
+                addChild(player.node)
+                
                 if player.displayName == GKLocalPlayer.local.displayName {
-                    robot = Player(displayName: player.displayName, playerNumber: player.playerNumber)
-                    
-                    let spawnNode = scene?.childNode(withName: "spawn\(robot!.playerNumber)")
-                    
-                    robot!.position(x: spawnNode!.position.x, y: spawnNode!.position.y)
-                    addChild(robot!.node)
-                    continue
+                    robot = player
+                    positionHistory.setReferencePosition(player)
+                } else {
+                    player.node.physicsBody?.affectedByGravity = false
+                    robots[player.playerNumber] = player
                 }
                 
-                robots[player.playerNumber] = player
-                player.node.physicsBody?.affectedByGravity = false
-                addChild(player.node)
             }
         } else {
             print("ERROR: NULL PLAYERS")
@@ -119,12 +120,15 @@ class GameScene: SKScene {
             robot?.addVelocity(dx: joystick.velocityX)
         }
         
-        let playerState = PlayerState(name: GKLocalPlayer.local.displayName,
-                                      playerNumber: robot!.playerNumber,
-                                      positionX: robot!.node.position.x,
-                                      positionY: robot!.node.position.y)
+        if positionHistory.hasPositionChanged(robot!) {
+            let playerState = PlayerState(name: GKLocalPlayer.local.displayName,
+                                          playerNumber: robot!.playerNumber,
+                                          positionX: robot!.node.position.x,
+                                          positionY: robot!.node.position.y)
+            
+            controllerDelegate?.sendPlayerState(playerState)
+        }
         
-        controllerDelegate?.sendPlayerState(playerState)
         
         if(joystick.inUse){
             robot!.nextSprite()
