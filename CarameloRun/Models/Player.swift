@@ -12,12 +12,19 @@ enum Direction {
     case left
 }
 
+enum typeOfPlayer: Codable {
+    case dog
+    case man
+}
+
 class Player {
     var node = SKSpriteNode(texture: SKTexture(imageNamed: "robot1"))
     private var currentPlayerSprite = 0
     var playerDirection: Direction = .right
     var playerNumber: Int
     let displayName: String
+    var type: typeOfPlayer = .dog
+    var ready: Bool = false
     
     init(displayName: String, playerNumber: Int) {
         let body = SKPhysicsBody(rectangleOf: node.size)

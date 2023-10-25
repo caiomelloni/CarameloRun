@@ -20,7 +20,7 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView){
         backgroundColor = .white
-        let players = controllerDelegate?.getAllPlayers()
+        let players = controllerDelegate?.getAllPlayers2()
         
         
         if let players = players {
@@ -37,6 +37,8 @@ class GameScene: SKScene {
                 
                 robots[player.playerNumber] = player
                 player.node.physicsBody?.affectedByGravity = false
+                let spawnNode = scene?.childNode(withName: "spawn\(player.playerNumber)")
+                player.position(x: spawnNode!.position.x, y: spawnNode!.position.y)
                 addChild(player.node)
             }
         } else {

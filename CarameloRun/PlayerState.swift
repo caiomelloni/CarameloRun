@@ -11,3 +11,11 @@ struct PlayerState: Codable {
     let positionX: Double
     let positionY: Double
 }
+
+struct PreparingPlayres: Codable {
+    var name: String
+    var ready: Bool
+    var type0: typeOfPlayer
+    var type1: typeOfPlayer
+    var type2: typeOfPlayer
+}
