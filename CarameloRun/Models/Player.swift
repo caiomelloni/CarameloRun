@@ -12,12 +12,19 @@ enum Direction {
     case left
 }
 
+enum typeOfPlayer: Codable {
+    case dog
+    case man
+}
+
 class Player {
     private var node = SKSpriteNode(texture: SKTexture(imageNamed: "robot1"))
     private var currentPlayerSprite = 0
     var playerDirection: Direction = .right
     var playerNumber: Int
     let displayName: String
+    var type: typeOfPlayer = .dog
+    var ready: Bool = false
     
     var position: CGPoint {
         get {

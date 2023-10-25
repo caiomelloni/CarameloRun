@@ -66,8 +66,10 @@ extension MenuInicialViewController: GameCenterHelperDelegate {
     self.present(vc, animated: true)
   }
   func presentGame(match: GKMatch) {
+      var prep: PreparingPlayres = PreparingPlayres(name: "", ready: false, type0: .dog, type1: .dog, type2: .dog)
       self.navigationController?.isNavigationBarHidden = true
       self.navigationController?.popViewController(animated: true)
-      self.navigationController?.pushViewController(GameViewController(match: match), animated: true)
+      self.navigationController?.pushViewController(PreparingViewController(match: match, prep: prep), animated: true)
+      //self.navigationController?.pushViewController(GameViewController(match: match), animated: true)
   }
 }

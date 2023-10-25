@@ -38,6 +38,7 @@ final class GameCenterHelper: NSObject, GKLocalPlayerListener {
       return
     }
     currentVC = vc
+//      vc.isHosted = true
     vc.matchmakerDelegate = self
     delegate?.presentMatchmaking(viewController: vc)
   }

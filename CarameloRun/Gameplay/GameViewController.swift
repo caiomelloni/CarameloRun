@@ -14,9 +14,11 @@ class GameViewController: UIViewController {
     
     var match: GKMatch
     var gameScene: GameScene?
+    var players2: [Player]
     
-    init(match: GKMatch) {
+    init(match: GKMatch, players2: [Player]) {
         self.match = match
+        self.players2 = players2
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -70,7 +72,7 @@ class GameViewController: UIViewController {
 extension GameViewController: GKMatchDelegate {
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
         let dataJsonString = String(decoding: data, as: UTF8.self)
-        print(dataJsonString)
+        //print(dataJsonString)
         
         let jsonData = dataJsonString.data(using: .utf8)!
         let playerState: PlayerState = try! JSONDecoder().decode(PlayerState.self, from: jsonData)
@@ -81,7 +83,7 @@ extension GameViewController: GKMatchDelegate {
 
 protocol GameControllerDelegate {
     func sendPlayerState(_ state: PlayerState)
-    func getAllPlayers() -> [Player]
+    func getAllPlayers2() -> [Player]
 }
 
 extension GameViewController: GameControllerDelegate {
@@ -95,32 +97,8 @@ extension GameViewController: GameControllerDelegate {
         }
     }
     
-    func getAllPlayers() -> [Player] {
-        let localPlayer = Player(displayName: GKLocalPlayer.local.displayName, playerNumber: 0)
-        var players = [localPlayer]
-        
-        let gameCenterPlayers = match.players
-        
-        for player in gameCenterPlayers {
-            for i in 0..<players.count {
-                if player.displayName < players[i].displayName {
-                    players.insert(Player(displayName: player.displayName, playerNumber: 0), at: i)
-                    break
-                }
-                
-                if i == players.count - 1 {
-                    players.append(Player(displayName: player.displayName, playerNumber: 0))
-                }
-                
-            }
-        }
-        
-        for i in 0..<players.count {
-            players[i].playerNumber = i + 1
-        }
-        
-        
-        return players
-        
+    
+    func getAllPlayers2() -> [Player] {
+        return players2
     }
 }

@@ -21,7 +21,7 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView){
         backgroundColor = .white
-        let players = controllerDelegate?.getAllPlayers()
+        let players = controllerDelegate?.getAllPlayers2()
         
         
         if let players = players {
