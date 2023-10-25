@@ -24,6 +24,12 @@ class Player {
             node.position
         }
         set {
+            let dx = node.position.x - newValue.x
+            if dx < 0 {
+                changePlayerDirection(.right)
+            } else if dx > 0 {
+                changePlayerDirection(.left)
+            }
             node.position = newValue
         }
     }
@@ -65,11 +71,9 @@ class Player {
         if let dx = dx {
             node.physicsBody?.velocity.dx = dx
             if dx > 0 {
-                node.xScale = 1
-                playerDirection = .right
+                changePlayerDirection(.right)
             } else if dx < 0 {
-                node.xScale = -1
-                playerDirection = .left
+                changePlayerDirection(.left)
             }
         }
         
@@ -93,5 +97,16 @@ class Player {
     
     func addToScene(_ scene: SKScene) {
         scene.addChild(node)
+    }
+    
+    func changePlayerDirection(_ direction: Direction) {
+        switch direction {
+        case .right:
+            node.xScale = 1
+            playerDirection = .right
+        case .left:
+            node.xScale = -1
+            playerDirection = .left
+        }
     }
 }
