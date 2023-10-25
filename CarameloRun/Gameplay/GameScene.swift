@@ -28,14 +28,14 @@ class GameScene: SKScene {
             for player in players {
                 
                 let spawnNode = scene?.childNode(withName: "spawn\(player.playerNumber)")
-                player.position(x: spawnNode!.position.x, y: spawnNode!.position.y)
-                addChild(player.node)
+                player.position = spawnNode!.position
+                player.addToScene(self)
                 
                 if player.displayName == GKLocalPlayer.local.displayName {
                     robot = player
                     positionHistory.setReferencePosition(player)
                 } else {
-                    player.node.physicsBody?.affectedByGravity = false
+                    player.affectedByGravity = false
                     robots[player.playerNumber] = player
                 }
                 
@@ -100,13 +100,13 @@ class GameScene: SKScene {
     }
     
     func updateCameraPosition() {
-        camera?.position.x = robot!.node.position.x
-        camera?.position.y = robot!.node.position.y
+        camera?.position.x = robot!.position.x
+        camera?.position.y = robot!.position.y
     }
     
     func updatePlayersPosition(_ playerState: PlayerState) {
         let newPosition = CGPoint(x: playerState.positionX, y: playerState.positionY)
-        robots[playerState.playerNumber]?.node.position = newPosition
+        robots[playerState.playerNumber]?.position = newPosition
     }
     
     
@@ -116,15 +116,15 @@ class GameScene: SKScene {
         updateCameraPosition()
         positionJoysticksAndJumpBtn()
         
-        if joystick.velocityX != 0 {
-            robot?.addVelocity(dx: joystick.velocityX)
+        if let movDirection = joystick.movementDirection {
+            robot?.addVelocityInXAxis(movDirection)
         }
         
         if positionHistory.hasPositionChanged(robot!) {
             let playerState = PlayerState(name: GKLocalPlayer.local.displayName,
                                           playerNumber: robot!.playerNumber,
-                                          positionX: robot!.node.position.x,
-                                          positionY: robot!.node.position.y)
+                                          positionX: robot!.position.x,
+                                          positionY: robot!.position.y)
             
             controllerDelegate?.sendPlayerState(playerState)
         }

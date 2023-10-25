@@ -13,7 +13,7 @@ enum Direction {
 }
 
 class Player {
-    var node = SKSpriteNode(texture: SKTexture(imageNamed: "robot1"))
+    private var node = SKSpriteNode(texture: SKTexture(imageNamed: "robot1"))
     private var currentPlayerSprite = 0
     var playerDirection: Direction = .right
     var playerNumber: Int
@@ -22,6 +22,27 @@ class Player {
     var position: CGPoint {
         get {
             node.position
+        }
+        set {
+            let dx = node.position.x - newValue.x
+            if dx < 0 {
+                changePlayerDirection(.right)
+            } else if dx > 0 {
+                changePlayerDirection(.left)
+            }
+            node.position = newValue
+        }
+    }
+    
+    var affectedByGravity: Bool? {
+        set {
+            if let newValue = newValue {
+                node.physicsBody?.affectedByGravity = newValue
+            }
+        }
+        
+        get {
+            node.physicsBody?.affectedByGravity
         }
     }
     
@@ -46,27 +67,50 @@ class Player {
         }
     }
     
-    func position(x: Double, y: Double) {
-        node.position = CGPoint(x: x, y: y)
+    func addVelocityInXAxis(_ direction: Direction) {
+        switch direction {
+        case .right:
+            changePlayerDirection(.right)
+            
+            //esta eh uma outra forma de incrementar a velocidade
+            //desta forma ele demora mais para, parar, dando um efeito de escorregamento
+            //node.physicsBody?.velocity.dx = Constants.playerVelocity
+            
+            node.position.x += Constants.playerVelocity
+        case .left:
+            changePlayerDirection(.left)
+            
+            //node.physicsBody?.velocity.dx = -1 * Constants.playerVelocity
+            
+            node.position.x -= Constants.playerVelocity
+        }
     }
     
-    func addVelocity(dx: Double? = nil, dy: Double? = nil) {
-        if let dx = dx {
-            node.physicsBody?.velocity.dx = dx
-            if dx > 0 {
-                node.xScale = 1
-                playerDirection = .right
-            } else if dx < 0 {
-                node.xScale = -1
-                playerDirection = .left
-            }
+    func jump() {
+        if node.physicsBody?.velocity.dy != 0 {
+            return
         }
-        
-        if let dy = dy {
-            node.physicsBody?.velocity.dy = dy
+        var direction = 1.00
+        if playerDirection == .left {
+            direction = -1
         }
-        
-        
+        node.physicsBody?.applyImpulse(
+            .init(dx: direction * node.size.width * Constants.playerJumpXMultiplier, dy: node.size.height * Constants.playerJumpYMultiplier)
+        )
     }
     
+    func addToScene(_ scene: SKScene) {
+        scene.addChild(node)
+    }
+    
+    func changePlayerDirection(_ direction: Direction) {
+        switch direction {
+        case .right:
+            node.xScale = 1
+            playerDirection = .right
+        case .left:
+            node.xScale = -1
+            playerDirection = .left
+        }
+    }
 }

@@ -12,7 +12,7 @@ class Joystick {
     private var right = SKSpriteNode(texture: SKTexture(image: UIImage(systemName: "arrowtriangle.right.circle.fill")!))
     var node = SKSpriteNode()
     var inUse = false
-    var velocityX = 0.0
+    var movementDirection: Direction? = nil
     
     //valor padrão adicionado pelo joystick
     let defaultVelocity: Double = 100
@@ -41,15 +41,15 @@ class Joystick {
         let location = touch.location(in: node)
         inUse = true
         if right.frame.contains(location) {
-            velocityX = defaultVelocity
+            movementDirection = .right
         } else if left.frame.contains(location) {
-            velocityX = -1 * defaultVelocity
+            movementDirection = .left
         }
     }
     
     func touchEnded() {
         inUse = false
-        velocityX = 0
+        movementDirection = nil
     }
     
 }
