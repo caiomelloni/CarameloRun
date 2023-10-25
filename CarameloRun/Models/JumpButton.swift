@@ -19,6 +19,9 @@ class JumpButton {
     }
     
     func buttonTapped(_ player: Player) {
+        if player.node.physicsBody?.velocity.dy != 0 {
+            return
+        }
         var direction = 1.00
         if player.playerDirection == .left {
             direction = -1
