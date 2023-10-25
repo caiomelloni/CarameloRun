@@ -39,12 +39,12 @@ class PreparingViewController: UIViewController {
         player1.frame = CGRect(x: 200, y: 100, width: 200, height: 30)
         player2.text = "\(players[1].displayName): \(players[1].type)"
         player2.frame = CGRect(x: 200, y: 150, width: 200, height: 30)
-        player3.text = "\(players[2].displayName): \(players[2].type)"
-        player3.frame = CGRect(x: 200, y: 200, width: 200, height: 30)
+//        player3.text = "\(players[2].displayName): \(players[2].type)"
+//        player3.frame = CGRect(x: 200, y: 200, width: 200, height: 30)
         
         view.addSubview(player1)
         view.addSubview(player2)
-        view.addSubview(player3)
+//        view.addSubview(player3)
         
         button.setTitle("Estou pronto", for: .normal)
         button.frame = CGRect(x: 200, y: 300, width: 200, height: 40)
@@ -65,7 +65,7 @@ class PreparingViewController: UIViewController {
     }
     
     func allReady(_ state: PreparingPlayres) {
-        for i in 0...2 {
+        for i in 0...1 {
             if state.name == players[i].displayName {
                 players[i].ready = state.ready
             }
@@ -75,15 +75,15 @@ class PreparingViewController: UIViewController {
         if state.name == players[1].displayName {
             players[0].type = state.type0
             players[1].type = state.type1
-            players[2].type = state.type2
+//            players[2].type = state.type2
             
             player1.text = "\(players[0].displayName): \(players[0].type)"
             player2.text = "\(players[1].displayName): \(players[1].type)"
-            player3.text = "\(players[2].displayName): \(players[2].type)"
+//            player3.text = "\(players[2].displayName): \(players[2].type)"
         }
         
         
-        if players[0].ready == true && players[1].ready == true && players[2].ready == true {
+        if players[0].ready == true && players[1].ready == true {//&& players[2].ready == true {
             self.navigationController?.isNavigationBarHidden = true
             self.navigationController?.popViewController(animated: true)
             self.navigationController?.pushViewController(GameViewController(match: match, players2: players), animated: true)
@@ -92,20 +92,20 @@ class PreparingViewController: UIViewController {
     
     func sort(_ players: [Player]) -> [Player]{
         if GKLocalPlayer.local.displayName == players[1].displayName{
-            let n = Int.random(in: 0...2)
+            let n = Int.random(in: 0...1)
             switch n {
             case 0:
                 players[0].type = .man
                 players[1].type = .dog
-                players[2].type = .dog
+//                players[2].type = .dog
             case 1:
                 players[0].type = .dog
                 players[1].type = .man
-                players[2].type = .dog
-            case 2:
-                players[0].type = .dog
-                players[1].type = .dog
-                players[2].type = .man
+//                players[2].type = .dog
+//            case 2:
+//                players[0].type = .dog
+//                players[1].type = .dog
+//                players[2].type = .man
             default:
                 print("Error")
             }
@@ -118,7 +118,7 @@ class PreparingViewController: UIViewController {
             prep.name = GKLocalPlayer.local.displayName
             prep.type0 = players[0].type
             prep.type1 = players[1].type
-            prep.type2 = players[2].type
+//            prep.type2 = players[2].type
             
             sendPreparingPlayers(prep)
         }
