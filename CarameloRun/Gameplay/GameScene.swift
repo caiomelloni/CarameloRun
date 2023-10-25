@@ -116,8 +116,8 @@ class GameScene: SKScene {
         updateCameraPosition()
         positionJoysticksAndJumpBtn()
         
-        if joystick.velocityX != 0 {
-            robot?.addVelocity(dx: joystick.velocityX)
+        if let movDirection = joystick.movementDirection {
+            robot?.addVelocityInXAxis(movDirection)
         }
         
         if positionHistory.hasPositionChanged(robot!) {

@@ -67,18 +67,22 @@ class Player {
         }
     }
     
-    func addVelocity(dx: Double? = nil, dy: Double? = nil) {
-        if let dx = dx {
-            node.physicsBody?.velocity.dx = dx
-            if dx > 0 {
-                changePlayerDirection(.right)
-            } else if dx < 0 {
-                changePlayerDirection(.left)
-            }
-        }
-        
-        if let dy = dy {
-            node.physicsBody?.velocity.dy = dy
+    func addVelocityInXAxis(_ direction: Direction) {
+        switch direction {
+        case .right:
+            changePlayerDirection(.right)
+            
+            //esta eh uma outra forma de incrementar a velocidade
+            //desta forma ele demora mais para, parar, dando um efeito de escorregamento
+            //node.physicsBody?.velocity.dx = Constants.playerVelocity
+            
+            node.position.x += Constants.playerVelocity
+        case .left:
+            changePlayerDirection(.left)
+            
+            //node.physicsBody?.velocity.dx = -1 * Constants.playerVelocity
+            
+            node.position.x -= Constants.playerVelocity
         }
     }
     
@@ -91,7 +95,7 @@ class Player {
             direction = -1
         }
         node.physicsBody?.applyImpulse(
-            .init(dx: direction * node.size.width, dy: node.size.height * 5)
+            .init(dx: direction * node.size.width * Constants.playerJumpXMultiplier, dy: node.size.height * Constants.playerJumpYMultiplier)
         )
     }
     
