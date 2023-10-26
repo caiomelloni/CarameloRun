@@ -35,7 +35,7 @@ class GameScene: SKScene {
                     robot = player
                     positionHistory.setReferencePosition(player)
                 } else {
-                    player.affectedByGravity = false
+                    player.affectedByGravity = true
                     robots[player.playerNumber] = player
                 }
                 

@@ -37,6 +37,7 @@ class PreparingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         players = getAllPlayers()
+        players[1].ready = true
         numberOfPlayers = players.count
         playerCatcher = sort(players)
         definePrep(players, playerCatcher)
@@ -48,7 +49,7 @@ class PreparingViewController: UIViewController {
         }
         
         button.setTitle("Estou pronto", for: .normal)
-        button.frame = CGRect(x: 200, y: 300, width: 200, height: 40)
+        button.frame = CGRect(x: 500, y: 300, width: 200, height: 40)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
 
         view.addSubview(button)
@@ -59,34 +60,31 @@ class PreparingViewController: UIViewController {
     @objc func buttonTapped() {
         prep.name = GKLocalPlayer.local.displayName
         prep.ready = true
-        print("\(prep.name) está pronto")
         
         sendPreparingPlayers(prep)
         allReady(prep)
     }
     
     func allReady(_ state: PreparingPlayres) {
-        for i in 0...(numberOfPlayers - 1) {
-            if state.name == players[i].displayName {
-                players[i].ready = state.ready
-            }
-        }
-        
-        
         if state.name == players[1].displayName {
             players[state.catcher].type = .man
             
             for i in 0...(numberOfPlayers - 1){
                 listOfPlayerLabels[i].text = "\(players[i].displayName): \(players[i].type)"
-            }        }
-        
+            }
+        }
         
         var counter = 0
-        for i in 0...(numberOfPlayers - 1){
+        for i in 0...(numberOfPlayers - 1) {
+            if state.name == players[i].displayName {
+                players[i].ready = state.ready
+            }
+            
             if players[i].ready == true {
                 counter += 1
             }
         }
+        
         if counter == numberOfPlayers  {
             self.navigationController?.isNavigationBarHidden = true
             self.navigationController?.popViewController(animated: true)
@@ -119,6 +117,13 @@ extension PreparingViewController: GKMatchDelegate{
         let dataJsonString = String(decoding: data, as: UTF8.self)
         
         let jsonData = dataJsonString.data(using: .utf8)!
+        
+        let jsonDictionary = convertToDictionary(text: dataJsonString)
+        
+//        if jsonDictionary["type"] as! String == "preparing" {
+//            
+//        }
+//        
         let preparingPlayers: PreparingPlayres = try! JSONDecoder().decode(PreparingPlayres.self, from: jsonData)
         
         allReady(preparingPlayers)
@@ -170,4 +175,16 @@ extension PreparingViewController: PreparingControllerDelegate {
         return players
         
     }
+}
+
+
+func convertToDictionary(text: String) -> [String: Any]? {
+    if let data = text.data(using: .utf8) {
+        do {
+            return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    return nil
 }
