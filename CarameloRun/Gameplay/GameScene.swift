@@ -19,7 +19,11 @@ class GameScene: SKScene {
     let positionHistory = PositionHistory()
     var controllerDelegate: GameControllerDelegate?
     
+    var entityManager: EntityManager!
+    
     override func didMove(to view: SKView){
+       entityManager = EntityManager(scene: self)
+        
         backgroundColor = .white
         let players = controllerDelegate?.getAllPlayers2()
         

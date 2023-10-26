@@ -6,6 +6,7 @@
 //
 
 import SpriteKit
+import GameplayKit
 
 enum Direction {
     case right
@@ -17,7 +18,7 @@ enum typeOfPlayer: Codable {
     case man
 }
 
-class Player {
+class Player: GKEntity {
     private var node = SKSpriteNode(texture: SKTexture(imageNamed: "robot1"))
     private var currentPlayerSprite = 0
     var playerDirection: Direction = .right
@@ -64,6 +65,19 @@ class Player {
         
         self.displayName = displayName
         self.playerNumber = playerNumber
+
+        
+        super.init()
+        
+        let spriteComponent = SpriteComponent(texture: SKTexture(imageNamed: "robot1"))
+        
+        [spriteComponent].forEach { component in
+            addComponent(component)
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func nextSprite() {
