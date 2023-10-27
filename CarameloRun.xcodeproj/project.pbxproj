@@ -105,7 +105,6 @@
 				F82787022AC5A8250047111D /* Joystick.swift */,
 				F82787042AC5B8CB0047111D /* JumpButton.swift */,
 				F8B81A2A2AC8A92C0081324E /* Ground.swift */,
-				F89283F92AE94D6F00A3B499 /* PositionHistory.swift */,
 				F87D81F62AEACD400006CDD8 /* EntityManager.swift */,
 			);
 			path = Entities;
@@ -175,6 +174,7 @@
 		F898070D2ACDA1510044D237 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				F89283F92AE94D6F00A3B499 /* PositionHistory.swift */,
 				F898070E2ACDA1880044D237 /* Zposition.swift */,
 				F89807102ACDA4130044D237 /* Dimensions.swift */,
 				F89283FC2AE964A900A3B499 /* Constants.swift */,

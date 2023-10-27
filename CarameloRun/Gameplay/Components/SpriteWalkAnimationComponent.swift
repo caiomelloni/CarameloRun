@@ -29,7 +29,6 @@ class SpriteWalkAnimationComponent: GKComponent {
     }
     
     func nextSprite() {
-        
         if let spriteComponent = entity?.component(ofType: SpriteComponent.self) {
             spriteComponent.texture = SKTexture(imageNamed: spriteName + String(currentSprite))
             if currentSprite == lastSprite {
