@@ -11,14 +11,16 @@ class PositionHistory {
     var oldY: CGFloat = 0
     
     func setReferencePosition(_ player: Player) {
-        oldX = player.position.x
-        oldY = player.position.y
+        let playerPosition = player.component(ofType: SpriteComponent.self)!.position
+        oldX = playerPosition.x
+        oldY = playerPosition.y
     }
     
     func hasPositionChanged(_ player: Player) -> Bool {
-        let hasChanged = oldX != player.position.x || oldY != player.position.y
-        oldX = player.position.x
-        oldY = player.position.y
+        let playerPosition = player.component(ofType: SpriteComponent.self)!.position
+        let hasChanged = oldX != playerPosition.x || oldY != playerPosition.y
+        oldX = playerPosition.x
+        oldY = playerPosition.y
         
         return hasChanged
     }

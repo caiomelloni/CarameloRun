@@ -11,13 +11,16 @@ import GameKit
 
 class GameScene: SKScene {
     
-    var robot: Player?
+    var robot: Player!
     var robots = [Int:Player]()
     let joystick = Joystick()
     let jumpButton = JumpButton()
     let sceneCamera = SKCameraNode()
     let positionHistory = PositionHistory()
     var controllerDelegate: GameControllerDelegate?
+    
+    // Update time
+    var lastUpdateTimeInterval: TimeInterval = 0
     
     var entityManager: EntityManager!
     
@@ -32,14 +35,17 @@ class GameScene: SKScene {
             for player in players {
                 
                 let spawnNode = scene?.childNode(withName: "spawn\(player.playerNumber)")
-                player.position = spawnNode!.position
-                player.addToScene(self)
+                
+                entityManager.addEntity(player, spawnPoint: spawnNode?.position)
                 
                 if player.displayName == GKLocalPlayer.local.displayName {
                     robot = player
                     positionHistory.setReferencePosition(player)
                 } else {
-                    player.affectedByGravity = false
+                    // TO DO: tirar gravidade e proibir que um player empurre o outro
+                    // o no do player deve ser um ponto fixo no mapa, que se movimenta apenas pelas
+                    // coordenadas emitidas
+                    // player.component(ofType: SpriteComponent.self).affectedByGravity = false
                     robots[player.playerNumber] = player
                 }
                 
@@ -104,38 +110,43 @@ class GameScene: SKScene {
     }
     
     func updateCameraPosition() {
-        camera?.position.x = robot!.position.x
-        camera?.position.y = robot!.position.y
+        camera?.position.x = robot.component(ofType: SpriteComponent.self)!.position.x
+        camera?.position.y = robot.component(ofType: SpriteComponent.self)!.position.y
     }
     
     func updatePlayersPosition(_ playerState: PlayerState) {
         let newPosition = CGPoint(x: playerState.positionX, y: playerState.positionY)
-        robots[playerState.playerNumber]?.position = newPosition
+        robots[playerState.playerNumber]?.component(ofType: SpriteComponent.self)?.position = newPosition
     }
     
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         
+        
+        let deltaTime = currentTime - lastUpdateTimeInterval
+        lastUpdateTimeInterval = currentTime
+        entityManager.update(deltaTime)
+        
         updateCameraPosition()
         positionJoysticksAndJumpBtn()
         
         if let movDirection = joystick.movementDirection {
-            robot?.addVelocityInXAxis(movDirection)
+            robot?.component(ofType: VelocityComponent.self)?.addVelocity(movDirection)
         }
         
         if positionHistory.hasPositionChanged(robot!) {
             let playerState = PlayerState(name: GKLocalPlayer.local.displayName,
-                                          playerNumber: robot!.playerNumber,
-                                          positionX: robot!.position.x,
-                                          positionY: robot!.position.y)
+                                          playerNumber: robot.playerNumber,
+                                          positionX: robot.component(ofType: SpriteComponent.self)!.position.x,
+                                          positionY: robot.component(ofType: SpriteComponent.self)!.position.y)
             
             controllerDelegate?.sendPlayerState(playerState)
         }
         
         
         if(joystick.inUse){
-            robot!.nextSprite()
+            robot.component(ofType: SpriteWalkAnimationComponent.self)?.nextSprite()
         }
     }
 }

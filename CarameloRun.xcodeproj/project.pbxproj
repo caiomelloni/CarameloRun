@@ -17,6 +17,10 @@
 		F82A32822AE2B3C500A3639C /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A32812AE2B3C500A3639C /* PlayerState.swift */; };
 		F854918A2AE16F71004EA5B1 /* MenuInicial.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85491892AE16F71004EA5B1 /* MenuInicial.swift */; };
 		F854918D2AE174A8004EA5B1 /* GameCenterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F854918C2AE174A8004EA5B1 /* GameCenterHelper.swift */; };
+		F87120B82AEBEB1C00697E21 /* DirectionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120B72AEBEB1C00697E21 /* DirectionComponent.swift */; };
+		F87120BA2AEBF20C00697E21 /* JumpComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120B92AEBF20C00697E21 /* JumpComponent.swift */; };
+		F87120BC2AEBF62600697E21 /* VelocityComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120BB2AEBF62600697E21 /* VelocityComponent.swift */; };
+		F87120BE2AEBF87600697E21 /* SpriteWalkAnimationComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120BD2AEBF87600697E21 /* SpriteWalkAnimationComponent.swift */; };
 		F87D81F72AEACD400006CDD8 /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D81F62AEACD400006CDD8 /* EntityManager.swift */; };
 		F87D81F92AEACE5E0006CDD8 /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D81F82AEACE5E0006CDD8 /* SpriteComponent.swift */; };
 		F89283FA2AE94D6F00A3B499 /* PositionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89283F92AE94D6F00A3B499 /* PositionHistory.swift */; };
@@ -41,6 +45,10 @@
 		F85491892AE16F71004EA5B1 /* MenuInicial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInicial.swift; sourceTree = "<group>"; };
 		F854918C2AE174A8004EA5B1 /* GameCenterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterHelper.swift; sourceTree = "<group>"; };
 		F854918E2AE1767F004EA5B1 /* CarameloRun.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CarameloRun.entitlements; sourceTree = "<group>"; };
+		F87120B72AEBEB1C00697E21 /* DirectionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionComponent.swift; sourceTree = "<group>"; };
+		F87120B92AEBF20C00697E21 /* JumpComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpComponent.swift; sourceTree = "<group>"; };
+		F87120BB2AEBF62600697E21 /* VelocityComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VelocityComponent.swift; sourceTree = "<group>"; };
+		F87120BD2AEBF87600697E21 /* SpriteWalkAnimationComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteWalkAnimationComponent.swift; sourceTree = "<group>"; };
 		F87D81F62AEACD400006CDD8 /* EntityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
 		F87D81F82AEACE5E0006CDD8 /* SpriteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
 		F89283F92AE94D6F00A3B499 /* PositionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionHistory.swift; sourceTree = "<group>"; };
@@ -124,6 +132,10 @@
 			isa = PBXGroup;
 			children = (
 				F87D81F82AEACE5E0006CDD8 /* SpriteComponent.swift */,
+				F87120B72AEBEB1C00697E21 /* DirectionComponent.swift */,
+				F87120B92AEBF20C00697E21 /* JumpComponent.swift */,
+				F87120BB2AEBF62600697E21 /* VelocityComponent.swift */,
+				F87120BD2AEBF87600697E21 /* SpriteWalkAnimationComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -253,11 +265,15 @@
 				F854918D2AE174A8004EA5B1 /* GameCenterHelper.swift in Sources */,
 				F898070F2ACDA1880044D237 /* Zposition.swift in Sources */,
 				F854918A2AE16F71004EA5B1 /* MenuInicial.swift in Sources */,
+				F87120BA2AEBF20C00697E21 /* JumpComponent.swift in Sources */,
+				F87120BC2AEBF62600697E21 /* VelocityComponent.swift in Sources */,
 				FBB5FDAB2AE93AE600E37BE1 /* PreparingViewController.swift in Sources */,
 				F82786EE2AC59B170047111D /* GameScene.swift in Sources */,
 				F87D81F72AEACD400006CDD8 /* EntityManager.swift in Sources */,
 				F8B81A2B2AC8A92C0081324E /* Ground.swift in Sources */,
 				F89283FA2AE94D6F00A3B499 /* PositionHistory.swift in Sources */,
+				F87120B82AEBEB1C00697E21 /* DirectionComponent.swift in Sources */,
+				F87120BE2AEBF87600697E21 /* SpriteWalkAnimationComponent.swift in Sources */,
 				F87D81F92AEACE5E0006CDD8 /* SpriteComponent.swift in Sources */,
 				F82A32822AE2B3C500A3639C /* PlayerState.swift in Sources */,
 				F82787032AC5A8250047111D /* Joystick.swift in Sources */,

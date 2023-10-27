@@ -19,6 +19,6 @@ class JumpButton {
     }
     
     func buttonTapped(_ player: Player) {
-        player.jump()
+        player.component(ofType: JumpComponent.self)?.jump()
     }
 }
