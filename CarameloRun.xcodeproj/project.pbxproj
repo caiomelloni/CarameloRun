@@ -17,6 +17,16 @@
 		F82A32822AE2B3C500A3639C /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A32812AE2B3C500A3639C /* PlayerState.swift */; };
 		F854918A2AE16F71004EA5B1 /* MenuInicial.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85491892AE16F71004EA5B1 /* MenuInicial.swift */; };
 		F854918D2AE174A8004EA5B1 /* GameCenterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F854918C2AE174A8004EA5B1 /* GameCenterHelper.swift */; };
+		F87120B82AEBEB1C00697E21 /* DirectionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120B72AEBEB1C00697E21 /* DirectionComponent.swift */; };
+		F87120BA2AEBF20C00697E21 /* JumpComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120B92AEBF20C00697E21 /* JumpComponent.swift */; };
+		F87120BC2AEBF62600697E21 /* VelocityComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120BB2AEBF62600697E21 /* VelocityComponent.swift */; };
+		F87120BE2AEBF87600697E21 /* SpriteWalkAnimationComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120BD2AEBF87600697E21 /* SpriteWalkAnimationComponent.swift */; };
+		F87120C42AEEC8F200697E21 /* IdleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120C32AEEC8F200697E21 /* IdleState.swift */; };
+		F87120C62AEEC9DE00697E21 /* JumpingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120C52AEEC9DE00697E21 /* JumpingState.swift */; };
+		F87120C82AEEC9FF00697E21 /* FallingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120C72AEEC9FF00697E21 /* FallingState.swift */; };
+		F87120CB2AEECA6100697E21 /* RunningState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120CA2AEECA6100697E21 /* RunningState.swift */; };
+		F87D81F72AEACD400006CDD8 /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D81F62AEACD400006CDD8 /* EntityManager.swift */; };
+		F87D81F92AEACE5E0006CDD8 /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D81F82AEACE5E0006CDD8 /* SpriteComponent.swift */; };
 		F89283FA2AE94D6F00A3B499 /* PositionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89283F92AE94D6F00A3B499 /* PositionHistory.swift */; };
 		F89283FD2AE964A900A3B499 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89283FC2AE964A900A3B499 /* Constants.swift */; };
 		F898070F2ACDA1880044D237 /* Zposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F898070E2ACDA1880044D237 /* Zposition.swift */; };
@@ -39,6 +49,16 @@
 		F85491892AE16F71004EA5B1 /* MenuInicial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInicial.swift; sourceTree = "<group>"; };
 		F854918C2AE174A8004EA5B1 /* GameCenterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterHelper.swift; sourceTree = "<group>"; };
 		F854918E2AE1767F004EA5B1 /* CarameloRun.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CarameloRun.entitlements; sourceTree = "<group>"; };
+		F87120B72AEBEB1C00697E21 /* DirectionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionComponent.swift; sourceTree = "<group>"; };
+		F87120B92AEBF20C00697E21 /* JumpComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpComponent.swift; sourceTree = "<group>"; };
+		F87120BB2AEBF62600697E21 /* VelocityComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VelocityComponent.swift; sourceTree = "<group>"; };
+		F87120BD2AEBF87600697E21 /* SpriteWalkAnimationComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteWalkAnimationComponent.swift; sourceTree = "<group>"; };
+		F87120C32AEEC8F200697E21 /* IdleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleState.swift; sourceTree = "<group>"; };
+		F87120C52AEEC9DE00697E21 /* JumpingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpingState.swift; sourceTree = "<group>"; };
+		F87120C72AEEC9FF00697E21 /* FallingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallingState.swift; sourceTree = "<group>"; };
+		F87120CA2AEECA6100697E21 /* RunningState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningState.swift; sourceTree = "<group>"; };
+		F87D81F62AEACD400006CDD8 /* EntityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
+		F87D81F82AEACE5E0006CDD8 /* SpriteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
 		F89283F92AE94D6F00A3B499 /* PositionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionHistory.swift; sourceTree = "<group>"; };
 		F89283FC2AE964A900A3B499 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F898070E2ACDA1880044D237 /* Zposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zposition.swift; sourceTree = "<group>"; };
@@ -80,27 +100,22 @@
 			children = (
 				F89283FB2AE9647500A3B499 /* Gameplay */,
 				F854918E2AE1767F004EA5B1 /* CarameloRun.entitlements */,
-				F854918B2AE17490004EA5B1 /* GameCenter */,
 				F85491882AE16EA3004EA5B1 /* Views */,
-				F898070D2ACDA1510044D237 /* Utils */,
 				F898070C2ACDA0D60044D237 /* Files */,
-				F8F97E342ACB07F50006A4BA /* Scenes */,
-				F82786FF2AC5A2DD0047111D /* Models */,
 			);
 			path = CarameloRun;
 			sourceTree = "<group>";
 		};
-		F82786FF2AC5A2DD0047111D /* Models */ = {
+		F82786FF2AC5A2DD0047111D /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				F82A32812AE2B3C500A3639C /* PlayerState.swift */,
 				F82787002AC5A2F20047111D /* Player.swift */,
 				F82787022AC5A8250047111D /* Joystick.swift */,
 				F82787042AC5B8CB0047111D /* JumpButton.swift */,
 				F8B81A2A2AC8A92C0081324E /* Ground.swift */,
-				F89283F92AE94D6F00A3B499 /* PositionHistory.swift */,
+				F87D81F62AEACD400006CDD8 /* EntityManager.swift */,
 			);
-			path = Models;
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		F85491882AE16EA3004EA5B1 /* Views */ = {
@@ -120,9 +135,55 @@
 			path = GameCenter;
 			sourceTree = "<group>";
 		};
+		F87120C12AEEC85F00697E21 /* States */ = {
+			isa = PBXGroup;
+			children = (
+				F87120C22AEEC89000697E21 /* Player */,
+			);
+			path = States;
+			sourceTree = "<group>";
+		};
+		F87120C22AEEC89000697E21 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				F87120C32AEEC8F200697E21 /* IdleState.swift */,
+				F87120C52AEEC9DE00697E21 /* JumpingState.swift */,
+				F87120C72AEEC9FF00697E21 /* FallingState.swift */,
+				F87120CA2AEECA6100697E21 /* RunningState.swift */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
+		F87D81F42AEA98760006CDD8 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				F87D81F82AEACE5E0006CDD8 /* SpriteComponent.swift */,
+				F87120B72AEBEB1C00697E21 /* DirectionComponent.swift */,
+				F87120B92AEBF20C00697E21 /* JumpComponent.swift */,
+				F87120BB2AEBF62600697E21 /* VelocityComponent.swift */,
+				F87120BD2AEBF87600697E21 /* SpriteWalkAnimationComponent.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		F87D81F52AEA98AC0006CDD8 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				F82A32812AE2B3C500A3639C /* PlayerState.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
 		F89283FB2AE9647500A3B499 /* Gameplay */ = {
 			isa = PBXGroup;
 			children = (
+				F87D81F52AEA98AC0006CDD8 /* DataModel */,
+				F87120C12AEEC85F00697E21 /* States */,
+				F87D81F42AEA98760006CDD8 /* Components */,
+				F82786FF2AC5A2DD0047111D /* Entities */,
+				F8F97E342ACB07F50006A4BA /* Maps */,
+				F898070D2ACDA1510044D237 /* Utils */,
+				F854918B2AE17490004EA5B1 /* GameCenter */,
 				F82786ED2AC59B170047111D /* GameScene.swift */,
 				F82786EF2AC59B170047111D /* GameViewController.swift */,
 			);
@@ -141,19 +202,21 @@
 		F898070D2ACDA1510044D237 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				F89283F92AE94D6F00A3B499 /* PositionHistory.swift */,
 				F898070E2ACDA1880044D237 /* Zposition.swift */,
 				F89807102ACDA4130044D237 /* Dimensions.swift */,
 				F89283FC2AE964A900A3B499 /* Constants.swift */,
 			);
 			name = Utils;
+			path = ..;
 			sourceTree = "<group>";
 		};
-		F8F97E342ACB07F50006A4BA /* Scenes */ = {
+		F8F97E342ACB07F50006A4BA /* Maps */ = {
 			isa = PBXGroup;
 			children = (
 				F8F97E372ACB08350006A4BA /* Background.sks */,
 			);
-			path = Scenes;
+			path = Maps;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,13 +293,23 @@
 				F854918D2AE174A8004EA5B1 /* GameCenterHelper.swift in Sources */,
 				F898070F2ACDA1880044D237 /* Zposition.swift in Sources */,
 				F854918A2AE16F71004EA5B1 /* MenuInicial.swift in Sources */,
+				F87120BA2AEBF20C00697E21 /* JumpComponent.swift in Sources */,
+				F87120BC2AEBF62600697E21 /* VelocityComponent.swift in Sources */,
 				FBB5FDAB2AE93AE600E37BE1 /* PreparingViewController.swift in Sources */,
 				F82786EE2AC59B170047111D /* GameScene.swift in Sources */,
+				F87D81F72AEACD400006CDD8 /* EntityManager.swift in Sources */,
 				F8B81A2B2AC8A92C0081324E /* Ground.swift in Sources */,
 				F89283FA2AE94D6F00A3B499 /* PositionHistory.swift in Sources */,
+				F87120B82AEBEB1C00697E21 /* DirectionComponent.swift in Sources */,
+				F87120BE2AEBF87600697E21 /* SpriteWalkAnimationComponent.swift in Sources */,
+				F87120C42AEEC8F200697E21 /* IdleState.swift in Sources */,
+				F87D81F92AEACE5E0006CDD8 /* SpriteComponent.swift in Sources */,
 				F82A32822AE2B3C500A3639C /* PlayerState.swift in Sources */,
 				F82787032AC5A8250047111D /* Joystick.swift in Sources */,
+				F87120C62AEEC9DE00697E21 /* JumpingState.swift in Sources */,
 				F82787052AC5B8CB0047111D /* JumpButton.swift in Sources */,
+				F87120CB2AEECA6100697E21 /* RunningState.swift in Sources */,
+				F87120C82AEEC9FF00697E21 /* FallingState.swift in Sources */,
 				F82786F02AC59B170047111D /* GameViewController.swift in Sources */,
 				F89283FD2AE964A900A3B499 /* Constants.swift in Sources */,
 				F82786E82AC59B170047111D /* AppDelegate.swift in Sources */,
