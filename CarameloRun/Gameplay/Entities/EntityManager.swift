@@ -21,6 +21,7 @@ class EntityManager {
         return [
             // component system insertion example:
             // GKComponentSystem(componentClass: DirectionComponent.self)
+            GKComponentSystem(componentClass: PlayerAnimationComponent.self)
         ]
     }()
     

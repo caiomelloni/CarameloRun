@@ -80,5 +80,9 @@ class SpriteComponent: GKComponent {
         }
     }
     
+    func run(_ action: SKAction) {
+        node.run(action)
+    }
+    
 }
 

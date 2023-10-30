@@ -145,8 +145,8 @@ class GameScene: SKScene {
         }
         
         
-//        if(joystick.inUse){
-//            robot.component(ofType: SpriteWalkAnimationComponent.self)?.nextSprite()
-//        }
+        if(!joystick.inUse){
+            robot.component(ofType: PlayerAnimationComponent.self)?.idle()
+        }
     }
 }

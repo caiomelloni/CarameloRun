@@ -41,7 +41,7 @@ class Player: GKEntity {
             DirectionComponent(),
             JumpComponent(Constants.playerJumpXMultiplier, Constants.playerJumpYMultiplier),
             VelocityComponent(Constants.playerVelocity),
-            SpriteWalkAnimationComponent(1, 2, "robot")
+            PlayerAnimationComponent(PlayerStateMachine(spriteComponent))
         ].forEach { component in
             addComponent(component)
         }
