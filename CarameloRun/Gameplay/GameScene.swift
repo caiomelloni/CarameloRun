@@ -11,11 +11,11 @@ import GameKit
 
 class GameScene: SKScene {
     
-    var robot: Player!
-    var robots = [Int:Player]()
+    var dog: Player!
+    var dogs = [Int:Player]()
     let joystick = Joystick()
     let jumpButton = JumpButton()
-    let sceneCamera = SKCameraNode()
+    var sceneCamera: LocalPlayerCamera!
     let positionHistory = PositionHistory()
     var controllerDelegate: GameControllerDelegate?
     
@@ -39,14 +39,14 @@ class GameScene: SKScene {
                 entityManager.addEntity(player, spawnPoint: spawnNode?.position)
                 
                 if player.displayName == GKLocalPlayer.local.displayName {
-                    robot = player
+                    dog = player
                     positionHistory.setReferencePosition(player)
                 } else {
                     // TO DO: tirar gravidade e proibir que um player empurre o outro
                     // o no do player deve ser um ponto fixo no mapa, que se movimenta apenas pelas
                     // coordenadas emitidas
                     // player.component(ofType: SpriteComponent.self).affectedByGravity = false
-                    robots[player.playerNumber] = player
+                    dogs[player.playerNumber] = player
                 }
                 
             }
@@ -57,6 +57,8 @@ class GameScene: SKScene {
         
         
         
+        // set camera
+        sceneCamera = LocalPlayerCamera(dog)
         camera = sceneCamera
         
         
@@ -89,7 +91,7 @@ class GameScene: SKScene {
             }
             
             if(jumpButton.node.frame.contains(location)) {
-                jumpButton.buttonTapped(robot!)
+                jumpButton.buttonTapped(dog!)
             }
         }
     }
@@ -109,14 +111,10 @@ class GameScene: SKScene {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
     
-    func updateCameraPosition() {
-        camera?.position.x = robot.component(ofType: SpriteComponent.self)!.position.x
-        camera?.position.y = robot.component(ofType: SpriteComponent.self)!.position.y
-    }
     
     func updatePlayersPosition(_ playerState: PlayerState) {
         let newPosition = CGPoint(x: playerState.positionX, y: playerState.positionY)
-        robots[playerState.playerNumber]?.component(ofType: SpriteComponent.self)?.position = newPosition
+        dogs[playerState.playerNumber]?.component(ofType: SpriteComponent.self)?.position = newPosition
     }
     
     
@@ -128,25 +126,26 @@ class GameScene: SKScene {
         lastUpdateTimeInterval = currentTime
         entityManager.update(deltaTime)
         
-        updateCameraPosition()
+        sceneCamera.update(deltaTime)
+        
         positionJoysticksAndJumpBtn()
         
         if let movDirection = joystick.movementDirection {
-            robot?.component(ofType: VelocityComponent.self)?.addVelocity(movDirection)
+            dog?.component(ofType: VelocityComponent.self)?.addVelocity(movDirection)
         }
         
-        if positionHistory.hasPositionChanged(robot!) {
+        if positionHistory.hasPositionChanged(dog!) {
             let playerState = PlayerState(name: GKLocalPlayer.local.displayName,
-                                          playerNumber: robot.playerNumber,
-                                          positionX: robot.component(ofType: SpriteComponent.self)!.position.x,
-                                          positionY: robot.component(ofType: SpriteComponent.self)!.position.y)
+                                          playerNumber: dog.playerNumber,
+                                          positionX: dog.component(ofType: SpriteComponent.self)!.position.x,
+                                          positionY: dog.component(ofType: SpriteComponent.self)!.position.y)
             
             controllerDelegate?.sendPlayerState(playerState)
         }
         
         
         if(!joystick.inUse){
-            robot.component(ofType: PlayerAnimationComponent.self)?.idle()
+            dog.component(ofType: PlayerAnimationComponent.self)?.idle()
         }
     }
 }

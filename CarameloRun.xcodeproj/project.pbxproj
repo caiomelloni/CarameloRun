@@ -26,13 +26,13 @@
 		F87120C82AEEC9FF00697E21 /* FallingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120C72AEEC9FF00697E21 /* FallingState.swift */; };
 		F87120CB2AEECA6100697E21 /* RunningState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120CA2AEECA6100697E21 /* RunningState.swift */; };
 		F87120CD2AEFDE2600697E21 /* PlayerStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120CC2AEFDE2600697E21 /* PlayerStateMachine.swift */; };
+		F87120D22AF0142A00697E21 /* LocalPlayerCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120D12AF0142A00697E21 /* LocalPlayerCamera.swift */; };
 		F87D81F72AEACD400006CDD8 /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D81F62AEACD400006CDD8 /* EntityManager.swift */; };
 		F87D81F92AEACE5E0006CDD8 /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D81F82AEACE5E0006CDD8 /* SpriteComponent.swift */; };
 		F89283FA2AE94D6F00A3B499 /* PositionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89283F92AE94D6F00A3B499 /* PositionHistory.swift */; };
 		F89283FD2AE964A900A3B499 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89283FC2AE964A900A3B499 /* Constants.swift */; };
 		F898070F2ACDA1880044D237 /* Zposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F898070E2ACDA1880044D237 /* Zposition.swift */; };
 		F89807112ACDA4130044D237 /* Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89807102ACDA4130044D237 /* Dimensions.swift */; };
-		F8B81A2B2AC8A92C0081324E /* Ground.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B81A2A2AC8A92C0081324E /* Ground.swift */; };
 		F8F97E382ACB08350006A4BA /* Background.sks in Resources */ = {isa = PBXBuildFile; fileRef = F8F97E372ACB08350006A4BA /* Background.sks */; };
 		FBB5FDAB2AE93AE600E37BE1 /* PreparingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB5FDAA2AE93AE600E37BE1 /* PreparingViewController.swift */; };
 /* End PBXBuildFile section */
@@ -59,13 +59,13 @@
 		F87120C72AEEC9FF00697E21 /* FallingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallingState.swift; sourceTree = "<group>"; };
 		F87120CA2AEECA6100697E21 /* RunningState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningState.swift; sourceTree = "<group>"; };
 		F87120CC2AEFDE2600697E21 /* PlayerStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStateMachine.swift; sourceTree = "<group>"; };
+		F87120D12AF0142A00697E21 /* LocalPlayerCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPlayerCamera.swift; sourceTree = "<group>"; };
 		F87D81F62AEACD400006CDD8 /* EntityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
 		F87D81F82AEACE5E0006CDD8 /* SpriteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
 		F89283F92AE94D6F00A3B499 /* PositionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionHistory.swift; sourceTree = "<group>"; };
 		F89283FC2AE964A900A3B499 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F898070E2ACDA1880044D237 /* Zposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zposition.swift; sourceTree = "<group>"; };
 		F89807102ACDA4130044D237 /* Dimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dimensions.swift; sourceTree = "<group>"; };
-		F8B81A2A2AC8A92C0081324E /* Ground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ground.swift; sourceTree = "<group>"; };
 		F8F97E372ACB08350006A4BA /* Background.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Background.sks; sourceTree = "<group>"; };
 		FBB5FDAA2AE93AE600E37BE1 /* PreparingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,9 +112,6 @@
 			isa = PBXGroup;
 			children = (
 				F82787002AC5A2F20047111D /* Player.swift */,
-				F82787022AC5A8250047111D /* Joystick.swift */,
-				F82787042AC5B8CB0047111D /* JumpButton.swift */,
-				F8B81A2A2AC8A92C0081324E /* Ground.swift */,
 				F87D81F62AEACD400006CDD8 /* EntityManager.swift */,
 			);
 			path = Entities;
@@ -157,6 +154,32 @@
 			path = Player;
 			sourceTree = "<group>";
 		};
+		F87120CE2AF013CE00697E21 /* GameTools */ = {
+			isa = PBXGroup;
+			children = (
+				F87120D02AF013E000697E21 /* Buttons */,
+				F87120CF2AF013D600697E21 /* Camera */,
+			);
+			path = GameTools;
+			sourceTree = "<group>";
+		};
+		F87120CF2AF013D600697E21 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				F87120D12AF0142A00697E21 /* LocalPlayerCamera.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		F87120D02AF013E000697E21 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				F82787022AC5A8250047111D /* Joystick.swift */,
+				F82787042AC5B8CB0047111D /* JumpButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
 		F87D81F42AEA98760006CDD8 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +203,7 @@
 		F89283FB2AE9647500A3B499 /* Gameplay */ = {
 			isa = PBXGroup;
 			children = (
+				F87120CE2AF013CE00697E21 /* GameTools */,
 				F87D81F52AEA98AC0006CDD8 /* DataModel */,
 				F87120C12AEEC85F00697E21 /* States */,
 				F87D81F42AEA98760006CDD8 /* Components */,
@@ -299,10 +323,10 @@
 				F854918A2AE16F71004EA5B1 /* MenuInicial.swift in Sources */,
 				F87120BA2AEBF20C00697E21 /* JumpComponent.swift in Sources */,
 				F87120BC2AEBF62600697E21 /* VelocityComponent.swift in Sources */,
+				F87120D22AF0142A00697E21 /* LocalPlayerCamera.swift in Sources */,
 				FBB5FDAB2AE93AE600E37BE1 /* PreparingViewController.swift in Sources */,
 				F82786EE2AC59B170047111D /* GameScene.swift in Sources */,
 				F87D81F72AEACD400006CDD8 /* EntityManager.swift in Sources */,
-				F8B81A2B2AC8A92C0081324E /* Ground.swift in Sources */,
 				F89283FA2AE94D6F00A3B499 /* PositionHistory.swift in Sources */,
 				F87120B82AEBEB1C00697E21 /* DirectionComponent.swift in Sources */,
 				F87120BE2AEBF87600697E21 /* PlayerAnimationComponent.swift in Sources */,
