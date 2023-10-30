@@ -21,6 +21,10 @@
 		F87120BA2AEBF20C00697E21 /* JumpComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120B92AEBF20C00697E21 /* JumpComponent.swift */; };
 		F87120BC2AEBF62600697E21 /* VelocityComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120BB2AEBF62600697E21 /* VelocityComponent.swift */; };
 		F87120BE2AEBF87600697E21 /* SpriteWalkAnimationComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120BD2AEBF87600697E21 /* SpriteWalkAnimationComponent.swift */; };
+		F87120C42AEEC8F200697E21 /* IdleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120C32AEEC8F200697E21 /* IdleState.swift */; };
+		F87120C62AEEC9DE00697E21 /* JumpingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120C52AEEC9DE00697E21 /* JumpingState.swift */; };
+		F87120C82AEEC9FF00697E21 /* FallingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120C72AEEC9FF00697E21 /* FallingState.swift */; };
+		F87120CB2AEECA6100697E21 /* RunningState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120CA2AEECA6100697E21 /* RunningState.swift */; };
 		F87D81F72AEACD400006CDD8 /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D81F62AEACD400006CDD8 /* EntityManager.swift */; };
 		F87D81F92AEACE5E0006CDD8 /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D81F82AEACE5E0006CDD8 /* SpriteComponent.swift */; };
 		F89283FA2AE94D6F00A3B499 /* PositionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89283F92AE94D6F00A3B499 /* PositionHistory.swift */; };
@@ -49,6 +53,10 @@
 		F87120B92AEBF20C00697E21 /* JumpComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpComponent.swift; sourceTree = "<group>"; };
 		F87120BB2AEBF62600697E21 /* VelocityComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VelocityComponent.swift; sourceTree = "<group>"; };
 		F87120BD2AEBF87600697E21 /* SpriteWalkAnimationComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteWalkAnimationComponent.swift; sourceTree = "<group>"; };
+		F87120C32AEEC8F200697E21 /* IdleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleState.swift; sourceTree = "<group>"; };
+		F87120C52AEEC9DE00697E21 /* JumpingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpingState.swift; sourceTree = "<group>"; };
+		F87120C72AEEC9FF00697E21 /* FallingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallingState.swift; sourceTree = "<group>"; };
+		F87120CA2AEECA6100697E21 /* RunningState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningState.swift; sourceTree = "<group>"; };
 		F87D81F62AEACD400006CDD8 /* EntityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
 		F87D81F82AEACE5E0006CDD8 /* SpriteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
 		F89283F92AE94D6F00A3B499 /* PositionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionHistory.swift; sourceTree = "<group>"; };
@@ -127,6 +135,25 @@
 			path = GameCenter;
 			sourceTree = "<group>";
 		};
+		F87120C12AEEC85F00697E21 /* States */ = {
+			isa = PBXGroup;
+			children = (
+				F87120C22AEEC89000697E21 /* Player */,
+			);
+			path = States;
+			sourceTree = "<group>";
+		};
+		F87120C22AEEC89000697E21 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				F87120C32AEEC8F200697E21 /* IdleState.swift */,
+				F87120C52AEEC9DE00697E21 /* JumpingState.swift */,
+				F87120C72AEEC9FF00697E21 /* FallingState.swift */,
+				F87120CA2AEECA6100697E21 /* RunningState.swift */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
 		F87D81F42AEA98760006CDD8 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				F87D81F52AEA98AC0006CDD8 /* DataModel */,
+				F87120C12AEEC85F00697E21 /* States */,
 				F87D81F42AEA98760006CDD8 /* Components */,
 				F82786FF2AC5A2DD0047111D /* Entities */,
 				F8F97E342ACB07F50006A4BA /* Maps */,
@@ -274,10 +302,14 @@
 				F89283FA2AE94D6F00A3B499 /* PositionHistory.swift in Sources */,
 				F87120B82AEBEB1C00697E21 /* DirectionComponent.swift in Sources */,
 				F87120BE2AEBF87600697E21 /* SpriteWalkAnimationComponent.swift in Sources */,
+				F87120C42AEEC8F200697E21 /* IdleState.swift in Sources */,
 				F87D81F92AEACE5E0006CDD8 /* SpriteComponent.swift in Sources */,
 				F82A32822AE2B3C500A3639C /* PlayerState.swift in Sources */,
 				F82787032AC5A8250047111D /* Joystick.swift in Sources */,
+				F87120C62AEEC9DE00697E21 /* JumpingState.swift in Sources */,
 				F82787052AC5B8CB0047111D /* JumpButton.swift in Sources */,
+				F87120CB2AEECA6100697E21 /* RunningState.swift in Sources */,
+				F87120C82AEEC9FF00697E21 /* FallingState.swift in Sources */,
 				F82786F02AC59B170047111D /* GameViewController.swift in Sources */,
 				F89283FD2AE964A900A3B499 /* Constants.swift in Sources */,
 				F82786E82AC59B170047111D /* AppDelegate.swift in Sources */,
