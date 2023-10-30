@@ -7,8 +7,8 @@
 
 class Constants {
     //player jump - a good proportion is 1x: 5y
-    static let playerJumpXMultiplier: Double = 1
-    static let playerJumpYMultiplier: Double = 5
+    static let playerJumpXMultiplier: Double = 2
+    static let playerJumpYMultiplier: Double = 7
     
     
     static let playerVelocity: Double = 10

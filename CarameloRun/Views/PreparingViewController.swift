@@ -37,7 +37,7 @@ class PreparingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         players = getAllPlayers()
-        players[1].ready = true
+//        players[1].ready = true
         numberOfPlayers = players.count
         playerCatcher = sort(players)
         definePrep(players, playerCatcher)

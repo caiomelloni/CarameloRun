@@ -10,6 +10,7 @@ struct PlayerState: Codable {
     let playerNumber: Int
     let positionX: Double
     let positionY: Double
+    //var timer: Int = 15
 }
 
 struct PreparingPlayres: Codable {

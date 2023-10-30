@@ -69,7 +69,8 @@ class Player {
     func nextSprite() {
         currentPlayerSprite += 1
         node.texture = SKTexture(imageNamed: "robot" + String(currentPlayerSprite))
-        if currentPlayerSprite == 2 {
+
+        if currentPlayerSprite == 7 {
             currentPlayerSprite = 0
         }
     }

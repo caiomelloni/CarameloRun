@@ -15,6 +15,8 @@ class GameViewController: UIViewController {
     var match: GKMatch
     var gameScene: GameScene?
     var players2: [Player]
+    var timer: Timer!
+    var time: Int = 15
     
     init(match: GKMatch, players2: [Player]) {
         self.match = match
@@ -51,6 +53,8 @@ class GameViewController: UIViewController {
             view.showsFPS = true
             view.preferredFramesPerSecond = 30
             view.showsNodeCount = true
+            
+            initTimer()
         }
         
         match.delegate = self
@@ -66,6 +70,21 @@ class GameViewController: UIViewController {
 
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+    
+    private func initTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
+            self.time -= 1
+            
+            if self.time == 0 {
+                //end game
+                self.navigationController?.isNavigationBarHidden = true
+                self.navigationController?.popViewController(animated: true)
+                self.navigationController?.pushViewController(EndGame(), animated: true)
+            }
+            
+            self.gameScene?.updateTimer(self.time)
+        })
     }
 }
 

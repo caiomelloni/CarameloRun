@@ -18,6 +18,7 @@ class GameScene: SKScene {
     let sceneCamera = SKCameraNode()
     let positionHistory = PositionHistory()
     var controllerDelegate: GameControllerDelegate?
+    var timer = ControllTimer()
     
     override func didMove(to view: SKView){
         backgroundColor = .white
@@ -49,6 +50,8 @@ class GameScene: SKScene {
         
         camera = sceneCamera
         
+        addChild(timer.node)
+        
         
         addChild(joystick.node)
         
@@ -64,6 +67,10 @@ class GameScene: SKScene {
             y: sceneCamera.position.y - frame.maxY
         )
         jumpButton.position(
+            x: sceneCamera.position.x + frame.maxX,
+            y: sceneCamera.position.y - frame.maxY
+        )
+        timer.position(
             x: sceneCamera.position.x + frame.maxX,
             y: sceneCamera.position.y - frame.maxY
         )
@@ -109,6 +116,9 @@ class GameScene: SKScene {
         robots[playerState.playerNumber]?.position = newPosition
     }
     
+    func updateTimer(_ time: Int){
+        timer.updateTimer(time)
+    }
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
