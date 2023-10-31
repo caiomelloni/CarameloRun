@@ -14,11 +14,11 @@ class GameViewController: UIViewController {
     
     var match: GKMatch
     var gameScene: GameScene?
-    var players2: [Player]
+    var players: [Player]
     
-    init(match: GKMatch, players2: [Player]) {
+    init(match: GKMatch, players: [Player]) {
         self.match = match
-        self.players2 = players2
+        self.players = players
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -83,7 +83,7 @@ extension GameViewController: GKMatchDelegate {
 
 protocol GameControllerDelegate {
     func sendPlayerState(_ state: PlayerState)
-    func getAllPlayers2() -> [Player]
+    var players: [Player] { get }
 }
 
 extension GameViewController: GameControllerDelegate {
@@ -95,10 +95,5 @@ extension GameViewController: GameControllerDelegate {
         } catch {
             print("error sending data")
         }
-    }
-    
-    
-    func getAllPlayers2() -> [Player] {
-        return players2
     }
 }

@@ -86,7 +86,7 @@ class PreparingViewController: UIViewController {
         if players[0].ready == true && players[1].ready == true {//&& players[2].ready == true {
             self.navigationController?.isNavigationBarHidden = true
             self.navigationController?.popViewController(animated: true)
-            self.navigationController?.pushViewController(GameViewController(match: match, players2: players), animated: true)
+            self.navigationController?.pushViewController(GameViewController(match: match, players: players), animated: true)
         }
     }
     
