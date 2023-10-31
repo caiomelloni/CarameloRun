@@ -11,8 +11,9 @@ import GameplayKit
 class SpriteComponent: GKComponent {
     private let node: SKSpriteNode
 
-    init(texture: SKTexture) {
+    init(texture: SKTexture, size: CGSize) {
         node = SKSpriteNode(texture: texture)
+        node.size = size
         super.init()
     }
     
@@ -77,6 +78,16 @@ class SpriteComponent: GKComponent {
         }
         set {
             node.xScale = newValue
+        }
+    }
+    
+    func run(_ action: SKAction) {
+        node.run(action)
+    }
+    
+    var dy: CGFloat? {
+        get {
+            node.physicsBody?.velocity.dy
         }
     }
     

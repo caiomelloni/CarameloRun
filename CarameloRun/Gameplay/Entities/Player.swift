@@ -34,14 +34,14 @@ class Player: GKEntity {
         
         super.init()
         
-        let spriteComponent = setPlayerBodySpriteComponent(SpriteComponent(texture: SKTexture(imageNamed: "robot1")))
+        let spriteComponent = setPlayerBodySpriteComponent(SpriteComponent(texture: SKTexture(imageNamed: "Idle1"), size: CGSize(width: Constants.playerWidth, height: Constants.playerHeight)))
         
         [
             spriteComponent,
             DirectionComponent(),
             JumpComponent(Constants.playerJumpXMultiplier, Constants.playerJumpYMultiplier),
             VelocityComponent(Constants.playerVelocity),
-            SpriteWalkAnimationComponent(1, 2, "robot")
+            PlayerAnimationComponent(PlayerStateMachine(spriteComponent))
         ].forEach { component in
             addComponent(component)
         }
@@ -52,7 +52,8 @@ class Player: GKEntity {
     }
     
     private func setPlayerBodySpriteComponent(_ spriteComponent: SpriteComponent) -> SpriteComponent {
-        let body = SKPhysicsBody(rectangleOf: spriteComponent.size)
+        let body = SKPhysicsBody(texture: SKTexture(imageNamed: "Idle1"),
+                                 size: CGSize(width: Constants.playerWidth, height: Constants.playerHeight))
         body.affectedByGravity = true
         body.allowsRotation = false
         

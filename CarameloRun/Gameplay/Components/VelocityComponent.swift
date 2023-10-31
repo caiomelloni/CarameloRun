@@ -22,7 +22,7 @@ class VelocityComponent: GKComponent {
     }
     
     func addVelocity(_ direction: Direction) {
-        entity?.component(ofType: SpriteWalkAnimationComponent.self)?.nextSprite()
+        entity?.component(ofType: PlayerAnimationComponent.self)?.run()
         let spriteComponent = entity?.component(ofType: SpriteComponent.self)
         let directionComponent = entity?.component(ofType: DirectionComponent.self)
         switch direction {

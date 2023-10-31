@@ -6,10 +6,12 @@
 //
 
 class Constants {
-    //player jump - a good proportion is 1x: 5y
-    static let playerJumpXMultiplier: Double = 1
-    static let playerJumpYMultiplier: Double = 5
+    static let playerJumpXMultiplier: Double = 0.5
+    static let playerJumpYMultiplier: Double = 0.8
     
     
     static let playerVelocity: Double = 10
+    
+    static let playerHeight: Double = 150
+    static let playerWidth: Double = 100
 }
