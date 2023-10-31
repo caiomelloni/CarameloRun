@@ -69,11 +69,11 @@ class Joystick {
         setJoystickPositionRelativeToCamera(sceneCamera, frame)
         
         if let movDirection = movementDirection {
-            print("movvvv")
             dog.component(ofType: VelocityComponent.self)?.addVelocity(movDirection)
         }
-        
-        if(!inUse){
+       
+        let dy = dog.component(ofType: SpriteComponent.self)?.dy
+        if(!inUse && dy == 0){
             dog.component(ofType: PlayerAnimationComponent.self)?.idle()
         }
     }

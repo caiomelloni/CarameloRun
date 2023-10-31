@@ -37,4 +37,16 @@ class JumpComponent: GKComponent {
         }
 
     }
+    
+    override func update(deltaTime seconds: TimeInterval) {
+        let dy = entity?.component(ofType: SpriteComponent.self)?.dy
+        let animationComponent = entity?.component(ofType: PlayerAnimationComponent.self)
+        if let dy = dy {
+            if dy > 0 {
+                animationComponent?.jump()
+            } else if dy < 0 {
+                animationComponent?.fall()
+            }
+        }
+    }
 }

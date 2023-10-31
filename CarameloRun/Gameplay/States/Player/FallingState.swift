@@ -22,7 +22,8 @@ class FallingState: GKState {
     override func didEnter(from previousState: GKState?) {
         // runs as it enters this state
         // has access to the previous state
-        spriteComponent.run(.animate(with: spriteSheet, timePerFrame: 1))
+        spriteComponent.run(.animate(with: spriteSheet, timePerFrame: 0.1))
+        print("did enter to falling")
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
