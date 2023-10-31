@@ -77,32 +77,43 @@ class GameViewController: UIViewController {
             self.time -= 1
             
             if self.time == 0 {
-                //end game
-                self.navigationController?.isNavigationBarHidden = true
-                self.navigationController?.popViewController(animated: true)
-                self.navigationController?.pushViewController(EndGame(), animated: true)
+                self.sendMatchState(matchState.init(finish: true))
+                self.finishGame(true)
             }
             
             self.gameScene?.updateTimer(self.time)
         })
+    }
+    
+    private func finishGame(_ bool: Bool) {
+        if bool == true {
+            match.finalize()
+            self.present(EndGame(), animated: true)
+        }
     }
 }
 
 extension GameViewController: GKMatchDelegate {
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
         let dataJsonString = String(decoding: data, as: UTF8.self)
-        //print(dataJsonString)
-        
         let jsonData = dataJsonString.data(using: .utf8)!
-        let playerState: PlayerState = try! JSONDecoder().decode(PlayerState.self, from: jsonData)
         
-        gameScene?.updatePlayersPosition(playerState)
+        do {
+            if let playerState = try? JSONDecoder().decode(PlayerState.self, from: jsonData) {
+                gameScene?.updatePlayersPosition(playerState)
+            } else if let matchState = try? JSONDecoder().decode(matchState.self, from: jsonData) {
+                finishGame(matchState.finish)
+            } else {
+                print("Error reciving data")
+            }
+        }
     }
 }
 
 protocol GameControllerDelegate {
     func sendPlayerState(_ state: PlayerState)
     func getAllPlayers2() -> [Player]
+    func sendMatchState(_ state: matchState)
 }
 
 extension GameViewController: GameControllerDelegate {
@@ -120,4 +131,20 @@ extension GameViewController: GameControllerDelegate {
     func getAllPlayers2() -> [Player] {
         return players2
     }
+    
+    
+    func sendMatchState(_ state: matchState) {
+        do {
+            let data = try JSONEncoder().encode(state)
+            try match.sendData(toAllPlayers: data, with: GKMatch.SendDataMode.unreliable)
+        } catch {
+            print("error sending data")
+        }
+    }
+}
+
+
+enum GameState {
+    case playerState(PlayerState)
+    case matchState(matchState)
 }

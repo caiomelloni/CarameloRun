@@ -10,11 +10,14 @@ struct PlayerState: Codable {
     let playerNumber: Int
     let positionX: Double
     let positionY: Double
-    //var timer: Int = 15
 }
 
 struct PreparingPlayres: Codable {
     var name: String
     var ready: Bool
     var catcher: Int
+}
+
+struct matchState: Codable {
+    var finish: Bool
 }
