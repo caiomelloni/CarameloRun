@@ -143,7 +143,7 @@ extension PreparingViewController: PreparingControllerDelegate {
     }
     
     func getAllPlayers() -> [Player] {
-        let localPlayer = Player(displayName: GKLocalPlayer.local.displayName, playerNumber: 0)
+        let localPlayer = Player(displayName: GKLocalPlayer.local.displayName, playerNumber: 0, playerType: .dog)
         var players = [localPlayer]
         
         let gameCenterPlayers = match.players
@@ -151,12 +151,12 @@ extension PreparingViewController: PreparingControllerDelegate {
         for player in gameCenterPlayers {
             for i in 0..<players.count {
                 if player.displayName < players[i].displayName {
-                    players.insert(Player(displayName: player.displayName, playerNumber: 0), at: i)
+                    players.insert(Player(displayName: player.displayName, playerNumber: 0, playerType: .dog), at: i)
                     break
                 }
                 
                 if i == players.count - 1 {
-                    players.append(Player(displayName: player.displayName, playerNumber: 0))
+                    players.append(Player(displayName: player.displayName, playerNumber: 0, playerType: .dog))
                 }
                 
             }

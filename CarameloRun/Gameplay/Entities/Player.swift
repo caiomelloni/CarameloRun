@@ -21,14 +21,15 @@ enum typeOfPlayer: Codable {
 class Player: GKEntity {
     var playerNumber: Int
     let displayName: String
-    var type: typeOfPlayer = .dog
+    var type: typeOfPlayer
     var ready: Bool = false
     
     
     
-    init(displayName: String, playerNumber: Int) {
+    init(displayName: String, playerNumber: Int, playerType: typeOfPlayer) {
         self.displayName = displayName
         self.playerNumber = playerNumber
+        self.type = playerType
         
         
         super.init()
