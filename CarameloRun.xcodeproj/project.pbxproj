@@ -35,6 +35,8 @@
 		F89283FD2AE964A900A3B499 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89283FC2AE964A900A3B499 /* Constants.swift */; };
 		F898070F2ACDA1880044D237 /* Zposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F898070E2ACDA1880044D237 /* Zposition.swift */; };
 		F89807112ACDA4130044D237 /* Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89807102ACDA4130044D237 /* Dimensions.swift */; };
+		F8EE82662AF2740000158D9B /* ControllTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8EE82652AF2740000158D9B /* ControllTimer.swift */; };
+		F8EE82682AF276B900158D9B /* EndGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8EE82672AF276B900158D9B /* EndGame.swift */; };
 		F8F97E382ACB08350006A4BA /* Background.sks in Resources */ = {isa = PBXBuildFile; fileRef = F8F97E372ACB08350006A4BA /* Background.sks */; };
 		FBB5FDAB2AE93AE600E37BE1 /* PreparingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB5FDAA2AE93AE600E37BE1 /* PreparingViewController.swift */; };
 /* End PBXBuildFile section */
@@ -70,6 +72,8 @@
 		F89283FC2AE964A900A3B499 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F898070E2ACDA1880044D237 /* Zposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zposition.swift; sourceTree = "<group>"; };
 		F89807102ACDA4130044D237 /* Dimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dimensions.swift; sourceTree = "<group>"; };
+		F8EE82652AF2740000158D9B /* ControllTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllTimer.swift; sourceTree = "<group>"; };
+		F8EE82672AF276B900158D9B /* EndGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGame.swift; sourceTree = "<group>"; };
 		F8F97E372ACB08350006A4BA /* Background.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Background.sks; sourceTree = "<group>"; };
 		FBB5FDAA2AE93AE600E37BE1 /* PreparingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -188,6 +192,7 @@
 		F87120CE2AF013CE00697E21 /* GameTools */ = {
 			isa = PBXGroup;
 			children = (
+				F8EE82642AF273E800158D9B /* ControllTimer */,
 				F87120D02AF013E000697E21 /* Buttons */,
 				F87120CF2AF013D600697E21 /* Camera */,
 			);
@@ -244,6 +249,7 @@
 				F898070D2ACDA1510044D237 /* Utils */,
 				F854918B2AE17490004EA5B1 /* GameCenter */,
 				F82786EF2AC59B170047111D /* GameViewController.swift */,
+				F8EE82672AF276B900158D9B /* EndGame.swift */,
 			);
 			path = Gameplay;
 			sourceTree = "<group>";
@@ -266,6 +272,14 @@
 			);
 			name = Utils;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		F8EE82642AF273E800158D9B /* ControllTimer */ = {
+			isa = PBXGroup;
+			children = (
+				F8EE82652AF2740000158D9B /* ControllTimer.swift */,
+			);
+			path = ControllTimer;
 			sourceTree = "<group>";
 		};
 		F8F97E342ACB07F50006A4BA /* Maps */ = {
@@ -347,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F87120CD2AEFDE2600697E21 /* PlayerStateMachine.swift in Sources */,
+				F8EE82662AF2740000158D9B /* ControllTimer.swift in Sources */,
 				F82787012AC5A2F20047111D /* Player.swift in Sources */,
 				F854918D2AE174A8004EA5B1 /* GameCenterHelper.swift in Sources */,
 				F898070F2ACDA1880044D237 /* Zposition.swift in Sources */,
@@ -354,6 +369,7 @@
 				F854918A2AE16F71004EA5B1 /* MenuInicial.swift in Sources */,
 				F87120BA2AEBF20C00697E21 /* JumpComponent.swift in Sources */,
 				F870AAF52AF12B6100195173 /* GameCenterCommunicationExtension.swift in Sources */,
+				F8EE82682AF276B900158D9B /* EndGame.swift in Sources */,
 				F87120BC2AEBF62600697E21 /* VelocityComponent.swift in Sources */,
 				F87120D22AF0142A00697E21 /* LocalPlayerCamera.swift in Sources */,
 				FBB5FDAB2AE93AE600E37BE1 /* PreparingViewController.swift in Sources */,

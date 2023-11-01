@@ -21,6 +21,7 @@ class GameScene: SKScene {
     var sceneCamera: LocalPlayerCamera!
     let localPlayerPositionHistory = PositionHistory()
     var controllerDelegate: GameControllerDelegate?
+    let timer = ControllTimer()
     
     // Update time
     var lastUpdateTimeInterval: TimeInterval = 0
@@ -45,6 +46,8 @@ class GameScene: SKScene {
         // set jump button
         addChild(jumpButton.node)
         jumpButton.setJumpBtnPositionRelativeToCamera(sceneCamera, frame)
+        
+        addChild(timer.node)
         
     }
     
@@ -78,6 +81,7 @@ class GameScene: SKScene {
         sceneCamera.update(deltaTime)
         joystick.update(sceneCamera, frame, dog)
         jumpButton.update(sceneCamera, frame)
+        timer.update(sceneCamera, frame)
         
         //game center online updates
         updatePlayerPositionForOtherPlayers()

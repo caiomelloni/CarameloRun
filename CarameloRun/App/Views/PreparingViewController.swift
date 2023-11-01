@@ -1,3 +1,4 @@
+
 //
 //  Preparing.swift
 //  CarameloRun
@@ -11,17 +12,22 @@ import GameKit
 
 class PreparingViewController: UIViewController {
     let match: GKMatch
-    var player1 = UILabel()
-    var player2 = UILabel()
-    var player3 = UILabel()
+    var listOfPlayerLabels: [UILabel] = []
     let button = UIButton(type: .system)
     var controllerDelegate: GameControllerDelegate?
     var players: [Player] = []
     var prep: PreparingPlayres
+    var numberOfPlayers: Int = 0
+    var playerCatcher: Int = 0
     
     init(match: GKMatch, prep: PreparingPlayres) {
         self.match = match
         self.prep = prep
+        
+        for _ in 0...(match.players.count){
+            listOfPlayerLabels.append(UILabel())
+        }
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -31,23 +37,20 @@ class PreparingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        players = getAllPlayers() 
-        players = sort(players)
-        definePrep(players)
+        players = getAllPlayers()
+//        players[1].ready = true
+        numberOfPlayers = players.count
+        playerCatcher = sort(players)
+        definePrep(players, playerCatcher)
         
-        player1.text = "\(players[0].displayName): \(players[0].type)"
-        player1.frame = CGRect(x: 200, y: 100, width: 200, height: 30)
-        player2.text = "\(players[1].displayName): \(players[1].type)"
-        player2.frame = CGRect(x: 200, y: 150, width: 200, height: 30)
-//        player3.text = "\(players[2].displayName): \(players[2].type)"
-//        player3.frame = CGRect(x: 200, y: 200, width: 200, height: 30)
-        
-        view.addSubview(player1)
-        view.addSubview(player2)
-//        view.addSubview(player3)
+        for i in 0...(numberOfPlayers - 1){
+            listOfPlayerLabels[i].text = "\(players[i].displayName): \(players[i].type)"
+            listOfPlayerLabels[i].frame = CGRect(x: 200, y: (100+i*50), width: 200, height: 30)
+            view.addSubview(listOfPlayerLabels[i])
+        }
         
         button.setTitle("Estou pronto", for: .normal)
-        button.frame = CGRect(x: 200, y: 300, width: 200, height: 40)
+        button.frame = CGRect(x: 500, y: 300, width: 200, height: 40)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
 
         view.addSubview(button)
@@ -58,67 +61,51 @@ class PreparingViewController: UIViewController {
     @objc func buttonTapped() {
         prep.name = GKLocalPlayer.local.displayName
         prep.ready = true
-        print("\(prep.name) está pronto")
         
         sendPreparingPlayers(prep)
         allReady(prep)
     }
     
     func allReady(_ state: PreparingPlayres) {
-        for i in 0...1 {
-            if state.name == players[i].displayName {
-                players[i].ready = state.ready
+        if state.name == players[1].displayName {
+            players[state.catcher].type = .man
+            
+            for i in 0...(numberOfPlayers - 1){
+                listOfPlayerLabels[i].text = "\(players[i].displayName): \(players[i].type)"
             }
         }
         
-        
-        if state.name == players[1].displayName {
-            players[0].type = state.type0
-            players[1].type = state.type1
-//            players[2].type = state.type2
+        var counter = 0
+        for i in 0...(numberOfPlayers - 1) {
+            if state.name == players[i].displayName {
+                players[i].ready = state.ready
+            }
             
-            player1.text = "\(players[0].displayName): \(players[0].type)"
-            player2.text = "\(players[1].displayName): \(players[1].type)"
-//            player3.text = "\(players[2].displayName): \(players[2].type)"
+            if players[i].ready == true {
+                counter += 1
+            }
         }
         
-        
-        if players[0].ready == true && players[1].ready == true {//&& players[2].ready == true {
+        if counter == numberOfPlayers  {
             self.navigationController?.isNavigationBarHidden = true
             self.navigationController?.popViewController(animated: true)
             self.navigationController?.pushViewController(GameViewController(match: match, players: players), animated: true)
         }
     }
     
-    func sort(_ players: [Player]) -> [Player]{
+    func sort(_ players: [Player]) -> Int {
+        let n = Int.random(in: 0...(numberOfPlayers - 1))
         if GKLocalPlayer.local.displayName == players[1].displayName{
-            let n = Int.random(in: 0...1)
-            switch n {
-            case 0:
-                players[0].type = .man
-                players[1].type = .dog
-//                players[2].type = .dog
-            case 1:
-                players[0].type = .dog
-                players[1].type = .man
-//                players[2].type = .dog
-//            case 2:
-//                players[0].type = .dog
-//                players[1].type = .dog
-//                players[2].type = .man
-            default:
-                print("Error")
-            }
+            players[n].type = .man
         }
-        return players
+        return n
     }
     
-    func definePrep(_ players: [Player]) {
+    
+    func definePrep(_ players: [Player], _ n: Int) {
         if GKLocalPlayer.local.displayName == players[1].displayName{
             prep.name = GKLocalPlayer.local.displayName
-            prep.type0 = players[0].type
-            prep.type1 = players[1].type
-//            prep.type2 = players[2].type
+            prep.catcher = n
             
             sendPreparingPlayers(prep)
         }
@@ -131,6 +118,7 @@ extension PreparingViewController: GKMatchDelegate{
         let dataJsonString = String(decoding: data, as: UTF8.self)
         
         let jsonData = dataJsonString.data(using: .utf8)!
+        
         let preparingPlayers: PreparingPlayres = try! JSONDecoder().decode(PreparingPlayres.self, from: jsonData)
         
         allReady(preparingPlayers)
@@ -148,7 +136,7 @@ extension PreparingViewController: PreparingControllerDelegate {
         print(state)
         do {
             let data = try JSONEncoder().encode(state)
-            try match.sendData(toAllPlayers: data, with: GKMatch.SendDataMode.reliable)
+            try match.sendData(toAllPlayers: data, with: .reliable)
         } catch {
             print("error sending data")
         }
