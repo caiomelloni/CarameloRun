@@ -10,19 +10,13 @@ import GameplayKit
 class IdleState: GKState {
     
     let spriteComponent: SpriteComponent
-    let spriteSheet = [
-        SKTexture(imageNamed: "Idle1"),
-        SKTexture(imageNamed: "Idle2"),
-        SKTexture(imageNamed: "Idle3"),
-        SKTexture(imageNamed: "Idle4"),
-        SKTexture(imageNamed: "Idle5"),
-        SKTexture(imageNamed: "Idle6"),
-        SKTexture(imageNamed: "Idle7"),
-        SKTexture(imageNamed: "Idle8"),
-        SKTexture(imageNamed: "Idle9"),
-    ]
+    var spriteSheet: [SKTexture] = []
     
-    init(_ spriteComponent: SpriteComponent) {
+    init(_ spriteComponent: SpriteComponent, statePrefix: String, frameCount: Int) {
+        for i in 1...frameCount {
+            spriteSheet.append(SKTexture(imageNamed: "\(statePrefix)Idle\(i)"))
+        }
+        
         self.spriteComponent = spriteComponent
     }
     
