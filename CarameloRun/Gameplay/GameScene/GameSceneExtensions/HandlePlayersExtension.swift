@@ -22,14 +22,14 @@ extension GameScene {
                 entityManager.addEntity(player, spawnPoint: spawnNode?.position)
                 
                 if player.displayName == GKLocalPlayer.local.displayName {
-                    dog = player
+                    localPlayer = player
                     localPlayerPositionHistory.setReferencePosition(player)
                 } else {
                     // TO DO: tirar gravidade e proibir que um player empurre o outro
                     // o no do player deve ser um ponto fixo no mapa, que se movimenta apenas pelas
                     // coordenadas emitidas
                     // player.component(ofType: SpriteComponent.self).affectedByGravity = false
-                    dogs[player.playerNumber] = player
+                    remotePlayers[player.playerNumber] = player
                 }
                 
             }
@@ -40,6 +40,6 @@ extension GameScene {
     
     func updatePlayersPosition(_ playerState: PlayerState) {
         let newPosition = CGPoint(x: playerState.positionX, y: playerState.positionY)
-        dogs[playerState.playerNumber]?.component(ofType: SpriteComponent.self)?.position = newPosition
+        remotePlayers[playerState.playerNumber]?.component(ofType: SpriteComponent.self)?.position = newPosition
     }
 }

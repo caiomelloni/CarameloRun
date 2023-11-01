@@ -19,7 +19,6 @@ enum typeOfPlayer: Codable {
 }
 
 class Player: GKEntity {
-    private var currentPlayerSprite = 0
     var playerNumber: Int
     let displayName: String
     var type: typeOfPlayer = .dog

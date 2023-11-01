@@ -14,4 +14,6 @@ class Constants {
     
     static let playerHeight: Double = 150
     static let playerWidth: Double = 100
+    
+    //player frames count
 }
