@@ -23,6 +23,7 @@ class Player: GKEntity {
     let displayName: String
     var type: typeOfPlayer
     var ready: Bool = false
+    var score: Int = 0
     
     
     
@@ -41,7 +42,7 @@ class Player: GKEntity {
             DirectionComponent(),
             JumpComponent(Constants.playerJumpXMultiplier, Constants.playerJumpYMultiplier),
             VelocityComponent(Constants.playerVelocity),
-            
+            ScoreComponent()
             PlayerAnimationComponent(type == .dog ? PlayerStateMachine(spriteComponent) : CatcherStateMachine(spriteComponent))
             
         ].forEach { component in
