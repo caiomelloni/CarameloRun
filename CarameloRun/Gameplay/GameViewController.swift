@@ -17,11 +17,12 @@ class GameViewController: UIViewController {
     var players: [Player]
     
     var timer: Timer!
-    var time: Int = 15
+    var time: Int 
     
-    init(match: GKMatch, players: [Player]) {
+    init(match: GKMatch, players: [Player], time: Int) {
         self.match = match
         self.players = players
+        self.time = time
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -89,7 +90,7 @@ class GameViewController: UIViewController {
         private func finishGame(_ bool: Bool) {
             if bool == true {
                 match.finalize()
-                self.present(EndGame(), animated: true)
+                self.present(EndGame(players[0].score), animated: true)
             }
         }
 }

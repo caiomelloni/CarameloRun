@@ -24,6 +24,7 @@ class Player: GKEntity {
     let displayName: String
     var type: typeOfPlayer = .dog
     var ready: Bool = false
+    var score: Int = 0
     
     
     

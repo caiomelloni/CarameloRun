@@ -19,6 +19,7 @@ class PreparingViewController: UIViewController {
     var prep: PreparingPlayres
     var numberOfPlayers: Int = 0
     var playerCatcher: Int = 0
+    var timer = ControllTimer()
     
     init(match: GKMatch, prep: PreparingPlayres) {
         self.match = match
@@ -89,7 +90,7 @@ class PreparingViewController: UIViewController {
         if counter == numberOfPlayers  {
             self.navigationController?.isNavigationBarHidden = true
             self.navigationController?.popViewController(animated: true)
-            self.navigationController?.pushViewController(GameViewController(match: match, players: players), animated: true)
+            self.navigationController?.pushViewController(GameViewController(match: match, players: players, time: timer.n), animated: true)
         }
     }
     
