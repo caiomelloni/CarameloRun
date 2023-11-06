@@ -13,7 +13,7 @@ class ScoreComponent: GKComponent {
     
     //func for the dog
     // dog make task
-    func taskDone() {
+    func dogMakeTask() {
         score = score + 10
     }
     
@@ -23,7 +23,7 @@ class ScoreComponent: GKComponent {
     }
     
     // dog freed his friend
-    func friendFree() {
+    func dogSetfriendFree() {
         score = score + 3
     }
     
@@ -33,7 +33,7 @@ class ScoreComponent: GKComponent {
     }
     
     // dog not adopted
-    func didNotAdopted() {
+    func dogNotAdopted() {
         score = score - 10
     }
     
@@ -46,7 +46,7 @@ class ScoreComponent: GKComponent {
     }
     
     // man catched all the dogs
-    func allDogsCatch() {
+    func humanCatchAllDogs() {
         score = score + 24
     }
     
