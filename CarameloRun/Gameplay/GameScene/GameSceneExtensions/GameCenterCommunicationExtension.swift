@@ -9,11 +9,11 @@ import GameKit
 
 extension GameScene {
     func updatePlayerPositionForOtherPlayers() {
-        if localPlayerPositionHistory.hasPositionChanged(dog!) {
+        if localPlayerPositionHistory.hasPositionChanged(localPlayer!) {
             let playerState = PlayerState(name: GKLocalPlayer.local.displayName,
-                                          playerNumber: dog.playerNumber,
-                                          positionX: dog.component(ofType: SpriteComponent.self)!.position.x,
-                                          positionY: dog.component(ofType: SpriteComponent.self)!.position.y)
+                                          playerNumber: localPlayer.playerNumber,
+                                          positionX: localPlayer.component(ofType: SpriteComponent.self)!.position.x,
+                                          positionY: localPlayer.component(ofType: SpriteComponent.self)!.position.y)
             
             controllerDelegate?.sendPlayerState(playerState)
         }

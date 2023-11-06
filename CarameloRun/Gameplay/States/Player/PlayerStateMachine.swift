@@ -11,10 +11,21 @@ class PlayerStateMachine: GKStateMachine {
     
     init(_ spriteComponent: SpriteComponent) {
         super.init(states:  [
-            IdleState(spriteComponent),
-            JumpingState(spriteComponent),
-            FallingState(spriteComponent),
-            RunningState(spriteComponent)
+            IdleState(spriteComponent,
+                      statePrefix: Constants.playerFramesPrefix,
+                      frameCount: Constants.playerIdleFramesCount),
+            
+            JumpingState(spriteComponent,
+                         statePrefix: Constants.playerFramesPrefix,
+                         frameCount: Constants.playerJumpFramesCount),
+            
+            FallingState(spriteComponent,
+                         statePrefix: Constants.playerFramesPrefix,
+                         frameCount: Constants.playerFallFramesCount),
+            
+            RunningState(spriteComponent,
+                         statePrefix: Constants.playerFramesPrefix,
+                         frameCount: Constants.playerRunFramesCount)
         ])
     }
 }

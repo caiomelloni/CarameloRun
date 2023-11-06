@@ -19,18 +19,18 @@ enum typeOfPlayer: Codable {
 }
 
 class Player: GKEntity {
-    private var currentPlayerSprite = 0
     var playerNumber: Int
     let displayName: String
-    var type: typeOfPlayer = .dog
+    var type: typeOfPlayer
     var ready: Bool = false
     var score: Int = 0
     
     
     
-    init(displayName: String, playerNumber: Int) {
+    init(displayName: String, playerNumber: Int, playerType: typeOfPlayer) {
         self.displayName = displayName
         self.playerNumber = playerNumber
+        self.type = playerType
         
         
         super.init()
@@ -42,8 +42,8 @@ class Player: GKEntity {
             DirectionComponent(),
             JumpComponent(Constants.playerJumpXMultiplier, Constants.playerJumpYMultiplier),
             VelocityComponent(Constants.playerVelocity),
-            PlayerAnimationComponent(PlayerStateMachine(spriteComponent)),
             ScoreComponent()
+            PlayerAnimationComponent(type == .dog ? PlayerStateMachine(spriteComponent) : CatcherStateMachine(spriteComponent))
             
         ].forEach { component in
             addComponent(component)

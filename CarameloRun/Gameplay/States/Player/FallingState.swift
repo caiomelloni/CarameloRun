@@ -10,12 +10,13 @@ import GameplayKit
 class FallingState: GKState {
     
     let spriteComponent: SpriteComponent
-    let spriteSheet = [
-        SKTexture(imageNamed: "Fall1"),
-        SKTexture(imageNamed: "Fall2")
-    ]
+    var spriteSheet = [SKTexture]()
     
-    init(_ spriteComponent: SpriteComponent) {
+    init(_ spriteComponent: SpriteComponent, statePrefix: String, frameCount: Int) {
+        for i in 1...frameCount {
+            spriteSheet.append(SKTexture(imageNamed: "\(statePrefix)Fall\(i)"))
+        }
+        
         self.spriteComponent = spriteComponent
     }
     
