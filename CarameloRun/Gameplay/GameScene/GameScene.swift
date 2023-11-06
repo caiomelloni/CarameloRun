@@ -64,6 +64,7 @@ class GameScene: SKScene {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
             joystick.touchEnded(t, self)
+            jumpButton.touchEnded(t, self)
         }
     }
     
