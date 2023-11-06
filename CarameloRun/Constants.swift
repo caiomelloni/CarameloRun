@@ -14,4 +14,18 @@ class Constants {
     
     static let playerHeight: Double = 150
     static let playerWidth: Double = 100
+    
+    //player frames count
+    static let playerFallFramesCount: Int = 2
+    static let playerJumpFramesCount: Int = 2
+    static let playerIdleFramesCount: Int = 2
+    static let playerRunFramesCount: Int = 2
+    static let playerFramesPrefix: String = "player"
+    
+    //catcher frames count
+    static let catcherFallFramesCount: Int = 2
+    static let catcherJumpFramesCount: Int = 10
+    static let catcherIdleFramesCount: Int = 9
+    static let catcherRunFramesCount: Int = 8
+    static let catcherFramesPrefix: String = ""
 }

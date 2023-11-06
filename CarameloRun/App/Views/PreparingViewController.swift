@@ -19,6 +19,7 @@ class PreparingViewController: UIViewController {
     var prep: PreparingPlayres
     var numberOfPlayers: Int = 0
     var playerCatcher: Int = 0
+    var timer = ControllTimer()
     
     init(match: GKMatch, prep: PreparingPlayres) {
         self.match = match
@@ -89,7 +90,7 @@ class PreparingViewController: UIViewController {
         if counter == numberOfPlayers  {
             self.navigationController?.isNavigationBarHidden = true
             self.navigationController?.popViewController(animated: true)
-            self.navigationController?.pushViewController(GameViewController(match: match, players: players), animated: true)
+            self.navigationController?.pushViewController(GameViewController(match: match, players: players, time: timer.n), animated: true)
         }
     }
     
@@ -133,7 +134,6 @@ protocol PreparingControllerDelegate {
 
 extension PreparingViewController: PreparingControllerDelegate {
     func sendPreparingPlayers(_ state: PreparingPlayres) {
-        print(state)
         do {
             let data = try JSONEncoder().encode(state)
             try match.sendData(toAllPlayers: data, with: .reliable)
@@ -143,7 +143,7 @@ extension PreparingViewController: PreparingControllerDelegate {
     }
     
     func getAllPlayers() -> [Player] {
-        let localPlayer = Player(displayName: GKLocalPlayer.local.displayName, playerNumber: 0)
+        let localPlayer = Player(displayName: GKLocalPlayer.local.displayName, playerNumber: 0, playerType: .dog)
         var players = [localPlayer]
         
         let gameCenterPlayers = match.players
@@ -151,12 +151,12 @@ extension PreparingViewController: PreparingControllerDelegate {
         for player in gameCenterPlayers {
             for i in 0..<players.count {
                 if player.displayName < players[i].displayName {
-                    players.insert(Player(displayName: player.displayName, playerNumber: 0), at: i)
+                    players.insert(Player(displayName: player.displayName, playerNumber: 0, playerType: .dog), at: i)
                     break
                 }
                 
                 if i == players.count - 1 {
-                    players.append(Player(displayName: player.displayName, playerNumber: 0))
+                    players.append(Player(displayName: player.displayName, playerNumber: 0, playerType: .dog))
                 }
                 
             }
