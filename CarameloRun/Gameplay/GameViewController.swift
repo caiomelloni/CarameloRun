@@ -19,6 +19,8 @@ class GameViewController: UIViewController {
     var timer: Timer!
     var time: Int 
     
+    var score = ScoreComponent()
+    
     init(match: GKMatch, players: [Player], time: Int) {
         self.match = match
         self.players = players
@@ -89,8 +91,38 @@ class GameViewController: UIViewController {
         
         private func finishGame(_ bool: Bool) {
             if bool == true {
-                match.finalize()
-                self.present(EndGame(players[0].score), animated: true)
+                
+                //teste
+//                if GKLocalPlayer.local.displayName == players[0].displayName{
+//                    print("score 1: \(score.score)")
+//                    score.dogWasCatched()
+//                    print("score obtido 1.1: \(score.score)")
+//                    score.taskDone()
+//                    print("score obtido 1.2: \(score.score)")
+//                    score.taskDone()
+//                    print("score obtido 1.3: \(score.score)")
+//                    score.taskDone()
+//                    print("score obtido 1.4: \(score.score)")
+//                    score.dogAdopted()
+//                    print("score obtido 1.5: \(score.score)")
+//                }
+//                if GKLocalPlayer.local.displayName == players[1].displayName {
+//                    print("score 2: \(score.score)")
+//                    score.humanCatch()
+//                    print("score obtido 2.1: \(score.score)")
+//                    score.humanCatch()
+//                    print("score obtido 2.2: \(score.score)")
+//                    score.humanCatch()
+//                    print("score obtido 2.3: \(score.score)")
+//                    score.humanCatch()
+//                    print("score obtido 2.4: \(score.score)")
+//                    score.humanCatch()
+//                    print("score obtido 2.5: \(score.score)")
+//                }
+                //fim do teste
+                
+                //match.finalize()
+                self.present(EndGame(score.score), animated: true)
             }
         }
 }

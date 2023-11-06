@@ -13,8 +13,6 @@ import GameKit
 class EndGame: UIViewController, GKGameCenterControllerDelegate {
     
     var score: Int
-    private let leaderboardID = "Pontos"
-    private var leaderboard: GKLeaderboard?
     
     init(_ score: Int) {
         self.score = score
@@ -54,44 +52,28 @@ class EndGame: UIViewController, GKGameCenterControllerDelegate {
 
         view.addSubview(button)
         
-        //teste de adição de score para os players
+        // adição de score para os players
         if GKLocalPlayer.local.isAuthenticated {
             
-            GKLeaderboard.loadLeaderboards(IDs: ["Pontos"] ){ (fetchedLBs, error) in
+            GKLeaderboard.loadLeaderboards(IDs: ["melhor.pontuacao"] ){ (fetchedLBs, error) in
                 if let lb = fetchedLBs?.first {
-                    lb.submitScore(10, context: 0, player: GKLocalPlayer.local, completionHandler: { error in
+                    lb.submitScore(self.score, context: 0, player: GKLocalPlayer.local, completionHandler: { error in
                     print("Error sending score")
                     })
                 }
             }
             
-            leaderboard?.submitScore(10, context: 0, player: GKLocalPlayer.local, completionHandler: {_ in
-                print("Error")
-            })
-            
+            GKLeaderboard.loadLeaderboards(IDs: ["pontuacao.mais.recente"] ){ (fetchedLBs, error) in
+                if let lb = fetchedLBs?.first {
+                    lb.submitScore(self.score, context: 0, player: GKLocalPlayer.local, completionHandler: { error in
+                    print("Error sending score 2")
+                    })
+                }
+            }
         }
         
         // apresenta a LeaderBoard do gameCenter
         showLeaderBoard()
-        
-    }
-    
-    func leaderboard() async{
-        Task{
-            try await GKLeaderboard.submitScore(
-                20,
-                context: 0,
-                player: GKLocalPlayer.local,
-                leaderboardIDs: ["Pontos"]
-            )
-        }
-    }
-    
-    func updateScore(value: Int) {
-        let score = GKLeaderboardScore()
-        score.value = value
-        score.player = GKLocalPlayer.local
-        score.leaderboardID = "Pontos"
         
     }
     

@@ -38,6 +38,7 @@
 		F8EE82662AF2740000158D9B /* ControllTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8EE82652AF2740000158D9B /* ControllTimer.swift */; };
 		F8EE82682AF276B900158D9B /* EndGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8EE82672AF276B900158D9B /* EndGame.swift */; };
 		F8F97E382ACB08350006A4BA /* Background.sks in Resources */ = {isa = PBXBuildFile; fileRef = F8F97E372ACB08350006A4BA /* Background.sks */; };
+		FB4134362AF919AB00C4F54C /* ScoreComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4134352AF919AB00C4F54C /* ScoreComponent.swift */; };
 		FBB5FDAB2AE93AE600E37BE1 /* PreparingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB5FDAA2AE93AE600E37BE1 /* PreparingViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,7 @@
 		F8EE82652AF2740000158D9B /* ControllTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllTimer.swift; sourceTree = "<group>"; };
 		F8EE82672AF276B900158D9B /* EndGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGame.swift; sourceTree = "<group>"; };
 		F8F97E372ACB08350006A4BA /* Background.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Background.sks; sourceTree = "<group>"; };
+		FB4134352AF919AB00C4F54C /* ScoreComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreComponent.swift; sourceTree = "<group>"; };
 		FBB5FDAA2AE93AE600E37BE1 /* PreparingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -219,6 +221,7 @@
 		F87D81F42AEA98760006CDD8 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				FB4134352AF919AB00C4F54C /* ScoreComponent.swift */,
 				F87D81F82AEACE5E0006CDD8 /* SpriteComponent.swift */,
 				F87120B72AEBEB1C00697E21 /* DirectionComponent.swift */,
 				F87120B92AEBF20C00697E21 /* JumpComponent.swift */,
@@ -381,6 +384,7 @@
 				F87120C42AEEC8F200697E21 /* IdleState.swift in Sources */,
 				F87D81F92AEACE5E0006CDD8 /* SpriteComponent.swift in Sources */,
 				F82A32822AE2B3C500A3639C /* PlayerState.swift in Sources */,
+				FB4134362AF919AB00C4F54C /* ScoreComponent.swift in Sources */,
 				F82787032AC5A8250047111D /* Joystick.swift in Sources */,
 				F87120C62AEEC9DE00697E21 /* JumpingState.swift in Sources */,
 				F82787052AC5B8CB0047111D /* JumpButton.swift in Sources */,

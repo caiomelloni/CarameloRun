@@ -134,7 +134,6 @@ protocol PreparingControllerDelegate {
 
 extension PreparingViewController: PreparingControllerDelegate {
     func sendPreparingPlayers(_ state: PreparingPlayres) {
-        print(state)
         do {
             let data = try JSONEncoder().encode(state)
             try match.sendData(toAllPlayers: data, with: .reliable)

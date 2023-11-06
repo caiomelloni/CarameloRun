@@ -42,7 +42,9 @@ class Player: GKEntity {
             DirectionComponent(),
             JumpComponent(Constants.playerJumpXMultiplier, Constants.playerJumpYMultiplier),
             VelocityComponent(Constants.playerVelocity),
-            PlayerAnimationComponent(PlayerStateMachine(spriteComponent))
+            PlayerAnimationComponent(PlayerStateMachine(spriteComponent)),
+            ScoreComponent()
+            
         ].forEach { component in
             addComponent(component)
         }
