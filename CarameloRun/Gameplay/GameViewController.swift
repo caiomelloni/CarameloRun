@@ -17,7 +17,7 @@ class GameViewController: UIViewController {
     var players: [Player]
     
     var timer: Timer!
-    var time: Int = 15
+    var time: Int = 60
     
     init(match: GKMatch, players: [Player]) {
         self.match = match

@@ -17,14 +17,13 @@ class EntityManager {
     
     // add the components that needs to be update by each frame
     lazy var componentSystems: [GKComponentSystem] = {
-        
         return [
-            // component system insertion example:
-            // GKComponentSystem(componentClass: DirectionComponent.self)
             GKComponentSystem(componentClass: PlayerAnimationComponent.self),
-            GKComponentSystem(componentClass: JumpComponent.self)
+            GKComponentSystem(componentClass: JumpComponent.self),
+            GKComponentSystem(componentClass: CatchComponent.self),
         ]
     }()
+    
     
     
     init(scene: SKScene) {
@@ -40,7 +39,7 @@ class EntityManager {
                 spriteComponent.position = spawnPoint
             }
         }
-    
+        
         addEntityComponentsToComponentsSystems(entity)
         
     }
@@ -73,6 +72,17 @@ class EntityManager {
     private func addEntityComponentsToComponentsSystems(_ entity: GKEntity) {
         for componentSystem in componentSystems {
             componentSystem.addComponent(foundIn: entity)
+        }
+    }
+    
+    func didCollide(_ contact: SKPhysicsContact) {
+        
+        for componentSystem in componentSystems {
+            if componentSystem.components[0] is CatchComponent {
+                for component in componentSystem.components {
+                    (component as! CatchComponent).didCollide(contact)
+                }
+            }
         }
     }
     

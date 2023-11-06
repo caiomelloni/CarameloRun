@@ -15,6 +15,7 @@ class SpriteComponent: GKComponent {
         node = SKSpriteNode(texture: texture)
         node.size = size
         super.init()
+        node.entity = entity
     }
     
     required init?(coder: NSCoder) {
@@ -24,6 +25,12 @@ class SpriteComponent: GKComponent {
     var size: CGSize {
         get {
             node.size
+        }
+    }
+    
+    var frame: CGRect {
+        get {
+            node.frame
         }
     }
     
@@ -92,4 +99,3 @@ class SpriteComponent: GKComponent {
     }
     
 }
-

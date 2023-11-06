@@ -12,7 +12,7 @@ import GameKit
 // just implement overrided functions in the main class
 // avoid bussiness logic in this file
 // place another functions in extensions
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var localPlayer: Player!
     var remotePlayers = [Int:Player]()
@@ -30,6 +30,8 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView){
         entityManager = EntityManager(scene: self)
+        
+        physicsWorld.contactDelegate = self
         
         backgroundColor = .white
         
@@ -70,6 +72,11 @@ class GameScene: SKScene {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
     
+    // called when two bodies collide
+    func didBegin(_ contact: SKPhysicsContact) {
+        entityManager.didCollide(contact)
+    }
+    
     // Called before each frame is rendered
     override func update(_ currentTime: TimeInterval) {
         
@@ -85,7 +92,7 @@ class GameScene: SKScene {
         
         //game center online updates
         updatePlayerPositionForOtherPlayers()
-
+        
     }
 }
 
