@@ -55,7 +55,7 @@ class GameViewController: UIViewController {
             view.preferredFramesPerSecond = 30
             view.showsNodeCount = true
             
-            initTimer()
+          //  initTimer()
         }
         
         match.delegate = self

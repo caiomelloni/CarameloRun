@@ -8,8 +8,8 @@
 import SpriteKit
 
 class Joystick {
-    private var left = SKSpriteNode(texture: SKTexture(image: UIImage(systemName: "arrowtriangle.backward.circle.fill")!))
-    private var right = SKSpriteNode(texture: SKTexture(image: UIImage(systemName: "arrowtriangle.right.circle.fill")!))
+    private var left = SKSpriteNode(texture: SKTexture(imageNamed: "ButtonLeftUp"))
+    private var right = SKSpriteNode(texture: SKTexture(imageNamed: "ButtonRightUp"))
     var node = SKSpriteNode()
     var inUse = false
     var movementDirection: Direction? = nil
@@ -28,13 +28,15 @@ class Joystick {
         
         node.addChild(left)
         node.addChild(right)
-        node.size = CGSize(width: 2 * size.width + 10, height: size.height)
+        node.size = CGSize(width: left.size.width + right.size.width, height: size.height)
+        node.xScale = 1.3
+        node.yScale = 1.3
         right.position = CGPoint(x: node.frame.midX + 5 + right.frame.width / 2, y: node.frame.midY)
         left.position = CGPoint(x: node.frame.midX - 5 - left.frame.width / 2, y: node.frame.midY)
     }
     
     private func position(x: Double, y: Double) {
-        node.position = CGPoint(x: x + 100 + node.frame.width / 2, y: y + 80 + node.frame.height)
+        node.position = CGPoint(x: x + 100 + node.frame.width / 2, y: y + 70 + node.frame.height)
     }
     
     func touchBegan(_ touch: UITouch) {
@@ -43,9 +45,13 @@ class Joystick {
             if right.frame.contains(location) {
                 inUse = true
                 movementDirection = .right
+                right.texture = SKTexture(imageNamed: "ButtonRightDown")
+                
             } else if left.frame.contains(location) {
                 inUse = true
                 movementDirection = .left
+                left.texture = SKTexture(imageNamed: "ButtonLeftDown")
+
             }
 
     }
@@ -55,6 +61,8 @@ class Joystick {
         if node.frame.contains(location) {
             inUse = false
             movementDirection = nil
+            right.texture = SKTexture(imageNamed: "ButtonRightUp")
+            left.texture = SKTexture(imageNamed: "ButtonLeftUp")
         }
     }
     
