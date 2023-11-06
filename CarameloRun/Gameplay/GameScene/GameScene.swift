@@ -14,8 +14,8 @@ import GameKit
 // place another functions in extensions
 class GameScene: SKScene {
     
-    var dog: Player!
-    var dogs = [Int:Player]()
+    var localPlayer: Player!
+    var remotePlayers = [Int:Player]()
     let joystick = Joystick()
     let jumpButton = JumpButton()
     var sceneCamera: LocalPlayerCamera!
@@ -36,7 +36,7 @@ class GameScene: SKScene {
         placePlayersInitialPositionInMap()
         
         // set camera
-        sceneCamera = LocalPlayerCamera(dog)
+        sceneCamera = LocalPlayerCamera(localPlayer)
         camera = sceneCamera
         
         // set joystick
@@ -54,7 +54,7 @@ class GameScene: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
             joystick.touchBegan(t)
-            jumpButton.touchBegan(t, self, dog)
+            jumpButton.touchBegan(t, self, localPlayer)
         }
     }
     
@@ -79,7 +79,7 @@ class GameScene: SKScene {
         //call updates
         entityManager.update(deltaTime)
         sceneCamera.update(deltaTime)
-        joystick.update(sceneCamera, frame, dog)
+        joystick.update(sceneCamera, frame, localPlayer)
         jumpButton.update(sceneCamera, frame)
         timer.update(sceneCamera, frame)
         
