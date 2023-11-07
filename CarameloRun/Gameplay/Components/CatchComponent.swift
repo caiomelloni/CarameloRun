@@ -28,5 +28,6 @@ class CatchComponent: GKComponent {
         }
         
         //TODO: add score to the catcher
+        entity?.component(ofType: ScoreComponent.self)?.humanCatch()
     }
 }

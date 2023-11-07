@@ -90,5 +90,9 @@ class GameScene: SKScene {
         handlePlayerCollision()
         
     }
+    
+    func getScore() -> Int{
+        return localPlayer.component(ofType: ScoreComponent.self)?.score ?? 0
+    }
 }
 

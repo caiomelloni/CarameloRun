@@ -26,6 +26,8 @@ class GetCaughtComponent: GKComponent {
             entity?.component(ofType: PlayerAnimationComponent.self)?.arrest()
 
         }
+        entity?.component(ofType: ScoreComponent.self)?.dogWasCatched()
+
     }
     
     func gotFreed() {

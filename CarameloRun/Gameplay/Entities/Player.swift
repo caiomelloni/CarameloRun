@@ -23,7 +23,7 @@ class Player: GKEntity {
     let displayName: String
     var type: typeOfPlayer
     var ready: Bool = false
-    var score: Int = 0
+//    var score: Int = 0
     
     
     
