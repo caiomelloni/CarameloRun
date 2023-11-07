@@ -46,34 +46,42 @@ class EndGame: UIViewController, GKGameCenterControllerDelegate {
         
         let button = UIButton()
         button.setTitle("Mostrar LeaderBoard", for: .normal)
-        button.frame = CGRect(x: UIScreen.main.bounds.size.width/2, y: 2*UIScreen.main.bounds.size.height/3, width: 200, height: 40)
+        button.frame = CGRect(x: UIScreen.main.bounds.size.width/2, y: -UIScreen.main.bounds.size.height/3, width: 200, height: 40)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         button.backgroundColor = .orange
 
         view.addSubview(button)
         
-        // adição de score para os players
+        // add score for all players
         if GKLocalPlayer.local.isAuthenticated {
-            
+            print(self.score)
             GKLeaderboard.loadLeaderboards(IDs: ["melhor.pontuacao"] ){ (fetchedLBs, error) in
                 if let lb = fetchedLBs?.first {
                     lb.submitScore(self.score, context: 0, player: GKLocalPlayer.local, completionHandler: { error in
-                    print("Error sending score")
+                        if error != nil {
+                            print("Error sending score")
+                        }
+                        
                     })
                 }
             }
             
             GKLeaderboard.loadLeaderboards(IDs: ["pontuacao.mais.recente"] ){ (fetchedLBs, error) in
                 if let lb = fetchedLBs?.first {
-                    lb.submitScore(self.score, context: 0, player: GKLocalPlayer.local, completionHandler: { error in
-                    print("Error sending score 2")
+                    lb.submitScore(self.score, context: 1, player: GKLocalPlayer.local, completionHandler: { error in
+                        if error != nil {
+                            print("Error sending score")
+                        }
                     })
                 }
             }
         }
         
-        // apresenta a LeaderBoard do gameCenter
-        showLeaderBoard()
+        // shows the LeaderBoard of gameCenter
+        Task {
+            try? await Task.sleep(nanoseconds: 4_000_000_000)
+            showLeaderBoard()
+        }
         
     }
     

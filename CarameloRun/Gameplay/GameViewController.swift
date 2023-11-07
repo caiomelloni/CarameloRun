@@ -19,7 +19,7 @@ class GameViewController: UIViewController {
     var timer: Timer!
     var time: Int
     
-    var score = ScoreComponent()
+    var score: Int = 0
     
     var controllerFinishGame: Int = 0
     
@@ -84,17 +84,22 @@ class GameViewController: UIViewController {
                 
                 if self.time == 0 {
                     self.sendMatchState(matchState.init(finish: true))
-                    self.finishGame(true)
+                    self.finishGame()
                 }
                 
                 self.gameScene?.timer.updateTimer(self.time)
             })
         }
         
-        private func finishGame(_ bool: Bool) {
-            if bool == true && controllerFinishGame == 0{
-                match.finalize()
-                self.navigationController?.pushViewController(EndGame(score.score), animated: true)
+        private func finishGame() {
+            if controllerFinishGame == 0{
+//                match.finalize()
+                score = gameScene?.getScore() ?? 0
+                if score < 0 {
+                    score = 0
+                }
+                
+                self.navigationController?.pushViewController(EndGame(score), animated: true)
                 controllerFinishGame = 1
             }
         }
@@ -109,7 +114,9 @@ extension GameViewController: GKMatchDelegate {
                 if let playerState = try? JSONDecoder().decode(PlayerState.self, from: jsonData) {
                     gameScene?.updatePlayersPosition(playerState)
                 } else if let matchState = try? JSONDecoder().decode(matchState.self, from: jsonData) {
-                    finishGame(matchState.finish)
+                    if matchState.finish {
+                        finishGame()
+                    }
                 } else {
                     print("Error reciving data")
                 }

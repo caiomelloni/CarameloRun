@@ -10,6 +10,6 @@ import GameplayKit
 
 class CatchComponent: GKComponent {
     func didCollideWithPlayer(_ player: Player) {
-        print("player \(player.displayName) pegou")
+        entity?.component(ofType: ScoreComponent.self)?.humanCatch()
     }
 }

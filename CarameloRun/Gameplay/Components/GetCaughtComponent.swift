@@ -9,7 +9,8 @@ import GameplayKit
 
 class GetCaughtComponent: GKComponent {
     func gotCaught(_ respawn: CGPoint) {
-        print("player foi pego")
         entity?.component(ofType: SpriteComponent.self)?.position = respawn
+        
+        entity?.component(ofType: ScoreComponent.self)?.dogWasCatched()
     }
 }
