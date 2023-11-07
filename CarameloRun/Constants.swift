@@ -8,6 +8,7 @@
 class Constants {
     static let playerJumpXMultiplier: Double = 0.5
     static let playerJumpYMultiplier: Double = 0.8
+    static let charactersCollisionMask: UInt32 = 1
     
     
     static let playerVelocity: Double = 10

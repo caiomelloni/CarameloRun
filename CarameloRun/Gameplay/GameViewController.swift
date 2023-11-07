@@ -17,7 +17,7 @@ class GameViewController: UIViewController {
     var players: [Player]
     
     var timer: Timer!
-    var time: Int 
+    var time: Int
     
     var score = ScoreComponent()
     

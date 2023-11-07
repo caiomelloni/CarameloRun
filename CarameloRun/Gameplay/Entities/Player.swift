@@ -37,16 +37,24 @@ class Player: GKEntity {
         
         let spriteComponent = setPlayerBodySpriteComponent(SpriteComponent(texture: SKTexture(imageNamed: "Idle1"), size: CGSize(width: Constants.playerWidth, height: Constants.playerHeight)))
         
-        [
+        let components = [
             spriteComponent,
             DirectionComponent(),
             JumpComponent(Constants.playerJumpXMultiplier, Constants.playerJumpYMultiplier),
             VelocityComponent(Constants.playerVelocity),
             ScoreComponent(),
-            PlayerAnimationComponent(type == .dog ? PlayerStateMachine(spriteComponent) : CatcherStateMachine(spriteComponent))
-            
-        ].forEach { component in
+            PlayerAnimationComponent(type == .dog ? PlayerStateMachine(spriteComponent) : CatcherStateMachine(spriteComponent)),
+                        
+        ]
+        
+        components.forEach { component in
             addComponent(component)
+        }
+        
+        if type == .man {
+            addComponent(CatchComponent())
+        } else {
+            addComponent(GetCaughtComponent())
         }
     }
     
@@ -59,6 +67,9 @@ class Player: GKEntity {
                                  size: CGSize(width: Constants.playerWidth, height: Constants.playerHeight))
         body.affectedByGravity = true
         body.allowsRotation = false
+        
+        body.contactTestBitMask = Constants.charactersCollisionMask
+        body.categoryBitMask = Constants.charactersCollisionMask
         
         spriteComponent.physicsBody = body
         

@@ -17,6 +17,7 @@
 		F82A32822AE2B3C500A3639C /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A32812AE2B3C500A3639C /* PlayerState.swift */; };
 		F854918A2AE16F71004EA5B1 /* MenuInicial.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85491892AE16F71004EA5B1 /* MenuInicial.swift */; };
 		F854918D2AE174A8004EA5B1 /* GameCenterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F854918C2AE174A8004EA5B1 /* GameCenterHelper.swift */; };
+		F85FD5482AF90C6D009CB45A /* CatchComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85FD5472AF90C6D009CB45A /* CatchComponent.swift */; };
 		F870AAF32AF12ADE00195173 /* HandlePlayersExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F870AAF22AF12ADE00195173 /* HandlePlayersExtension.swift */; };
 		F870AAF52AF12B6100195173 /* GameCenterCommunicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F870AAF42AF12B6100195173 /* GameCenterCommunicationExtension.swift */; };
 		F87120B82AEBEB1C00697E21 /* DirectionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120B72AEBEB1C00697E21 /* DirectionComponent.swift */; };
@@ -35,6 +36,7 @@
 		F89283FD2AE964A900A3B499 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89283FC2AE964A900A3B499 /* Constants.swift */; };
 		F898070F2ACDA1880044D237 /* Zposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F898070E2ACDA1880044D237 /* Zposition.swift */; };
 		F89807112ACDA4130044D237 /* Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89807102ACDA4130044D237 /* Dimensions.swift */; };
+		F8A004A22AFA609600A9DAC3 /* GetCaughtComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A004A12AFA609600A9DAC3 /* GetCaughtComponent.swift */; };
 		F8EE82662AF2740000158D9B /* ControllTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8EE82652AF2740000158D9B /* ControllTimer.swift */; };
 		F8EE82682AF276B900158D9B /* EndGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8EE82672AF276B900158D9B /* EndGame.swift */; };
 		F8EE826A2AF2932F00158D9B /* CatcherStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8EE82692AF2932F00158D9B /* CatcherStateMachine.swift */; };
@@ -56,6 +58,7 @@
 		F85491892AE16F71004EA5B1 /* MenuInicial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInicial.swift; sourceTree = "<group>"; };
 		F854918C2AE174A8004EA5B1 /* GameCenterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterHelper.swift; sourceTree = "<group>"; };
 		F854918E2AE1767F004EA5B1 /* CarameloRun.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CarameloRun.entitlements; sourceTree = "<group>"; };
+		F85FD5472AF90C6D009CB45A /* CatchComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatchComponent.swift; sourceTree = "<group>"; };
 		F870AAF22AF12ADE00195173 /* HandlePlayersExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandlePlayersExtension.swift; sourceTree = "<group>"; };
 		F870AAF42AF12B6100195173 /* GameCenterCommunicationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterCommunicationExtension.swift; sourceTree = "<group>"; };
 		F87120B72AEBEB1C00697E21 /* DirectionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionComponent.swift; sourceTree = "<group>"; };
@@ -74,6 +77,7 @@
 		F89283FC2AE964A900A3B499 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F898070E2ACDA1880044D237 /* Zposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zposition.swift; sourceTree = "<group>"; };
 		F89807102ACDA4130044D237 /* Dimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dimensions.swift; sourceTree = "<group>"; };
+		F8A004A12AFA609600A9DAC3 /* GetCaughtComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCaughtComponent.swift; sourceTree = "<group>"; };
 		F8EE82652AF2740000158D9B /* ControllTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllTimer.swift; sourceTree = "<group>"; };
 		F8EE82672AF276B900158D9B /* EndGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGame.swift; sourceTree = "<group>"; };
 		F8EE82692AF2932F00158D9B /* CatcherStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatcherStateMachine.swift; sourceTree = "<group>"; };
@@ -230,6 +234,8 @@
 				F87120B92AEBF20C00697E21 /* JumpComponent.swift */,
 				F87120BB2AEBF62600697E21 /* VelocityComponent.swift */,
 				F87120BD2AEBF87600697E21 /* PlayerAnimationComponent.swift */,
+				F85FD5472AF90C6D009CB45A /* CatchComponent.swift */,
+				F8A004A12AFA609600A9DAC3 /* GetCaughtComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -371,6 +377,7 @@
 				F82787012AC5A2F20047111D /* Player.swift in Sources */,
 				F854918D2AE174A8004EA5B1 /* GameCenterHelper.swift in Sources */,
 				F898070F2ACDA1880044D237 /* Zposition.swift in Sources */,
+				F85FD5482AF90C6D009CB45A /* CatchComponent.swift in Sources */,
 				F870AAF32AF12ADE00195173 /* HandlePlayersExtension.swift in Sources */,
 				F854918A2AE16F71004EA5B1 /* MenuInicial.swift in Sources */,
 				F8EE826A2AF2932F00158D9B /* CatcherStateMachine.swift in Sources */,
@@ -395,6 +402,7 @@
 				F87120CB2AEECA6100697E21 /* RunningState.swift in Sources */,
 				F87120C82AEEC9FF00697E21 /* FallingState.swift in Sources */,
 				F82786F02AC59B170047111D /* GameViewController.swift in Sources */,
+				F8A004A22AFA609600A9DAC3 /* GetCaughtComponent.swift in Sources */,
 				F89283FD2AE964A900A3B499 /* Constants.swift in Sources */,
 				F82786E82AC59B170047111D /* AppDelegate.swift in Sources */,
 				F89807112ACDA4130044D237 /* Dimensions.swift in Sources */,

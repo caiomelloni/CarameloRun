@@ -46,4 +46,26 @@ extension GameScene {
         let newPosition = CGPoint(x: playerState.positionX, y: playerState.positionY)
         remotePlayers[playerState.playerNumber]?.component(ofType: SpriteComponent.self)?.position = newPosition
     }
+    
+    func handlePlayerCollision() {
+        for remotePlayer in remotePlayers.values {
+            if CGRectIntersectsRect(localPlayer.component(ofType: SpriteComponent.self)!.frame, remotePlayer.component(ofType: SpriteComponent.self)!.frame) {
+                localPlayer.component(ofType: GetCaughtComponent.self)?.gotCaught(farestRespawnPoint(localPlayer))
+                localPlayer.component(ofType: CatchComponent.self)?.didCollideWithPlayer(remotePlayer)
+            }
+        }
+    }
+    
+    private func farestRespawnPoint(_ player: Player) -> CGPoint {
+        let respawn1 = scene!.childNode(withName: "respawn1")!.position
+        let respawn2 = scene!.childNode(withName: "respawn2")!.position
+        let localPlayerPosition = player.component(ofType: SpriteComponent.self)!.position
+        
+        if abs(respawn1.x - localPlayerPosition.x) > abs(respawn2.x - localPlayerPosition.x) {
+            return respawn1
+        } else {
+            return respawn2
+        }
+    }
+    
 }

@@ -30,7 +30,7 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView){
         entityManager = EntityManager(scene: self)
-        
+                
         backgroundColor = .white
         
         placePlayersInitialPositionInMap()
@@ -86,7 +86,9 @@ class GameScene: SKScene {
         
         //game center online updates
         updatePlayerPositionForOtherPlayers()
-
+        
+        handlePlayerCollision()
+        
     }
 }
 
