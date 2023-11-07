@@ -55,6 +55,7 @@ class Player: GKEntity {
             addComponent(CatchComponent())
         } else {
             addComponent(GetCaughtComponent())
+            addComponent(HealthComponent())
         }
     }
     

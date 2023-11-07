@@ -9,7 +9,7 @@ import SpriteKit
 
 // cria uma camera que segue o jogador especificado
 class LocalPlayerCamera: SKCameraNode {
-    let player: Player
+    var player: Player
     init(_ playerToFollow: Player) {
         self.player = playerToFollow
         super.init()
@@ -18,6 +18,10 @@ class LocalPlayerCamera: SKCameraNode {
     private func updateCameraPosition() {
         position.x = player.component(ofType: SpriteComponent.self)!.position.x
         position.y = player.component(ofType: SpriteComponent.self)!.position.y
+    }
+    
+    func followCatcher(_ catcher: Player) {
+        player = catcher
     }
     
     required init?(coder aDecoder: NSCoder) {
