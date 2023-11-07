@@ -15,21 +15,28 @@ class ControllTimer {
     
     init() {
         node.size = CGSize(width: Dimensions.buttonWidth.rawValue, height: Dimensions.buttonHeight.rawValue)
-        number.text = "timer: \(n)"
+        let m = n/60
+        let s = n%60
+        number.text = "0\(m):\(s)"
         number.fontColor = .blue
-        
         
         node.addChild(number)
         node.scene?.backgroundColor = .blue
     }
     
     private func position(x: Double, y: Double) {
-        node.position = CGPoint(x: x - node.frame.width - 400, y: y + 400 + node.frame.height)
+        node.position = CGPoint(x: x - 668, y: y + 540 + UIScreen.main.bounds.size.height/6)
     }
     
     func updateTimer(_ new: Int) {
         n = new
-        number.text = "timer: \(n)"
+        let minutos = n / 60
+        let segundos = n % 60
+        var z = ""
+        if segundos < 10 {
+            z = "0"
+        }
+        number.text = "0\(minutos):\(z)\(segundos)"
     }
     
     func update(_ camera: SKCameraNode, _ frame: CGRect) {

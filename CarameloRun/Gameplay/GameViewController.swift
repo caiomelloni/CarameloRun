@@ -21,6 +21,8 @@ class GameViewController: UIViewController {
     
     var score = ScoreComponent()
     
+    var controllerFinishGame: Int = 0
+    
     init(match: GKMatch, players: [Player], time: Int) {
         self.match = match
         self.players = players
@@ -90,9 +92,10 @@ class GameViewController: UIViewController {
         }
         
         private func finishGame(_ bool: Bool) {
-            if bool == true {
-                //match.finalize()
-                self.present(EndGame(score.score), animated: true)
+            if bool == true && controllerFinishGame == 0{
+                match.finalize()
+                self.navigationController?.pushViewController(EndGame(score.score), animated: true)
+                controllerFinishGame = 1
             }
         }
 }
