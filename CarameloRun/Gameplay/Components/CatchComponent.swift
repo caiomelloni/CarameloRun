@@ -11,5 +11,6 @@ import GameplayKit
 class CatchComponent: GKComponent {
     func didCollideWithPlayer(_ player: Player) {
         print("player \(player.displayName) pegou")
+        //TODO: if the last player is caught, them ends the game
     }
 }

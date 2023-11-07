@@ -36,6 +36,7 @@ extension GameScene {
                     remotePlayers[player.playerNumber] = player
                 }
                 
+                player.component(ofType: HealthComponent.self)?.killPlayerRef = killPlayer
             }
         } else {
             print("ERROR: NULL PLAYERS")
@@ -65,6 +66,18 @@ extension GameScene {
             return respawn1
         } else {
             return respawn2
+        }
+    }
+    
+    func killPlayer() {
+        joystick.node.removeFromParent()
+        jumpButton.node.removeFromParent()
+        
+        for player in remotePlayers.values {
+            if player.type == .man {
+                sceneCamera.followCatcher(player)
+                break
+            }
         }
     }
     
