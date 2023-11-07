@@ -46,7 +46,7 @@ class EndGame: UIViewController, GKGameCenterControllerDelegate {
         
         let button = UIButton()
         button.setTitle("Mostrar LeaderBoard", for: .normal)
-        button.frame = CGRect(x: 500, y: 300, width: 200, height: 40)
+        button.frame = CGRect(x: UIScreen.main.bounds.size.width/2, y: 2*UIScreen.main.bounds.size.height/3, width: 200, height: 40)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         button.backgroundColor = .orange
 
