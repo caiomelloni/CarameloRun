@@ -75,15 +75,4 @@ class EntityManager {
         }
     }
     
-    func didCollide(_ contact: SKPhysicsContact) {
-        
-        for componentSystem in componentSystems {
-            if componentSystem.components[0] is CatchComponent {
-                for component in componentSystem.components {
-                    (component as! CatchComponent).didCollide(contact)
-                }
-            }
-        }
-    }
-    
 }

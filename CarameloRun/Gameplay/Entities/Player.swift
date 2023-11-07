@@ -36,7 +36,7 @@ class Player: GKEntity {
         
         let spriteComponent = setPlayerBodySpriteComponent(SpriteComponent(texture: SKTexture(imageNamed: "Idle1"), size: CGSize(width: Constants.playerWidth, height: Constants.playerHeight)))
         
-        var components = [
+        let components = [
             spriteComponent,
             DirectionComponent(),
             JumpComponent(Constants.playerJumpXMultiplier, Constants.playerJumpYMultiplier),
@@ -52,6 +52,8 @@ class Player: GKEntity {
         
         if type == .man {
             addComponent(CatchComponent())
+        } else {
+            addComponent(GetCaughtComponent())
         }
     }
     

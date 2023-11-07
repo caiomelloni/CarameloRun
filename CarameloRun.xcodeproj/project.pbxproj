@@ -36,6 +36,7 @@
 		F89283FD2AE964A900A3B499 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89283FC2AE964A900A3B499 /* Constants.swift */; };
 		F898070F2ACDA1880044D237 /* Zposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F898070E2ACDA1880044D237 /* Zposition.swift */; };
 		F89807112ACDA4130044D237 /* Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89807102ACDA4130044D237 /* Dimensions.swift */; };
+		F8A004A22AFA609600A9DAC3 /* GetCaughtComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A004A12AFA609600A9DAC3 /* GetCaughtComponent.swift */; };
 		F8EE82662AF2740000158D9B /* ControllTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8EE82652AF2740000158D9B /* ControllTimer.swift */; };
 		F8EE82682AF276B900158D9B /* EndGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8EE82672AF276B900158D9B /* EndGame.swift */; };
 		F8EE826A2AF2932F00158D9B /* CatcherStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8EE82692AF2932F00158D9B /* CatcherStateMachine.swift */; };
@@ -75,6 +76,7 @@
 		F89283FC2AE964A900A3B499 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F898070E2ACDA1880044D237 /* Zposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zposition.swift; sourceTree = "<group>"; };
 		F89807102ACDA4130044D237 /* Dimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dimensions.swift; sourceTree = "<group>"; };
+		F8A004A12AFA609600A9DAC3 /* GetCaughtComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCaughtComponent.swift; sourceTree = "<group>"; };
 		F8EE82652AF2740000158D9B /* ControllTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllTimer.swift; sourceTree = "<group>"; };
 		F8EE82672AF276B900158D9B /* EndGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGame.swift; sourceTree = "<group>"; };
 		F8EE82692AF2932F00158D9B /* CatcherStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatcherStateMachine.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				F87120BB2AEBF62600697E21 /* VelocityComponent.swift */,
 				F87120BD2AEBF87600697E21 /* PlayerAnimationComponent.swift */,
 				F85FD5472AF90C6D009CB45A /* CatchComponent.swift */,
+				F8A004A12AFA609600A9DAC3 /* GetCaughtComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				F87120CB2AEECA6100697E21 /* RunningState.swift in Sources */,
 				F87120C82AEEC9FF00697E21 /* FallingState.swift in Sources */,
 				F82786F02AC59B170047111D /* GameViewController.swift in Sources */,
+				F8A004A22AFA609600A9DAC3 /* GetCaughtComponent.swift in Sources */,
 				F89283FD2AE964A900A3B499 /* Constants.swift in Sources */,
 				F82786E82AC59B170047111D /* AppDelegate.swift in Sources */,
 				F89807112ACDA4130044D237 /* Dimensions.swift in Sources */,
