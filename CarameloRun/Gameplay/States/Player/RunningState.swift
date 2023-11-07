@@ -24,7 +24,6 @@ class RunningState: GKState {
         // runs as it enters this state
         // has access to the previous state
         spriteComponent.run(.repeatForever(.animate(with: spriteSheet, timePerFrame: 0.1)))
-        print("did enter running state")
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {

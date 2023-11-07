@@ -24,7 +24,6 @@ class IdleState: GKState {
         // runs as it enters this state
         // has access to the previous state
         spriteComponent.run(.repeatForever(.animate(with: spriteSheet, timePerFrame: 0.1)))
-        print("did enter to idle")
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {

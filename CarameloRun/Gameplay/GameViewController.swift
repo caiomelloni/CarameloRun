@@ -17,11 +17,14 @@ class GameViewController: UIViewController {
     var players: [Player]
     
     var timer: Timer!
-    var time: Int = 60
+    var time: Int
     
-    init(match: GKMatch, players: [Player]) {
+    var score = ScoreComponent()
+    
+    init(match: GKMatch, players: [Player], time: Int) {
         self.match = match
         self.players = players
+        self.time = time
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -55,7 +58,7 @@ class GameViewController: UIViewController {
             view.preferredFramesPerSecond = 30
             view.showsNodeCount = true
             
-            initTimer()
+           initTimer()
         }
         
         match.delegate = self
@@ -88,8 +91,8 @@ class GameViewController: UIViewController {
         
         private func finishGame(_ bool: Bool) {
             if bool == true {
-                match.finalize()
-                self.present(EndGame(), animated: true)
+                //match.finalize()
+                self.present(EndGame(score.score), animated: true)
             }
         }
 }
