@@ -51,22 +51,45 @@ extension GameScene {
     func handlePlayerCollision() {
         for remotePlayer in remotePlayers.values {
             if CGRectIntersectsRect(localPlayer.component(ofType: SpriteComponent.self)!.frame, remotePlayer.component(ofType: SpriteComponent.self)!.frame) {
-                localPlayer.component(ofType: GetCaughtComponent.self)?.gotCaught(farestRespawnPoint(localPlayer))
+                if remotePlayer.type == .man {
+                    localPlayer.component(ofType: GetCaughtComponent.self)?.gotCaught(emptyRespawnPoint(localPlayer))
+                } else {
+                    localPlayer.component(ofType: GetCaughtComponent.self)?.gotFreed()
+                }
                 localPlayer.component(ofType: CatchComponent.self)?.didCollideWithPlayer(remotePlayer)
             }
         }
     }
     
-    private func farestRespawnPoint(_ player: Player) -> CGPoint {
-        let respawn1 = scene!.childNode(withName: "respawn1")!.position
-        let respawn2 = scene!.childNode(withName: "respawn2")!.position
-        let localPlayerPosition = player.component(ofType: SpriteComponent.self)!.position
+    private func emptyRespawnPoint(_ player: Player) -> CGPoint {
+        let respawns = [
+            scene!.childNode(withName: "respawn1")!,
+            scene!.childNode(withName: "respawn2")!,
+            scene!.childNode(withName: "respawn3")!,
+            scene!.childNode(withName: "respawn4")!,
+            scene!.childNode(withName: "respawn5")!,
+        ]
         
-        if abs(respawn1.x - localPlayerPosition.x) > abs(respawn2.x - localPlayerPosition.x) {
-            return respawn1
-        } else {
-            return respawn2
+        var emptyRespawn = respawns[0]
+        
+        for respawn in respawns {
+            var isAvailable = true
+            for player in remotePlayers.values {
+                if CGRectIntersectsRect(player.component(ofType: SpriteComponent.self)!.frame, respawn.frame) {
+                    isAvailable = false
+                    break
+                }
+            }
+            
+            if isAvailable {
+                emptyRespawn = respawn
+                break
+            }
+            
         }
+        
+        return emptyRespawn.position
+        
     }
     
     func killPlayer() {
