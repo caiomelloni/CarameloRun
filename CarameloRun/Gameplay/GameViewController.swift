@@ -121,6 +121,7 @@ protocol GameControllerDelegate {
     func sendPlayerState(_ state: PlayerState)
     func sendMatchState(_ state: matchState)
     var players: [Player] { get }
+    func finishGame()
 }
 
 extension GameViewController: GameControllerDelegate {
@@ -142,6 +143,10 @@ extension GameViewController: GameControllerDelegate {
                 print("error sending data")
             }
         }
+    
+    func finishGame() {
+        finishGame(true)
+    }
 }
 
 enum GameState {

@@ -36,4 +36,11 @@ class VelocityComponent: GKComponent {
         
     }
     
+    func stop() {
+        let dy = entity?.component(ofType: SpriteComponent.self)?.dy
+        if(dy == 0){
+            entity?.component(ofType: PlayerAnimationComponent.self)?.idle()
+        }
+    }
+    
 }

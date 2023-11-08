@@ -36,6 +36,10 @@ class PlayerAnimationComponent: GKComponent {
         stateMachine.enter(FallingState.self)
     }
     
+    func arrest() {
+        stateMachine.enter(ArrestedState.self)
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

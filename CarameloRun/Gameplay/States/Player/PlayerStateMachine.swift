@@ -25,7 +25,11 @@ class PlayerStateMachine: GKStateMachine {
             
             RunningState(spriteComponent,
                          statePrefix: Constants.playerFramesPrefix,
-                         frameCount: Constants.playerRunFramesCount)
+                         frameCount: Constants.playerRunFramesCount),
+            
+            ArrestedState(spriteComponent, 
+                          statePrefix: Constants.playerFramesPrefix,
+                          frameCount: Constants.playerArrestedFramesCount),
         ])
     }
 }

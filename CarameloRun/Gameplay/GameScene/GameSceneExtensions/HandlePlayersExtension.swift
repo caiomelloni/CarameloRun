@@ -56,7 +56,9 @@ extension GameScene {
                 } else {
                     localPlayer.component(ofType: GetCaughtComponent.self)?.gotFreed()
                 }
-                localPlayer.component(ofType: CatchComponent.self)?.didCollideWithPlayer(remotePlayer)
+                
+                // just called by a catcher
+                localPlayer.component(ofType: CatchComponent.self)?.didCollideWithPlayer(remotePlayer, remotePlayers, finishGame: controllerDelegate?.finishGame)
             }
         }
     }

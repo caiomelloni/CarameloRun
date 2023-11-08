@@ -10,6 +10,8 @@ struct PlayerState: Codable {
     let playerNumber: Int
     let positionX: Double
     let positionY: Double
+    let state: String
+    
 }
 
 struct PreparingPlayres: Codable {
@@ -20,4 +22,12 @@ struct PreparingPlayres: Codable {
 
 struct matchState: Codable {
     var finish: Bool
+}
+
+enum PlayerStateMap: String {
+    case idleState = "idle"
+    case runState = "run"
+    case fallState = "fall"
+    case jumpState = "jump"
+    case arrestState = "arrest"
 }

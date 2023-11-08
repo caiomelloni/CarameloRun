@@ -16,18 +16,22 @@ class GetCaughtComponent: GKComponent {
             isArrested = true
             entity?.component(ofType: SpriteComponent.self)?.position = respawn
             entity?.component(ofType: HealthComponent.self)?.decreaseLife()
-            //TODO: restringir movimentos e mudar o estado para preso
+            
             
             // removes player movement
             entity?.removeComponent(ofType: VelocityComponent.self)
             entity?.removeComponent(ofType: JumpComponent.self)
             
+            // must be called after lose velocity end jump components
+            entity?.component(ofType: PlayerAnimationComponent.self)?.arrest()
+
         }
     }
     
     func gotFreed() {
         isArrested = false
-        //TODO: recuperar movientos e sair do estado de preso
+        
+        entity?.component(ofType: PlayerAnimationComponent.self)?.idle()
         
         // adds player movement
         entity?.addComponent(VelocityComponent(Constants.playerVelocity))

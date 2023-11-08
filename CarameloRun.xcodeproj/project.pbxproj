@@ -38,6 +38,7 @@
 		F89807112ACDA4130044D237 /* Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89807102ACDA4130044D237 /* Dimensions.swift */; };
 		F8A004A22AFA609600A9DAC3 /* GetCaughtComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A004A12AFA609600A9DAC3 /* GetCaughtComponent.swift */; };
 		F8A004A42AFA71D500A9DAC3 /* HealthComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A004A32AFA71D500A9DAC3 /* HealthComponent.swift */; };
+		F8E4B1782AFBC87F0066BBFC /* ArrestedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E4B1772AFBC87F0066BBFC /* ArrestedState.swift */; };
 		F8EE82662AF2740000158D9B /* ControllTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8EE82652AF2740000158D9B /* ControllTimer.swift */; };
 		F8EE82682AF276B900158D9B /* EndGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8EE82672AF276B900158D9B /* EndGame.swift */; };
 		F8EE826A2AF2932F00158D9B /* CatcherStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8EE82692AF2932F00158D9B /* CatcherStateMachine.swift */; };
@@ -80,6 +81,7 @@
 		F89807102ACDA4130044D237 /* Dimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dimensions.swift; sourceTree = "<group>"; };
 		F8A004A12AFA609600A9DAC3 /* GetCaughtComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCaughtComponent.swift; sourceTree = "<group>"; };
 		F8A004A32AFA71D500A9DAC3 /* HealthComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthComponent.swift; sourceTree = "<group>"; };
+		F8E4B1772AFBC87F0066BBFC /* ArrestedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrestedState.swift; sourceTree = "<group>"; };
 		F8EE82652AF2740000158D9B /* ControllTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllTimer.swift; sourceTree = "<group>"; };
 		F8EE82672AF276B900158D9B /* EndGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGame.swift; sourceTree = "<group>"; };
 		F8EE82692AF2932F00158D9B /* CatcherStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatcherStateMachine.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				F87120CA2AEECA6100697E21 /* RunningState.swift */,
 				F87120CC2AEFDE2600697E21 /* PlayerStateMachine.swift */,
 				F8EE82692AF2932F00158D9B /* CatcherStateMachine.swift */,
+				F8E4B1772AFBC87F0066BBFC /* ArrestedState.swift */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				F89283FA2AE94D6F00A3B499 /* PositionHistory.swift in Sources */,
 				F87120B82AEBEB1C00697E21 /* DirectionComponent.swift in Sources */,
 				F87120BE2AEBF87600697E21 /* PlayerAnimationComponent.swift in Sources */,
+				F8E4B1782AFBC87F0066BBFC /* ArrestedState.swift in Sources */,
 				F87120C42AEEC8F200697E21 /* IdleState.swift in Sources */,
 				F87D81F92AEACE5E0006CDD8 /* SpriteComponent.swift in Sources */,
 				F82A32822AE2B3C500A3639C /* PlayerState.swift in Sources */,
