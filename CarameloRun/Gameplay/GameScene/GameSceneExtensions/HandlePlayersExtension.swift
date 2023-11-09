@@ -86,12 +86,25 @@ extension GameScene {
             if CGRectIntersectsRect(localPlayer.component(ofType: SpriteComponent.self)!.frame, remotePlayer.component(ofType: SpriteComponent.self)!.frame) {
                 if remotePlayer.type == .man {
                     localPlayer.component(ofType: GetCaughtComponent.self)?.gotCaught(emptyRespawnPoint(localPlayer))
-                } else {
+                } else if (remotePlayer.component(ofType: PlayerAnimationComponent.self)?.stateMachine.currentState as? ArrestedState) == nil {
                     localPlayer.component(ofType: GetCaughtComponent.self)?.gotFreed()
                 }
                 
                 // just called by a catcher
-                localPlayer.component(ofType: CatchComponent.self)?.didCollideWithPlayer(remotePlayer, remotePlayers, finishGame: controllerDelegate?.finishGame)
+                Task {
+                    await localPlayer.component(ofType: CatchComponent.self)?
+                        .didCollideWithPlayer(remotePlayer, remotePlayers,
+                                              finishGame: {
+                            self.controllerDelegate?.sendMatchState(matchState.init(finish: true))
+                            DispatchQueue.main.async {
+                                self.controllerDelegate?.finishGame()
+                            }
+                        }
+                        )
+                }
+                
+                
+                
             }
         }
     }
