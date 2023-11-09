@@ -8,7 +8,6 @@
 import GameplayKit
 
 class FallingState: GKState {
-    
     let spriteComponent: SpriteComponent
     var spriteSheet = [SKTexture]()
     
@@ -37,5 +36,11 @@ class FallingState: GKState {
     
     override func update(deltaTime seconds: TimeInterval) {
         
+    }
+}
+
+extension FallingState: CodableState {
+    var stringIdentifier: String {
+        PlayerStateStringIdentifier.fallState.rawValue
     }
 }

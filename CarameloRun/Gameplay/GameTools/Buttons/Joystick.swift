@@ -76,13 +76,15 @@ class Joystick {
     func update(_ sceneCamera: SKCameraNode, _ frame: CGRect, _ dog: Player) {
         setJoystickPositionRelativeToCamera(sceneCamera, frame)
         
+        let velocityComponent = dog.component(ofType: VelocityComponent.self)
+        
         if let movDirection = movementDirection {
-            dog.component(ofType: VelocityComponent.self)?.addVelocity(movDirection)
+            velocityComponent?.addVelocity(movDirection)
         }
        
-        let dy = dog.component(ofType: SpriteComponent.self)?.dy
-        if(!inUse && dy == 0){
-            dog.component(ofType: PlayerAnimationComponent.self)?.idle()
+        if !inUse {
+            velocityComponent?.stop()
         }
+        
     }
 }

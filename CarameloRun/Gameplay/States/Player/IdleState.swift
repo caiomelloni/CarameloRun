@@ -40,3 +40,9 @@ class IdleState: GKState {
         
     }
 }
+
+extension IdleState: CodableState {
+    var stringIdentifier: String {
+        PlayerStateStringIdentifier.idleState.rawValue
+    }
+}
