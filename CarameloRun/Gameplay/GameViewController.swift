@@ -79,31 +79,33 @@ class GameViewController: UIViewController {
     }
     
     private func initTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
-            self.time -= 1
-            
-            if self.time == 0 {
-                self.sendMatchState(matchState.init(finish: true))
-                self.finishGame()
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
+                self.time -= 1
+                
+                if self.time == 0 {
+                    self.sendMatchState(matchState.init(finish: true))
+                    self.finishGame()
+                    timer.invalidate()
+                }
+                
+                self.gameScene?.timer.updateTimer(self.time)
+            })
+        }
+        
+        func finishGame() {
+            if controllerFinishGame == 0{
+//                match.finalize()
+                score = gameScene?.getScore() ?? 0
+                if score < 0 {
+                    score = 0
+                }
+                
+                self.navigationController?.pushViewController(EndGame(score), animated: true)
+                controllerFinishGame = 1
             }
-            
-            self.gameScene?.timer.updateTimer(self.time)
-        })
-    }
-    
-    func finishGame() {
-        if controllerFinishGame == 0{
-            //                match.finalize()
-            score = gameScene?.getScore() ?? 0
-            if score < 0 {
-                score = 0
-            }
-            
-            self.navigationController?.pushViewController(EndGame(score), animated: true)
-            controllerFinishGame = 1
         }
     }
-}
+
 
 extension GameViewController: GKMatchDelegate {
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {

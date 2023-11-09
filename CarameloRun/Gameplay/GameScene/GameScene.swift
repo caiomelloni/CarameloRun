@@ -49,6 +49,8 @@ class GameScene: SKScene {
         
         addChild(timer.node)
         
+        InsertTask()
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -88,6 +90,8 @@ class GameScene: SKScene {
         updatePlayerPositionForOtherPlayers()
         
         handlePlayerCollision()
+        
+        verifyDoingTask()
         
     }
     
