@@ -52,7 +52,7 @@ class ProgressBarComponent: GKComponent {
                     avaiable = false
                     self.entity?.component(ofType: CompleteTaskComponent.self)?.ChangeAvaiable(false)
                     progressBar.xScale = 0.00
-                    
+                    localPlayer.component(ofType: ScoreComponent.self)?.dogMakeTask()
                     initTimer()
                 }
                 
@@ -73,6 +73,7 @@ class ProgressBarComponent: GKComponent {
                 self.entity?.component(ofType: CompleteTaskComponent.self)?.ChangeAvaiable(true)
                 self.entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(false)
                 timer.invalidate()
+                self.time = 15
             }
         })
     }

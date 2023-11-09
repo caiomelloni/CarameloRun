@@ -20,7 +20,7 @@ extension GameScene {
         
         if let myEntity2 = entityManager.entities.first(where: { $0.component(ofType: ProgressBarComponent.self) != nil }) {
             myEntity2.component(ofType: CompleteTaskComponent.self)?.addCompleteLabel()
-            myEntity2.component(ofType: CompleteTaskComponent.self)?.TaskAvaiable(false)
+            myEntity2.component(ofType: CompleteTaskComponent.self)?.TaskAvaiable(true)
         }
         
         
