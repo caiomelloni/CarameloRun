@@ -13,19 +13,22 @@ import GameKit
 class MenuInicialViewController: UIViewController {
     let stackView = UIStackView()
     let logoImageView = UIImageView(image: UIImage(named: "Logo"))
-    let buttonImage = UIImage(named: "startButton") as UIImage?
-    let button = UIButton(type: UIButton.ButtonType.custom) as UIButton
+    let helpButtonImage = UIImage(named: "helpButton") as UIImage?
+    let helpButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
+    let startButtonImage = UIImage(named: "startButton") as UIImage?
+    let startButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
     let gameCenterHelper = GameCenterHelper()
     let connectionStatusLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        button.isEnabled = false
+        startButton.isEnabled = false
         
         
-        configureButton()
+        configureButtons()
         configureStackView()
         setStackViewConstraints()
+        setButtonsContraints()
         gameCenterHelper.delegate = self
         gameCenterHelper.authenticatePlayer()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "backgroundMenu.png")!)
@@ -37,11 +40,15 @@ extension MenuInicialViewController {
     
     
     
-    func configureButton() {
+    func configureButtons() {
     
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(buttonImage, for: .normal)
-        button.addTarget(self, action: #selector(initGame), for: .touchUpInside)
+        startButton.translatesAutoresizingMaskIntoConstraints = false
+        startButton.setImage(startButtonImage, for: .normal)
+        startButton.addTarget(self, action: #selector(initGame), for: .touchUpInside)
+        
+        helpButton.translatesAutoresizingMaskIntoConstraints = false
+        helpButton.setImage(helpButtonImage, for: .normal)
+        helpButton.addTarget(self, action: #selector(showHelpPopUp), for: .touchUpInside)
       
     }
     
@@ -51,10 +58,8 @@ extension MenuInicialViewController {
         stackView.spacing = 24
         stackView.alignment = .center
         stackView.addArrangedSubview(logoImageView)
-        stackView.addArrangedSubview(button)
+        stackView.addArrangedSubview(startButton)
         stackView.addArrangedSubview(connectionStatusLabel)
-    
-
     }
     
     func setStackViewConstraints() {
@@ -64,19 +69,23 @@ extension MenuInicialViewController {
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-
-//            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -75),
-//            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 32)
+        ])
+    }
+    
+    func setButtonsContraints() {
+        view.addSubview(helpButton)
+        
+        helpButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            helpButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 32),
+            helpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -56)
+           
         ])
     }
     
     func configureConnectionStatusLabel() {
         connectionStatusLabel.text = "You are not connected to Game Center"
-       
-//        if let interFont = UIFont(name: "Inter", size: 16){
-//            print("inter")
-//            connectionStatusLabel.font = interFont
-//        } else {print("deu ruim")}
         connectionStatusLabel.textAlignment = .center
         connectionStatusLabel.numberOfLines = 1
     }
@@ -84,13 +93,18 @@ extension MenuInicialViewController {
     @objc func initGame() {
         gameCenterHelper.presentMatchmaker()
     }
+    
+    @objc func showHelpPopUp(){
+        let vc = HelpPopUpViewController()
+        self.present(vc, animated: true, completion: nil)
+    }
 }
 
 
 extension MenuInicialViewController: GameCenterHelperDelegate {
   func didChangeAuthStatus(isAuthenticated: Bool) {
       print("changed status is auth: \(isAuthenticated)")
-    button.isEnabled = isAuthenticated
+    startButton.isEnabled = isAuthenticated
     connectionStatusLabel.text = "Connected to Game Center"
 
     
@@ -108,6 +122,5 @@ extension MenuInicialViewController: GameCenterHelperDelegate {
       self.navigationController?.isNavigationBarHidden = true
       self.navigationController?.popViewController(animated: true)
       self.navigationController?.pushViewController(PreparingViewController(match: match, prep: prep), animated: true)
-      //self.navigationController?.pushViewController(GameViewController(match: match), animated: true)
   }
 }
