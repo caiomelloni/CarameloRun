@@ -65,15 +65,14 @@ class ProgressBarComponent: GKComponent {
     }
     
     func initTimer() {
+        var x = time
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
-            self.time -= 1
-            print(self.time)
-            if self.time == 0 {
+            x -= 1
+            if x == 0 {
                 self.avaiable = true
                 self.entity?.component(ofType: CompleteTaskComponent.self)?.ChangeAvaiable(true)
                 self.entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(false)
                 timer.invalidate()
-                self.time = 15
             }
         })
     }
