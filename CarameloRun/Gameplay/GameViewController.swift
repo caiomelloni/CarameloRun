@@ -85,6 +85,7 @@ class GameViewController: UIViewController {
                 if self.time == 0 {
                     self.sendMatchState(matchState.init(finish: true))
                     self.finishGame()
+                    timer.invalidate()
                 }
                 
                 self.gameScene?.timer.updateTimer(self.time)
