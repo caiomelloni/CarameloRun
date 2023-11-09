@@ -33,3 +33,7 @@ class PlayerStateMachine: GKStateMachine {
         ])
     }
 }
+
+protocol CodableState {
+    var stringIdentifier: String { get }
+}

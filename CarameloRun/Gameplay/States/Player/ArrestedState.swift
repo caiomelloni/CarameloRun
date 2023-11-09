@@ -8,7 +8,6 @@
 import GameplayKit
 
 class ArrestedState: GKState {
-    
     let spriteComponent: SpriteComponent
     var spriteSheet: [SKTexture] = []
     
@@ -38,5 +37,10 @@ class ArrestedState: GKState {
     
     override func update(deltaTime seconds: TimeInterval) {
         
+    }
+}
+extension ArrestedState: CodableState {
+    var stringIdentifier: String {
+        PlayerStateStringIdentifier.arrestState.rawValue
     }
 }
