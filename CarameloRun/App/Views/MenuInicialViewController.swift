@@ -15,6 +15,8 @@ class MenuInicialViewController: UIViewController {
     let logoImageView = UIImageView(image: UIImage(named: "Logo"))
     let helpButtonImage = UIImage(named: "helpButton") as UIImage?
     let helpButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
+    let settingsButtonImage = UIImage(named: "settingsButton") as UIImage?
+    let settingsButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
     let startButtonImage = UIImage(named: "startButton") as UIImage?
     let startButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
     let gameCenterHelper = GameCenterHelper()
@@ -49,6 +51,10 @@ extension MenuInicialViewController {
         helpButton.translatesAutoresizingMaskIntoConstraints = false
         helpButton.setImage(helpButtonImage, for: .normal)
         helpButton.addTarget(self, action: #selector(showHelpPopUp), for: .touchUpInside)
+        
+        settingsButton.translatesAutoresizingMaskIntoConstraints = false
+        settingsButton.setImage(settingsButtonImage, for: .normal)
+        settingsButton.addTarget(self, action: #selector(showSettingsPopUp), for: .touchUpInside)
       
     }
     
@@ -74,6 +80,7 @@ extension MenuInicialViewController {
     
     func setButtonsContraints() {
         view.addSubview(helpButton)
+        view.addSubview(settingsButton)
         
         helpButton.translatesAutoresizingMaskIntoConstraints = false
         
@@ -82,6 +89,15 @@ extension MenuInicialViewController {
             helpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -56)
            
         ])
+        
+        settingsButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            settingsButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 33),
+            settingsButton.trailingAnchor.constraint(equalTo: helpButton.leadingAnchor, constant: -13)
+           
+        ])
+        
     }
     
     func configureConnectionStatusLabel() {
@@ -96,6 +112,11 @@ extension MenuInicialViewController {
     
     @objc func showHelpPopUp(){
         let vc = HelpPopUpViewController()
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func showSettingsPopUp(){
+        let vc = SettingsPopUpViewController()
         self.present(vc, animated: true, completion: nil)
     }
 }
