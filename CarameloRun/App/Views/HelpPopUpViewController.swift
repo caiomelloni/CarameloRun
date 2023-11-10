@@ -18,10 +18,9 @@ class HelpPopUpViewController: UIViewController {
     let exitButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
 
  
-    private lazy var canvas1: UIView = {
+    private var canvas1: UIView = {
     let view = UIView()
-//    view.backgroundColor = UIColor(red: 248.0/255.0, green: 228.0/255.0, blue: 172.0/255.0, alpha: 1.0)
-    view.backgroundColor = .blue
+    view.backgroundColor = UIColor(red: 248.0/255.0, green: 228.0/255.0, blue: 172.0/255.0, alpha: 1.0)
     view.layer.borderWidth = 3
     view.layer.borderColor = UIColor.black.cgColor
     view.translatesAutoresizingMaskIntoConstraints = false
@@ -29,31 +28,29 @@ class HelpPopUpViewController: UIViewController {
     return view
     }()
     
-    private lazy var canvas2: UIView = {
-    let view = UIView()
-//    view.backgroundColor = UIColor(red: 248.0/255.0, green: 228.0/255.0, blue: 172.0/255.0, alpha: 1.0)
-    view.backgroundColor = .red
+    private var canvas2: UIView = {
+    let view = UIView()   
+    view.backgroundColor = UIColor(red: 248.0/255.0, green: 228.0/255.0, blue: 172.0/255.0, alpha: 1.0)
     view.layer.borderWidth = 3
     view.layer.borderColor = UIColor.black.cgColor
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
     }()
     
-    private lazy var canvas3: UIView = {
+    private var canvas3: UIView = {
     let view = UIView()
-//    view.backgroundColor = UIColor(red: 248.0/255.0, green: 228.0/255.0, blue: 172.0/255.0, alpha: 1.0)
-    view.backgroundColor = .green
+    view.backgroundColor = UIColor(red: 248.0/255.0, green: 228.0/255.0, blue: 172.0/255.0, alpha: 1.0)
     view.layer.borderWidth = 3
     view.layer.borderColor = UIColor.black.cgColor
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
     }()
     
-    var currentView: UIView = UIView()
+    var currentView: UIView!
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-            currentView = UIView()  // Initialize in the init method
             super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+            self.currentView = canvas1  // Initialize in the init method
         }
 
         required init?(coder aDecoder: NSCoder) {
@@ -86,8 +83,8 @@ class HelpPopUpViewController: UIViewController {
         
         view.backgroundColor = UIColor.black.withAlphaComponent(0.1)
         view.addSubview(currentView)
-      
         setCurrentViewConstraints()
+      
         
         view.addSubview(segmentedControl)
         setupSegmentedControl()
@@ -150,24 +147,56 @@ class HelpPopUpViewController: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             currentView.removeFromSuperview()
+            segmentedControl.removeFromSuperview()
+            exitButton.removeFromSuperview()
             currentView = canvas1
             //configure current canva => set autolayout and position
             view.addSubview(currentView)
+            view.addSubview(segmentedControl)
+            view.addSubview(exitButton)
+            setCurrentViewConstraints()
+            setupSegmentedControl()
+            configureExitButton()
+
         case 1:
             currentView.removeFromSuperview()
+            segmentedControl.removeFromSuperview()
+            exitButton.removeFromSuperview()
             currentView = canvas2
             //configure current canva => set autolayout and position
             view.addSubview(currentView)
+            view.addSubview(segmentedControl)
+            view.addSubview(exitButton)
+            setCurrentViewConstraints()
+            setupSegmentedControl()
+            configureExitButton()
+
         case 2:
             currentView.removeFromSuperview()
+            segmentedControl.removeFromSuperview()
+            exitButton.removeFromSuperview()
             currentView = canvas3
             //configure current canva => set autolayout and position
             view.addSubview(currentView)
+            view.addSubview(segmentedControl)
+            view.addSubview(exitButton)
+            setCurrentViewConstraints()
+            setupSegmentedControl()
+            configureExitButton()
+
         default:
             currentView.removeFromSuperview()
+            segmentedControl.removeFromSuperview()
+            exitButton.removeFromSuperview()
             currentView = canvas1
             //configure current canva => set autolayout and position
             view.addSubview(currentView)
+            view.addSubview(segmentedControl)
+            view.addSubview(exitButton)
+            setCurrentViewConstraints()
+            setupSegmentedControl()
+            configureExitButton()
+
         }
     }
     
