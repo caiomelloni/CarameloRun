@@ -11,11 +11,13 @@ class HealthComponent: GKComponent {
     private var healthPoints = 2
     var killPlayerRef: (() -> Void)?
     
-    func decreaseLife() {
+    func decreaseLife() -> Int{
         healthPoints -= 1
         if healthPoints == 0 {
             entity?.component(ofType: SpriteComponent.self)?.removeFromParent()
             killPlayerRef?()
         }
+        
+        return healthPoints
     }
 }

@@ -42,6 +42,7 @@ class PlayerAnimationComponent: GKComponent {
     
     func dead() {
         stateMachine.enter(DeadState.self)
+        entity?.component(ofType: SpriteComponent.self)?.removeFromParent()
     }
     
     required init?(coder: NSCoder) {

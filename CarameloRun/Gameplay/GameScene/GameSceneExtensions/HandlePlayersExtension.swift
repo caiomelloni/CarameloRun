@@ -91,17 +91,13 @@ extension GameScene {
                 }
                 
                 // just called by a catcher
-                Task {
-                    await localPlayer.component(ofType: CatchComponent.self)?
-                        .didCollideWithPlayer(remotePlayer, remotePlayers,
-                                              finishGame: {
-                            self.controllerDelegate?.sendMatchState(matchState.init(finish: true))
-                            DispatchQueue.main.async {
-                                self.controllerDelegate?.finishGame()
-                            }
-                        }
-                        )
-                }
+                localPlayer.component(ofType: CatchComponent.self)?
+                    .didCollideWithPlayer(remotePlayer, remotePlayers,
+                                          finishGame: {
+                        self.controllerDelegate?.sendMatchState(matchState.init(finish: true))
+                        self.controllerDelegate?.finishGame()
+                    }
+                    )
                 
                 
                 
@@ -110,13 +106,11 @@ extension GameScene {
     }
     
     private func emptyRespawnPoint(_ player: Player) -> CGPoint {
-        let respawns = [
-            scene!.childNode(withName: "respawn1")!,
-            scene!.childNode(withName: "respawn2")!,
-            scene!.childNode(withName: "respawn3")!,
-            scene!.childNode(withName: "respawn4")!,
-            scene!.childNode(withName: "respawn5")!,
-        ]
+        var respawns = [SKNode]()
+        
+        for i in 1...Constants.respawnCount {
+            respawns.append(scene!.childNode(withName: "respawn\(i)")!)
+        }
         
         var emptyRespawn = respawns[0]
         
