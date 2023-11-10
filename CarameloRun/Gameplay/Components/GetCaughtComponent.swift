@@ -15,7 +15,6 @@ class GetCaughtComponent: GKComponent {
         if !isArrested {
             isArrested = true
             entity?.component(ofType: SpriteComponent.self)?.position = respawn
-            entity?.component(ofType: HealthComponent.self)?.decreaseLife()
             
             
             // removes player movement
@@ -23,7 +22,13 @@ class GetCaughtComponent: GKComponent {
             entity?.removeComponent(ofType: JumpComponent.self)
             
             // must be called after lose velocity end jump components
-            entity?.component(ofType: PlayerAnimationComponent.self)?.arrest()
+            let healthPoints = entity?.component(ofType: HealthComponent.self)?.decreaseLife()
+            let animationComponent = entity?.component(ofType: PlayerAnimationComponent.self)
+            if healthPoints == 0 {
+                animationComponent?.dead()
+            } else {
+                animationComponent?.arrest()
+            }
 
         }
         entity?.component(ofType: ScoreComponent.self)?.dogWasCatched()

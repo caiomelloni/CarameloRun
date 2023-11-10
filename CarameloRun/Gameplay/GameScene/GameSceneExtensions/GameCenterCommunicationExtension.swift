@@ -14,7 +14,7 @@ extension GameScene {
                                           playerNumber: localPlayer.playerNumber,
                                           positionX: localPlayer.component(ofType: SpriteComponent.self)!.position.x,
                                           positionY: localPlayer.component(ofType: SpriteComponent.self)!.position.y,
-                                          state: (localPlayer.component(ofType: PlayerAnimationComponent.self)?.stateMachine.currentState as! CodableState).stringIdentifier)
+                                          state: (localPlayer.component(ofType: PlayerAnimationComponent.self)?.stateMachine.currentState as? CodableState)?.stringIdentifier ?? PlayerStateStringIdentifier.deadState.rawValue)
             
             controllerDelegate?.sendPlayerState(playerState)
         }
