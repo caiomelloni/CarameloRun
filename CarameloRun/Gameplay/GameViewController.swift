@@ -19,7 +19,7 @@ class GameViewController: UIViewController {
     var timer: Timer!
     var time: Int
     
-    var score = ScoreComponent()
+    var score: Int = 0
     
     var controllerFinishGame: Int = 0
     
@@ -37,7 +37,7 @@ class GameViewController: UIViewController {
     override func loadView() {
         self.view = SKView()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let view = self.view as! SKView? {
@@ -53,19 +53,19 @@ class GameViewController: UIViewController {
                 // Present the scene
                 view.presentScene(scene)
             }
-    
+            
             view.ignoresSiblingOrder = true
             view.isMultipleTouchEnabled = true
             view.showsFPS = true
             view.preferredFramesPerSecond = 30
             view.showsNodeCount = true
             
-           initTimer()
+            initTimer()
         }
         
         match.delegate = self
     }
-
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         if UIDevice.current.userInterfaceIdiom == .phone {
             return .landscape
@@ -73,7 +73,7 @@ class GameViewController: UIViewController {
             return .landscape
         }
     }
-
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -84,43 +84,53 @@ class GameViewController: UIViewController {
                 
                 if self.time == 0 {
                     self.sendMatchState(matchState.init(finish: true))
-                    self.finishGame(true)
+                    self.finishGame()
+                    timer.invalidate()
                 }
                 
                 self.gameScene?.timer.updateTimer(self.time)
             })
         }
         
-        private func finishGame(_ bool: Bool) {
-            if bool == true && controllerFinishGame == 0{
-                match.finalize()
-                self.navigationController?.pushViewController(EndGame(score.score), animated: true)
+        func finishGame() {
+            if controllerFinishGame == 0{
+//                match.finalize()
+                score = gameScene?.getScore() ?? 0
+                if score < 0 {
+                    score = 0
+                }
+                
+                self.navigationController?.pushViewController(EndGame(score), animated: true)
                 controllerFinishGame = 1
             }
         }
-}
+    }
+
 
 extension GameViewController: GKMatchDelegate {
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
-            let dataJsonString = String(decoding: data, as: UTF8.self)
-            let jsonData = dataJsonString.data(using: .utf8)!
-            
-            do {
-                if let playerState = try? JSONDecoder().decode(PlayerState.self, from: jsonData) {
-                    gameScene?.updatePlayersPosition(playerState)
-                } else if let matchState = try? JSONDecoder().decode(matchState.self, from: jsonData) {
-                    finishGame(matchState.finish)
-                } else {
-                    print("Error reciving data")
+        let dataJsonString = String(decoding: data, as: UTF8.self)
+        let jsonData = dataJsonString.data(using: .utf8)!
+        
+        do {
+            if let playerState = try? JSONDecoder().decode(PlayerState.self, from: jsonData) {
+                gameScene?.updatePlayersPosition(playerState)
+            } else if let matchState = try? JSONDecoder().decode(matchState.self, from: jsonData) {
+                if matchState.finish {
+                    finishGame()
                 }
+            } else {
+                print("Error reciving data")
             }
         }
+    }
 }
 
 protocol GameControllerDelegate {
     func sendPlayerState(_ state: PlayerState)
     func sendMatchState(_ state: matchState)
     var players: [Player] { get }
+    func finishGame()
 }
 
 extension GameViewController: GameControllerDelegate {
@@ -135,13 +145,14 @@ extension GameViewController: GameControllerDelegate {
     }
     
     func sendMatchState(_ state: matchState) {
-            do {
-                let data = try JSONEncoder().encode(state)
-                try match.sendData(toAllPlayers: data, with: GKMatch.SendDataMode.unreliable)
-            } catch {
-                print("error sending data")
-            }
+        do {
+            let data = try JSONEncoder().encode(state)
+            try match.sendData(toAllPlayers: data, with: GKMatch.SendDataMode.unreliable)
+        } catch {
+            print("error sending data")
         }
+    }
+    
 }
 
 enum GameState {

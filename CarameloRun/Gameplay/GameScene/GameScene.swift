@@ -49,6 +49,8 @@ class GameScene: SKScene {
         
         addChild(timer.node)
         
+        InsertTask()
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -89,6 +91,12 @@ class GameScene: SKScene {
         
         handlePlayerCollision()
         
+        verifyDoingTask()
+        
+    }
+    
+    func getScore() -> Int{
+        return localPlayer.component(ofType: ScoreComponent.self)?.score ?? 0
     }
 }
 

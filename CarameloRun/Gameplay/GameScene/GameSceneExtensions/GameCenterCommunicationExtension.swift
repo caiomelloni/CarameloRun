@@ -13,7 +13,8 @@ extension GameScene {
             let playerState = PlayerState(name: GKLocalPlayer.local.displayName,
                                           playerNumber: localPlayer.playerNumber,
                                           positionX: localPlayer.component(ofType: SpriteComponent.self)!.position.x,
-                                          positionY: localPlayer.component(ofType: SpriteComponent.self)!.position.y)
+                                          positionY: localPlayer.component(ofType: SpriteComponent.self)!.position.y,
+                                          state: (localPlayer.component(ofType: PlayerAnimationComponent.self)?.stateMachine.currentState as! CodableState).stringIdentifier)
             
             controllerDelegate?.sendPlayerState(playerState)
         }

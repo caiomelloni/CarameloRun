@@ -1,20 +1,19 @@
 //
-//  RunningState.swift
+//  ArrestedState.swift
 //  CarameloRun
 //
-//  Created by Caio Melloni dos Santos on 29/10/23.
+//  Created by Caio Melloni dos Santos on 08/11/23.
 //
 
 import GameplayKit
 
-class RunningState: GKState {
-    
+class ArrestedState: GKState {
     let spriteComponent: SpriteComponent
-    var spriteSheet = [SKTexture]()
+    var spriteSheet: [SKTexture] = []
     
     init(_ spriteComponent: SpriteComponent, statePrefix: String, frameCount: Int) {
         for i in 1...frameCount {
-            spriteSheet.append(SKTexture(imageNamed: "\(statePrefix)Run\(i)"))
+            spriteSheet.append(SKTexture(imageNamed: "\(statePrefix)Arrested\(i)"))
         }
         
         self.spriteComponent = spriteComponent
@@ -28,7 +27,8 @@ class RunningState: GKState {
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         // returns true if can go to the next state
-        return !(stateClass is RunningState.Type)
+        
+        return !(stateClass is ArrestedState.Type || stateClass is FallingState.Type || stateClass is JumpingState.Type)
     }
     
     override func willExit(to nextState: GKState) {
@@ -36,11 +36,11 @@ class RunningState: GKState {
     }
     
     override func update(deltaTime seconds: TimeInterval) {
+        
     }
 }
-
-extension RunningState: CodableState {
+extension ArrestedState: CodableState {
     var stringIdentifier: String {
-        PlayerStateStringIdentifier.runState.rawValue
+        PlayerStateStringIdentifier.arrestState.rawValue
     }
 }
