@@ -20,7 +20,11 @@ class HelpPopUpViewController: UIViewController {
     let labelDescription1: UILabel = UILabel()
     let labelTitle2: UILabel = UILabel()
     let labelDescription2: UILabel = UILabel()
-    
+    let mainStackView = UIStackView()
+    let ButtonLeftImageView = UIImageView(image: UIImage(named: "ButtonLeftUp"))
+    let ButtonRightImageView = UIImageView(image: UIImage(named: "ButtonRightUp"))
+    let ButtonJumpImageView = UIImageView(image: UIImage(named: "JumpButtonUp"))
+
  
     private var canvas: UIView = {
     let view = UIView()
@@ -234,7 +238,7 @@ class HelpPopUpViewController: UIViewController {
     
     func configureCanvas1() {
             
-        labelTitle1.text = "Caramelo"
+        labelTitle1.text = "Controles"
         labelTitle1.font = UIFont(name: "Crang", size: 30)
         labelTitle1.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
         
@@ -249,57 +253,24 @@ class HelpPopUpViewController: UIViewController {
        
             ])
         
-        labelDescription1.text = "O Caramelo é um cãozinho fofo e malandro que vive feliz pelas ruas brasileiras. Mas, infelizmente, o Zé Cadelo, funcionário da carrocinha, está prestes a Capturar o Caramelo! O seu objetivo nessa missão é ajudar nosso querido cãozinho a fazer amizade com os moradores da vizinhança e ser adotado antes que o Zé cadelo o alcance!"
+        canvas.addSubview(mainStackView)
         
-        labelDescription1.font = UIFont(name: "Inter", size: 13)
-        labelDescription1.textColor = UIColor(red: 32.0/255.0, green: 46.0/255.0, blue: 55.0/255.0, alpha: 1.0)
-        labelDescription1.numberOfLines = 0
-        
-        canvas.addSubview(labelDescription1)
-
-        labelDescription1.translatesAutoresizingMaskIntoConstraints = false
-        
+        mainStackView.alignment = .leading
+        mainStackView.distribution = .fillEqually
+        mainStackView.spacing = 12
+        mainStackView.axis = .vertical
+        mainStackView.translatesAutoresizingMaskIntoConstraints = false
+        mainStackView.addArrangedSubview(ButtonJumpImageView)
+        mainStackView.addArrangedSubview(ButtonLeftImageView)
+        mainStackView.addArrangedSubview(ButtonRightImageView)
+                
         NSLayoutConstraint.activate([
-
-            labelDescription1.topAnchor.constraint(equalTo: labelTitle1.bottomAnchor, constant: 12),
-            labelDescription1.leadingAnchor.constraint(equalTo: canvas.leadingAnchor, constant: 32),
-            labelDescription1.trailingAnchor.constraint(equalTo: canvas.trailingAnchor, constant: -32)
-           
-        ])
-        
-        
-        labelTitle2.text = "Zé Cadelo"
-        labelTitle2.font = UIFont(name: "Crang", size: 30)
-        labelTitle2.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
-        
-        canvas.addSubview(labelTitle2)
-        
-        labelTitle2.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-
-            labelTitle2.topAnchor.constraint(equalTo: labelDescription1.bottomAnchor, constant: 24),
-            labelTitle2.leadingAnchor.constraint(equalTo: canvas.leadingAnchor, constant: 32)
+            mainStackView.topAnchor.constraint(equalTo: labelTitle1.bottomAnchor, constant: 26),
+            mainStackView.bottomAnchor.constraint(equalTo: canvas.bottomAnchor, constant: -50),
+            mainStackView.leadingAnchor.constraint(equalTo: canvas.leadingAnchor, constant: 32)
             
         ])
         
-        labelDescription2.text = "O Zé cadelo precisa garantir seu emprego e, para isso, precisa tirar cães abandonas da rua e levá-los para NOME DO LUGAR. Infelizmente, esses cãezinhos são malandros e conhecem os catons da cidade melhor que o Zé. Tente capturá-los, usando sua rede, para vencer a partida."
-        labelDescription2.font = UIFont(name: "Inter", size: 13)
-        labelDescription2.textColor = UIColor(red: 32.0/255.0, green: 46.0/255.0, blue: 55.0/255.0, alpha: 1.0)
-        labelDescription2.numberOfLines = 0
-        
-        canvas.addSubview(labelDescription2)
-
-        labelDescription2.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-
-            labelDescription2.topAnchor.constraint(equalTo: labelTitle2.bottomAnchor, constant: 12),
-            labelDescription2.leadingAnchor.constraint(equalTo: canvas.leadingAnchor, constant: 32),
-            labelDescription2.trailingAnchor.constraint(equalTo: canvas.trailingAnchor, constant: -32)
-           
-        ])
-     
         }
     
     func configureCanvas2() {

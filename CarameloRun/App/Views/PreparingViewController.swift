@@ -50,11 +50,14 @@ class PreparingViewController: UIViewController {
             view.addSubview(listOfPlayerLabels[i])
         }
         
+        view.backgroundColor = UIColor(red: 232.0/255.0, green: 214.0/255.0, blue: 166.0/255.0, alpha: 1.0)
+        
         button.setTitle("Estou pronto", for: .normal)
-        button.frame = CGRect(x: 500, y: 300, width: 200, height: 40)
+        button.frame = CGRect(x: 248, y: 300, width: 248, height: 56)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
 
         view.addSubview(button)
+        
         
         match.delegate = self
     }
