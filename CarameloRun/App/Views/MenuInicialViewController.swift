@@ -101,9 +101,12 @@ extension MenuInicialViewController {
     }
     
     func configureConnectionStatusLabel() {
-        connectionStatusLabel.text = "You are not connected to Game Center"
         connectionStatusLabel.textAlignment = .center
         connectionStatusLabel.numberOfLines = 1
+        connectionStatusLabel.text = "You are not connected to Game Center"
+        connectionStatusLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        
+        
     }
     
     @objc func initGame() {
@@ -127,8 +130,7 @@ extension MenuInicialViewController: GameCenterHelperDelegate {
       print("changed status is auth: \(isAuthenticated)")
     startButton.isEnabled = isAuthenticated
     connectionStatusLabel.text = "Connected to Game Center"
-
-    
+    connectionStatusLabel.font = UIFont.boldSystemFont(ofSize: 16)
   }
   func presentGameCenterAuth(viewController: UIViewController?) {
     guard let vc = viewController else {return}
