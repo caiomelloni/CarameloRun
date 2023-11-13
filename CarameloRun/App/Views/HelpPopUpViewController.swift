@@ -12,6 +12,58 @@ import UIKit
 import GameKit
 //import TinyConstraints
 
+class IconLabelView: UIView {
+    let imageView: UIImageView = {
+            let imageView = UIImageView()
+            imageView.contentMode = .scaleAspectFit
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            return imageView
+        }()
+    
+    let label: UILabel = {
+            let label = UILabel()
+            label.textAlignment = .center
+            label.numberOfLines = 0
+            label.translatesAutoresizingMaskIntoConstraints = false
+            return label
+        }()
+    
+    override init(frame: CGRect) {
+            super.init(frame: frame)
+            setupSubviews()
+        }
+    
+    required init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+            setupSubviews()
+        }
+    
+    private func setupSubviews() {
+            addSubview(imageView)
+            addSubview(label)
+            
+            NSLayoutConstraint.activate([
+                imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                imageView.topAnchor.constraint(equalTo: topAnchor),
+                imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5),
+                imageView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+                label.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 8),
+                label.centerYAnchor.constraint(equalTo: imageView.centerYAnchor)
+                
+            ])
+        
+            label.font = UIFont.systemFont(ofSize: 17.0, weight: .semibold)
+
+        }
+        
+        func configure(with image: UIImage?, text: String) {
+            imageView.image = image
+            label.text = text
+          
+        }
+}
+
 class HelpPopUpViewController: UIViewController {
    
     let exitButtonImage = UIImage(named: "ExitButton") as UIImage?
@@ -21,11 +73,12 @@ class HelpPopUpViewController: UIViewController {
     let labelTitle2: UILabel = UILabel()
     let labelDescription2: UILabel = UILabel()
     let mainStackView = UIStackView()
+    let labelStackView = UIStackView()
     let ButtonLeftImageView = UIImageView(image: UIImage(named: "ButtonLeftUp"))
     let ButtonRightImageView = UIImageView(image: UIImage(named: "ButtonRightUp"))
     let ButtonJumpImageView = UIImageView(image: UIImage(named: "JumpButtonUp"))
-
- 
+    var alreadyCalled = false
+    
     private var canvas: UIView = {
     let view = UIView()
     view.backgroundColor = UIColor(red: 248.0/255.0, green: 228.0/255.0, blue: 172.0/255.0, alpha: 1.0)
@@ -234,43 +287,73 @@ class HelpPopUpViewController: UIViewController {
            
         ])
      
+        
+       
         }
     
     func configureCanvas1() {
-            
+        
+        for subview in mainStackView.subviews {
+               subview.removeFromSuperview()
+           }
+        
+        let jumpView = IconLabelView()
+        jumpView.configure(with: UIImage(named: "JumpButtonUp"), text: "Pular")
+        
+        let leftView = IconLabelView()
+        leftView.configure(with: UIImage(named: "ButtonLeftUp"), text: "Andar para a esquerda")
+        
+        let rightView = IconLabelView()
+        rightView.configure(with: UIImage(named: "ButtonRightUp"), text: "Andar para a direita")
+        
         labelTitle1.text = "Controles"
         labelTitle1.font = UIFont(name: "Crang", size: 30)
         labelTitle1.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
         
         canvas.addSubview(labelTitle1)
-
+        
         labelTitle1.translatesAutoresizingMaskIntoConstraints = false
         
-            NSLayoutConstraint.activate([
-
-                labelTitle1.topAnchor.constraint(equalTo: canvas.topAnchor, constant: 68),
-                labelTitle1.leadingAnchor.constraint(equalTo: canvas.leadingAnchor, constant: 32)
-       
-            ])
-        
-        canvas.addSubview(mainStackView)
-        
-        mainStackView.alignment = .leading
-        mainStackView.distribution = .fillEqually
-        mainStackView.spacing = 12
-        mainStackView.axis = .vertical
-        mainStackView.translatesAutoresizingMaskIntoConstraints = false
-        mainStackView.addArrangedSubview(ButtonJumpImageView)
-        mainStackView.addArrangedSubview(ButtonLeftImageView)
-        mainStackView.addArrangedSubview(ButtonRightImageView)
-                
         NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: labelTitle1.bottomAnchor, constant: 26),
-            mainStackView.bottomAnchor.constraint(equalTo: canvas.bottomAnchor, constant: -50),
-            mainStackView.leadingAnchor.constraint(equalTo: canvas.leadingAnchor, constant: 32)
+            
+            labelTitle1.topAnchor.constraint(equalTo: canvas.topAnchor, constant: 68),
+            labelTitle1.leadingAnchor.constraint(equalTo: canvas.leadingAnchor, constant: 32)
             
         ])
         
+        
+        
+        canvas.addSubview(mainStackView)
+        
+        mainStackView.alignment = .center
+        mainStackView.distribution = .fillEqually
+        mainStackView.spacing = 16
+        mainStackView.axis = .vertical
+        
+        ButtonLeftImageView.contentMode = .scaleAspectFit
+        ButtonRightImageView.contentMode = .scaleAspectFit
+        ButtonJumpImageView.contentMode = .scaleAspectFit
+        
+            
+        
+        
+        mainStackView.addArrangedSubview(jumpView)
+        mainStackView.addArrangedSubview(leftView)
+        mainStackView.addArrangedSubview(rightView)
+        
+        mainStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        NSLayoutConstraint.activate([
+            mainStackView.topAnchor.constraint(equalTo: labelTitle1.bottomAnchor, constant: 26),
+            mainStackView.bottomAnchor.constraint(equalTo: canvas.bottomAnchor, constant: -50),
+            mainStackView.leadingAnchor.constraint(equalTo: canvas.leadingAnchor, constant: 0)
+            
+        ])
+        
+        
+        
+   
         }
     
     func configureCanvas2() {
@@ -342,6 +425,8 @@ class HelpPopUpViewController: UIViewController {
         ])
      
         }
+   
     
     
 }
+
