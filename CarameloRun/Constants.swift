@@ -17,11 +17,11 @@ class Constants {
     static let playerWidth: Double = 150
     
     //player frames count
-    static let playerFallFramesCount: Int = 2
-    static let playerJumpFramesCount: Int = 2
+    static let playerFallFramesCount: Int = 7
+    static let playerJumpFramesCount: Int = 14
     static let playerIdleFramesCount: Int = 7
     static let playerRunFramesCount: Int = 8
-    static let playerArrestedFramesCount: Int = 2
+    static let playerArrestedFramesCount: Int = 22
     static let playerFramesPrefix: String = "dog"
     
     //catcher frames count
