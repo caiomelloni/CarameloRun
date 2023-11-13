@@ -38,7 +38,7 @@ class ProgressBarComponent: GKComponent {
         scene.addChild(progressBar)
     }
     
-    func verify() {
+    func verify(_ sendProgressToAllPlayers:(ProgressState) -> Void) {
         let task1 = scene.childNode(withName: "task1")!.frame
         
         if avaiable {
@@ -46,18 +46,26 @@ class ProgressBarComponent: GKComponent {
             if (task1.contains(localPlayer.component(ofType: SpriteComponent.self)!.position)) == true && localPlayer.type == .dog{
                 progress += 0.01
                 progressBar.xScale = progress
+                var progressState = ProgressState(progress: progress, done: false)
+                sendProgressToAllPlayers(progressState)
                 
-                if progress >= 1.00 {
+                if progress >= 1.50 {
                     entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(true)
                     avaiable = false
                     self.entity?.component(ofType: CompleteTaskComponent.self)?.ChangeAvaiable(false)
                     progressBar.xScale = 0.00
                     localPlayer.component(ofType: ScoreComponent.self)?.dogMakeTask()
                     initTimer()
+                    progress = 0.00
+                    progressState.progress = progress
+                    progressState.done = true
+                    sendProgressToAllPlayers(progressState)
                 }
                 
             } else {
-                progress = 0.00
+                if progress > 0 {
+                    sendProgressToAllPlayers(ProgressState(progress: 0.00, done: false))
+                }
                 entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(false)
                 progressBar.xScale = progress
             }
@@ -70,10 +78,30 @@ class ProgressBarComponent: GKComponent {
             x -= 1
             if x == 0 {
                 self.avaiable = true
+                self.progress = 0.00
                 self.entity?.component(ofType: CompleteTaskComponent.self)?.ChangeAvaiable(true)
                 self.entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(false)
                 timer.invalidate()
             }
         })
+    }
+    
+    func reciveProgress(_ state: ProgressState){
+        if localPlayer.type == .dog {
+            let task1 = scene.childNode(withName: "task1")!.frame
+            if (task1.contains(localPlayer.component(ofType: SpriteComponent.self)!.position)) == false {
+                progress = state.progress
+                progressBar.xScale = state.progress
+                
+                if progress >= 1.50 {
+                    entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(true)
+                    avaiable = false
+                    self.entity?.component(ofType: CompleteTaskComponent.self)?.ChangeAvaiable(false)
+                    progressBar.xScale = 0.00
+                    localPlayer.component(ofType: ScoreComponent.self)?.dogMakeTask()
+                    initTimer()
+                }
+            }
+        }
     }
 }

@@ -119,7 +119,11 @@ extension GameViewController: GKMatchDelegate {
                 if matchState.finish {
                     finishGame()
                 }
-            } else {
+            } else if let progressState = try? JSONDecoder().decode(ProgressState.self, from: jsonData){
+                if let myEntity = gameScene?.entityManager.entities.first(where: { $0.component(ofType: ProgressBarComponent.self) != nil }) {
+                    myEntity.component(ofType: ProgressBarComponent.self)!.reciveProgress(progressState)
+                }
+            }else {
                 print("Error reciving data")
             }
         }
@@ -131,6 +135,7 @@ protocol GameControllerDelegate {
     func sendMatchState(_ state: matchState)
     var players: [Player] { get }
     func finishGame()
+    func sendProgress(_ state: ProgressState)
 }
 
 extension GameViewController: GameControllerDelegate {
@@ -145,6 +150,16 @@ extension GameViewController: GameControllerDelegate {
     }
     
     func sendMatchState(_ state: matchState) {
+        do {
+            let data = try JSONEncoder().encode(state)
+            try match.sendData(toAllPlayers: data, with: GKMatch.SendDataMode.unreliable)
+        } catch {
+            print("error sending data")
+        }
+    }
+    
+    func sendProgress(_ state: ProgressState) {
+//        print(state)
         do {
             let data = try JSONEncoder().encode(state)
             try match.sendData(toAllPlayers: data, with: GKMatch.SendDataMode.unreliable)

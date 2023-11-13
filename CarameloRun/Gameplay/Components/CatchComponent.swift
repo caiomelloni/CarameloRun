@@ -25,6 +25,7 @@ class CatchComponent: GKComponent {
         
         if allPlayersArrested {
             finishGame?()
+            entity?.component(ofType: ScoreComponent.self)?.humanCatchAllDogs()
         }
         
         //TODO: add score to the catcher

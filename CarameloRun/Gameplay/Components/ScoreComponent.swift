@@ -12,12 +12,12 @@ class ScoreComponent: GKComponent {
     var score: Int = 0
     
     //func for the dog
-    // dog make task
+    // dog make task - done
     func dogMakeTask() {
         score = score + 10
     }
     
-    // dog was catched
+    // dog was catched - done
     func dogWasCatched() {
         score = score - 20
     }
@@ -40,12 +40,12 @@ class ScoreComponent: GKComponent {
     // ------------
     
     //func for the man
-    // man catched dog
+    // man catched dog - done
     func humanCatch() {
         score = score + 7
     }
     
-    // man catched all the dogs
+    // man catched all the dogs - done
     func humanCatchAllDogs() {
         score = score + 24
     }

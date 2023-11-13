@@ -24,7 +24,6 @@ class CompleteTaskComponent: GKComponent {
     }
     
     func addCompleteLabel() {
-        print("entrou 1")
         let task1 = scene.childNode(withName: "task1")!.frame
         completeLabel = SKLabelNode()
         completeLabel.fontName = "San Francisco"
@@ -44,9 +43,9 @@ class CompleteTaskComponent: GKComponent {
     func TaskAvaiable(_ status: Bool){
         let task1 = scene.childNode(withName: "task1")!.frame
         if status{
-            Label.text = "Disponível"
+            Label.text = "Task disponível"
         } else {
-            Label.text = "Indisponível"
+            Label.text = "Task indisponível"
         }
         Label.fontName = "San Francisco"
         Label.position = CGPoint(x: task1.midX, y: task1.midY+100)
@@ -56,9 +55,9 @@ class CompleteTaskComponent: GKComponent {
     
     func ChangeAvaiable(_ status: Bool) {
         if status{
-            Label.text = "Disponível"
+            Label.text = "Task disponível"
         } else {
-            Label.text = "Indisponível"
+            Label.text = "Task indisponível"
         }
     }
 }
