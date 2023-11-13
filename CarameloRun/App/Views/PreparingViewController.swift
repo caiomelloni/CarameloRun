@@ -49,18 +49,36 @@ class PreparingViewController: UIViewController {
             listOfPlayerLabels[i].frame = CGRect(x: 200, y: (100+i*50), width: 200, height: 30)
             view.addSubview(listOfPlayerLabels[i])
         }
-        
+       
+        configureButton()
+                
         view.backgroundColor = UIColor(red: 232.0/255.0, green: 214.0/255.0, blue: 166.0/255.0, alpha: 1.0)
         
-        button.setTitle("Estou pronto", for: .normal)
-        button.frame = CGRect(x: 248, y: 300, width: 248, height: 56)
-        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-
         view.addSubview(button)
-        
         
         match.delegate = self
     }
+    
+    func configureButton() {
+            
+            let screenWidth = UIScreen.main.bounds.width
+            let buttonWidth: CGFloat = 248 // Largura do botão
+            let xCoordinate = screenWidth / 2 - buttonWidth/2
+            let screenHeight = UIScreen.main.bounds.height
+            let buttonHeight: CGFloat = 56 // Largura do botão
+        let yCoordinate = (screenHeight - 1.5*buttonHeight)
+            
+            button.layer.borderWidth = 1.5
+            button.layer.borderColor = UIColor.black.cgColor
+            
+            button.setTitle("Estou pronto!", for: .normal)
+            button.frame = CGRect(x: xCoordinate, y: yCoordinate, width: buttonWidth, height: 56)
+            button.setTitleColor(UIColor.white, for: .normal) // Defina a cor do texto como branca
+            button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+            button.backgroundColor = UIColor(_colorLiteralRed: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0) // Defina a cor de fundo como laranja
+            button.titleLabel?.font = UIFont(name: "Crang", size: 16)
+            
+        }
     
     @objc func buttonTapped() {
         prep.name = GKLocalPlayer.local.displayName
