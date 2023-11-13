@@ -18,8 +18,8 @@
 		F82787032AC5A8250047111D /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82787022AC5A8250047111D /* Joystick.swift */; };
 		F82787052AC5B8CB0047111D /* JumpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82787042AC5B8CB0047111D /* JumpButton.swift */; };
 		F82A32822AE2B3C500A3639C /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A32812AE2B3C500A3639C /* PlayerState.swift */; };
-		F854918A2AE16F71004EA5B1 /* MenuInicialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85491892AE16F71004EA5B1 /* MenuInicialViewController.swift */; };
 		F84D86832AFCF98600774AF5 /* DeadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84D86822AFCF98600774AF5 /* DeadState.swift */; };
+		F854918A2AE16F71004EA5B1 /* MenuInicialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85491892AE16F71004EA5B1 /* MenuInicialViewController.swift */; };
 		F854918D2AE174A8004EA5B1 /* GameCenterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F854918C2AE174A8004EA5B1 /* GameCenterHelper.swift */; };
 		F85FD5482AF90C6D009CB45A /* CatchComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85FD5472AF90C6D009CB45A /* CatchComponent.swift */; };
 		F870AAF32AF12ADE00195173 /* HandlePlayersExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F870AAF22AF12ADE00195173 /* HandlePlayersExtension.swift */; };
@@ -69,8 +69,8 @@
 		F82787022AC5A8250047111D /* Joystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
 		F82787042AC5B8CB0047111D /* JumpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpButton.swift; sourceTree = "<group>"; };
 		F82A32812AE2B3C500A3639C /* PlayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerState.swift; sourceTree = "<group>"; };
-		F85491892AE16F71004EA5B1 /* MenuInicialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInicialViewController.swift; sourceTree = "<group>"; };
 		F84D86822AFCF98600774AF5 /* DeadState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadState.swift; sourceTree = "<group>"; };
+		F85491892AE16F71004EA5B1 /* MenuInicialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInicialViewController.swift; sourceTree = "<group>"; };
 		F854918C2AE174A8004EA5B1 /* GameCenterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterHelper.swift; sourceTree = "<group>"; };
 		F854918E2AE1767F004EA5B1 /* CarameloRun.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CarameloRun.entitlements; sourceTree = "<group>"; };
 		F85FD5472AF90C6D009CB45A /* CatchComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatchComponent.swift; sourceTree = "<group>"; };
