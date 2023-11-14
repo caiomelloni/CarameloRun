@@ -47,7 +47,7 @@ class PreparingViewController: UIViewController {
                 playerCatcher = sort(players)
                 definePrep(players, playerCatcher)
                 
-                updateLabels(players:players)
+                configureLabelsAndPhotos(players:players)
                 
             }
         }
@@ -64,12 +64,31 @@ class PreparingViewController: UIViewController {
         match.delegate = self
     }
     
-    func updateLabels(players:[Player]) {
+    func configureLabelsAndPhotos(players:[Player]) {
         for i in 0...(players.count - 1){
-            let label = self.listOfPlayerLabels[i]
             
-            label.text = "\(players[i].displayName): \(players[i].type)"
-            label.frame = CGRect(x: 200, y: (100+i*50), width: 200, height: 30)
+            let playerImage = players[i].photo
+            
+            let imageView = UIImageView(frame: CGRect(x: 50, y: (100 + i * 50), width: 30, height: 30))
+            imageView.image = playerImage
+            imageView.contentMode = .scaleAspectFit
+            
+            view.addSubview(imageView)
+
+            let playerLabel = self.listOfPlayerLabels[i]
+            
+            playerLabel.text = "\(players[i].displayName): \(players[i].type)"
+            
+            playerLabel.translatesAutoresizingMaskIntoConstraints = false
+            
+//            NSLayoutConstraint.activate = ([
+//                playerLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
+//                playerLabel.widthAnchor.constraint(equalTo: 200)
+//            ])
+//        
+            playerLabel.frame = CGRect(x: 200, y: (100+i*50), width: 200, height: 30)
+            
+            
             
         }
     }
