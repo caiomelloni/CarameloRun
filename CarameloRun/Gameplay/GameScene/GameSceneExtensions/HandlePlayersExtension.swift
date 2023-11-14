@@ -19,7 +19,7 @@ extension GameScene {
                 
                 //isso eh necessario porque a mesma classe eh usada para passar dados
                 //da tela de PreparingViewController
-                let player = Player(displayName: playerFromPreparing.displayName, playerNumber: playerFromPreparing.playerNumber, playerType: playerFromPreparing.type)
+                let player = Player(displayName: playerFromPreparing.displayName, playerNumber: playerFromPreparing.playerNumber, playerType: playerFromPreparing.type, photo: playerFromPreparing.photo)
                 
                 let spawnNode = scene?.childNode(withName: "spawn\(player.playerNumber)")
                 

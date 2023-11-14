@@ -25,10 +25,6 @@ class PreparingViewController: UIViewController {
         self.match = match
         self.prep = prep
         
-        for _ in 0...(match.players.count){
-            listOfPlayerLabels.append(UILabel())
-        }
-        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -38,17 +34,26 @@ class PreparingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        players = getAllPlayers()
-//        players[1].ready = true
-        numberOfPlayers = players.count
-        playerCatcher = sort(players)
-        definePrep(players, playerCatcher)
         
-        for i in 0...(numberOfPlayers - 1){
-            listOfPlayerLabels[i].text = "\(players[i].displayName): \(players[i].type)"
-            listOfPlayerLabels[i].frame = CGRect(x: 200, y: (100+i*50), width: 200, height: 30)
+        for i in 0...(match.players.count){
+            listOfPlayerLabels.append(UILabel())
             view.addSubview(listOfPlayerLabels[i])
         }
+        
+        Task {
+            players = await getAllPlayers()
+            await MainActor.run {
+                numberOfPlayers = players.count
+                playerCatcher = sort(players)
+                definePrep(players, playerCatcher)
+                
+                updateLabels(players:players)
+                
+            }
+        }
+       
+//        players[1].ready = true
+        
        
         configureButton()
                 
@@ -58,6 +63,17 @@ class PreparingViewController: UIViewController {
         
         match.delegate = self
     }
+    
+    func updateLabels(players:[Player]) {
+        for i in 0...(players.count - 1){
+            let label = self.listOfPlayerLabels[i]
+            
+            label.text = "\(players[i].displayName): \(players[i].type)"
+            label.frame = CGRect(x: 200, y: (100+i*50), width: 200, height: 30)
+            
+        }
+    }
+    
     
     func configureButton() {
             
@@ -89,10 +105,13 @@ class PreparingViewController: UIViewController {
     }
     
     func allReady(_ state: PreparingPlayres) {
+        
+        guard players.count >= 2 else {return}
+        
         if state.name == players[1].displayName {
             players[state.catcher].type = .man
             
-            for i in 0...(numberOfPlayers - 1){
+            for i in 0..<numberOfPlayers{
                 listOfPlayerLabels[i].text = "\(players[i].displayName): \(players[i].type)"
             }
         }
@@ -150,10 +169,12 @@ extension PreparingViewController: GKMatchDelegate{
 
 protocol PreparingControllerDelegate {
     func sendPreparingPlayers(_ state: PreparingPlayres)
-    func getAllPlayers() -> [Player]
+    func getAllPlayers() async -> [Player]
 }
 
 extension PreparingViewController: PreparingControllerDelegate {
+
+    
     func sendPreparingPlayers(_ state: PreparingPlayres) {
         do {
             let data = try JSONEncoder().encode(state)
@@ -163,23 +184,29 @@ extension PreparingViewController: PreparingControllerDelegate {
         }
     }
     
-    func getAllPlayers() -> [Player] {
-        let localPlayer = Player(displayName: GKLocalPlayer.local.displayName, playerNumber: 0, playerType: .dog)
-        var players = [localPlayer]
+    func getAllPlayers() async -> [Player] {
+        
+        //let localPlayer = GKLocalPlayer.local
+        
+        let localPlayerPhoto: UIImage? = try? await GKLocalPlayer.local.loadPhoto(for: .normal)
+        
+        let localPlayerInstance = Player(displayName: GKLocalPlayer.local.displayName, playerNumber: 0, playerType: .dog, photo: localPlayerPhoto)
+        var players = [localPlayerInstance]
         
         let gameCenterPlayers = match.players
         
         for player in gameCenterPlayers {
             for i in 0..<players.count {
                 if player.displayName < players[i].displayName {
-                    players.insert(Player(displayName: player.displayName, playerNumber: 0, playerType: .dog), at: i)
+                    let remotePlayerPhoto = try? await player.loadPhoto(for: .normal)
+                    players.insert(Player(displayName: player.displayName, playerNumber: 0, playerType: .dog, photo: remotePlayerPhoto), at: i)
                     break
                 }
                 
                 if i == players.count - 1 {
-                    players.append(Player(displayName: player.displayName, playerNumber: 0, playerType: .dog))
+                    let remotePlayerPhoto = try? await player.loadPhoto(for: .normal)
+                    players.append(Player(displayName: player.displayName, playerNumber: 0, playerType: .dog, photo: remotePlayerPhoto))
                 }
-                
             }
         }
         

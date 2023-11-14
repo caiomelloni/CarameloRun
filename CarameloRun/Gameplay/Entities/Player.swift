@@ -23,14 +23,16 @@ class Player: GKEntity {
     let displayName: String
     var type: typeOfPlayer
     var ready: Bool = false
+    var photo: UIImage?
 //    var score: Int = 0
     
     
     
-    init(displayName: String, playerNumber: Int, playerType: typeOfPlayer) {
+    init(displayName: String, playerNumber: Int, playerType: typeOfPlayer, photo: UIImage?) {
         self.displayName = displayName
         self.playerNumber = playerNumber
         self.type = playerType
+        self.photo = photo
         
         
         super.init()
