@@ -35,10 +35,7 @@ class PreparingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        for i in 0...(match.players.count){
-            listOfPlayerLabels.append(UILabel())
-            view.addSubview(listOfPlayerLabels[i])
-        }
+      
         
         Task {
             players = await getAllPlayers()
@@ -47,7 +44,7 @@ class PreparingViewController: UIViewController {
                 playerCatcher = sort(players)
                 definePrep(players, playerCatcher)
                 
-                configureLabelsAndPhotos(players:players)
+                configureStackView(players:players)
                 
             }
         }
@@ -64,33 +61,41 @@ class PreparingViewController: UIViewController {
         match.delegate = self
     }
     
-    func configureLabelsAndPhotos(players:[Player]) {
+    func configureStackView(players:[Player]) {
+        
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.spacing = 8
+        
+        let screenWidth = UIScreen.main.bounds.width
+        let stackViewWidth = screenWidth * 0.8
+        stackView.frame = CGRect(x: (screenWidth - stackViewWidth) / 2, y: (UIScreen.main.bounds.height / 2) - 120, width: stackViewWidth, height: 150)
+
         for i in 0...(players.count - 1){
             
             let playerImage = players[i].photo
             
-            let imageView = UIImageView(frame: CGRect(x: 50, y: (100 + i * 50), width: 30, height: 30))
+            let imageView = UIImageView()
             imageView.image = playerImage
             imageView.contentMode = .scaleAspectFit
             
-            view.addSubview(imageView)
-
-            let playerLabel = self.listOfPlayerLabels[i]
+            //let playerLabel = self.listOfPlayerLabels[i]
             
+            let playerLabel = UILabel()
             playerLabel.text = "\(players[i].displayName): \(players[i].type)"
+            playerLabel.textAlignment = .center
+            playerLabel.font = UIFont(name: "Inter", size: 10)
+            playerLabel.numberOfLines = 0
+                        
+            let verticalStackView = UIStackView(arrangedSubviews: [imageView, playerLabel])
+            verticalStackView.axis = .vertical
+            verticalStackView.alignment = .center
+            verticalStackView.spacing = 8
             
-            playerLabel.translatesAutoresizingMaskIntoConstraints = false
-            
-//            NSLayoutConstraint.activate = ([
-//                playerLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
-//                playerLabel.widthAnchor.constraint(equalTo: 200)
-//            ])
-//        
-            playerLabel.frame = CGRect(x: 200, y: (100+i*50), width: 200, height: 30)
-            
-            
-            
+            stackView.addArrangedSubview(verticalStackView)
         }
+        view.addSubview(stackView)
     }
     
     
