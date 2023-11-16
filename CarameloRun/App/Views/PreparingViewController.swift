@@ -34,25 +34,23 @@ class PreparingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-      
+       // configureButton()
         
         Task {
             players = await getAllPlayers()
+
             await MainActor.run {
                 numberOfPlayers = players.count
                 playerCatcher = sort(players)
+                print(numberOfPlayers)
                 definePrep(players, playerCatcher)
-                
                 configureStackView(players:players)
-                
+                configureButton()
             }
         }
+
        
-//        players[1].ready = true
         
-       
-        configureButton()
                 
         view.backgroundColor = UIColor(red: 232.0/255.0, green: 214.0/255.0, blue: 166.0/255.0, alpha: 1.0)
         
@@ -66,10 +64,12 @@ class PreparingViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
-        stackView.spacing = 8
+        stackView.spacing = 24
         
         let screenWidth = UIScreen.main.bounds.width
         let stackViewWidth = screenWidth * 0.8
+        
+        
         stackView.frame = CGRect(x: (screenWidth - stackViewWidth) / 2, y: (UIScreen.main.bounds.height / 2) - 120, width: stackViewWidth, height: 150)
 
         for i in 0...(players.count - 1){
@@ -86,7 +86,8 @@ class PreparingViewController: UIViewController {
             playerLabel.text = "\(players[i].displayName): \(players[i].type)"
             playerLabel.textAlignment = .center
             playerLabel.font = UIFont(name: "Inter", size: 10)
-            playerLabel.numberOfLines = 0
+            playerLabel.numberOfLines = 2
+            
                         
             let verticalStackView = UIStackView(arrangedSubviews: [imageView, playerLabel])
             verticalStackView.axis = .vertical
@@ -130,15 +131,14 @@ class PreparingViewController: UIViewController {
     
     func allReady(_ state: PreparingPlayres) {
         
-        guard players.count >= 2 else {return}
         
-        if state.name == players[1].displayName {
-            players[state.catcher].type = .man
-            
-            for i in 0..<numberOfPlayers{
-                listOfPlayerLabels[i].text = "\(players[i].displayName): \(players[i].type)"
-            }
-        }
+        
+        guard players.count == numberOfPlayers else {return}
+        
+        print("numberOfPlayers \(numberOfPlayers)")
+        
+        
+        print("players\(players)")
         
         var counter = 0
         for i in 0...(numberOfPlayers - 1) {
@@ -172,7 +172,7 @@ class PreparingViewController: UIViewController {
             prep.name = GKLocalPlayer.local.displayName
             prep.catcher = n
             
-            sendPreparingPlayers(prep)
+          //  sendPreparingPlayers(prep)
         }
     }
 }
@@ -202,6 +202,10 @@ extension PreparingViewController: PreparingControllerDelegate {
     func sendPreparingPlayers(_ state: PreparingPlayres) {
         do {
             let data = try JSONEncoder().encode(state)
+            let jsonString = String(data: data, encoding: .utf8)
+            print("===========================")
+            print(jsonString)
+            print("===========================")
             try match.sendData(toAllPlayers: data, with: .reliable)
         } catch {
             print("error sending data")
