@@ -17,13 +17,17 @@ class PreparingViewController: UIViewController {
     var controllerDelegate: GameControllerDelegate?
     var players: [Player] = []
     var prep: PreparingPlayres
+    var definingCatcher: IsCatcher
     var numberOfPlayers: Int = 0
     var playerCatcher: Int = 0
     var timer = ControllTimer()
     
-    init(match: GKMatch, prep: PreparingPlayres) {
+    var catchersName: String = ""
+    
+    init(match: GKMatch, prep: PreparingPlayres, definingCatcher: IsCatcher) {
         self.match = match
         self.prep = prep
+        self.definingCatcher = definingCatcher
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -37,6 +41,7 @@ class PreparingViewController: UIViewController {
        // configureButton()
         
         Task {
+            
             players = await getAllPlayers()
 
             await MainActor.run {
@@ -131,9 +136,12 @@ class PreparingViewController: UIViewController {
     
     func allReady(_ state: PreparingPlayres) {
         
-        
-        
-        guard players.count == numberOfPlayers else {return}
+        guard players.count == numberOfPlayers else {
+            let alert = UIAlertController(title: "OOps!", message: "Number of players not the expected one", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
         
         print("numberOfPlayers \(numberOfPlayers)")
         
@@ -148,6 +156,10 @@ class PreparingViewController: UIViewController {
             
             if players[i].ready == true {
                 counter += 1
+            }
+            
+            if players[i].displayName == catchersName {
+                players[i].type = .man
             }
         }
         
@@ -168,11 +180,22 @@ class PreparingViewController: UIViewController {
     
     
     func definePrep(_ players: [Player], _ n: Int) {
+        
+        guard players.count >= 2 else {
+            let alert = UIAlertController(title: "OOps!", 
+                                          message: "Not enought palyers!",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
         if GKLocalPlayer.local.displayName == players[1].displayName{
-            prep.name = GKLocalPlayer.local.displayName
-            prep.catcher = n
             
-          //  sendPreparingPlayers(prep)
+            definingCatcher.name = GKLocalPlayer.local.displayName
+            definingCatcher.catcher = n
+            
+            shareTypeOfPlayers(definingCatcher)
         }
     }
 }
@@ -180,13 +203,53 @@ class PreparingViewController: UIViewController {
 
 extension PreparingViewController: GKMatchDelegate{
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
+        
         let dataJsonString = String(decoding: data, as: UTF8.self)
         
         let jsonData = dataJsonString.data(using: .utf8)!
         
-        let preparingPlayers: PreparingPlayres = try! JSONDecoder().decode(PreparingPlayres.self, from: jsonData)
-        
-        allReady(preparingPlayers)
+        do {
+            if let preparingPlayers = try? JSONDecoder().decode(PreparingPlayres.self, from: jsonData) {
+                
+//                let alert = UIAlertController(title: "Nice!",
+//                                              message: "recebi Player is ready: \(preparingPlayers.name) !",
+//                                              preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//                self.present(alert, animated: true, completion: nil)
+                
+                
+                allReady(preparingPlayers)
+            } else if let definedCatcher = try? JSONDecoder().decode(IsCatcher.self, from: jsonData) {
+                
+//                let alert = UIAlertController(title: "Nice!",
+//                                              message: "recebi o Ze Cadelo! \(definedCatcher.catcher) : \(definedCatcher.name)",
+//                                              preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//                self.present(alert, animated: true, completion: nil)
+                
+                
+//                guard players.count >= 2 else {
+//                    let alert = UIAlertController(title: "OOps!",
+//                                                  message: "Not enought palyers to define Ze Cadelo!",
+//                                                  preferredStyle: .alert)
+//                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//                    self.present(alert, animated: true, completion: nil)
+//                    return
+//                }
+                
+                let alert = UIAlertController(title: "Nice!",
+                                              message: "recebi o Ze Cadelo! \(definedCatcher.name) : \(players[1].displayName)",
+                                              preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                
+                catchersName = definedCatcher.name
+                
+//                if definingCatcher.name == players[1].displayName {
+//                    players[definedCatcher.catcher].type = .man
+//                }
+            }
+        }
     }
 }
 
@@ -206,6 +269,16 @@ extension PreparingViewController: PreparingControllerDelegate {
             print("===========================")
             print(jsonString)
             print("===========================")
+            try match.sendData(toAllPlayers: data, with: .reliable)
+        } catch {
+            print("error sending data")
+        }
+    }
+    
+    func shareTypeOfPlayers(_ state: IsCatcher) {
+        do {
+            let data = try JSONEncoder().encode(state)
+            let jsonString = String(data: data, encoding: .utf8)
             try match.sendData(toAllPlayers: data, with: .reliable)
         } catch {
             print("error sending data")
