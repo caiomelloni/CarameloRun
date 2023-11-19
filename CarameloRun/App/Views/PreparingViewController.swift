@@ -40,6 +40,8 @@ class PreparingViewController: UIViewController {
         super.viewDidLoad()
        // configureButton()
         
+        button.isEnabled = false
+        
         Task {
             
             players = await getAllPlayers()
@@ -51,12 +53,15 @@ class PreparingViewController: UIViewController {
                 definePrep(players, playerCatcher)
                 configureStackView(players:players)
                 configureButton()
+                
+                button.isEnabled = true
+                 
+                if button.isEnabled {
+                    button.backgroundColor = UIColor(_colorLiteralRed: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0) // Defina a cor de fundo como laranja
+                }
             }
         }
 
-       
-        
-                
         view.backgroundColor = UIColor(red: 232.0/255.0, green: 214.0/255.0, blue: 166.0/255.0, alpha: 1.0)
         
         view.addSubview(button)
@@ -121,12 +126,18 @@ class PreparingViewController: UIViewController {
             button.frame = CGRect(x: xCoordinate, y: yCoordinate, width: buttonWidth, height: 56)
             button.setTitleColor(UIColor.white, for: .normal) // Defina a cor do texto como branca
             button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-            button.backgroundColor = UIColor(_colorLiteralRed: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0) // Defina a cor de fundo como laranja
+            button.backgroundColor = UIColor(_colorLiteralRed: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 0.5) // Defina a cor de fundo como laranja
             button.titleLabel?.font = UIFont(name: "Crang", size: 16)
             
         }
     
     @objc func buttonTapped() {
+        
+        guard button.isEnabled else {
+            // O botao esta desativado, nada acontece
+            return
+        }
+        
         prep.name = GKLocalPlayer.local.displayName
         prep.ready = true
         
@@ -196,6 +207,7 @@ class PreparingViewController: UIViewController {
             definingCatcher.catcher = n
             
             shareTypeOfPlayers(definingCatcher)
+
         }
     }
 }
@@ -236,18 +248,16 @@ extension PreparingViewController: GKMatchDelegate{
 //                    self.present(alert, animated: true, completion: nil)
 //                    return
 //                }
-                
-                let alert = UIAlertController(title: "Nice!",
-                                              message: "recebi o Ze Cadelo! \(definedCatcher.name) : \(players[1].displayName)",
-                                              preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+//                
+//                let alert1 = UIAlertController(title: "Nice!",
+//                                              message: "recebi o Ze Cadelo! \(definedCatcher.name) : \(players[1].displayName)",
+//                                              preferredStyle: .alert)
+//                alert1.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//                self.present(alert1, animated: true, completion: nil)
                 
                 catchersName = definedCatcher.name
                 
-//                if definingCatcher.name == players[1].displayName {
-//                    players[definedCatcher.catcher].type = .man
-//                }
+
             }
         }
     }
@@ -266,9 +276,9 @@ extension PreparingViewController: PreparingControllerDelegate {
         do {
             let data = try JSONEncoder().encode(state)
             let jsonString = String(data: data, encoding: .utf8)
-            print("===========================")
-            print(jsonString)
-            print("===========================")
+//            print("===========================")
+//            print(jsonString)
+//            print("===========================")
             try match.sendData(toAllPlayers: data, with: .reliable)
         } catch {
             print("error sending data")
