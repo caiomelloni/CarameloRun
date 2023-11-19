@@ -96,7 +96,11 @@ class PreparingViewController: UIViewController {
             playerLabel.text = "\(players[i].displayName): \(players[i].type)"
             playerLabel.textAlignment = .center
             playerLabel.font = UIFont(name: "Inter", size: 10)
+            playerLabel.textColor = UIColor.black
+            playerLabel.alpha = 1.0
             playerLabel.numberOfLines = 2
+            playerLabel.isHidden = false
+
             
                         
             let verticalStackView = UIStackView(arrangedSubviews: [imageView, playerLabel])
@@ -192,8 +196,8 @@ class PreparingViewController: UIViewController {
     
     func definePrep(_ players: [Player], _ n: Int) {
         
-        guard players.count >= 2 else {
-            let alert = UIAlertController(title: "OOps!", 
+        guard players.count == numberOfPlayers else {
+            let alert = UIAlertController(title: "OOps!",
                                           message: "Not enought palyers!",
                                           preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
