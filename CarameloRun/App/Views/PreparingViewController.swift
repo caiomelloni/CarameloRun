@@ -21,6 +21,7 @@ class PreparingViewController: UIViewController {
     var numberOfPlayers: Int = 0
     var playerCatcher: Int = 0
     var timer = ControllTimer()
+    var catcherInformationShared = false
     
     var catchersName: String = ""
     
@@ -49,7 +50,6 @@ class PreparingViewController: UIViewController {
             await MainActor.run {
                 numberOfPlayers = players.count
                 playerCatcher = sort(players)
-                print(numberOfPlayers)
                 definePrep(players, playerCatcher)
                 configureStackView(players:players)
                 configureButton()
@@ -70,6 +70,11 @@ class PreparingViewController: UIViewController {
     }
     
     func configureStackView(players:[Player]) {
+        
+        guard catcherInformationShared == true else {
+            //
+            return
+        }
         
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -93,13 +98,18 @@ class PreparingViewController: UIViewController {
             //let playerLabel = self.listOfPlayerLabels[i]
             
             let playerLabel = UILabel()
+          
+            if players[i].displayName == catchersName {
+                players[i].type = .man
+            }
+
             playerLabel.text = "\(players[i].displayName): \(players[i].type)"
             playerLabel.textAlignment = .center
             playerLabel.font = UIFont(name: "Inter", size: 10)
             playerLabel.textColor = UIColor.black
             playerLabel.alpha = 1.0
             playerLabel.numberOfLines = 2
-            playerLabel.isHidden = false
+            playerLabel.setContentCompressionResistancePriority(.required, for: .vertical)
 
             
                         
@@ -209,10 +219,13 @@ class PreparingViewController: UIViewController {
             
             definingCatcher.name = GKLocalPlayer.local.displayName
             definingCatcher.catcher = n
-            
+            players[n].type = .man
             shareTypeOfPlayers(definingCatcher)
-
+        
         }
+        
+        catcherInformationShared = true
+
     }
 }
 
@@ -279,7 +292,7 @@ extension PreparingViewController: PreparingControllerDelegate {
     func sendPreparingPlayers(_ state: PreparingPlayres) {
         do {
             let data = try JSONEncoder().encode(state)
-            let jsonString = String(data: data, encoding: .utf8)
+            //let jsonString = String(data: data, encoding: .utf8)
 //            print("===========================")
 //            print(jsonString)
 //            print("===========================")
@@ -292,7 +305,7 @@ extension PreparingViewController: PreparingControllerDelegate {
     func shareTypeOfPlayers(_ state: IsCatcher) {
         do {
             let data = try JSONEncoder().encode(state)
-            let jsonString = String(data: data, encoding: .utf8)
+            //let jsonString = String(data: data, encoding: .utf8)
             try match.sendData(toAllPlayers: data, with: .reliable)
         } catch {
             print("error sending data")
