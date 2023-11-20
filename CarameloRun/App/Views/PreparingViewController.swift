@@ -60,6 +60,7 @@ class PreparingViewController: UIViewController {
                     button.backgroundColor = UIColor(_colorLiteralRed: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0) // Defina a cor de fundo como laranja
                 }
             }
+
         }
 
         view.backgroundColor = UIColor(red: 232.0/255.0, green: 214.0/255.0, blue: 166.0/255.0, alpha: 1.0)
@@ -67,14 +68,11 @@ class PreparingViewController: UIViewController {
         view.addSubview(button)
         
         match.delegate = self
+
+        
     }
     
     func configureStackView(players:[Player]) {
-        
-        guard catcherInformationShared == true else {
-            //
-            return
-        }
         
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -97,23 +95,36 @@ class PreparingViewController: UIViewController {
             
             //let playerLabel = self.listOfPlayerLabels[i]
             
-            let playerLabel = UILabel()
+            let playerNameLabel = UILabel()
           
+            
+            
+            playerNameLabel.text = "\(players[i].displayName)"
+            playerNameLabel.textAlignment = .center
+            playerNameLabel.font = .boldSystemFont(ofSize: 20)
+            playerNameLabel.textColor = UIColor(red: 32.0/255.0, green: 46.0/255.0, blue: 55.0/255.0, alpha: 1.0)
+            playerNameLabel.alpha = 1.0
+            playerNameLabel.numberOfLines = 2
+            playerNameLabel.setContentCompressionResistancePriority(.required, for: .vertical)
+
+            let playerTypeLabel = UILabel()
+            
             if players[i].displayName == catchersName {
                 players[i].type = .man
+                playerTypeLabel.text = "Zé Cadelo"
+            } else {
+                playerTypeLabel.text = "Caramelo"
+
             }
-
-            playerLabel.text = "\(players[i].displayName): \(players[i].type)"
-            playerLabel.textAlignment = .center
-            playerLabel.font = UIFont(name: "Inter", size: 10)
-            playerLabel.textColor = UIColor.black
-            playerLabel.alpha = 1.0
-            playerLabel.numberOfLines = 2
-            playerLabel.setContentCompressionResistancePriority(.required, for: .vertical)
-
             
+            playerTypeLabel.textAlignment = .center
+            playerTypeLabel.font = .boldSystemFont(ofSize: 20)
+            playerTypeLabel.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+            playerTypeLabel.alpha = 1.0
+            playerTypeLabel.numberOfLines = 2
+            playerTypeLabel.setContentCompressionResistancePriority(.required, for: .vertical)
                         
-            let verticalStackView = UIStackView(arrangedSubviews: [imageView, playerLabel])
+            let verticalStackView = UIStackView(arrangedSubviews: [imageView, playerNameLabel, playerTypeLabel])
             verticalStackView.axis = .vertical
             verticalStackView.alignment = .center
             verticalStackView.spacing = 8
@@ -223,9 +234,7 @@ class PreparingViewController: UIViewController {
             shareTypeOfPlayers(definingCatcher)
         
         }
-        
-        catcherInformationShared = true
-
+    
     }
 }
 
@@ -274,6 +283,9 @@ extension PreparingViewController: GKMatchDelegate{
                 
                 catchersName = definedCatcher.name
                 
+                //catcherInformationShared = true
+                //configureStackView(players: players)
+
 
             }
         }
