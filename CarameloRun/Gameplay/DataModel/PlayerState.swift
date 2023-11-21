@@ -21,6 +21,11 @@ struct PreparingPlayres: Codable {
     var catcher: Int
 }
 
+struct IsCatcher: Codable {
+    var catcher: Int
+    var name: String
+}
+
 struct matchState: Codable {
     var finish: Bool
 }
