@@ -24,6 +24,7 @@ class PreparingViewController: UIViewController {
     var catcherInformationShared = false
     
     var catchersName: String = ""
+    var catcherInt: Int = -1
     
     init(match: GKMatch, prep: PreparingPlayres, definingCatcher: IsCatcher) {
         self.match = match
@@ -48,16 +49,22 @@ class PreparingViewController: UIViewController {
             players = await getAllPlayers()
 
             await MainActor.run {
-                numberOfPlayers = players.count
-                playerCatcher = sort(players)
-                definePrep(players, playerCatcher)
-                configureStackView(players:players)
-                configureButton()
-                
-                button.isEnabled = true
-                 
-                if button.isEnabled {
-                    button.backgroundColor = UIColor(_colorLiteralRed: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0) // Defina a cor de fundo como laranja
+                if GKLocalPlayer.local.displayName == players[1].displayName {
+                    numberOfPlayers = players.count
+                    playerCatcher = sort(players)
+                    definePrep(players, playerCatcher)
+                    if catcherInt >= 0 {
+                        define()
+                    }
+                    
+                    configureStackView(players:players)
+                    configureButton()
+                    
+                    button.isEnabled = true
+                    
+                    if button.isEnabled {
+                        button.backgroundColor = UIColor(_colorLiteralRed: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0) // Defina a cor de fundo como laranja
+                    }
                 }
             }
 
@@ -92,8 +99,6 @@ class PreparingViewController: UIViewController {
             let imageView = UIImageView()
             imageView.image = playerImage
             imageView.contentMode = .scaleAspectFit
-            
-            //let playerLabel = self.listOfPlayerLabels[i]
             
             let playerNameLabel = UILabel()
           
@@ -194,9 +199,9 @@ class PreparingViewController: UIViewController {
                 counter += 1
             }
             
-            if players[i].displayName == catchersName {
-                players[i].type = .man
-            }
+//            if players[i].displayName == catchersName {
+//                players[i].type = .man
+//            }
         }
         
         if counter == numberOfPlayers  {
@@ -207,6 +212,7 @@ class PreparingViewController: UIViewController {
     }
     
     func sort(_ players: [Player]) -> Int {
+        print(numberOfPlayers)
         let n = Int.random(in: 0...(numberOfPlayers - 1))
         if GKLocalPlayer.local.displayName == players[1].displayName{
             players[n].type = .man
@@ -216,7 +222,7 @@ class PreparingViewController: UIViewController {
     
     
     func definePrep(_ players: [Player], _ n: Int) {
-        
+  
         guard players.count == numberOfPlayers else {
             let alert = UIAlertController(title: "OOps!",
                                           message: "Not enought palyers!",
@@ -228,13 +234,52 @@ class PreparingViewController: UIViewController {
         
         if GKLocalPlayer.local.displayName == players[1].displayName{
             
-            definingCatcher.name = GKLocalPlayer.local.displayName
+            definingCatcher.name = players[n].displayName
             definingCatcher.catcher = n
             players[n].type = .man
+            catchersName = players[n].displayName
             shareTypeOfPlayers(definingCatcher)
         
         }
     
+    }
+    
+    func define() {
+        players[catcherInt].type = .man
+    }
+    
+    func call() {
+        Task {
+            
+            players = await getAllPlayers()
+
+            await MainActor.run {
+                numberOfPlayers = players.count
+                playerCatcher = sort(players)
+                definePrep(players, playerCatcher)
+                if catcherInt >= 0 {
+                    define()
+                }
+                
+                // pra fazer funcionar e aparecer o que cada um é de maneira correta, precisamos achar um jeito da função configureStackView só ser chamada quando o valor de catcherInt for diferente de -1, ou seja, quando receber dados
+                
+                // tentei fazer com while, mas achei um pouco de corno, fica ai a ideia do que fazer
+                
+                
+//                while GKLocalPlayer.local.displayName != players[1].displayName && catcherInt == -1 {
+//                    print("esperando dados")
+//                }
+                configureStackView(players:players)
+                configureButton()
+                
+                button.isEnabled = true
+                 
+                if button.isEnabled {
+                    button.backgroundColor = UIColor(_colorLiteralRed: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0) // Defina a cor de fundo como laranja
+                }
+            }
+
+        }
     }
 }
 
@@ -248,40 +293,20 @@ extension PreparingViewController: GKMatchDelegate{
         
         do {
             if let preparingPlayers = try? JSONDecoder().decode(PreparingPlayres.self, from: jsonData) {
-                
-//                let alert = UIAlertController(title: "Nice!",
-//                                              message: "recebi Player is ready: \(preparingPlayers.name) !",
-//                                              preferredStyle: .alert)
-//                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//                self.present(alert, animated: true, completion: nil)
-                
-                
                 allReady(preparingPlayers)
             } else if let definedCatcher = try? JSONDecoder().decode(IsCatcher.self, from: jsonData) {
                 
-//                let alert = UIAlertController(title: "Nice!",
-//                                              message: "recebi o Ze Cadelo! \(definedCatcher.catcher) : \(definedCatcher.name)",
-//                                              preferredStyle: .alert)
-//                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//                self.present(alert, animated: true, completion: nil)
-                
-                
-//                guard players.count >= 2 else {
-//                    let alert = UIAlertController(title: "OOps!",
-//                                                  message: "Not enought palyers to define Ze Cadelo!",
-//                                                  preferredStyle: .alert)
-//                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//                    self.present(alert, animated: true, completion: nil)
-//                    return
-//                }
-//                
-//                let alert1 = UIAlertController(title: "Nice!",
-//                                              message: "recebi o Ze Cadelo! \(definedCatcher.name) : \(players[1].displayName)",
-//                                              preferredStyle: .alert)
-//                alert1.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//                self.present(alert1, animated: true, completion: nil)
-                
                 catchersName = definedCatcher.name
+                
+                if !(players.isEmpty) {
+                    players[definedCatcher.catcher].type = .man
+                    catcherInt = -2
+                    call()
+                } else {
+                    catcherInt = definedCatcher.catcher
+                    call()
+                }
+                
                 
                 //catcherInformationShared = true
                 //configureStackView(players: players)
@@ -304,10 +329,6 @@ extension PreparingViewController: PreparingControllerDelegate {
     func sendPreparingPlayers(_ state: PreparingPlayres) {
         do {
             let data = try JSONEncoder().encode(state)
-            //let jsonString = String(data: data, encoding: .utf8)
-//            print("===========================")
-//            print(jsonString)
-//            print("===========================")
             try match.sendData(toAllPlayers: data, with: .reliable)
         } catch {
             print("error sending data")
@@ -317,7 +338,6 @@ extension PreparingViewController: PreparingControllerDelegate {
     func shareTypeOfPlayers(_ state: IsCatcher) {
         do {
             let data = try JSONEncoder().encode(state)
-            //let jsonString = String(data: data, encoding: .utf8)
             try match.sendData(toAllPlayers: data, with: .reliable)
         } catch {
             print("error sending data")
@@ -325,8 +345,6 @@ extension PreparingViewController: PreparingControllerDelegate {
     }
     
     func getAllPlayers() async -> [Player] {
-        
-        //let localPlayer = GKLocalPlayer.local
         
         let localPlayerPhoto: UIImage? = try? await GKLocalPlayer.local.loadPhoto(for: .normal)
         

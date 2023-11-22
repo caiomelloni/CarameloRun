@@ -17,7 +17,7 @@ class ControllTimer {
         node.size = CGSize(width: Dimensions.buttonWidth.rawValue, height: Dimensions.buttonHeight.rawValue)
         let m = n/60
         let s = n%60
-        number.text = "0\(m):\(s)"
+        number.text = "0\(m):0\(s)"
         number.fontColor = .blue
         
         node.addChild(number)

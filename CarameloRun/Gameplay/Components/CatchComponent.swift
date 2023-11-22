@@ -10,6 +10,12 @@ import GameplayKit
 
 class CatchComponent: GKComponent {
     func didCollideWithPlayer(_ player: Player, _ allRemotePlayers: [Int:Player], finishGame: (() -> Void)?) {
+        
+        //TODO: add score to the catcher
+        if (player.component(ofType: PlayerAnimationComponent.self)?.stateMachine.currentState as? ArrestedState) == nil {
+            entity?.component(ofType: ScoreComponent.self)?.humanCatch()
+        }
+        
         player.component(ofType: PlayerAnimationComponent.self)?.stateMachine.enter(ArrestedState.self)
         
         // TODO: associar o estado dos outros jogadores | por enquanto a finalizacao do jogo nao funciona quando todos foram presos
@@ -25,10 +31,10 @@ class CatchComponent: GKComponent {
         }
         
         if allPlayersCaught {
+            entity?.component(ofType: ScoreComponent.self)?.humanCatchAllDogs()
             finishGame?()
         }
         
-        //TODO: add score to the catcher
-        entity?.component(ofType: ScoreComponent.self)?.humanCatch()
+        
     }
 }
