@@ -24,7 +24,6 @@ class PreparingViewController: UIViewController {
     var catcherInformationShared = false
     
     var catchersName: String = ""
-    var catcherInt: Int = -1
     
     init(match: GKMatch, prep: PreparingPlayres, definingCatcher: IsCatcher) {
         self.match = match
@@ -44,16 +43,26 @@ class PreparingViewController: UIViewController {
         
         button.isEnabled = false
         
-        Task {
-            
+        Task{
             players = await getAllPlayers()
+            if GKLocalPlayer.local.displayName == players[1].displayName {
+                execute()
+            }
+        }
+        
+        view.backgroundColor = UIColor(red: 232.0/255.0, green: 214.0/255.0, blue: 166.0/255.0, alpha: 1.0)
+        view.addSubview(button)
+        match.delegate = self
 
+    }
+        
+    func execute() {
+        Task {
+            players = await getAllPlayers()
             await MainActor.run {
-                if GKLocalPlayer.local.displayName == players[1].displayName {
                     numberOfPlayers = players.count
                     playerCatcher = sort(players)
                     definePrep(players, playerCatcher)
-                    
                     configureStackView(players:players)
                     configureButton()
                     
@@ -62,19 +71,12 @@ class PreparingViewController: UIViewController {
                     if button.isEnabled {
                         button.backgroundColor = UIColor(_colorLiteralRed: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0) // Defina a cor de fundo como laranja
                     }
-                }
             }
-
         }
-
-        view.backgroundColor = UIColor(red: 232.0/255.0, green: 214.0/255.0, blue: 166.0/255.0, alpha: 1.0)
-        
-        view.addSubview(button)
-        
-        match.delegate = self
-
-        
     }
+    
+    
+
     
     func configureStackView(players:[Player]) {
         
@@ -181,11 +183,6 @@ class PreparingViewController: UIViewController {
             return
         }
         
-        print("numberOfPlayers \(numberOfPlayers)")
-        
-        
-        print("players\(players)")
-        
         var counter = 0
         for i in 0...(numberOfPlayers - 1) {
             if state.name == players[i].displayName {
@@ -196,9 +193,7 @@ class PreparingViewController: UIViewController {
                 counter += 1
             }
             
-//            if players[i].displayName == catchersName {
-//                players[i].type = .man
-//            }
+
         }
         
         if counter == numberOfPlayers  {
@@ -209,7 +204,6 @@ class PreparingViewController: UIViewController {
     }
     
     func sort(_ players: [Player]) -> Int {
-        print(numberOfPlayers)
         let n = Int.random(in: 0...(numberOfPlayers - 1))
         if GKLocalPlayer.local.displayName == players[1].displayName{
             players[n].type = .man
@@ -241,33 +235,7 @@ class PreparingViewController: UIViewController {
     
     }
     
-    func define() {
-        players[catcherInt].type = .man
-    }
-    
-    func call() {
-        Task {
-            
-            players = await getAllPlayers()
-
-            await MainActor.run {
-                numberOfPlayers = players.count
-                playerCatcher = sort(players)
-                definePrep(players, playerCatcher)
-                define()
-            
-                configureStackView(players:players)
-                configureButton()
-                
-                button.isEnabled = true
-                 
-                if button.isEnabled {
-                    button.backgroundColor = UIColor(_colorLiteralRed: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0) // Defina a cor de fundo como laranja
-                }
-            }
-
-        }
-    }
+   
 }
 
 
@@ -280,20 +248,10 @@ extension PreparingViewController: GKMatchDelegate{
         
         do {
             if let preparingPlayers = try? JSONDecoder().decode(PreparingPlayres.self, from: jsonData) {
-                allReady(preparingPlayers)
-            } else if let definedCatcher = try? JSONDecoder().decode(IsCatcher.self, from: jsonData) {
-                
-                catchersName = definedCatcher.name
-                
-                catcherInt = definedCatcher.catcher
-                
-                call()
-                
-                
-                //catcherInformationShared = true
-                //configureStackView(players: players)
-
-
+                allReady(preparingPlayers) //Se os dados podem ser decodificados como uma instância de PreparingPlayres, chama a função allReady(preparingPlayers).
+            } else if let definedCatcher = try? JSONDecoder().decode(IsCatcher.self, from: jsonData) { //Se os dados não puderem ser decodificados como PreparingPlayres mas puderem ser decodificados como IsCatcher, realiza algumas operações adicionais.
+                catchersName = definedCatcher.name // ele atribui o nome de usuário "sorteado"em definprep para cumprir a função de zé cadelo à variável catchersname
+                execute()
             }
         }
     }
