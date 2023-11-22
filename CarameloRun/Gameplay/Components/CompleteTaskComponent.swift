@@ -24,7 +24,6 @@ class CompleteTaskComponent: GKComponent {
     }
     
     func addCompleteLabel() {
-        print("entrou 1")
         let task1 = scene.childNode(withName: "task1")!.frame
         completeLabel = SKLabelNode()
         completeLabel.fontName = "San Francisco"

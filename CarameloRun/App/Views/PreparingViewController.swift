@@ -53,9 +53,6 @@ class PreparingViewController: UIViewController {
                     numberOfPlayers = players.count
                     playerCatcher = sort(players)
                     definePrep(players, playerCatcher)
-                    if catcherInt >= 0 {
-                        define()
-                    }
                     
                     configureStackView(players:players)
                     configureButton()
@@ -257,18 +254,8 @@ class PreparingViewController: UIViewController {
                 numberOfPlayers = players.count
                 playerCatcher = sort(players)
                 definePrep(players, playerCatcher)
-                if catcherInt >= 0 {
-                    define()
-                }
-                
-                // pra fazer funcionar e aparecer o que cada um é de maneira correta, precisamos achar um jeito da função configureStackView só ser chamada quando o valor de catcherInt for diferente de -1, ou seja, quando receber dados
-                
-                // tentei fazer com while, mas achei um pouco de corno, fica ai a ideia do que fazer
-                
-                
-//                while GKLocalPlayer.local.displayName != players[1].displayName && catcherInt == -1 {
-//                    print("esperando dados")
-//                }
+                define()
+            
                 configureStackView(players:players)
                 configureButton()
                 
@@ -298,14 +285,9 @@ extension PreparingViewController: GKMatchDelegate{
                 
                 catchersName = definedCatcher.name
                 
-                if !(players.isEmpty) {
-                    players[definedCatcher.catcher].type = .man
-                    catcherInt = -2
-                    call()
-                } else {
-                    catcherInt = definedCatcher.catcher
-                    call()
-                }
+                catcherInt = definedCatcher.catcher
+                
+                call()
                 
                 
                 //catcherInformationShared = true

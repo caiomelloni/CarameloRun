@@ -20,7 +20,7 @@ class Tasks: GKEntity {
         super.init()
         
         let components = [
-            ProgressBarComponent(scene, localPlayer),
+            ProgressBarComponent(scene as! GameScene, localPlayer),
             CompleteTaskComponent(scene)
         ]
         
