@@ -24,7 +24,6 @@ class PreparingViewController: UIViewController {
     var catcherInformationShared = false
     
     var catchersName: String = ""
-    var catcherInt: Int = -1
     
     init(match: GKMatch, prep: PreparingPlayres, definingCatcher: IsCatcher) {
         self.match = match
@@ -184,11 +183,6 @@ class PreparingViewController: UIViewController {
             return
         }
         
-        print("numberOfPlayers \(numberOfPlayers)")
-        
-        
-        print("players\(players)")
-        
         var counter = 0
         for i in 0...(numberOfPlayers - 1) {
             if state.name == players[i].displayName {
@@ -210,7 +204,6 @@ class PreparingViewController: UIViewController {
     }
     
     func sort(_ players: [Player]) -> Int {
-        print(numberOfPlayers)
         let n = Int.random(in: 0...(numberOfPlayers - 1))
         if GKLocalPlayer.local.displayName == players[1].displayName{
             players[n].type = .man
@@ -258,7 +251,6 @@ extension PreparingViewController: GKMatchDelegate{
                 allReady(preparingPlayers) //Se os dados podem ser decodificados como uma instância de PreparingPlayres, chama a função allReady(preparingPlayers).
             } else if let definedCatcher = try? JSONDecoder().decode(IsCatcher.self, from: jsonData) { //Se os dados não puderem ser decodificados como PreparingPlayres mas puderem ser decodificados como IsCatcher, realiza algumas operações adicionais.
                 catchersName = definedCatcher.name // ele atribui o nome de usuário "sorteado"em definprep para cumprir a função de zé cadelo à variável catchersname
-                //catcherInt = definedCatcher.catcher
                 execute()
             }
         }
