@@ -14,12 +14,12 @@ class ScoreComponent: GKComponent {
     //func for the dog
     // dog make task
     func dogMakeTask() {
-        score = score + 10
+        score = score + 20
     }
     
     // dog was catched
     func dogWasCatched() {
-        score = score - 20
+        score = score - 15
     }
     
     // dog freed his friend
