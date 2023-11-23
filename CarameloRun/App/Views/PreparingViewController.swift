@@ -108,7 +108,7 @@ class PreparingViewController: UIViewController {
             playerNameLabel.font = .boldSystemFont(ofSize: 20)
             playerNameLabel.textColor = UIColor(red: 32.0/255.0, green: 46.0/255.0, blue: 55.0/255.0, alpha: 1.0)
             playerNameLabel.alpha = 1.0
-            playerNameLabel.numberOfLines = 2
+            playerNameLabel.numberOfLines = 1
             playerNameLabel.setContentCompressionResistancePriority(.required, for: .vertical)
 
             let playerTypeLabel = UILabel()
@@ -125,7 +125,7 @@ class PreparingViewController: UIViewController {
             playerTypeLabel.font = .boldSystemFont(ofSize: 20)
             playerTypeLabel.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
             playerTypeLabel.alpha = 1.0
-            playerTypeLabel.numberOfLines = 2
+            playerTypeLabel.numberOfLines = 1
             playerTypeLabel.setContentCompressionResistancePriority(.required, for: .vertical)
                         
             let verticalStackView = UIStackView(arrangedSubviews: [imageView, playerNameLabel, playerTypeLabel])
