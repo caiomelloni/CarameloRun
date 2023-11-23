@@ -22,6 +22,7 @@ class PreparingViewController: UIViewController {
     var playerCatcher: Int = 0
     var timer = ControllTimer()
     var catcherInformationShared = false
+    var minFontSize = 100.0
     
     var catchersName: String = ""
     
@@ -83,14 +84,41 @@ class PreparingViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
-        stackView.spacing = 24
+        stackView.spacing = 0
         
         let screenWidth = UIScreen.main.bounds.width
-        let stackViewWidth = screenWidth * 0.8
-        
+        let stackViewWidth = screenWidth * 0.9
         
         stackView.frame = CGRect(x: (screenWidth - stackViewWidth) / 2, y: (UIScreen.main.bounds.height / 2) - 120, width: stackViewWidth, height: 150)
+        
+        for i in 0...(players.count - 1){
+            
+            let playerImage = players[i].photo
+            
+            let imageView = UIImageView()
+            imageView.image = playerImage
+            imageView.contentMode = .scaleAspectFit
+            
+            let playerNameLabel = UILabel()
+            var fontSize = 0.0
+            
+            playerNameLabel.text = "\(players[i].displayName)"
+            playerNameLabel.textAlignment = .center
+            playerNameLabel.adjustsFontSizeToFitWidth = true
+            
+            playerNameLabel.numberOfLines = 1
+            playerNameLabel.setContentCompressionResistancePriority(.required, for: .vertical)
 
+            fontSize = playerNameLabel.font.pointSize
+            
+            if fontSize < minFontSize {
+                minFontSize = fontSize
+            }
+           
+        }
+        
+        print("minFontSize: \(minFontSize)")
+        
         for i in 0...(players.count - 1){
             
             let playerImage = players[i].photo
@@ -102,10 +130,9 @@ class PreparingViewController: UIViewController {
             let playerNameLabel = UILabel()
           
             
-            
             playerNameLabel.text = "\(players[i].displayName)"
             playerNameLabel.textAlignment = .center
-            playerNameLabel.font = .boldSystemFont(ofSize: 20)
+            playerNameLabel.font = .boldSystemFont(ofSize: minFontSize)
             playerNameLabel.textColor = UIColor(red: 32.0/255.0, green: 46.0/255.0, blue: 55.0/255.0, alpha: 1.0)
             playerNameLabel.alpha = 1.0
             playerNameLabel.numberOfLines = 1
@@ -122,7 +149,8 @@ class PreparingViewController: UIViewController {
             }
             
             playerTypeLabel.textAlignment = .center
-            playerTypeLabel.font = .boldSystemFont(ofSize: 20)
+            //playerNameLabel.font = .boldSystemFont(ofSize: minFontSize)
+            playerTypeLabel.font = .boldSystemFont(ofSize: 19)
             playerTypeLabel.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
             playerTypeLabel.alpha = 1.0
             playerTypeLabel.numberOfLines = 1
