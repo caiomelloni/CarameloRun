@@ -11,8 +11,8 @@ import GameplayKit
 class SpriteComponent: GKComponent {
     private let node: SKSpriteNode
 
-    init(texture: SKTexture, size: CGSize) {
-        node = SKSpriteNode(texture: texture)
+    init(imageName: String, size: CGSize) {
+        node = SKSpriteNode(imageNamed: imageName)
         node.size = size
         super.init()
         node.entity = entity

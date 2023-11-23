@@ -6,8 +6,8 @@
 //
 
 class Constants {
-    static let playerJumpXMultiplier: Double = 0.5
-    static let playerJumpYMultiplier: Double = 1.5
+    static let playerJumpXMultiplier: Double = 2.5
+    static let playerJumpYMultiplier: Double = 5.5
     static let charactersCollisionMask: UInt32 = 1
     
     
@@ -15,6 +15,8 @@ class Constants {
     
     static let playerHeight: Double = 150
     static let playerWidth: Double = 150
+    static let catcherHeight: Double = 216
+    static let catcherWidth: Double = 150
     
     //player frames count
     static let playerFallFramesCount: Int = 7
