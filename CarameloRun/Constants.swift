@@ -26,11 +26,11 @@ class Constants {
     
     //catcher frames count
     static let catcherFallFramesCount: Int = 2
-    static let catcherJumpFramesCount: Int = 10
-    static let catcherIdleFramesCount: Int = 9
+    static let catcherJumpFramesCount: Int = 13
+    static let catcherIdleFramesCount: Int = 2
     static let catcherRunFramesCount: Int = 8
-    static let catcherFramesPrefix: String = ""
-    
+    static let catcherFramesPrefix: String = "catcher"
+
     //respawn
     static let respawnCount: Int = 2
 }
