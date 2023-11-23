@@ -13,12 +13,12 @@ class ProgressBarComponent: GKComponent {
     var avaiable: Bool = false
     var progress: CGFloat = 0.00
     var progressBar = SKShapeNode()
-    var scene: SKScene
+    var scene: GameScene
     var localPlayer: Player
     var timer: Timer!
     var time: Int = 15
     
-    init(_ scene: SKScene, _ localPlayer: Player) {
+    init(_ scene: GameScene, _ localPlayer: Player) {
         self.scene = scene
         self.localPlayer = localPlayer
         
@@ -36,31 +36,75 @@ class ProgressBarComponent: GKComponent {
         progressBar.position = CGPoint(x: task1.midX, y: task1.midY+80)
         progressBar.xScale = 0.00
         scene.addChild(progressBar)
+        
     }
     
     func verify() {
         let task1 = scene.childNode(withName: "task1")!.frame
         
         if avaiable {
+
+            //TODO: fazer com que as tasks apareça que está sendo feita, para todos os jogadores
             
-            if (task1.contains(localPlayer.component(ofType: SpriteComponent.self)!.position)) == true && localPlayer.type == .dog{
-                progress += 0.01
-                progressBar.xScale = progress
+            var thereAreSomeoneInsideTheTask = 0
+            for player in scene.remotePlayers.values {
                 
-                if progress >= 1.00 {
-                    entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(true)
-                    avaiable = false
-                    self.entity?.component(ofType: CompleteTaskComponent.self)?.ChangeAvaiable(false)
-                    progressBar.xScale = 0.00
-                    localPlayer.component(ofType: ScoreComponent.self)?.dogMakeTask()
-                    initTimer()
+                if player.type == .dog {
+                    if (task1.contains((player.component(ofType: SpriteComponent.self)!.position))) == true {
+                        progress += 0.01
+                        progressBar.xScale = progress
+                    } else {
+                        thereAreSomeoneInsideTheTask += 1
+                    }
                 }
+            }
+            
+            if scene.localPlayer.type == .dog {
                 
-            } else {
+                if (task1.contains((scene.localPlayer.component(ofType: SpriteComponent.self)!.position))) == true {
+                    progress += 0.01
+                    progressBar.xScale = progress
+                } else {
+                    thereAreSomeoneInsideTheTask += 1
+                }
+            }
+            
+            if progress >= 1.50 {
+                entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(true)
+                avaiable = false
+                self.entity?.component(ofType: CompleteTaskComponent.self)?.ChangeAvaiable(false)
+                progressBar.xScale = 0.00
+                if (task1.contains((scene.localPlayer.component(ofType: SpriteComponent.self)!.position))) == true && scene.localPlayer.type == .dog{
+                    localPlayer.component(ofType: ScoreComponent.self)?.dogMakeTask()
+                }
+                initTimer()
+            }
+            
+            if thereAreSomeoneInsideTheTask == scene.remotePlayers.count {
                 progress = 0.00
                 entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(false)
                 progressBar.xScale = progress
             }
+            // código antigo está daqui para baixo
+            
+//            if (task1.contains(localPlayer.component(ofType: SpriteComponent.self)!.position)) == true && localPlayer.type == .dog{
+//                progress += 0.01
+//                progressBar.xScale = progress
+//                
+//                if progress >= 1.00 {
+//                    entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(true)
+//                    avaiable = false
+//                    self.entity?.component(ofType: CompleteTaskComponent.self)?.ChangeAvaiable(false)
+//                    progressBar.xScale = 0.00
+//                    localPlayer.component(ofType: ScoreComponent.self)?.dogMakeTask()
+//                    initTimer()
+//                }
+//                
+//            } else {
+//                progress = 0.00
+//                entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(false)
+//                progressBar.xScale = progress
+//            }
         }
     }
     

@@ -11,7 +11,7 @@ class Constants {
     static let charactersCollisionMask: UInt32 = 1
     
     
-    static let playerVelocity: Double = 10
+    static let playerVelocity: Double = 15
     
     static let playerHeight: Double = 150
     static let playerWidth: Double = 150
