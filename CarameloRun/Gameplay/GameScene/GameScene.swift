@@ -98,5 +98,9 @@ class GameScene: SKScene {
     func getScore() -> Int{
         return localPlayer.component(ofType: ScoreComponent.self)?.score ?? 0
     }
+    
+    func getVictory() -> Bool{
+        return localPlayer.component(ofType: ScoreComponent.self)?.victory ?? false
+    }
 }
 

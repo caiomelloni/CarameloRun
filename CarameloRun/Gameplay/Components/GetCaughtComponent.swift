@@ -11,11 +11,11 @@ class GetCaughtComponent: GKComponent {
     var isArrested: Bool = false
     
     func gotCaught(_ respawn: CGPoint) {
-        print("player foi pego")
         if !isArrested {
             isArrested = true
             entity?.component(ofType: SpriteComponent.self)?.position = respawn
             
+            entity?.component(ofType: ScoreComponent.self)?.dogWasCatched()
             
             // removes player movement
             entity?.removeComponent(ofType: VelocityComponent.self)
@@ -29,10 +29,7 @@ class GetCaughtComponent: GKComponent {
             } else {
                 animationComponent?.arrest()
             }
-
         }
-        entity?.component(ofType: ScoreComponent.self)?.dogWasCatched()
-
     }
     
     func gotFreed() {

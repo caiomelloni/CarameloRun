@@ -43,6 +43,9 @@ class ProgressBarComponent: GKComponent {
         let task1 = scene.childNode(withName: "task1")!.frame
         
         if avaiable {
+            
+            self.entity?.component(ofType: CompleteTaskComponent.self)?.ChangeAvaiable(true)
+            self.entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(false)
 
             //TODO: fazer com que as tasks apareça que está sendo feita, para todos os jogadores
             
@@ -75,7 +78,9 @@ class ProgressBarComponent: GKComponent {
                 self.entity?.component(ofType: CompleteTaskComponent.self)?.ChangeAvaiable(false)
                 progressBar.xScale = 0.00
                 if (task1.contains((scene.localPlayer.component(ofType: SpriteComponent.self)!.position))) == true && scene.localPlayer.type == .dog{
+                    print(localPlayer.component(ofType: ScoreComponent.self)?.score ?? -100)
                     localPlayer.component(ofType: ScoreComponent.self)?.dogMakeTask()
+                    print(localPlayer.component(ofType: ScoreComponent.self)?.score ?? -100)
                 }
                 initTimer()
             }
@@ -85,26 +90,6 @@ class ProgressBarComponent: GKComponent {
                 entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(false)
                 progressBar.xScale = progress
             }
-            // código antigo está daqui para baixo
-            
-//            if (task1.contains(localPlayer.component(ofType: SpriteComponent.self)!.position)) == true && localPlayer.type == .dog{
-//                progress += 0.01
-//                progressBar.xScale = progress
-//                
-//                if progress >= 1.00 {
-//                    entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(true)
-//                    avaiable = false
-//                    self.entity?.component(ofType: CompleteTaskComponent.self)?.ChangeAvaiable(false)
-//                    progressBar.xScale = 0.00
-//                    localPlayer.component(ofType: ScoreComponent.self)?.dogMakeTask()
-//                    initTimer()
-//                }
-//                
-//            } else {
-//                progress = 0.00
-//                entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(false)
-//                progressBar.xScale = progress
-//            }
         }
     }
     
@@ -114,8 +99,6 @@ class ProgressBarComponent: GKComponent {
             x -= 1
             if x == 0 {
                 self.avaiable = true
-                self.entity?.component(ofType: CompleteTaskComponent.self)?.ChangeAvaiable(true)
-                self.entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(false)
                 timer.invalidate()
             }
         })
