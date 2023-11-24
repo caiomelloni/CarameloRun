@@ -22,6 +22,7 @@ class PreparingViewController: UIViewController {
     var playerCatcher: Int = 0
     var timer = ControllTimer()
     var catcherInformationShared = false
+    var minFontSize = 100.0
     
     var catchersName: String = ""
     
@@ -83,14 +84,41 @@ class PreparingViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
-        stackView.spacing = 24
+        stackView.spacing = 0
         
         let screenWidth = UIScreen.main.bounds.width
-        let stackViewWidth = screenWidth * 0.8
-        
+        let stackViewWidth = screenWidth * 0.9
         
         stackView.frame = CGRect(x: (screenWidth - stackViewWidth) / 2, y: (UIScreen.main.bounds.height / 2) - 120, width: stackViewWidth, height: 150)
+        
+        for i in 0...(players.count - 1){
+            
+            let playerImage = players[i].photo
+            
+            let imageView = UIImageView()
+            imageView.image = playerImage
+            imageView.contentMode = .scaleAspectFit
+            
+            let playerNameLabel = UILabel()
+            var fontSize = 0.0
+            
+            playerNameLabel.text = "\(players[i].displayName)"
+            playerNameLabel.textAlignment = .center
+            playerNameLabel.adjustsFontSizeToFitWidth = true
+            
+            playerNameLabel.numberOfLines = 1
+            playerNameLabel.setContentCompressionResistancePriority(.required, for: .vertical)
 
+            fontSize = playerNameLabel.font.pointSize
+            
+            if fontSize < minFontSize {
+                minFontSize = fontSize
+            }
+           
+        }
+        
+        print("minFontSize: \(minFontSize)")
+        
         for i in 0...(players.count - 1){
             
             let playerImage = players[i].photo
@@ -102,13 +130,12 @@ class PreparingViewController: UIViewController {
             let playerNameLabel = UILabel()
           
             
-            
             playerNameLabel.text = "\(players[i].displayName)"
             playerNameLabel.textAlignment = .center
-            playerNameLabel.font = .boldSystemFont(ofSize: 20)
+            playerNameLabel.font = .boldSystemFont(ofSize: minFontSize)
             playerNameLabel.textColor = UIColor(red: 32.0/255.0, green: 46.0/255.0, blue: 55.0/255.0, alpha: 1.0)
             playerNameLabel.alpha = 1.0
-            playerNameLabel.numberOfLines = 2
+            playerNameLabel.numberOfLines = 1
             playerNameLabel.setContentCompressionResistancePriority(.required, for: .vertical)
 
             let playerTypeLabel = UILabel()
@@ -122,10 +149,17 @@ class PreparingViewController: UIViewController {
             }
             
             playerTypeLabel.textAlignment = .center
-            playerTypeLabel.font = .boldSystemFont(ofSize: 20)
-            playerTypeLabel.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+            //playerNameLabel.font = .boldSystemFont(ofSize: minFontSize)
+            playerTypeLabel.font = UIFont(name: "Crang", size: 16)
+            
+            if players[i].ready {
+                playerTypeLabel.textColor = UIColor(red: 57.0/255.0, green: 103.0/255.0, blue: 41.0/255.0, alpha: 1.0)
+            } else {
+                playerTypeLabel.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+
+            }
             playerTypeLabel.alpha = 1.0
-            playerTypeLabel.numberOfLines = 2
+            playerTypeLabel.numberOfLines = 1
             playerTypeLabel.setContentCompressionResistancePriority(.required, for: .vertical)
                         
             let verticalStackView = UIStackView(arrangedSubviews: [imageView, playerNameLabel, playerTypeLabel])
@@ -172,6 +206,7 @@ class PreparingViewController: UIViewController {
         
         sendPreparingPlayers(prep)
         allReady(prep)
+        configureStackView(players: players)
     }
     
     func allReady(_ state: PreparingPlayres) {
@@ -238,7 +273,6 @@ class PreparingViewController: UIViewController {
    
 }
 
-
 extension PreparingViewController: GKMatchDelegate{
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
         
@@ -249,7 +283,24 @@ extension PreparingViewController: GKMatchDelegate{
         do {
             if let preparingPlayers = try? JSONDecoder().decode(PreparingPlayres.self, from: jsonData) {
                 allReady(preparingPlayers) //Se os dados podem ser decodificados como uma instância de PreparingPlayres, chama a função allReady(preparingPlayers).
+
+                configureStackView(players: players)
+                
+//                let alert = UIAlertController(title: "Nice!",
+//                                              message: "recebi Player is ready: \(preparingPlayers.name) !",
+//                                              preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//                self.present(alert, animated: true, completion: nil)
+                
+                
+
+                
             } else if let definedCatcher = try? JSONDecoder().decode(IsCatcher.self, from: jsonData) { //Se os dados não puderem ser decodificados como PreparingPlayres mas puderem ser decodificados como IsCatcher, realiza algumas operações adicionais.
+//                let alert = UIAlertController(title: "Nice!",
+//                                              message: "recebi o Ze Cadelo! \(definedCatcher.name) : \(players[1].displayName)",
+//                                              preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//                self.present(alert, animated: true, completion: nil)
                 catchersName = definedCatcher.name // ele atribui o nome de usuário "sorteado"em definprep para cumprir a função de zé cadelo à variável catchersname
                 execute()
             }
