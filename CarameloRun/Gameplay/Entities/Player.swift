@@ -73,6 +73,7 @@ class Player: GKEntity {
         let body = SKPhysicsBody(rectangleOf: size)
         body.affectedByGravity = true
         body.allowsRotation = false
+        body.mass = Constants.playerMass
         
         body.contactTestBitMask = Constants.charactersCollisionMask
         body.categoryBitMask = Constants.charactersCollisionMask

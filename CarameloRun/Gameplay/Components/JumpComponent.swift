@@ -32,7 +32,7 @@ class JumpComponent: GKComponent {
                 direction = -1
             }
             spritComponent.physicsBody?.applyImpulse(
-                .init(dx: direction * spritComponent.size.width * jumpXMultiplyer, dy: spritComponent.size.height * jumpYMultiplyer)
+                .init(dx: direction * jumpXMultiplyer, dy: jumpYMultiplyer)
             )
         }
 
