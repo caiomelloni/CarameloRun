@@ -8,7 +8,7 @@
 import SpriteKit
 
 class ControllTimer {
-    var n: Int = 120
+    var n: Int = Constants.gameTime
 
     var number = SKLabelNode(fontNamed: "Helvetica")
     var node = SKSpriteNode()
