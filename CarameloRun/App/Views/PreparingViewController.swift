@@ -150,8 +150,14 @@ class PreparingViewController: UIViewController {
             
             playerTypeLabel.textAlignment = .center
             //playerNameLabel.font = .boldSystemFont(ofSize: minFontSize)
-            playerTypeLabel.font = .boldSystemFont(ofSize: 19)
-            playerTypeLabel.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+            playerTypeLabel.font = UIFont(name: "Crang", size: 16)
+            
+            if players[i].ready {
+                playerTypeLabel.textColor = UIColor(red: 57.0/255.0, green: 103.0/255.0, blue: 41.0/255.0, alpha: 1.0)
+            } else {
+                playerTypeLabel.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+
+            }
             playerTypeLabel.alpha = 1.0
             playerTypeLabel.numberOfLines = 1
             playerTypeLabel.setContentCompressionResistancePriority(.required, for: .vertical)
@@ -200,6 +206,7 @@ class PreparingViewController: UIViewController {
         
         sendPreparingPlayers(prep)
         allReady(prep)
+        configureStackView(players: players)
     }
     
     func allReady(_ state: PreparingPlayres) {
@@ -266,7 +273,6 @@ class PreparingViewController: UIViewController {
    
 }
 
-
 extension PreparingViewController: GKMatchDelegate{
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
         
@@ -277,7 +283,24 @@ extension PreparingViewController: GKMatchDelegate{
         do {
             if let preparingPlayers = try? JSONDecoder().decode(PreparingPlayres.self, from: jsonData) {
                 allReady(preparingPlayers) //Se os dados podem ser decodificados como uma instância de PreparingPlayres, chama a função allReady(preparingPlayers).
+
+                configureStackView(players: players)
+                
+//                let alert = UIAlertController(title: "Nice!",
+//                                              message: "recebi Player is ready: \(preparingPlayers.name) !",
+//                                              preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//                self.present(alert, animated: true, completion: nil)
+                
+                
+
+                
             } else if let definedCatcher = try? JSONDecoder().decode(IsCatcher.self, from: jsonData) { //Se os dados não puderem ser decodificados como PreparingPlayres mas puderem ser decodificados como IsCatcher, realiza algumas operações adicionais.
+//                let alert = UIAlertController(title: "Nice!",
+//                                              message: "recebi o Ze Cadelo! \(definedCatcher.name) : \(players[1].displayName)",
+//                                              preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//                self.present(alert, animated: true, completion: nil)
                 catchersName = definedCatcher.name // ele atribui o nome de usuário "sorteado"em definprep para cumprir a função de zé cadelo à variável catchersname
                 execute()
             }
