@@ -32,6 +32,7 @@ class CatchComponent: GKComponent {
         
         if allPlayersCaught {
             entity?.component(ofType: ScoreComponent.self)?.humanCatchAllDogs()
+            
             finishGame?()
         }
         
