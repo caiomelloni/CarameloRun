@@ -40,6 +40,7 @@
 		F89283FD2AE964A900A3B499 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89283FC2AE964A900A3B499 /* Constants.swift */; };
 		F898070F2ACDA1880044D237 /* Zposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F898070E2ACDA1880044D237 /* Zposition.swift */; };
 		F89807112ACDA4130044D237 /* Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89807102ACDA4130044D237 /* Dimensions.swift */; };
+		F89EEE8F2B10C324007EEFA4 /* ComponentSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89EEE8E2B10C324007EEFA4 /* ComponentSystem.swift */; };
 		F8A004A22AFA609600A9DAC3 /* GetCaughtComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A004A12AFA609600A9DAC3 /* GetCaughtComponent.swift */; };
 		F8A004A42AFA71D500A9DAC3 /* HealthComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A004A32AFA71D500A9DAC3 /* HealthComponent.swift */; };
 		F8D1A9042B0E48450075F6C4 /* LobbyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D1A9032B0E48450075F6C4 /* LobbyHelper.swift */; };
@@ -94,6 +95,7 @@
 		F89283FC2AE964A900A3B499 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F898070E2ACDA1880044D237 /* Zposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zposition.swift; sourceTree = "<group>"; };
 		F89807102ACDA4130044D237 /* Dimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dimensions.swift; sourceTree = "<group>"; };
+		F89EEE8E2B10C324007EEFA4 /* ComponentSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentSystem.swift; sourceTree = "<group>"; };
 		F8A004A12AFA609600A9DAC3 /* GetCaughtComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCaughtComponent.swift; sourceTree = "<group>"; };
 		F8A004A32AFA71D500A9DAC3 /* HealthComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthComponent.swift; sourceTree = "<group>"; };
 		F8D1A9032B0E48450075F6C4 /* LobbyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyHelper.swift; sourceTree = "<group>"; };
@@ -164,7 +166,6 @@
 			children = (
 				FB3E27CA2AFBB9F500430E2D /* Tasks.swift */,
 				F82787002AC5A2F20047111D /* Player.swift */,
-				F87D81F62AEACD400006CDD8 /* EntityManager.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -297,6 +298,7 @@
 		F89283FB2AE9647500A3B499 /* Gameplay */ = {
 			isa = PBXGroup;
 			children = (
+				F89EEE8D2B10C25B007EEFA4 /* systems */,
 				F870AAF02AF12A9000195173 /* GameScene */,
 				F87120CE2AF013CE00697E21 /* GameTools */,
 				F87D81F52AEA98AC0006CDD8 /* DataModel */,
@@ -330,6 +332,15 @@
 			);
 			name = Utils;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		F89EEE8D2B10C25B007EEFA4 /* systems */ = {
+			isa = PBXGroup;
+			children = (
+				F87D81F62AEACD400006CDD8 /* EntityManager.swift */,
+				F89EEE8E2B10C324007EEFA4 /* ComponentSystem.swift */,
+			);
+			path = systems;
 			sourceTree = "<group>";
 		};
 		F8EE82642AF273E800158D9B /* ControllTimer */ = {
@@ -427,6 +438,7 @@
 				F898070F2ACDA1880044D237 /* Zposition.swift in Sources */,
 				F85FD5482AF90C6D009CB45A /* CatchComponent.swift in Sources */,
 				F870AAF32AF12ADE00195173 /* HandlePlayersExtension.swift in Sources */,
+				F89EEE8F2B10C324007EEFA4 /* ComponentSystem.swift in Sources */,
 				F854918A2AE16F71004EA5B1 /* MenuInicialViewController.swift in Sources */,
 				F8EE826A2AF2932F00158D9B /* CatcherStateMachine.swift in Sources */,
 				F87120BA2AEBF20C00697E21 /* JumpComponent.swift in Sources */,
