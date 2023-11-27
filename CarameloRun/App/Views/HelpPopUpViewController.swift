@@ -290,7 +290,7 @@ class HelpPopUpViewController: UIViewController {
         labelTitle2.font = UIFont(name: "Crang", size: 30)
         labelTitle2.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
         
-        canvas.addSubview(labelTitle2)
+        contentView.addSubview(labelTitle2)
         
         labelTitle2.translatesAutoresizingMaskIntoConstraints = false
 
@@ -306,7 +306,7 @@ class HelpPopUpViewController: UIViewController {
         labelDescription2.textColor = UIColor(red: 32.0/255.0, green: 46.0/255.0, blue: 55.0/255.0, alpha: 1.0)
         labelDescription2.numberOfLines = 0
         
-        canvas.addSubview(labelDescription2)
+        contentView.addSubview(labelDescription2)
 
         labelDescription2.translatesAutoresizingMaskIntoConstraints = false
         
@@ -383,9 +383,6 @@ class HelpPopUpViewController: UIViewController {
         ButtonRightImageView.contentMode = .scaleAspectFit
         ButtonJumpImageView.contentMode = .scaleAspectFit
         
-            
-        
-        
         mainStackView.addArrangedSubview(jumpView)
         mainStackView.addArrangedSubview(leftView)
         mainStackView.addArrangedSubview(rightView)
@@ -395,12 +392,12 @@ class HelpPopUpViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             mainStackView.topAnchor.constraint(equalTo: labelTitle1.bottomAnchor, constant: 26),
-            mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50),
-            mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0)
+           // mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50),
+            mainStackView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.25),
+            mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32)
             
         ])
 
-        print("case 1")
 
     }
     
