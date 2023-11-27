@@ -79,14 +79,27 @@ class HelpPopUpViewController: UIViewController {
     let ButtonJumpImageView = UIImageView(image: UIImage(named: "JumpButtonUp"))
     var alreadyCalled = false
     
-    private var canvas: UIView = {
-    let view = UIView()
-    view.backgroundColor = UIColor(red: 248.0/255.0, green: 228.0/255.0, blue: 172.0/255.0, alpha: 1.0)
-    view.layer.borderWidth = 3
-    view.layer.borderColor = UIColor.black.cgColor
-    view.translatesAutoresizingMaskIntoConstraints = false
+//    private var scrollView: UIScrollView = {
+//        let scrollView = UIScrollView()
+//        scrollView.backgroundColor = UIColor.blue
+//        
+//        return scrollView
+//    }()
+    
+    private var canvas: UIScrollView = {
+    let scrollView = UIScrollView()
+    scrollView.backgroundColor = UIColor(red: 248.0/255.0, green: 228.0/255.0, blue: 172.0/255.0, alpha: 1.0)
+    scrollView.layer.borderWidth = 3
+    scrollView.layer.borderColor = UIColor.black.cgColor
  
-    return view
+    return scrollView
+    }()
+    
+    private var contentView: UIView = {
+        let view = UIView()
+       // view.backgroundColor = UIColor.green
+       
+        return view
     }()
     
     
@@ -127,7 +140,6 @@ class HelpPopUpViewController: UIViewController {
         view.backgroundColor = UIColor.black.withAlphaComponent(0.1)
         view.addSubview(canvas)
         setcanvasConstraints()
-      
         
         view.addSubview(segmentedControl)
         setupSegmentedControl()
@@ -158,6 +170,9 @@ class HelpPopUpViewController: UIViewController {
     }
     
     func setcanvasConstraints() {
+        
+        canvas.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
             canvas.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             canvas.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -190,8 +205,8 @@ class HelpPopUpViewController: UIViewController {
     
     @objc func handleSegmentedControlValueCHanged(_ sender: UISegmentedControl) {
         
-        canvas.subviews.forEach { $0.removeFromSuperview() }
-
+        contentView.subviews.forEach { $0.removeFromSuperview() }
+        
         switch sender.selectedSegmentIndex {
         case 0:
           
@@ -199,16 +214,15 @@ class HelpPopUpViewController: UIViewController {
             configureCanvas0()
             
         case 1:
-            print("case 1")
             configureCanvas1()
 
         case 2:
             print("case 2")
-            configureCanvas2()
+            //configureCanvas2()
 
         default:
             print("case default")
-            configureCanvas0()
+            //configureCanvas0()
         }
         
         view.addSubview(canvas)
@@ -221,18 +235,35 @@ class HelpPopUpViewController: UIViewController {
     
     func configureCanvas0() {
             
+        self.canvas.addSubview(contentView)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let hConst =  contentView.heightAnchor.constraint(equalTo: canvas.heightAnchor)
+        hConst.isActive = true
+        hConst.priority = UILayoutPriority(50)
+        
+        NSLayoutConstraint.activate([
+        
+            contentView.topAnchor.constraint(equalTo: self.canvas.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: self.canvas.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: self.canvas.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: self.canvas.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: self.canvas.widthAnchor)
+            
+        ])
+        
         labelTitle1.text = "Caramelo"
         labelTitle1.font = UIFont(name: "Crang", size: 30)
         labelTitle1.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
         
-        canvas.addSubview(labelTitle1)
+        contentView.addSubview(labelTitle1)
 
         labelTitle1.translatesAutoresizingMaskIntoConstraints = false
         
             NSLayoutConstraint.activate([
 
-                labelTitle1.topAnchor.constraint(equalTo: canvas.topAnchor, constant: 68),
-                labelTitle1.leadingAnchor.constraint(equalTo: canvas.leadingAnchor, constant: 32)
+                labelTitle1.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 68),
+                labelTitle1.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 24)
        
             ])
         
@@ -242,16 +273,16 @@ class HelpPopUpViewController: UIViewController {
         labelDescription1.textColor = UIColor(red: 32.0/255.0, green: 46.0/255.0, blue: 55.0/255.0, alpha: 1.0)
         labelDescription1.numberOfLines = 0
         
-        canvas.addSubview(labelDescription1)
+        contentView.addSubview(labelDescription1)
 
         labelDescription1.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
 
             labelDescription1.topAnchor.constraint(equalTo: labelTitle1.bottomAnchor, constant: 12),
-            labelDescription1.leadingAnchor.constraint(equalTo: canvas.leadingAnchor, constant: 32),
-            labelDescription1.trailingAnchor.constraint(equalTo: canvas.trailingAnchor, constant: -32)
-           
+            labelDescription1.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
+            labelDescription1.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24)
+            
         ])
         
         
@@ -266,7 +297,7 @@ class HelpPopUpViewController: UIViewController {
         NSLayoutConstraint.activate([
 
             labelTitle2.topAnchor.constraint(equalTo: labelDescription1.bottomAnchor, constant: 24),
-            labelTitle2.leadingAnchor.constraint(equalTo: canvas.leadingAnchor, constant: 32)
+            labelTitle2.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24)
             
         ])
         
@@ -280,22 +311,24 @@ class HelpPopUpViewController: UIViewController {
         labelDescription2.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-
+            
             labelDescription2.topAnchor.constraint(equalTo: labelTitle2.bottomAnchor, constant: 12),
-            labelDescription2.leadingAnchor.constraint(equalTo: canvas.leadingAnchor, constant: 32),
-            labelDescription2.trailingAnchor.constraint(equalTo: canvas.trailingAnchor, constant: -32)
-           
+            labelDescription2.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
+            labelDescription2.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
+            labelDescription2.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+
         ])
-     
-        
        
         }
     
     func configureCanvas1() {
         
-        for subview in mainStackView.subviews {
+        for subview in contentView.subviews {
                subview.removeFromSuperview()
            }
+        
+        self.canvas.addSubview(contentView)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         
         let jumpView = IconLabelView()
         jumpView.configure(with: UIImage(named: "JumpButtonUp"), text: "Pular")
@@ -306,24 +339,40 @@ class HelpPopUpViewController: UIViewController {
         let rightView = IconLabelView()
         rightView.configure(with: UIImage(named: "ButtonRightUp"), text: "Andar para a direita")
         
+        self.canvas.addSubview(contentView)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let hConst =  contentView.heightAnchor.constraint(equalTo: canvas.heightAnchor)
+        hConst.isActive = true
+        hConst.priority = UILayoutPriority(50)
+        
+        NSLayoutConstraint.activate([
+        
+            contentView.topAnchor.constraint(equalTo: self.canvas.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: self.canvas.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: self.canvas.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: self.canvas.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: self.canvas.widthAnchor)
+            
+        ])
+
         labelTitle1.text = "Controles"
         labelTitle1.font = UIFont(name: "Crang", size: 30)
         labelTitle1.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
         
-        canvas.addSubview(labelTitle1)
+        contentView.addSubview(labelTitle1)
         
         labelTitle1.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
-            labelTitle1.topAnchor.constraint(equalTo: canvas.topAnchor, constant: 68),
-            labelTitle1.leadingAnchor.constraint(equalTo: canvas.leadingAnchor, constant: 32)
+            labelTitle1.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 68),
+            labelTitle1.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32)
             
         ])
         
         
-        
-        canvas.addSubview(mainStackView)
+        contentView.addSubview(mainStackView)
         
         mainStackView.alignment = .center
         mainStackView.distribution = .fillEqually
@@ -346,15 +395,14 @@ class HelpPopUpViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             mainStackView.topAnchor.constraint(equalTo: labelTitle1.bottomAnchor, constant: 26),
-            mainStackView.bottomAnchor.constraint(equalTo: canvas.bottomAnchor, constant: -50),
-            mainStackView.leadingAnchor.constraint(equalTo: canvas.leadingAnchor, constant: 0)
+            mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50),
+            mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0)
             
         ])
-        
-        
-        
-   
-        }
+
+        print("case 1")
+
+    }
     
     func configureCanvas2() {
             
@@ -362,14 +410,14 @@ class HelpPopUpViewController: UIViewController {
         labelTitle1.font = UIFont(name: "Crang", size: 30)
         labelTitle1.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
         
-        canvas.addSubview(labelTitle1)
+        contentView.addSubview(labelTitle1)
 
         labelTitle1.translatesAutoresizingMaskIntoConstraints = false
         
             NSLayoutConstraint.activate([
 
-                labelTitle1.topAnchor.constraint(equalTo: canvas.topAnchor, constant: 68),
-                labelTitle1.leadingAnchor.constraint(equalTo: canvas.leadingAnchor, constant: 32)
+                labelTitle1.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 68),
+                labelTitle1.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32)
        
             ])
         
@@ -379,31 +427,30 @@ class HelpPopUpViewController: UIViewController {
         labelDescription1.textColor = UIColor(red: 32.0/255.0, green: 46.0/255.0, blue: 55.0/255.0, alpha: 1.0)
         labelDescription1.numberOfLines = 0
         
-        canvas.addSubview(labelDescription1)
+        contentView.addSubview(labelDescription1)
 
         labelDescription1.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
 
             labelDescription1.topAnchor.constraint(equalTo: labelTitle1.bottomAnchor, constant: 12),
-            labelDescription1.leadingAnchor.constraint(equalTo: canvas.leadingAnchor, constant: 32),
-            labelDescription1.trailingAnchor.constraint(equalTo: canvas.trailingAnchor, constant: -32)
+            labelDescription1.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32),
+            labelDescription1.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -32)
            
         ])
-        
         
         labelTitle2.text = "Convidar seu amigo"
         labelTitle2.font = UIFont(name: "Crang", size: 30)
         labelTitle2.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
         
-        canvas.addSubview(labelTitle2)
+        contentView.addSubview(labelTitle2)
         
         labelTitle2.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
 
             labelTitle2.topAnchor.constraint(equalTo: labelDescription1.bottomAnchor, constant: 24),
-            labelTitle2.leadingAnchor.constraint(equalTo: canvas.leadingAnchor, constant: 32)
+            labelTitle2.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32)
             
         ])
         
@@ -412,15 +459,15 @@ class HelpPopUpViewController: UIViewController {
         labelDescription2.textColor = UIColor(red: 32.0/255.0, green: 46.0/255.0, blue: 55.0/255.0, alpha: 1.0)
         labelDescription2.numberOfLines = 0
         
-        canvas.addSubview(labelDescription2)
+        contentView.addSubview(labelDescription2)
 
         labelDescription2.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
 
             labelDescription2.topAnchor.constraint(equalTo: labelTitle2.bottomAnchor, constant: 12),
-            labelDescription2.leadingAnchor.constraint(equalTo: canvas.leadingAnchor, constant: 32),
-            labelDescription2.trailingAnchor.constraint(equalTo: canvas.trailingAnchor, constant: -32)
+            labelDescription2.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32),
+            labelDescription2.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -32)
            
         ])
      
