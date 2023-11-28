@@ -13,12 +13,12 @@ class ProgressBarComponent: GKComponent {
     var avaiable: Bool = false
     var progress: CGFloat = 0.00
     var progressBar = SKShapeNode()
-    var scene: SKScene
+    var scene: GameScene
     var localPlayer: Player
     var timer: Timer!
     var time: Int = 15
     
-    init(_ scene: SKScene, _ localPlayer: Player) {
+    init(_ scene: GameScene, _ localPlayer: Player) {
         self.scene = scene
         self.localPlayer = localPlayer
         
@@ -36,6 +36,7 @@ class ProgressBarComponent: GKComponent {
         progressBar.position = CGPoint(x: task1.midX, y: task1.midY+80)
         progressBar.xScale = 0.00
         scene.addChild(progressBar)
+        
     }
     
     func verify() {
@@ -43,20 +44,48 @@ class ProgressBarComponent: GKComponent {
         
         if avaiable {
             
-            if (task1.contains(localPlayer.component(ofType: SpriteComponent.self)!.position)) == true && localPlayer.type == .dog{
-                progress += 0.01
-                progressBar.xScale = progress
+            self.entity?.component(ofType: CompleteTaskComponent.self)?.ChangeAvaiable(true)
+            self.entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(false)
+
+            //TODO: fazer com que as tasks apareça que está sendo feita, para todos os jogadores
+            
+            var thereAreSomeoneInsideTheTask = 0
+            for player in scene.remotePlayers.values {
                 
-                if progress >= 1.00 {
-                    entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(true)
-                    avaiable = false
-                    self.entity?.component(ofType: CompleteTaskComponent.self)?.ChangeAvaiable(false)
-                    progressBar.xScale = 0.00
-                    localPlayer.component(ofType: ScoreComponent.self)?.dogMakeTask()
-                    initTimer()
+                if player.type == .dog {
+                    if (task1.contains((player.component(ofType: SpriteComponent.self)!.position))) == true {
+                        progress += 0.01
+                        progressBar.xScale = progress
+                    } else {
+                        thereAreSomeoneInsideTheTask += 1
+                    }
                 }
+            }
+            
+            if scene.localPlayer.type == .dog {
                 
-            } else {
+                if (task1.contains((scene.localPlayer.component(ofType: SpriteComponent.self)!.position))) == true {
+                    progress += 0.01
+                    progressBar.xScale = progress
+                } else {
+                    thereAreSomeoneInsideTheTask += 1
+                }
+            }
+            
+            if progress >= 1.50 {
+                entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(true)
+                avaiable = false
+                self.entity?.component(ofType: CompleteTaskComponent.self)?.ChangeAvaiable(false)
+                progressBar.xScale = 0.00
+                if (task1.contains((scene.localPlayer.component(ofType: SpriteComponent.self)!.position))) == true && scene.localPlayer.type == .dog{
+                    print(localPlayer.component(ofType: ScoreComponent.self)?.score ?? -100)
+                    localPlayer.component(ofType: ScoreComponent.self)?.dogMakeTask()
+                    print(localPlayer.component(ofType: ScoreComponent.self)?.score ?? -100)
+                }
+                initTimer()
+            }
+            
+            if thereAreSomeoneInsideTheTask == scene.remotePlayers.count {
                 progress = 0.00
                 entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(false)
                 progressBar.xScale = progress
@@ -70,8 +99,6 @@ class ProgressBarComponent: GKComponent {
             x -= 1
             if x == 0 {
                 self.avaiable = true
-                self.entity?.component(ofType: CompleteTaskComponent.self)?.ChangeAvaiable(true)
-                self.entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(false)
                 timer.invalidate()
             }
         })

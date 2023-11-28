@@ -10,16 +10,17 @@ import GameplayKit
 
 class ScoreComponent: GKComponent {
     var score: Int = 0
+    var victory: Bool = false
     
     //func for the dog
     // dog make task
     func dogMakeTask() {
-        score = score + 10
+        score = score + 20
     }
     
     // dog was catched
     func dogWasCatched() {
-        score = score - 20
+        score = score - 15
     }
     
     // dog freed his friend
@@ -30,6 +31,7 @@ class ScoreComponent: GKComponent {
     // dog ran away
     func dogAdopted() {
         score = score + 41
+        victory = true
     }
     
     // dog not adopted
@@ -48,7 +50,6 @@ class ScoreComponent: GKComponent {
     // man catched all the dogs
     func humanCatchAllDogs() {
         score = score + 24
+        victory = true
     }
-    
-    //the max for both is 80 points
 }

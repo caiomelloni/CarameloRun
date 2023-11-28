@@ -100,7 +100,10 @@ class GameViewController: UIViewController {
                     score = 0
                 }
                 
-                self.navigationController?.pushViewController(EndGame(score), animated: true)
+                var victory = gameScene?.getVictory() ?? false
+                
+                self.navigationController?.pushViewController(EndGame(score, GKLocalPlayer.local.displayName, victory), animated: true)
+                
                 controllerFinishGame = 1
             }
         }

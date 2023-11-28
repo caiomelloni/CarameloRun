@@ -37,7 +37,7 @@ class Player: GKEntity {
         
         super.init()
         
-        let spriteComponent = setPlayerBodySpriteComponent(SpriteComponent(texture: SKTexture(imageNamed: "Idle1"), size: CGSize(width: Constants.playerWidth, height: Constants.playerHeight)))
+        let spriteComponent = setPlayerBodySpriteComponent()
         
         let components = [
             spriteComponent,
@@ -65,11 +65,15 @@ class Player: GKEntity {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setPlayerBodySpriteComponent(_ spriteComponent: SpriteComponent) -> SpriteComponent {
-        let body = SKPhysicsBody(texture: SKTexture(imageNamed: "Idle1"),
-                                 size: CGSize(width: Constants.playerWidth, height: Constants.playerHeight))
+    private func setPlayerBodySpriteComponent() -> SpriteComponent {
+        let imageName = (type == .dog ? Constants.playerFramesPrefix  : Constants.catcherFramesPrefix) + "Idle1"
+        let size = type == .dog ? CGSize(width: Constants.playerWidth, height: Constants.playerHeight) : CGSize(width: Constants.catcherWidth, height: Constants.catcherHeight)
+        
+        let spriteComponent = SpriteComponent(imageName: imageName, size: size)
+        let body = SKPhysicsBody(rectangleOf: size)
         body.affectedByGravity = true
         body.allowsRotation = false
+        body.mass = Constants.playerMass
         
         body.contactTestBitMask = Constants.charactersCollisionMask
         body.categoryBitMask = Constants.charactersCollisionMask
