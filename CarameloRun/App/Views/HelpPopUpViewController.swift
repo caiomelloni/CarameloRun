@@ -80,13 +80,7 @@ class HelpPopUpViewController: UIViewController {
     var alreadyCalled = false
     var case1AlreadyAcessed = false
     
-    
-    //    private var scrollView: UIScrollView = {
-    //        let scrollView = UIScrollView()
-    //        scrollView.backgroundColor = UIColor.blue
-    //
-    //        return scrollView
-    //    }()
+ 
     
     private var canvas: UIScrollView = {
         let scrollView = UIScrollView()
@@ -99,7 +93,7 @@ class HelpPopUpViewController: UIViewController {
     
     private var contentView: UIView = {
         let view = UIView()
-        // view.backgroundColor = UIColor.green
+  
         
         return view
     }()
@@ -107,7 +101,6 @@ class HelpPopUpViewController: UIViewController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        //self.canvas  // Initialize in the init method
         configureCanvas0()
     }
     
@@ -224,7 +217,7 @@ class HelpPopUpViewController: UIViewController {
             
         default:
             print("case default")
-            //configureCanvas0()
+            configureCanvas0()
         }
         
         view.addSubview(canvas)
