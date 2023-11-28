@@ -8,6 +8,6 @@
 import Foundation
 
 enum Dimensions: Int {
-    case buttonHeight = 84
-    case buttonWidth = 120
+    case buttonHeight = 143
+    case buttonWidth = 204
 }
