@@ -50,6 +50,7 @@ class GameScene: SKScene {
         addChild(timer.node)
         
         InsertTask()
+
         
     }
     

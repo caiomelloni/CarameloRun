@@ -36,7 +36,7 @@ class Joystick {
     }
     
     private func position(x: Double, y: Double) {
-        node.position = CGPoint(x: x + 100 + node.frame.width / 2, y: y + 70 + node.frame.height)
+        node.position = CGPoint(x: x + 150 + node.frame.width / 2, y: y + 120 + node.frame.height)
     }
     
     func touchBegan(_ touch: UITouch) {
@@ -66,14 +66,14 @@ class Joystick {
         }
     }
     
-    func setJoystickPositionRelativeToCamera(_ camera: SKCameraNode, _ screenFrame: CGRect) {
+    func setJoystickPositionRelativeToCamera(_ camera: LocalPlayerCamera, _ screenFrame: CGRect) {
         position(
-            x: camera.position.x - screenFrame.maxX,
-            y: camera.position.y - screenFrame.maxY
+            x: camera.position.x - screenFrame.maxX * camera.scaleFactorX,
+            y: camera.position.y - screenFrame.maxY * camera.scaleFactorY
         )
     }
     
-    func update(_ sceneCamera: SKCameraNode, _ frame: CGRect, _ dog: Player) {
+    func update(_ sceneCamera: LocalPlayerCamera, _ frame: CGRect, _ dog: Player) {
         setJoystickPositionRelativeToCamera(sceneCamera, frame)
         
         let velocityComponent = dog.component(ofType: VelocityComponent.self)
