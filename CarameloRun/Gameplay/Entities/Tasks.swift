@@ -10,18 +10,18 @@ import GameplayKit
 import GameKit
 
 class Tasks: GKEntity {
-    var scene: SKScene
-    var localPlayer: Player
+    var scene: GameScene
+    var frame: CGRect
     
-    init(_ scene: SKScene, _ localPlayer: Player) {
+    init(_ scene: GameScene, _ frame: CGRect) {
         self.scene = scene
-        self.localPlayer = localPlayer
+        self.frame = frame
         
         super.init()
         
         let components = [
-            ProgressBarComponent(scene as! GameScene, localPlayer),
-            CompleteTaskComponent(scene)
+            ProgressBarComponent(scene, frame),
+            CompleteTaskComponent(scene, frame)
         ]
         
         components.forEach{ component in
