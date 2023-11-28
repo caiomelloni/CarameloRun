@@ -185,7 +185,7 @@ class PreparingViewController: UIViewController {
             
             button.setTitle("Estou pronto!", for: .normal)
             button.frame = CGRect(x: xCoordinate, y: yCoordinate, width: buttonWidth, height: 56)
-            button.setTitleColor(UIColor.white, for: .normal) /
+            button.setTitleColor(UIColor.white, for: .normal) 
             button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
             button.backgroundColor = UIColor(_colorLiteralRed: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 0.5)
             
@@ -287,8 +287,8 @@ extension PreparingViewController: GKMatchDelegate{
 
                 
             } else if let definedCatcher = try? JSONDecoder().decode(IsCatcher.self, from: jsonData) {
-
                 catchersName = definedCatcher.name
+                execute()
             }
         }
     }
