@@ -194,19 +194,17 @@ class HelpPopUpViewController: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0:
           
-            print("case 0")
             configureCanvas0()
             
         case 1:
-            print("case 1")
             configureCanvas1()
 
         case 2:
-            print("case 2")
             configureCanvas2()
-
+            
+        case 3:
+            configureCanvas3()
         default:
-            print("case default")
             configureCanvas0()
         }
         
@@ -419,7 +417,10 @@ class HelpPopUpViewController: UIViewController {
      
         }
    
-    
+    func configureCanvas3() {
+        
+    }
+
     
 }
 
