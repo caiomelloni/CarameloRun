@@ -378,8 +378,8 @@ class HelpPopUpViewController: UIViewController {
         contentView.addSubview(mainStackView)
         
         mainStackView.alignment = .center
-        mainStackView.distribution = .fillEqually
-        mainStackView.spacing = 8
+        mainStackView.distribution = .equalSpacing
+        mainStackView.spacing = 0
         mainStackView.axis = .vertical
         
         ButtonLeftImageView.contentMode = .scaleAspectFit
@@ -398,7 +398,7 @@ class HelpPopUpViewController: UIViewController {
             mainStackView.topAnchor.constraint(equalTo: labelTitle1.bottomAnchor, constant: 26),
             mainStackView.widthAnchor.constraint(equalToConstant: 150),
             mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32),
-            // mainStackView.heightAnchor.constraint(equalToConstant: UIStackView.spacingUseSystem),
+            //mainStackView.heightAnchor.constraint(equalToConstant: 300),
             mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
             
         ])
