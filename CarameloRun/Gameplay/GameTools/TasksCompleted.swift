@@ -20,7 +20,7 @@ class TasksCompleted {
     }
     
     private func position(x: Double, y: Double) {
-        node.position = CGPoint(x: x - 1168, y: y + 540 + UIScreen.main.bounds.size.height/6)
+        node.position = CGPoint(x: x, y: y)
     }
     
     func updateNumberOfTasksCompleted(_ n: Int) {
@@ -30,5 +30,12 @@ class TasksCompleted {
     func update(_ camera: SKCameraNode, _ frame: CGRect) {
         position(x: camera.position.x + frame.maxX,
                  y: camera.position.y - frame.maxY)
+    }
+    
+    func update(_ camera: LocalPlayerCamera, _ screenFrame: CGRect) {
+        position(
+            x: camera.position.x + 0.68 * (screenFrame.minX * camera.scaleFactorX),
+            y: camera.position.y + 0.72 * (screenFrame.maxY * camera.scaleFactorY)
+        )
     }
 }
