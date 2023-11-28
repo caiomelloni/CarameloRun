@@ -10,7 +10,6 @@ import Foundation
 import Foundation
 import UIKit
 import GameKit
-//import TinyConstraints
 
 class IconLabelView: UIView {
     let imageView: UIImageView = {
@@ -66,8 +65,8 @@ class IconLabelView: UIView {
 
 class HelpPopUpViewController: UIViewController {
    
-    let exitButtonImage = UIImage(named: "ExitButton") as UIImage?
-    let exitButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
+    let exitButtonImage = UIImage(named: "ExitButton")
+    let exitButton = UIButton(type: UIButton.ButtonType.custom)
     var labelTitle1: UILabel = UILabel()
     let labelDescription1: UILabel = UILabel()
     let labelTitle2: UILabel = UILabel()
@@ -92,7 +91,7 @@ class HelpPopUpViewController: UIViewController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
             super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-            //self.canvas  // Initialize in the init method
+         
             configureCanvas0()
         }
 
@@ -334,9 +333,6 @@ class HelpPopUpViewController: UIViewController {
         ButtonRightImageView.contentMode = .scaleAspectFit
         ButtonJumpImageView.contentMode = .scaleAspectFit
         
-            
-        
-        
         mainStackView.addArrangedSubview(jumpView)
         mainStackView.addArrangedSubview(leftView)
         mainStackView.addArrangedSubview(rightView)
@@ -350,9 +346,6 @@ class HelpPopUpViewController: UIViewController {
             mainStackView.leadingAnchor.constraint(equalTo: canvas.leadingAnchor, constant: 0)
             
         ])
-        
-        
-        
    
         }
     

@@ -13,20 +13,18 @@ import GameKit
 class MenuInicialViewController: UIViewController {
     let stackView = UIStackView()
     let logoImageView = UIImageView(image: UIImage(named: "Logo"))
-    let helpButtonImage = UIImage(named: "helpButton") as UIImage?
-    let helpButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
-    let settingsButtonImage = UIImage(named: "settingsButton") as UIImage?
-    let settingsButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
-    let startButtonImage = UIImage(named: "startButton") as UIImage?
-    let startButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
+    let helpButtonImage = UIImage(named: "helpButton")
+    let helpButton = UIButton(type: UIButton.ButtonType.custom)
+    let settingsButtonImage = UIImage(named: "settingsButton")
+    let creditsButton = UIButton(type: UIButton.ButtonType.custom)
+    let startButtonImage = UIImage(named: "startButton")
+    let startButton = UIButton(type: UIButton.ButtonType.custom)
     let gameCenterHelper = GameCenterHelper()
     let connectionStatusLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         startButton.isEnabled = false
-        
-        
         configureButtons()
         configureStackView()
         setStackViewConstraints()
@@ -52,9 +50,9 @@ extension MenuInicialViewController {
         helpButton.setImage(helpButtonImage, for: .normal)
         helpButton.addTarget(self, action: #selector(showHelpPopUp), for: .touchUpInside)
         
-        settingsButton.translatesAutoresizingMaskIntoConstraints = false
-        settingsButton.setImage(settingsButtonImage, for: .normal)
-        settingsButton.addTarget(self, action: #selector(showSettingsPopUp), for: .touchUpInside)
+        creditsButton.translatesAutoresizingMaskIntoConstraints = false
+        creditsButton.setImage(settingsButtonImage, for: .normal)
+        creditsButton.addTarget(self, action: #selector(showCreditsPopUp), for: .touchUpInside)
       
     }
     
@@ -80,7 +78,7 @@ extension MenuInicialViewController {
     
     func setButtonsContraints() {
         view.addSubview(helpButton)
-        view.addSubview(settingsButton)
+        view.addSubview(creditsButton)
         
         helpButton.translatesAutoresizingMaskIntoConstraints = false
         
@@ -90,11 +88,11 @@ extension MenuInicialViewController {
            
         ])
         
-        settingsButton.translatesAutoresizingMaskIntoConstraints = false
+        creditsButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            settingsButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 33),
-            settingsButton.trailingAnchor.constraint(equalTo: helpButton.leadingAnchor, constant: -13)
+            creditsButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 33),
+            creditsButton.trailingAnchor.constraint(equalTo: helpButton.leadingAnchor, constant: -13)
            
         ])
         
@@ -118,8 +116,8 @@ extension MenuInicialViewController {
         self.present(vc, animated: true, completion: nil)
     }
     
-    @objc func showSettingsPopUp(){
-        let vc = SettingsPopUpViewController()
+    @objc func showCreditsPopUp(){
+        let vc = CreditsPopUpViewController()
         self.present(vc, animated: true, completion: nil)
     }
 }

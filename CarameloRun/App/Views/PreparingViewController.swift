@@ -40,7 +40,6 @@ class PreparingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       // configureButton()
         
         button.isEnabled = false
         
@@ -149,7 +148,7 @@ class PreparingViewController: UIViewController {
             }
             
             playerTypeLabel.textAlignment = .center
-            //playerNameLabel.font = .boldSystemFont(ofSize: minFontSize)
+          
             playerTypeLabel.font = UIFont(name: "Crang", size: 16)
             
             if players[i].ready {
@@ -282,26 +281,12 @@ extension PreparingViewController: GKMatchDelegate{
         
         do {
             if let preparingPlayers = try? JSONDecoder().decode(PreparingPlayres.self, from: jsonData) {
-                allReady(preparingPlayers) //Se os dados podem ser decodificados como uma instância de PreparingPlayres, chama a função allReady(preparingPlayers).
+                allReady(preparingPlayers)
 
                 configureStackView(players: players)
-                
-//                let alert = UIAlertController(title: "Nice!",
-//                                              message: "recebi Player is ready: \(preparingPlayers.name) !",
-//                                              preferredStyle: .alert)
-//                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//                self.present(alert, animated: true, completion: nil)
-                
-                
-
-                
-            } else if let definedCatcher = try? JSONDecoder().decode(IsCatcher.self, from: jsonData) { //Se os dados não puderem ser decodificados como PreparingPlayres mas puderem ser decodificados como IsCatcher, realiza algumas operações adicionais.
-//                let alert = UIAlertController(title: "Nice!",
-//                                              message: "recebi o Ze Cadelo! \(definedCatcher.name) : \(players[1].displayName)",
-//                                              preferredStyle: .alert)
-//                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//                self.present(alert, animated: true, completion: nil)
-                catchersName = definedCatcher.name // ele atribui o nome de usuário "sorteado"em definprep para cumprir a função de zé cadelo à variável catchersname
+    
+            } else if let definedCatcher = try? JSONDecoder().decode(IsCatcher.self, from: jsonData) {
+                catchersName = definedCatcher.name
                 execute()
             }
         }
