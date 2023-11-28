@@ -41,7 +41,7 @@ class EntityManager {
         }
         
         entities.remove(entity)
-        componentSystem.removeEntityComponents(entity)
+        componentSystem.removeEntityComponents(foundIn: entity)
     }
     
     func update(_ deltaTime: CFTimeInterval) {
