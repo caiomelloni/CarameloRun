@@ -8,6 +8,7 @@
 import Foundation
 import GameKit
 
+//Handles game center match making logic
 class LobbyHelper {
     
     private var imTheHost = false
@@ -15,22 +16,23 @@ class LobbyHelper {
     private var catcherIndex: Int = 0
     var delegate: LobbyHelperDelegate?
     private var match: GKMatch?
+    var allPlayersAreReadyToPlay = false
     
     func receivedData(_ match: GKMatch, _ data: Data, _ remotePlayer: GKPlayer) {
         receivedDefineCatcher(data)
         receivedSetPlayerAsReady(data)
-        delegate?.lobbyPlayersDidChange(allPlayers)
     }
     
     func initLobby(_ match: GKMatch) {
         self.match = match
+        match.delegate = delegate
         
         Task {
             
-            updatePlayersArray(await getAllPlayers())
+            updatePlayersArray(await getPlayersInitialInformation())
             
-            let bestHostName = (await match.chooseBestHostingPlayer())?.displayName
-            if bestHostName == GKLocalPlayer.local.displayName {
+            let hostName = allPlayers[0].displayName
+            if hostName == GKLocalPlayer.local.displayName {
                 imTheHost = true
             }
             
@@ -43,23 +45,19 @@ class LobbyHelper {
         
     }
     
-    func getReadyToPlay(_ match: GKMatch) {
-        //MARK: set local player to ready and send this information to everyone
+    //set local player to ready and send this information to everyone
+    func getReadyToPlay() {
         let displayName = GKLocalPlayer.local.displayName
         let playerIndex = allPlayers.firstIndex(where: {$0.displayName == displayName})
         allPlayers[playerIndex!].ready = true
         
-        do {
-            let data = try JSONEncoder().encode(PlayerSetToReady(displayName: displayName))
-            try? match.sendData(toAllPlayers: data, with: .reliable)
-        } catch {
-            print("FAIL => nao conseguiu mandar que o player esta pronto")
-        }
+        sendReliableData(PlayerSetToReadyData(displayName: displayName))
         
         updatePlayersArray(allPlayers)
     }
     
-    private func getAllPlayers() async -> [LobbyPlayer] {
+    //get players of the match initial informations
+    private func getPlayersInitialInformation() async -> [LobbyPlayer] {
         guard let match = self.match else {
             print("Warning: match was nil in getallplayers function")
             return []
@@ -97,36 +95,25 @@ class LobbyHelper {
         
     }
     
-    private func catcherNumberArrayIndex(_ numberOfPlayers: Int) -> Int {
-        return Int.random(in: 0...(numberOfPlayers - 1))
+    private func pickRandomCatcherArrayIndex(_ numberOfPlayers: Int) -> Int {
+//        return Int.random(in: 0...(numberOfPlayers - 1))
+        return 1
     }
     
     private func pickCatcherAndNotifyPlayers(_ match:GKMatch) {
-        let catcherIndex = catcherNumberArrayIndex(allPlayers.count)
+        let catcherIndex = pickRandomCatcherArrayIndex(allPlayers.count)
         self.catcherIndex = catcherIndex
         allPlayers[catcherIndex].playerType = .man
         updatePlayersArray(allPlayers)
-        do {
-            let data = try JSONEncoder().encode(CatcherPlayerArrayIndex(index: catcherIndex))
-            try? match.sendData(toAllPlayers: data, with: .reliable)
-        } catch {
-            print("FAIL => nao conseguiu mandar o player sorteado")
-        }
+        
+        sendReliableData(CatcherPlayerArrayIndexData(index: catcherIndex))
     }
     
     private func receivedDefineCatcher(_ data: Data) {
-        Task {
-            if allPlayers.count == 0 {
-                allPlayers = await getAllPlayers()
-            }
-            let dataJsonString = String(decoding: data, as: UTF8.self)
-            
-            let jsonData = dataJsonString.data(using: .utf8)!
-            if let catcherIndex = (try? JSONDecoder().decode(CatcherPlayerArrayIndex.self, from: jsonData))?.index {
-                print("received index: \(catcherIndex)")
-                self.catcherIndex = catcherIndex
-                updatePlayersArray(allPlayers)
-            }
+        
+        if let catcherIndex = (try? decodeReceivedData(data, CatcherPlayerArrayIndexData.self))?.index {
+            self.catcherIndex = catcherIndex
+            updatePlayersArray(allPlayers)
         }
         
     }
@@ -135,7 +122,7 @@ class LobbyHelper {
         let dataJsonString = String(decoding: data, as: UTF8.self)
         
         let jsonData = dataJsonString.data(using: .utf8)!
-        if let displayName = (try? JSONDecoder().decode(PlayerSetToReady.self, from: jsonData))?.displayName {
+        if let displayName = (try? JSONDecoder().decode(PlayerSetToReadyData.self, from: jsonData))?.displayName {
             for i in 0..<allPlayers.count {
                 if allPlayers[i].displayName == displayName {
                     allPlayers[i].ready = true
@@ -146,6 +133,7 @@ class LobbyHelper {
         updatePlayersArray(allPlayers)
     }
     
+    //Update the array of players and notify the changes to the UI
     private func updatePlayersArray(_ newArray: [LobbyPlayer]) {
         allPlayers = newArray
         if catcherIndex < allPlayers.count {
@@ -154,28 +142,61 @@ class LobbyHelper {
             }
             allPlayers[catcherIndex].playerType = .man
         }
-        DispatchQueue.main.async {
-            self.delegate?.lobbyPlayersDidChange(self.allPlayers)
+        
+        var allPlayersReady = true
+        for player in allPlayers {
+            if player.ready == false {
+                allPlayersReady = false
+                break
+            }
         }
+        
+        //Do not update the UI if there are no players
+        if self.allPlayers.isEmpty {
+            return
+        }
+        
+        DispatchQueue.main.async {
+            if allPlayersReady{
+                self.delegate?.allPlayersAreReadyToPlay(self.allPlayers)
+            } else {
+                self.delegate?.lobbyPlayersDidChange(self.allPlayers)
+            }
+        }
+    }
+    
+    private func sendReliableData(_ data: Codable) {
+        do {
+            let data = try JSONEncoder().encode(data)
+            try? match?.sendData(toAllPlayers: data, with: .reliable)
+        } catch {
+            print("FAIL => Unable to send data in LobbyHelper class")
+        }
+    }
+    
+    private func decodeReceivedData<T: Codable>(_ data: Data, _ type: T.Type) throws -> T where T : Decodable {
+        let dataJsonString = String(decoding: data, as: UTF8.self)
+        
+        let jsonData = dataJsonString.data(using: .utf8)!
+        
+        return try JSONDecoder().decode(T.self, from: jsonData)
+        
     }
 }
 
-struct CatcherPlayerArrayIndex: Codable {
+struct CatcherPlayerArrayIndexData: Codable {
     let index: Int
 }
 
-struct PlayerSetToReady: Codable {
+struct PlayerSetToReadyData: Codable {
     let displayName: String
 }
 
-protocol LobbyHelperDelegate: AnyObject {
+protocol LobbyHelperDelegate: GKMatchDelegate {
     func lobbyPlayersDidChange(_ players: [LobbyPlayer])
+    func allPlayersAreReadyToPlay(_ players: [LobbyPlayer])
+    func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer)
 }
 
-//MARK: handles received data
-extension PreparingViewController: GKMatchDelegate{
-    func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
-        lobbyHelper.receivedData(match, data, player)
-    }
-}
+
 
