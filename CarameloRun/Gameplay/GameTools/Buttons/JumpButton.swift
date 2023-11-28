@@ -11,13 +11,12 @@ class JumpButton {
     var node = SKSpriteNode(texture: SKTexture(imageNamed: "JumpButtonUp"))
 
     init() {
-       // node.size = CGSize(width: Dimensions.buttonWidth.rawValue, height: Dimensions.buttonHeight.rawValue)
-        node.xScale = 1.35
-        node.yScale = 1.35
+        node.size = CGSize(width: Dimensions.buttonWidth.rawValue, height: Dimensions.buttonWidth.rawValue)
+        node.zPosition = Zposition.joystick.rawValue
     }
     
     private func position(x: Double, y: Double) {
-        node.position = CGPoint(x: x - node.frame.width - 80, y: y + 45 + node.frame.height)
+        node.position = CGPoint(x: x - node.frame.width - 80, y: y + 85 + node.frame.height)
     }
     
     func touchBegan(_ touch: UITouch, _ scene: SKScene, _ player: Player) {
@@ -37,14 +36,14 @@ class JumpButton {
         }
     }
     
-    func setJumpBtnPositionRelativeToCamera(_ camera: SKCameraNode, _ frame: CGRect) {
+    func setJumpBtnPositionRelativeToCamera(_ camera: LocalPlayerCamera, _ screenFrame: CGRect) {
         position(
-            x: camera.position.x + frame.maxX,
-            y: camera.position.y - frame.maxY
+            x: camera.position.x + screenFrame.maxX * camera.scaleFactorX,
+            y: camera.position.y - screenFrame.maxY * camera.scaleFactorY
         )
     }
     
-    func update(_ camera: SKCameraNode, _ frame: CGRect) {
+    func update(_ camera: LocalPlayerCamera, _ frame: CGRect) {
        setJumpBtnPositionRelativeToCamera(camera, frame)
     }
     
