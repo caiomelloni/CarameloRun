@@ -130,7 +130,7 @@ extension GameScene {
     }
     
     func killPlayer() {
-        joystick.node.removeFromParent()
+        joystick.removeFromScene()
         jumpButton.node.removeFromParent()
         
         for player in entityManager.remotePlayers {

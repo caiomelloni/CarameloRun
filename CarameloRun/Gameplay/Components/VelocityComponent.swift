@@ -11,6 +11,8 @@ import GameplayKit
 // Adds velocity to a entity that has a SpriteComponent
 class VelocityComponent: GKComponent {
     let velocity: Double
+    private var isJoystickInUse: Bool = false
+    private var joystickDirection: Direction = .left
     
     init(_ velocity: Double) {
         self.velocity = velocity
@@ -42,5 +44,21 @@ class VelocityComponent: GKComponent {
             entity?.component(ofType: PlayerAnimationComponent.self)?.idle()
         }
     }
+
     
+    override func update(deltaTime seconds: TimeInterval) {
+        if isJoystickInUse {
+            addVelocity(joystickDirection)
+        } else {
+            stop()
+        }
+    }
+    
+}
+
+extension VelocityComponent: GetNotifiedWhenJoystickStateChanges {
+    func joystickStateChanged(inUse: Bool, direction: Direction) {
+        isJoystickInUse = inUse
+        joystickDirection = direction
+    }
 }

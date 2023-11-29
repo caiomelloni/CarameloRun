@@ -32,7 +32,6 @@ class RemotePlayer: GKEntity {
             spriteComponent,
             DirectionComponent(),
             JumpComponent(Constants.playerJumpXMultiplier, Constants.playerJumpYMultiplier),
-            VelocityComponent(Constants.playerVelocity),
             ScoreComponent(),
             PlayerAnimationComponent(type == .dog ? PlayerStateMachine(spriteComponent) : CatcherStateMachine(spriteComponent)),
                         
