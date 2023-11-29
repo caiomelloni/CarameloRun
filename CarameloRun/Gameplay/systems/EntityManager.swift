@@ -43,6 +43,9 @@ class EntityManager {
         componentSystem.update(deltaTime)
     }
     
+    func joystickStateChanged(inUse: Bool, direction: Direction) {
+        componentSystem.notifyJoystickStateChanged(inUse: inUse, direction: direction)
+    }
 
     
 }

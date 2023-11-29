@@ -38,8 +38,7 @@ class GameScene: SKScene {
         camera = sceneCamera
         
         // set joystick
-        addChild(joystick.node)
-        joystick.setJoystickPositionRelativeToCamera(sceneCamera, frame)
+        joystick.addToScene(self)
         
         // set jump button
         addChild(jumpButton.node)
@@ -64,12 +63,16 @@ class GameScene: SKScene {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
-            joystick.touchEnded(t, self)
+            joystick.touchEnded(t)
             jumpButton.touchEnded(t, self)
         }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+    }
+    
+    func joystickStateChanged(inUse: Bool, direction: Direction) {
+        entityManager.joystickStateChanged(inUse: inUse, direction: direction)
     }
     
     // Called before each frame is rendered
@@ -102,4 +105,3 @@ class GameScene: SKScene {
         return entityManager.localPlayer!.component(ofType: ScoreComponent.self)?.victory ?? false
     }
 }
-

@@ -10,16 +10,12 @@ import SpriteKit
 class Joystick {
     private var left = SKSpriteNode(texture: SKTexture(imageNamed: "ButtonLeftUp"))
     private var right = SKSpriteNode(texture: SKTexture(imageNamed: "ButtonRightUp"))
-    var node = SKSpriteNode()
-    var inUse = false
-    var movementDirection: Direction? = nil
-    
-    //valor padrão adicionado pelo joystick
-    let defaultVelocity: Double = 100
-    
+    private var inUse = false
+    private var movementDirection: Direction = .right
+    private var scene: GameScene?
+    private var node = SKSpriteNode()
     
     init() {
-        
         node.zPosition = Zposition.joystick.rawValue
         
         let size = CGSize(width: Dimensions.buttonWidth.rawValue, height: Dimensions.buttonHeight.rawValue)
@@ -39,31 +35,41 @@ class Joystick {
         node.position = CGPoint(x: x + 150 + node.frame.width / 2, y: y + 120 + node.frame.height)
     }
     
-    func touchBegan(_ touch: UITouch) {
-        let location = touch.location(in: node)
-
-            if right.frame.contains(location) {
-                inUse = true
-                movementDirection = .right
-                right.texture = SKTexture(imageNamed: "ButtonRightDown")
-                
-            } else if left.frame.contains(location) {
-                inUse = true
-                movementDirection = .left
-                left.texture = SKTexture(imageNamed: "ButtonLeftDown")
-
-            }
-
+    func addToScene(_ scene: GameScene) {
+        self.scene = scene
+        scene.addChild(node)
+        setJoystickPositionRelativeToCamera(scene.sceneCamera, scene.frame)
     }
     
-    func touchEnded(_ touch: UITouch, _ scene: SKScene) {
-        let location = touch.location(in: scene)
+    func touchBegan(_ touch: UITouch) {
+        let location = touch.location(in: node)
+        
+        if right.frame.contains(location) {
+            inUse = true
+            movementDirection = .right
+            right.texture = SKTexture(imageNamed: "ButtonRightDown")
+            
+        } else if left.frame.contains(location) {
+            inUse = true
+            movementDirection = .left
+            left.texture = SKTexture(imageNamed: "ButtonLeftDown")
+            
+        }
+        
+        scene?.joystickStateChanged(inUse: inUse, direction: movementDirection)
+        
+        
+    }
+    
+    func touchEnded(_ touch: UITouch) {
+        let location = touch.location(in: scene!)
         if node.frame.contains(location) {
             inUse = false
-            movementDirection = nil
             right.texture = SKTexture(imageNamed: "ButtonRightUp")
             left.texture = SKTexture(imageNamed: "ButtonLeftUp")
         }
+        scene!.joystickStateChanged(inUse: inUse, direction: movementDirection)
+        
     }
     
     func setJoystickPositionRelativeToCamera(_ camera: LocalPlayerCamera, _ screenFrame: CGRect) {
@@ -75,16 +81,10 @@ class Joystick {
     
     func update(_ sceneCamera: LocalPlayerCamera, _ frame: CGRect, _ player: LocalPlayer) {
         setJoystickPositionRelativeToCamera(sceneCamera, frame)
-        
-        let velocityComponent = player.component(ofType: VelocityComponent.self)
-        
-        if let movDirection = movementDirection {
-            velocityComponent?.addVelocity(movDirection)
-        }
-       
-        if !inUse {
-            velocityComponent?.stop()
-        }
-        
     }
+    
+    func removeFromScene() {
+        node.removeFromParent()
+    }
+    
 }

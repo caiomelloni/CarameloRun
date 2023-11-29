@@ -17,7 +17,8 @@ class ComponentSystem {
             GKComponentSystem(componentClass: PlayerAnimationComponent.self),
             GKComponentSystem(componentClass: JumpComponent.self),
             GKComponentSystem(componentClass: CatchComponent.self),
-            GKComponentSystem(componentClass: SpawnComponent.self)
+            GKComponentSystem(componentClass: SpawnComponent.self),
+            GKComponentSystem(componentClass: VelocityComponent.self)
         ]
     }()
     
