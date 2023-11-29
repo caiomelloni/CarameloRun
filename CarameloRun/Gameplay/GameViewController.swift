@@ -14,7 +14,7 @@ class GameViewController: UIViewController {
     
     var match: GKMatch
     var gameScene: GameScene?
-    var players: [Player]
+    var players: [LobbyPlayer]
     
     var timer: Timer!
     var time: Int
@@ -23,7 +23,7 @@ class GameViewController: UIViewController {
     
     var controllerFinishGame: Int = 0
     
-    init(match: GKMatch, players: [Player], time: Int) {
+    init(match: GKMatch, players: [LobbyPlayer], time: Int) {
         self.match = match
         self.players = players
         self.time = time
@@ -137,7 +137,7 @@ protocol GameControllerDelegate {
     func sendPlayerState(_ state: PlayerState)
     func sendMatchState(_ state: matchState)
     func sendTaskDone(_ state: taskDone)
-    var players: [Player] { get }
+    var players: [LobbyPlayer] { get }
     func finishGame()
     func addOneTaskDone(_ frame: CGRect)
 }
