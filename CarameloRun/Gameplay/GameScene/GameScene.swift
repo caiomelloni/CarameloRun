@@ -57,9 +57,9 @@ class GameScene: SKScene {
         
         addChild(NTasksCompleted.node)
         
-        task1 = Tasks(scene! as! GameScene, (scene?.childNode(withName: "task1")!.frame)!)
-        task2 = Tasks(scene! as! GameScene, (scene?.childNode(withName: "task2")!.frame)!)
-        task3 = Tasks(scene! as! GameScene, (scene?.childNode(withName: "task3")!.frame)!)
+        task1 = Tasks(scene! as! GameScene, (scene?.childNode(withName: "task1")!.frame)!, Constants.timerTask1BeAvaiable)
+        task2 = Tasks(scene! as! GameScene, (scene?.childNode(withName: "task2")!.frame)!, Constants.timerTask2BeAvaiable)
+        task3 = Tasks(scene! as! GameScene, (scene?.childNode(withName: "task3")!.frame)!, Constants.timerTask3BeAvaiable)
         
         InsertTask(task1)
         InsertTask(task2)

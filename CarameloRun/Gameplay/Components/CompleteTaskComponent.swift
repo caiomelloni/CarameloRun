@@ -28,7 +28,7 @@ class CompleteTaskComponent: GKComponent {
     
     func addCompleteLabel() {
         completeLabel = SKLabelNode()
-        completeLabel.fontName = "San Francisco"
+        completeLabel.fontName = .localizedName(of: .symbol)
         completeLabel.position = CGPoint(x: frame.midX, y: frame.midY+30)
         completeLabel.fontColor = SKColor.black
         scene.addChild(completeLabel)
@@ -44,19 +44,19 @@ class CompleteTaskComponent: GKComponent {
     
     func TaskAvaiable(_ status: Bool){
         if status{
-            Label.text = "Disponível"
+            Label.text = ""
         } else {
             Label.text = "Indisponível"
         }
-        Label.fontName = "San Francisco"
-        Label.position = CGPoint(x: frame.midX, y: frame.midY+100)
+        Label.fontName = .localizedName(of: .symbol)
+        Label.position = CGPoint(x: frame.midX, y: frame.midY+75)
         Label.fontColor = SKColor.black
         scene.addChild(Label)
     }
     
     func ChangeAvaiable(_ status: Bool) {
         if status{
-            Label.text = "Disponível"
+            Label.text = ""
         } else {
             Label.text = "Indisponível"
         }

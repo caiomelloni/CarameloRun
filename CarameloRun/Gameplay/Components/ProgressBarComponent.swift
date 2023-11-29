@@ -14,13 +14,18 @@ class ProgressBarComponent: GKComponent {
     var progress: CGFloat = 0.00
     var progressBar = SKShapeNode()
     var scene: GameScene
-    var timer: Timer!
-    var time: Int = 15
+    var timer1: Timer!
+    var timer2: Timer!
+    var timerOfTheTaskAvaiableThatApearsForThePlayer = SKLabelNode()
+    var timerForThrTaskBeAvaiableAgain: Int = Constants.timerForThrTaskBeAvaiableAgain
+    var possibleTimeToDoTheTask: Int
     var frame: CGRect
+    var alreadyStartTheTimer: Bool = false
     
-    init(_ scene: GameScene, _ frame: CGRect) {
+    init(_ scene: GameScene, _ frame: CGRect, _ possibleTimeToDoTheTask: Int) {
         self.scene = scene
         self.frame = frame
+        self.possibleTimeToDoTheTask = possibleTimeToDoTheTask
         
         super.init()
     }
@@ -32,15 +37,27 @@ class ProgressBarComponent: GKComponent {
     func addProgressBar() {
         progressBar = SKShapeNode(rectOf: CGSize(width: 100, height: 10))
         progressBar.fillColor = SKColor.black
-        progressBar.position = CGPoint(x: frame.midX, y: frame.midY+80)
+        progressBar.position = CGPoint(x: frame.midX, y: frame.midY+50)
         progressBar.xScale = 0.00
         scene.addChild(progressBar)
         
     }
     
+    func addTimer() {
+        timerOfTheTaskAvaiableThatApearsForThePlayer.text = ""
+        timerOfTheTaskAvaiableThatApearsForThePlayer.fontName = .localizedName(of: .symbol)
+        timerOfTheTaskAvaiableThatApearsForThePlayer.fontColor = .black
+        timerOfTheTaskAvaiableThatApearsForThePlayer.position = CGPoint(x: frame.midX, y: frame.maxY - 60)
+        scene.addChild(timerOfTheTaskAvaiableThatApearsForThePlayer)
+    }
+    
     func verify() {
         
         if avaiable {
+            
+            if !alreadyStartTheTimer{
+                initTimerThatIsPossibleToDoTheTask()
+            }
             
             self.entity?.component(ofType: CompleteTaskComponent.self)?.ChangeAvaiable(true)
             self.entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(false)
@@ -70,11 +87,9 @@ class ProgressBarComponent: GKComponent {
                 }
             }
             
-            if progress >= 1.50 {
+            if progress >= 2.00 {
                 entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(true)
                 avaiable = false
-                self.entity?.component(ofType: CompleteTaskComponent.self)?.ChangeAvaiable(false)
-                progressBar.xScale = 0.00
                 if (frame.contains((scene.localPlayer.component(ofType: SpriteComponent.self)!.position))) == true && scene.localPlayer.type == .dog{
                     scene.localPlayer.component(ofType: ScoreComponent.self)?.dogMakeTask()
                     
@@ -83,7 +98,7 @@ class ProgressBarComponent: GKComponent {
                     scene.controllerDelegate?.sendTaskDone(state)
                     scene.controllerDelegate?.addOneTaskDone(frame)
                 }
-                initTimer()
+                initTimerFotTheTaskBeAvaiableAgain()
                 
             }
             
@@ -95,14 +110,52 @@ class ProgressBarComponent: GKComponent {
         }
     }
     
-    func initTimer() {
-        var x = time
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
+    func initTimerFotTheTaskBeAvaiableAgain() {
+        self.entity?.component(ofType: CompleteTaskComponent.self)?.ChangeAvaiable(false)
+        self.timerOfTheTaskAvaiableThatApearsForThePlayer.text = ""
+        progressBar.xScale = 0.00
+        var x = timerForThrTaskBeAvaiableAgain
+        timer1 = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
             x -= 1
             if x == 0 {
                 self.avaiable = true
-                timer.invalidate()
+                self.alreadyStartTheTimer = false
+                self.progress = 0.00
+                self.timer2.invalidate()
             }
         })
+    }
+    
+    
+    func initTimerThatIsPossibleToDoTheTask() {
+        self.alreadyStartTheTimer = true
+        var y = possibleTimeToDoTheTask
+        timer2 = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer2) in
+            if self.avaiable {
+                self.updateTimer(y)
+                y -= 1
+                if y == -1 { //coloquei -1 pq estava parando no 00:02
+                    self.avaiable = false
+                    self.initTimerFotTheTaskBeAvaiableAgain()
+                    self.alreadyStartTheTimer = false
+                    self.progress = 0.00
+                    self.timer2.invalidate()
+                }
+            } else {
+                self.alreadyStartTheTimer = false
+                self.timer2.invalidate()
+            }
+        })
+    }
+    
+    func updateTimer(_ new: Int) {
+        var n = new
+        let minutos = n / 60
+        let segundos = n % 60
+        var z = ""
+        if segundos < 10 {
+            z = "0"
+        }
+        timerOfTheTaskAvaiableThatApearsForThePlayer.text = "Disponível: 0\(minutos):\(z)\(segundos)"
     }
 }

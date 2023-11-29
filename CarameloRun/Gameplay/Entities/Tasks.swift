@@ -12,15 +12,17 @@ import GameKit
 class Tasks: GKEntity {
     var scene: GameScene
     var frame: CGRect
+    var possibleTimeToDoTheTask: Int
     
-    init(_ scene: GameScene, _ frame: CGRect) {
+    init(_ scene: GameScene, _ frame: CGRect,_ possibleTimeToDoTheTask: Int) {
         self.scene = scene
         self.frame = frame
+        self.possibleTimeToDoTheTask = possibleTimeToDoTheTask
         
         super.init()
         
         let components = [
-            ProgressBarComponent(scene, frame),
+            ProgressBarComponent(scene, frame, possibleTimeToDoTheTask),
             CompleteTaskComponent(scene, frame)
         ]
         

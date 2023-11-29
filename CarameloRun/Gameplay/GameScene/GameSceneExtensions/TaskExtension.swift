@@ -14,9 +14,11 @@ extension GameScene {
         entityManager.addEntity(task)
         
         task.component(ofType: ProgressBarComponent.self)?.addProgressBar()
+        task.component(ofType: ProgressBarComponent.self)?.addTimer()
         task.component(ofType: ProgressBarComponent.self)?.avaiable = true
         task.component(ofType: CompleteTaskComponent.self)?.addCompleteLabel()
         task.component(ofType: CompleteTaskComponent.self)?.TaskAvaiable(true)
+        task.component(ofType: ProgressBarComponent.self)?.initTimerThatIsPossibleToDoTheTask()
         
     }
     
@@ -30,7 +32,7 @@ extension GameScene {
         
         //TODO: fazer o update da barra de tarefas completas aqui
         NTasksCompleted.updateNumberOfTasksCompleted(numberOfTasksCompleted())
-        print(numberOfTasksCompleted())
+        
     }
     
     func numberOfTasksCompleted() -> Int {

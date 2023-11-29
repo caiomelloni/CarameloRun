@@ -10,7 +10,7 @@ import SpriteKit
 class ControllTimer {
     var n: Int = Constants.gameTime
 
-    var number = SKLabelNode(fontNamed: "Helvetica")
+    var number = SKLabelNode(fontNamed: .localizedName(of: .symbol))
     var node = SKSpriteNode()
     
     init() {
@@ -21,7 +21,6 @@ class ControllTimer {
         number.fontColor = .blue
         
         node.addChild(number)
-        node.scene?.backgroundColor = .blue
     }
     
     private func position(x: Double, y: Double) {

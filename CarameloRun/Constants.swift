@@ -37,4 +37,10 @@ class Constants {
 
     //respawn
     static let respawnCount: Int = 2
+    
+    //tasks timers
+    static let timerForThrTaskBeAvaiableAgain: Int = 15
+    static let timerTask1BeAvaiable: Int = 25
+    static let timerTask2BeAvaiable: Int = 30
+    static let timerTask3BeAvaiable: Int = 35
 }
