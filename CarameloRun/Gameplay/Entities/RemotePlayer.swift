@@ -8,24 +8,12 @@
 import SpriteKit
 import GameplayKit
 
-enum Direction {
-    case right
-    case left
-}
-
-enum typeOfPlayer: Codable {
-    case dog
-    case man
-}
-
-class Player: GKEntity {
+class RemotePlayer: GKEntity {
     var playerNumber: Int
     let displayName: String
     var type: typeOfPlayer
     var ready: Bool = false
     var photo: UIImage?
-//    var score: Int = 0
-    
     
     
     init(displayName: String, playerNumber: Int, playerType: typeOfPlayer, photo: UIImage?) {
@@ -40,6 +28,7 @@ class Player: GKEntity {
         let spriteComponent = setPlayerBodySpriteComponent()
         
         let components = [
+            SpawnComponent(spawnNumber: playerNumber),
             spriteComponent,
             DirectionComponent(),
             JumpComponent(Constants.playerJumpXMultiplier, Constants.playerJumpYMultiplier),
@@ -86,3 +75,4 @@ class Player: GKEntity {
     }
     
 }
+

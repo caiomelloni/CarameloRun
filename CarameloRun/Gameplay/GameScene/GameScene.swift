@@ -14,8 +14,6 @@ import GameKit
 // place another functions in extensions
 class GameScene: SKScene {
     
-    var localPlayer: Player!
-    var remotePlayers = [Int:Player]()
     let joystick = Joystick()
     let jumpButton = JumpButton()
     var sceneCamera: LocalPlayerCamera!
@@ -36,7 +34,7 @@ class GameScene: SKScene {
         placePlayersInitialPositionInMap()
         
         // set camera
-        sceneCamera = LocalPlayerCamera(localPlayer)
+        sceneCamera = LocalPlayerCamera(entityManager.localPlayer!)
         camera = sceneCamera
         
         // set joystick
@@ -57,7 +55,7 @@ class GameScene: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
             joystick.touchBegan(t)
-            jumpButton.touchBegan(t, self, localPlayer)
+            jumpButton.touchBegan(t, self, entityManager.localPlayer!)
         }
     }
     
@@ -83,7 +81,7 @@ class GameScene: SKScene {
         //call updates
         entityManager.update(deltaTime)
         sceneCamera.update(deltaTime)
-        joystick.update(sceneCamera, frame, localPlayer)
+        joystick.update(sceneCamera, frame, entityManager.localPlayer!)
         jumpButton.update(sceneCamera, frame)
         timer.update(sceneCamera, frame)
         
@@ -97,11 +95,11 @@ class GameScene: SKScene {
     }
     
     func getScore() -> Int{
-        return localPlayer.component(ofType: ScoreComponent.self)?.score ?? 0
+        return entityManager.localPlayer!.component(ofType: ScoreComponent.self)?.score ?? 0
     }
     
     func getVictory() -> Bool{
-        return localPlayer.component(ofType: ScoreComponent.self)?.victory ?? false
+        return entityManager.localPlayer!.component(ofType: ScoreComponent.self)?.victory ?? false
     }
 }
 

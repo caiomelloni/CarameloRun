@@ -9,11 +9,20 @@ import SpriteKit
 
 // cria uma camera que segue o jogador especificado
 class LocalPlayerCamera: SKCameraNode {
-    var player: Player
+    var playerSpriteComponent: SpriteComponent
     let scaleFactorY: CGFloat = 1.75
     let scaleFactorX: CGFloat = 1.75
-    init(_ playerToFollow: Player) {
-        self.player = playerToFollow
+    init(_ playerToFollow: LocalPlayer) {
+        guard let spriteComp = playerToFollow.component(ofType: SpriteComponent.self) else {
+            //TODO: treat error in a better way
+            print("****Error on local player camera!*******")
+            self.playerSpriteComponent = SpriteComponent(imageName: "Dumb", size: CGSize(width: 7, height: 7))
+            super.init()
+            return
+        }
+        self.playerSpriteComponent = spriteComp
+        
+        
         super.init()
         
         //set the camera size
@@ -22,12 +31,16 @@ class LocalPlayerCamera: SKCameraNode {
     }
     
     private func updateCameraPosition() {
-        position.x = player.component(ofType: SpriteComponent.self)!.position.x
-        position.y = player.component(ofType: SpriteComponent.self)!.position.y
+        position.x = playerSpriteComponent.position.x
+        position.y = playerSpriteComponent.position.y
     }
     
-    func followCatcher(_ catcher: Player) {
-        player = catcher
+    func followCatcher(_ catcher: RemotePlayer) {
+        guard let spriteComp = catcher.component(ofType: SpriteComponent.self) else {
+            print("Error on local player camera!")
+            return
+        }
+        playerSpriteComponent = spriteComp
     }
     
     
