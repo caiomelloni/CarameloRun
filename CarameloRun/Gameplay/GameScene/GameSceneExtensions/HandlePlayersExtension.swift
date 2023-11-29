@@ -13,39 +13,32 @@ extension GameScene {
     func placePlayersInitialPositionInMap() {
         let players = controllerDelegate?.players
         
-        
-        if let players = players {
-            for playerFromPreparing in players {
-                
-                //isso eh necessario porque a mesma classe eh usada para passar dados
-                //da tela de PreparingViewController
-                let player = Player(displayName: playerFromPreparing.displayName, playerNumber: playerFromPreparing.playerNumber, playerType: playerFromPreparing.playerType, photo: playerFromPreparing.photo)
-                
-                let spawnNode = scene?.childNode(withName: "spawn\(player.playerNumber)")
-                
-                entityManager.addEntity(player, spawnPoint: spawnNode?.position)
-                
-                if player.displayName == GKLocalPlayer.local.displayName {
-                    localPlayer = player
-                    localPlayerPositionHistory.setReferencePosition(player)
-                } else {
-                    // TO DO: tirar gravidade e proibir que um player empurre o outro
-                    // o no do player deve ser um ponto fixo no mapa, que se movimenta apenas pelas
-                    // coordenadas emitidas
-                    // player.component(ofType: SpriteComponent.self).affectedByGravity = false
-                    remotePlayers[player.playerNumber] = player
-                }
-                
-                player.component(ofType: HealthComponent.self)?.killPlayerRef = killPlayer
-            }
-        } else {
+        guard let players = players else {
+            //TODO: treat errors in a better way
             print("ERROR: NULL PLAYERS")
+            return
         }
+        for playerFromPreparing in players {
+            
+            var player :GKEntity
+            
+            if playerFromPreparing.displayName == GKLocalPlayer.local.displayName {
+                let localPlayer = LocalPlayer(displayName: playerFromPreparing.displayName, playerNumber: playerFromPreparing.playerNumber, playerType: playerFromPreparing.playerType, photo: playerFromPreparing.photo)
+                localPlayerPositionHistory.setReferencePosition(localPlayer)
+                player = localPlayer
+            } else {
+                player = RemotePlayer(displayName: playerFromPreparing.displayName, playerNumber: playerFromPreparing.playerNumber, playerType: playerFromPreparing.playerType, photo: playerFromPreparing.photo)
+            }
+            
+            player.component(ofType: HealthComponent.self)?.killPlayerRef = killPlayer
+            entityManager.addEntity(player)
+        }
+        
     }
     
     func updatePlayersPosition(_ playerState: PlayerState) {
         let newPosition = CGPoint(x: playerState.positionX, y: playerState.positionY)
-        let player = remotePlayers[playerState.playerNumber]
+        let player = entityManager.getRemotePlayer(ofPlayerNumber: playerState.playerNumber)
         let spriteComp = player?.component(ofType: SpriteComponent.self)
         
         let oldX = spriteComp?.position.x
@@ -82,7 +75,9 @@ extension GameScene {
     }
     
     func handlePlayerCollision() {
-        for remotePlayer in remotePlayers.values {
+        let localPlayer = entityManager.localPlayer!
+        let remotePlayers = entityManager.remotePlayers
+        for remotePlayer in remotePlayers {
             if CGRectIntersectsRect(localPlayer.component(ofType: SpriteComponent.self)!.frame, remotePlayer.component(ofType: SpriteComponent.self)!.frame) {
                 if remotePlayer.type == .man {
                     localPlayer.component(ofType: GetCaughtComponent.self)?.gotCaught(emptyRespawnPoint(localPlayer))
@@ -105,7 +100,7 @@ extension GameScene {
         }
     }
     
-    private func emptyRespawnPoint(_ player: Player) -> CGPoint {
+    private func emptyRespawnPoint(_ player: GKEntity) -> CGPoint {
         var respawns = [SKNode]()
         
         for i in 1...Constants.respawnCount {
@@ -116,7 +111,7 @@ extension GameScene {
         
         for respawn in respawns {
             var isAvailable = true
-            for player in remotePlayers.values {
+            for player in entityManager.remotePlayers {
                 if CGRectIntersectsRect(player.component(ofType: SpriteComponent.self)!.frame, respawn.frame) {
                     isAvailable = false
                     break
@@ -138,7 +133,7 @@ extension GameScene {
         joystick.node.removeFromParent()
         jumpButton.node.removeFromParent()
         
-        for player in remotePlayers.values {
+        for player in entityManager.remotePlayers {
             if player.type == .man {
                 sceneCamera.followCatcher(player)
                 break

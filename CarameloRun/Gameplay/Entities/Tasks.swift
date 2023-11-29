@@ -11,9 +11,9 @@ import GameKit
 
 class Tasks: GKEntity {
     var scene: SKScene
-    var localPlayer: Player
+    var localPlayer: LocalPlayer
     
-    init(_ scene: SKScene, _ localPlayer: Player) {
+    init(_ scene: SKScene, _ localPlayer: LocalPlayer) {
         self.scene = scene
         self.localPlayer = localPlayer
         

@@ -63,6 +63,7 @@ class SpriteComponent: GKComponent {
     }
     
     func addToScene(_ scene: SKScene) {
+        node.removeFromParent()
         scene.addChild(node)
     }
    

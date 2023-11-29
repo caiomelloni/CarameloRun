@@ -10,7 +10,7 @@ import GameKit
 
 extension GameScene {
     func InsertTask() {
-        let task1 = Tasks(scene!, localPlayer)
+        let task1 = Tasks(scene!, entityManager.localPlayer!)
         entityManager.addEntity(task1)
 
         if let myEntity = entityManager.entities.first(where: { $0.component(ofType: ProgressBarComponent.self) != nil }) {

@@ -14,11 +14,11 @@ class ProgressBarComponent: GKComponent {
     var progress: CGFloat = 0.00
     var progressBar = SKShapeNode()
     var scene: GameScene
-    var localPlayer: Player
+    var localPlayer: LocalPlayer
     var timer: Timer!
     var time: Int = 15
     
-    init(_ scene: GameScene, _ localPlayer: Player) {
+    init(_ scene: GameScene, _ localPlayer: LocalPlayer) {
         self.scene = scene
         self.localPlayer = localPlayer
         
@@ -50,7 +50,7 @@ class ProgressBarComponent: GKComponent {
             //TODO: fazer com que as tasks apareça que está sendo feita, para todos os jogadores
             
             var thereAreSomeoneInsideTheTask = 0
-            for player in scene.remotePlayers.values {
+            for player in scene.entityManager.remotePlayers {
                 
                 if player.type == .dog {
                     if (task1.contains((player.component(ofType: SpriteComponent.self)!.position))) == true {
@@ -62,9 +62,9 @@ class ProgressBarComponent: GKComponent {
                 }
             }
             
-            if scene.localPlayer.type == .dog {
+            if scene.entityManager.localPlayer!.type == .dog {
                 
-                if (task1.contains((scene.localPlayer.component(ofType: SpriteComponent.self)!.position))) == true {
+                if (task1.contains((scene.entityManager.localPlayer!.component(ofType: SpriteComponent.self)!.position))) == true {
                     progress += 0.01
                     progressBar.xScale = progress
                 } else {
@@ -77,7 +77,7 @@ class ProgressBarComponent: GKComponent {
                 avaiable = false
                 self.entity?.component(ofType: CompleteTaskComponent.self)?.ChangeAvaiable(false)
                 progressBar.xScale = 0.00
-                if (task1.contains((scene.localPlayer.component(ofType: SpriteComponent.self)!.position))) == true && scene.localPlayer.type == .dog{
+                if (task1.contains((scene.entityManager.localPlayer!.component(ofType: SpriteComponent.self)!.position))) == true && scene.entityManager.localPlayer!.type == .dog{
                     print(localPlayer.component(ofType: ScoreComponent.self)?.score ?? -100)
                     localPlayer.component(ofType: ScoreComponent.self)?.dogMakeTask()
                     print(localPlayer.component(ofType: ScoreComponent.self)?.score ?? -100)
@@ -85,7 +85,7 @@ class ProgressBarComponent: GKComponent {
                 initTimer()
             }
             
-            if thereAreSomeoneInsideTheTask == scene.remotePlayers.count {
+            if thereAreSomeoneInsideTheTask == scene.entityManager.remotePlayers.count {
                 progress = 0.00
                 entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(false)
                 progressBar.xScale = progress

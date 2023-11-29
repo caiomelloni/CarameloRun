@@ -10,11 +10,14 @@
 		61970CD02AFCF9DA0099760B /* HelpPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61970CCF2AFCF9DA0099760B /* HelpPopUpViewController.swift */; };
 		61A2428E2AFD79AC001D152A /* Crang.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61A2428D2AFD79AC001D152A /* Crang.ttf */; };
 		61A242912AFE48EB001D152A /* SettingsPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A242902AFE48EB001D152A /* SettingsPopUpViewController.swift */; };
+		F811A48E2B1759EA00E01031 /* RemotePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F811A48D2B1759EA00E01031 /* RemotePlayer.swift */; };
+		F811A4902B17829400E01031 /* SpawnComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F811A48F2B17829400E01031 /* SpawnComponent.swift */; };
+		F811A4952B179CE600E01031 /* AddedToScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F811A4942B179CE600E01031 /* AddedToScene.swift */; };
 		F82786E82AC59B170047111D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82786E72AC59B170047111D /* AppDelegate.swift */; };
 		F82786EE2AC59B170047111D /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82786ED2AC59B170047111D /* GameScene.swift */; };
 		F82786F02AC59B170047111D /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82786EF2AC59B170047111D /* GameViewController.swift */; };
 		F82786F52AC59B180047111D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F82786F42AC59B180047111D /* Assets.xcassets */; };
-		F82787012AC5A2F20047111D /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82787002AC5A2F20047111D /* Player.swift */; };
+		F82787012AC5A2F20047111D /* LocalPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82787002AC5A2F20047111D /* LocalPlayer.swift */; };
 		F82787032AC5A8250047111D /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82787022AC5A8250047111D /* Joystick.swift */; };
 		F82787052AC5B8CB0047111D /* JumpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82787042AC5B8CB0047111D /* JumpButton.swift */; };
 		F82A32822AE2B3C500A3639C /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A32812AE2B3C500A3639C /* PlayerState.swift */; };
@@ -63,12 +66,15 @@
 		61A2428D2AFD79AC001D152A /* Crang.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Crang.ttf; sourceTree = "<group>"; };
 		61A2428F2AFD7B2D001D152A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		61A242902AFE48EB001D152A /* SettingsPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPopUpViewController.swift; sourceTree = "<group>"; };
+		F811A48D2B1759EA00E01031 /* RemotePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemotePlayer.swift; sourceTree = "<group>"; };
+		F811A48F2B17829400E01031 /* SpawnComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnComponent.swift; sourceTree = "<group>"; };
+		F811A4942B179CE600E01031 /* AddedToScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedToScene.swift; sourceTree = "<group>"; };
 		F82786E42AC59B170047111D /* CarameloRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarameloRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F82786E72AC59B170047111D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F82786ED2AC59B170047111D /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		F82786EF2AC59B170047111D /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		F82786F42AC59B180047111D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F82787002AC5A2F20047111D /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		F82787002AC5A2F20047111D /* LocalPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPlayer.swift; sourceTree = "<group>"; };
 		F82787022AC5A8250047111D /* Joystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
 		F82787042AC5B8CB0047111D /* JumpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpButton.swift; sourceTree = "<group>"; };
 		F82A32812AE2B3C500A3639C /* PlayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerState.swift; sourceTree = "<group>"; };
@@ -132,6 +138,23 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		F811A4912B17881000E01031 /* ComponentSystem */ = {
+			isa = PBXGroup;
+			children = (
+				F811A4922B179C0800E01031 /* NotifyComponents */,
+				F8BA5B712B162A9F003AF5F2 /* ComponentSystem.swift */,
+			);
+			path = ComponentSystem;
+			sourceTree = "<group>";
+		};
+		F811A4922B179C0800E01031 /* NotifyComponents */ = {
+			isa = PBXGroup;
+			children = (
+				F811A4942B179CE600E01031 /* AddedToScene.swift */,
+			);
+			path = NotifyComponents;
+			sourceTree = "<group>";
+		};
 		F82786DB2AC59B170047111D = {
 			isa = PBXGroup;
 			children = (
@@ -165,7 +188,8 @@
 			isa = PBXGroup;
 			children = (
 				FB3E27CA2AFBB9F500430E2D /* Tasks.swift */,
-				F82787002AC5A2F20047111D /* Player.swift */,
+				F82787002AC5A2F20047111D /* LocalPlayer.swift */,
+				F811A48D2B1759EA00E01031 /* RemotePlayer.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -282,6 +306,7 @@
 				F8A004A32AFA71D500A9DAC3 /* HealthComponent.swift */,
 				FB3E27CC2AFBD21000430E2D /* ProgressBarComponent.swift */,
 				FB3E27CE2AFBD3EE00430E2D /* CompleteTaskComponent.swift */,
+				F811A48F2B17829400E01031 /* SpawnComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -337,7 +362,7 @@
 		F89EEE8D2B10C25B007EEFA4 /* systems */ = {
 			isa = PBXGroup;
 			children = (
-				F8BA5B712B162A9F003AF5F2 /* ComponentSystem.swift */,
+				F811A4912B17881000E01031 /* ComponentSystem */,
 				F8BA5B722B162A9F003AF5F2 /* EntityManager.swift */,
 			);
 			path = systems;
@@ -431,8 +456,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F87120CD2AEFDE2600697E21 /* PlayerStateMachine.swift in Sources */,
+				F811A4952B179CE600E01031 /* AddedToScene.swift in Sources */,
 				F8EE82662AF2740000158D9B /* ControllTimer.swift in Sources */,
-				F82787012AC5A2F20047111D /* Player.swift in Sources */,
+				F82787012AC5A2F20047111D /* LocalPlayer.swift in Sources */,
 				F854918D2AE174A8004EA5B1 /* GameCenterHelper.swift in Sources */,
 				FB3E27CB2AFBB9F500430E2D /* Tasks.swift in Sources */,
 				F898070F2ACDA1880044D237 /* Zposition.swift in Sources */,
@@ -455,6 +481,7 @@
 				FB3E27CF2AFBD3EE00430E2D /* CompleteTaskComponent.swift in Sources */,
 				F87120BE2AEBF87600697E21 /* PlayerAnimationComponent.swift in Sources */,
 				F8D1A9062B0E5E9C0075F6C4 /* LobbyPlayer.swift in Sources */,
+				F811A48E2B1759EA00E01031 /* RemotePlayer.swift in Sources */,
 				F8E4B1782AFBC87F0066BBFC /* ArrestedState.swift in Sources */,
 				F87120C42AEEC8F200697E21 /* IdleState.swift in Sources */,
 				F87D81F92AEACE5E0006CDD8 /* SpriteComponent.swift in Sources */,
@@ -472,6 +499,7 @@
 				F87120C82AEEC9FF00697E21 /* FallingState.swift in Sources */,
 				F82786F02AC59B170047111D /* GameViewController.swift in Sources */,
 				61970CD02AFCF9DA0099760B /* HelpPopUpViewController.swift in Sources */,
+				F811A4902B17829400E01031 /* SpawnComponent.swift in Sources */,
 				F8A004A22AFA609600A9DAC3 /* GetCaughtComponent.swift in Sources */,
 				F89283FD2AE964A900A3B499 /* Constants.swift in Sources */,
 				F82786E82AC59B170047111D /* AppDelegate.swift in Sources */,

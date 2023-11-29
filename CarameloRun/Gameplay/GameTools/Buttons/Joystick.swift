@@ -73,10 +73,10 @@ class Joystick {
         )
     }
     
-    func update(_ sceneCamera: LocalPlayerCamera, _ frame: CGRect, _ dog: Player) {
+    func update(_ sceneCamera: LocalPlayerCamera, _ frame: CGRect, _ player: LocalPlayer) {
         setJoystickPositionRelativeToCamera(sceneCamera, frame)
         
-        let velocityComponent = dog.component(ofType: VelocityComponent.self)
+        let velocityComponent = player.component(ofType: VelocityComponent.self)
         
         if let movDirection = movementDirection {
             velocityComponent?.addVelocity(movDirection)
