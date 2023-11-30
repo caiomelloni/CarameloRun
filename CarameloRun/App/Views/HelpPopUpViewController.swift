@@ -324,7 +324,6 @@ class HelpPopUpViewController: UIViewController {
     
     func configureCanvas1() {
         
-        
         for subview in contentView.subviews {
             subview.removeFromSuperview()
         }
@@ -526,7 +525,7 @@ class HelpPopUpViewController: UIViewController {
         
         case3StackView.alignment = .leading
         case3StackView.distribution = .equalSpacing
-        case3StackView.spacing = 0
+        case3StackView.spacing = 12
         case3StackView.axis = .vertical
         
         ButtonLeftImageView.contentMode = .scaleAspectFit
@@ -538,7 +537,7 @@ class HelpPopUpViewController: UIViewController {
                 var label = UILabel()
                 label.font = UIFont(name: "Inter", size: 13)
                 label.textColor = UIColor(red: 32.0/255.0, green: 46.0/255.0, blue: 55.0/255.0, alpha: 1.0)
-                label.numberOfLines = 0
+                label.numberOfLines = 1
                 label.text = developerName
                 case3StackView.addArrangedSubview(label)
             }
@@ -548,9 +547,8 @@ class HelpPopUpViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             case3StackView.topAnchor.constraint(equalTo: labelTitle1.bottomAnchor, constant: 26),
-           //case3StackView.widthAnchor.constraint(equalToConstant: 150),
-            case3StackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32),
-            case3StackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            case3StackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32)
+           //case3StackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
             
         ])
         

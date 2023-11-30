@@ -26,7 +26,6 @@ class MenuInicialViewController: UIViewController {
         super.viewDidLoad()
         startButton.isEnabled = false
         
-        
         configureButtons()
         configureStackView()
         setStackViewConstraints()
