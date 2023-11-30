@@ -41,8 +41,7 @@ class GameScene: SKScene {
         joystick.addToScene(self)
         
         // set jump button
-        addChild(jumpButton.node)
-        jumpButton.setJumpBtnPositionRelativeToCamera(sceneCamera, frame)
+        jumpButton.addToScene(self)
         
         addChild(timer.node)
         
@@ -54,7 +53,7 @@ class GameScene: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
             joystick.touchBegan(t)
-            jumpButton.touchBegan(t, self, entityManager.localPlayer!)
+            jumpButton.touchBegan(t)
         }
     }
     
@@ -73,6 +72,10 @@ class GameScene: SKScene {
     
     func joystickStateChanged(inUse: Bool, direction: Direction) {
         entityManager.joystickStateChanged(inUse: inUse, direction: direction)
+    }
+    
+    func jumpButtonPressed() {
+        entityManager.jumpButtonPressed()
     }
     
     // Called before each frame is rendered

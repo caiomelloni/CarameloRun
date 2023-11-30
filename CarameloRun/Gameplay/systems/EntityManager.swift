@@ -46,6 +46,10 @@ class EntityManager {
     func joystickStateChanged(inUse: Bool, direction: Direction) {
         componentSystem.notifyJoystickStateChanged(inUse: inUse, direction: direction)
     }
+    
+    func jumpButtonPressed() {
+        componentSystem.notifyJumpButtonPressed()
+    }
 
     
 }

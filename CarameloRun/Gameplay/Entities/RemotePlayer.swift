@@ -28,10 +28,9 @@ class RemotePlayer: GKEntity {
         let spriteComponent = setPlayerBodySpriteComponent()
         
         let components = [
-            SpawnComponent(spawnNumber: playerNumber),
+            SpawnComponent(spawnPrefix: "spawn", spawnNumber: playerNumber),
             spriteComponent,
             DirectionComponent(),
-            JumpComponent(Constants.playerJumpXMultiplier, Constants.playerJumpYMultiplier),
             ScoreComponent(),
             PlayerAnimationComponent(type == .dog ? PlayerStateMachine(spriteComponent) : CatcherStateMachine(spriteComponent)),
                         

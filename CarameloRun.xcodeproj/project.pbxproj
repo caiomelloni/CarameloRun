@@ -39,6 +39,7 @@
 		F87120CD2AEFDE2600697E21 /* PlayerStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120CC2AEFDE2600697E21 /* PlayerStateMachine.swift */; };
 		F87120D22AF0142A00697E21 /* LocalPlayerCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120D12AF0142A00697E21 /* LocalPlayerCamera.swift */; };
 		F87D81F92AEACE5E0006CDD8 /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D81F82AEACE5E0006CDD8 /* SpriteComponent.swift */; };
+		F88C86542B18AEBE00DBF0AB /* JumpButtonPressed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C86532B18AEBE00DBF0AB /* JumpButtonPressed.swift */; };
 		F89283FA2AE94D6F00A3B499 /* PositionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89283F92AE94D6F00A3B499 /* PositionHistory.swift */; };
 		F89283FD2AE964A900A3B499 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89283FC2AE964A900A3B499 /* Constants.swift */; };
 		F898070F2ACDA1880044D237 /* Zposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F898070E2ACDA1880044D237 /* Zposition.swift */; };
@@ -98,6 +99,7 @@
 		F87120CC2AEFDE2600697E21 /* PlayerStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStateMachine.swift; sourceTree = "<group>"; };
 		F87120D12AF0142A00697E21 /* LocalPlayerCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPlayerCamera.swift; sourceTree = "<group>"; };
 		F87D81F82AEACE5E0006CDD8 /* SpriteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
+		F88C86532B18AEBE00DBF0AB /* JumpButtonPressed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpButtonPressed.swift; sourceTree = "<group>"; };
 		F89283F92AE94D6F00A3B499 /* PositionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionHistory.swift; sourceTree = "<group>"; };
 		F89283FC2AE964A900A3B499 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F898070E2ACDA1880044D237 /* Zposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zposition.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			children = (
 				F811A4942B179CE600E01031 /* AddedToScene.swift */,
 				F811A4962B17B91300E01031 /* JoystickStateChanged.swift */,
+				F88C86532B18AEBE00DBF0AB /* JumpButtonPressed.swift */,
 			);
 			path = NotifyComponents;
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 				F87120CD2AEFDE2600697E21 /* PlayerStateMachine.swift in Sources */,
 				F811A4952B179CE600E01031 /* AddedToScene.swift in Sources */,
 				F8EE82662AF2740000158D9B /* ControllTimer.swift in Sources */,
+				F88C86542B18AEBE00DBF0AB /* JumpButtonPressed.swift in Sources */,
 				F82787012AC5A2F20047111D /* LocalPlayer.swift in Sources */,
 				F854918D2AE174A8004EA5B1 /* GameCenterHelper.swift in Sources */,
 				FB3E27CB2AFBB9F500430E2D /* Tasks.swift in Sources */,

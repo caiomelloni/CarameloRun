@@ -38,7 +38,7 @@ class LocalPlayer: GKEntity {
         let spriteComponent = setPlayerBodySpriteComponent()
         
         let components = [
-            SpawnComponent(spawnNumber: playerNumber),
+            SpawnComponent(spawnPrefix: "spawn", spawnNumber: playerNumber),
             spriteComponent,
             DirectionComponent(),
             JumpComponent(Constants.playerJumpXMultiplier, Constants.playerJumpYMultiplier),

@@ -50,3 +50,9 @@ class JumpComponent: GKComponent {
         }
     }
 }
+
+extension JumpComponent: GetNotifiedWhenJumpButtonIsPressed {
+    func jumpButtonPressed() {
+        jump()
+    }
+}

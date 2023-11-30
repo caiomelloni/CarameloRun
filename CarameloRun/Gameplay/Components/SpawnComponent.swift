@@ -8,9 +8,12 @@
 import GameplayKit
 
 class SpawnComponent: GKComponent {
+    let spawnPrefix: String
     let spawnNumber: Int
-    init(spawnNumber: Int) {
+
+    init(spawnPrefix: String, spawnNumber: Int) {
         self.spawnNumber = spawnNumber
+        self.spawnPrefix = spawnPrefix
         super.init()
     }
     
@@ -19,7 +22,7 @@ class SpawnComponent: GKComponent {
     }
     
     func getSpawnPosition(_ scene: SKScene) -> CGPoint? {
-        let spawnNode = scene.childNode(withName: "spawn\(spawnNumber)")
+        let spawnNode = scene.childNode(withName: "\(spawnPrefix)\(spawnNumber)")
         return spawnNode?.position
     }
     
