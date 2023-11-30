@@ -15,8 +15,6 @@ class MenuInicialViewController: UIViewController {
     let logoImageView = UIImageView(image: UIImage(named: "Logo"))
     let helpButtonImage = UIImage(named: "helpButton")
     let helpButton = UIButton(type: UIButton.ButtonType.custom)
-//    let settingsButtonImage = UIImage(named: "settingsButton")
-//    let creditsButton = UIButton(type: UIButton.ButtonType.custom)
     let startButtonImage = UIImage(named: "startButton")
     let startButton = UIButton(type: UIButton.ButtonType.custom)
     let gameCenterHelper = GameCenterHelper()
@@ -50,10 +48,6 @@ extension MenuInicialViewController {
         helpButton.setImage(helpButtonImage, for: .normal)
         helpButton.addTarget(self, action: #selector(showHelpPopUp), for: .touchUpInside)
         
-//        creditsButton.translatesAutoresizingMaskIntoConstraints = false
-//        creditsButton.setImage(settingsButtonImage, for: .normal)
-//        creditsButton.addTarget(self, action: #selector(showCreditsPopUp), for: .touchUpInside)
-      
     }
     
     func configureStackView() {
@@ -78,7 +72,6 @@ extension MenuInicialViewController {
     
     func setButtonsContraints() {
         view.addSubview(helpButton)
-//        view.addSubview(creditsButton)
         
         helpButton.translatesAutoresizingMaskIntoConstraints = false
         
@@ -87,14 +80,6 @@ extension MenuInicialViewController {
             helpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -56)
            
         ])
-        
-//        creditsButton.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        NSLayoutConstraint.activate([
-//            creditsButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 33),
-//            creditsButton.trailingAnchor.constraint(equalTo: helpButton.leadingAnchor, constant: -13)
-//           
-//        ])
         
     }
     
