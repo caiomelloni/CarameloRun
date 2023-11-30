@@ -8,17 +8,18 @@
 import Foundation
 import SpriteKit
 import GameplayKit
+import GameKit
 
 //MARK: a known way to improve performance is to make the access to certain entity faster
 class EntityManager {
     
     var entities = Set<GKEntity>()
-    let scene: SKScene
+    let scene: GameScene
     let componentSystem = ComponentSystem()
     
     
     
-    init(scene: SKScene) {
+    init(scene: GameScene) {
         self.scene = scene
     }
     
@@ -39,6 +40,40 @@ class EntityManager {
         componentSystem.removeEntityComponents(foundIn: entity)
     }
     
+    func initPlayersEntities(lobbyPlayers: [LobbyPlayer]) {
+        for playerFromPreparing in lobbyPlayers {
+            
+            var player :GKEntity
+            
+            if playerFromPreparing.displayName == GKLocalPlayer.local.displayName {
+                let localPlayer = LocalPlayer(displayName: playerFromPreparing.displayName, playerNumber: playerFromPreparing.playerNumber, playerType: playerFromPreparing.playerType, photo: playerFromPreparing.photo)
+                player = localPlayer
+            } else {
+                player = RemotePlayer(displayName: playerFromPreparing.displayName, playerNumber: playerFromPreparing.playerNumber, playerType: playerFromPreparing.playerType, photo: playerFromPreparing.photo)
+            }
+            
+            player.component(ofType: HealthComponent.self)?.killPlayerRef = killPlayer
+            addEntity(player)
+        }
+        
+    }
+    
+    func killPlayer() {
+        scene.removeJoystickAndJumpButton()
+        
+        for player in remotePlayers {
+            if player.type == .man {
+                scene.sceneCamera.followCatcher(player)
+                break
+            }
+        }
+    }
+    
+}
+
+
+//Events
+extension EntityManager {
     func update(_ deltaTime: CFTimeInterval) {
         componentSystem.update(deltaTime)
     }
@@ -50,10 +85,9 @@ class EntityManager {
     func jumpButtonPressed() {
         componentSystem.notifyJumpButtonPressed()
     }
-
-    
 }
 
+//TODO: Remove it, and place the entity logic inside the entity manager
 //Getter methods
 extension EntityManager {
     var localPlayer: LocalPlayer? {

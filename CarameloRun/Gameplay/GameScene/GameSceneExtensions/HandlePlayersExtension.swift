@@ -18,25 +18,13 @@ extension GameScene {
             print("ERROR: NULL PLAYERS")
             return
         }
-        for playerFromPreparing in players {
-            
-            var player :GKEntity
-            
-            if playerFromPreparing.displayName == GKLocalPlayer.local.displayName {
-                let localPlayer = LocalPlayer(displayName: playerFromPreparing.displayName, playerNumber: playerFromPreparing.playerNumber, playerType: playerFromPreparing.playerType, photo: playerFromPreparing.photo)
-                localPlayerPositionHistory.setReferencePosition(localPlayer)
-                player = localPlayer
-            } else {
-                player = RemotePlayer(displayName: playerFromPreparing.displayName, playerNumber: playerFromPreparing.playerNumber, playerType: playerFromPreparing.playerType, photo: playerFromPreparing.photo)
-            }
-            
-            player.component(ofType: HealthComponent.self)?.killPlayerRef = killPlayer
-            entityManager.addEntity(player)
-        }
+        
+        entityManager.initPlayersEntities(lobbyPlayers: players)
         
     }
     
     func updatePlayersPosition(_ playerState: PlayerState) {
+        print("received player data")
         let newPosition = CGPoint(x: playerState.positionX, y: playerState.positionY)
         let player = entityManager.getRemotePlayer(ofPlayerNumber: playerState.playerNumber)
         let spriteComp = player?.component(ofType: SpriteComponent.self)
@@ -129,16 +117,9 @@ extension GameScene {
         
     }
     
-    func killPlayer() {
+    func removeJoystickAndJumpButton() {
         joystick.removeFromScene()
         jumpButton.node.removeFromParent()
-        
-        for player in entityManager.remotePlayers {
-            if player.type == .man {
-                sceneCamera.followCatcher(player)
-                break
-            }
-        }
     }
     
 }

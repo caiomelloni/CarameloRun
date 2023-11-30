@@ -15,6 +15,8 @@ class ComponentSystem {
     lazy var componentSystems: [GKComponentSystem] = {
         return [
             GKComponentSystem(componentClass: PlayerAnimationComponent.self),
+            GKComponentSystem(componentClass: SpriteComponent.self),
+            GKComponentSystem(componentClass: PlayerAnimationComponent.self),
             GKComponentSystem(componentClass: JumpComponent.self),
             GKComponentSystem(componentClass: CatchComponent.self),
             GKComponentSystem(componentClass: SpawnComponent.self),

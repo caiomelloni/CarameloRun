@@ -40,7 +40,6 @@
 		F87120D22AF0142A00697E21 /* LocalPlayerCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120D12AF0142A00697E21 /* LocalPlayerCamera.swift */; };
 		F87D81F92AEACE5E0006CDD8 /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D81F82AEACE5E0006CDD8 /* SpriteComponent.swift */; };
 		F88C86542B18AEBE00DBF0AB /* JumpButtonPressed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C86532B18AEBE00DBF0AB /* JumpButtonPressed.swift */; };
-		F89283FA2AE94D6F00A3B499 /* PositionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89283F92AE94D6F00A3B499 /* PositionHistory.swift */; };
 		F89283FD2AE964A900A3B499 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89283FC2AE964A900A3B499 /* Constants.swift */; };
 		F898070F2ACDA1880044D237 /* Zposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F898070E2ACDA1880044D237 /* Zposition.swift */; };
 		F89807112ACDA4130044D237 /* Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89807102ACDA4130044D237 /* Dimensions.swift */; };
@@ -100,7 +99,6 @@
 		F87120D12AF0142A00697E21 /* LocalPlayerCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPlayerCamera.swift; sourceTree = "<group>"; };
 		F87D81F82AEACE5E0006CDD8 /* SpriteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
 		F88C86532B18AEBE00DBF0AB /* JumpButtonPressed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpButtonPressed.swift; sourceTree = "<group>"; };
-		F89283F92AE94D6F00A3B499 /* PositionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionHistory.swift; sourceTree = "<group>"; };
 		F89283FC2AE964A900A3B499 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F898070E2ACDA1880044D237 /* Zposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zposition.swift; sourceTree = "<group>"; };
 		F89807102ACDA4130044D237 /* Dimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dimensions.swift; sourceTree = "<group>"; };
@@ -356,7 +354,6 @@
 		F898070D2ACDA1510044D237 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				F89283F92AE94D6F00A3B499 /* PositionHistory.swift */,
 				F898070E2ACDA1880044D237 /* Zposition.swift */,
 				F89807102ACDA4130044D237 /* Dimensions.swift */,
 				F89283FC2AE964A900A3B499 /* Constants.swift */,
@@ -483,7 +480,6 @@
 				F84D86832AFCF98600774AF5 /* DeadState.swift in Sources */,
 				F82786EE2AC59B170047111D /* GameScene.swift in Sources */,
 				FB3E27CD2AFBD21000430E2D /* ProgressBarComponent.swift in Sources */,
-				F89283FA2AE94D6F00A3B499 /* PositionHistory.swift in Sources */,
 				F811A4972B17B91300E01031 /* JoystickStateChanged.swift in Sources */,
 				F87120B82AEBEB1C00697E21 /* DirectionComponent.swift in Sources */,
 				FB3E27CF2AFBD3EE00430E2D /* CompleteTaskComponent.swift in Sources */,

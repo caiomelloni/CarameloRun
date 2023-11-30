@@ -13,6 +13,8 @@ import GameplayKit
 class PlayerAnimationComponent: GKComponent {
     
     let stateMachine: GKStateMachine
+    private var oldStateStringIdentifier: String = PlayerStateStringIdentifier.idleState.rawValue
+    private var currentStateStringIdentifier: String = PlayerStateStringIdentifier.idleState.rawValue
     
     init(_ stateMachine: GKStateMachine) {
         self.stateMachine = stateMachine
@@ -50,7 +52,17 @@ class PlayerAnimationComponent: GKComponent {
     }
     
     override func update(deltaTime seconds: TimeInterval) {
+        oldStateStringIdentifier = currentStateStringIdentifier
+        currentStateStringIdentifier = getCurrentStateStringIdentifier()
         stateMachine.currentState?.update(deltaTime: seconds)
+    }
+    
+    func hasStateChanged() -> Bool {
+       oldStateStringIdentifier != currentStateStringIdentifier
+    }
+    
+    private func getCurrentStateStringIdentifier() -> String {
+        return (stateMachine.currentState as? CodableState)?.stringIdentifier ?? PlayerStateStringIdentifier.idleState.rawValue
     }
     
 }

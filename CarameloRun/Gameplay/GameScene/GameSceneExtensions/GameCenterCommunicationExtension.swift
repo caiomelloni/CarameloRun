@@ -10,7 +10,7 @@ import GameKit
 extension GameScene {
     func updatePlayerPositionForOtherPlayers() {
         let localPlayer = entityManager.localPlayer!
-        if localPlayerPositionHistory.hasPositionChanged(localPlayer) {
+        if localPlayer.component(ofType: SpriteComponent.self)?.hasChanged() ?? false {
             let playerState = PlayerState(name: GKLocalPlayer.local.displayName,
                                           playerNumber: localPlayer.playerNumber,
                                           positionX: localPlayer.component(ofType: SpriteComponent.self)!.position.x,

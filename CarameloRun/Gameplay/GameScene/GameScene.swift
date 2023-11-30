@@ -17,7 +17,6 @@ class GameScene: SKScene {
     let joystick = Joystick()
     let jumpButton = JumpButton()
     var sceneCamera: LocalPlayerCamera!
-    let localPlayerPositionHistory = PositionHistory()
     var controllerDelegate: GameControllerDelegate?
     let timer = ControllTimer()
     

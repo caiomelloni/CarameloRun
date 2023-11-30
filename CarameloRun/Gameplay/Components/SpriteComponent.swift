@@ -10,6 +10,12 @@ import GameplayKit
 
 class SpriteComponent: GKComponent {
     private let node: SKSpriteNode
+    
+    //sprite frames updates changes controll
+    private var oldPosition =  CGPoint(x: 0, y: 0)
+    private var positionChangedOnFrameUpdate = false
+    private var oldState: String?
+    
 
     init(imageName: String, size: CGSize) {
         node = SKSpriteNode(imageNamed: imageName)
@@ -65,6 +71,7 @@ class SpriteComponent: GKComponent {
     func addToScene(_ scene: SKScene) {
         node.removeFromParent()
         scene.addChild(node)
+        setReferencePosition()
     }
    
     func removeFromParent() {
@@ -97,6 +104,27 @@ class SpriteComponent: GKComponent {
         get {
             node.physicsBody?.velocity.dy
         }
+    }
+    
+    override func update(deltaTime seconds: TimeInterval) {
+        positionChangedOnFrameUpdate = position.x != oldPosition.x || position.y != oldPosition.y
+        oldPosition = CGPoint(x: position.x, y: position.y)
+    }
+    
+    private func setReferencePosition() {
+        oldPosition = CGPoint(x: position.x, y: position.y)
+        oldState = (entity?.component(ofType: PlayerAnimationComponent.self)?.stateMachine.currentState as? CodableState)?.stringIdentifier
+    }
+    
+    func hasChanged() -> Bool {
+//        let hasStateChanged = entity?.component(ofType: PlayerAnimationComponent.self)?.hasStateChanged() ?? false
+        let hasStateChanged = false
+        
+        let hasChanged = positionChangedOnFrameUpdate || hasStateChanged
+
+
+        
+        return hasChanged
     }
     
 }
