@@ -12,6 +12,7 @@ import UIKit
 import GameKit
 
 
+
 class HelpPopUpViewController: UIViewController {
     
     let exitButtonImage = UIImage(named: "ExitButton") as UIImage?
@@ -33,7 +34,7 @@ class HelpPopUpViewController: UIViewController {
     
     private var canvas: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = UIColor(red: 248.0/255.0, green: 228.0/255.0, blue: 172.0/255.0, alpha: 1.0)
+        scrollView.backgroundColor = ColorsConstants.backgroundColor
         scrollView.layer.borderWidth = 3
         scrollView.layer.borderColor = UIColor.black.cgColor
         
@@ -67,12 +68,12 @@ class HelpPopUpViewController: UIViewController {
         
         let attributes: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.font: font as Any,
-            NSAttributedString.Key.foregroundColor: UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+            NSAttributedString.Key.foregroundColor: ColorsConstants.tittlesColor
         ]
         
         control.setTitleTextAttributes(attributes, for: .normal)
-        control.selectedSegmentTintColor = UIColor(red: 255.0/255.0, green: 240.0/255.0, blue: 199.0/255.0, alpha: 1.0)
-        control.backgroundColor = UIColor(red: 232.0/255.0, green: 214.0/255.0, blue: 166.0/255.0, alpha: 1.0)
+        control.selectedSegmentTintColor = ColorsConstants.selectedSegment
+        control.backgroundColor = ColorsConstants.unselectedSegment
         control.addTarget(self, action: #selector(handleSegmentedControlValueCHanged), for: .valueChanged)
         
         return control
@@ -201,7 +202,7 @@ class HelpPopUpViewController: UIViewController {
         
         labelTitle1RegraTab.text = "Caramelo"
         labelTitle1RegraTab.font = UIFont(name: "Crang", size: 30)
-        labelTitle1RegraTab.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+        labelTitle1RegraTab.textColor = ColorsConstants.tittlesColor
         
         contentView.addSubview(labelTitle1RegraTab)
         
@@ -217,7 +218,7 @@ class HelpPopUpViewController: UIViewController {
         labelDescription1RegraTab.text = "O Caramelo é um cãozinho fofo e malandro que vive feliz pelas ruas brasileiras. Mas, infelizmente, o Zé Cadelo, funcionário da carrocinha, está prestes a Capturar o Caramelo! O seu objetivo nessa missão é ajudar nosso querido cãozinho a fazer amizade com os moradores da vizinhança e ser adotado antes que o Zé cadelo o alcance!"
         
         labelDescription1RegraTab.font = UIFont(name: "Inter", size: 13)
-        labelDescription1RegraTab.textColor = UIColor(red: 32.0/255.0, green: 46.0/255.0, blue: 55.0/255.0, alpha: 1.0)
+        labelDescription1RegraTab.textColor = ColorsConstants.textColor
         labelDescription1RegraTab.numberOfLines = 0
         
         contentView.addSubview(labelDescription1RegraTab)
@@ -235,7 +236,7 @@ class HelpPopUpViewController: UIViewController {
         
         LabelTitle2RegrasTab.text = "Zé Cadelo"
         LabelTitle2RegrasTab.font = UIFont(name: "Crang", size: 30)
-        LabelTitle2RegrasTab.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+        LabelTitle2RegrasTab.textColor = ColorsConstants.tittlesColor
         
         contentView.addSubview(LabelTitle2RegrasTab)
         
@@ -250,7 +251,7 @@ class HelpPopUpViewController: UIViewController {
         
         labelDescription2RegrasTab.text = "O Zé cadelo precisa garantir seu emprego e, para isso, precisa tirar cães abandonas da rua e levá-los para o abrigo. Infelizmente, esses cãezinhos são malandros e conhecem os catons da cidade melhor que o Zé. Tente capturá-los, usando sua rede, para vencer a partida."
         labelDescription2RegrasTab.font = UIFont(name: "Inter", size: 13)
-        labelDescription2RegrasTab.textColor = UIColor(red: 32.0/255.0, green: 46.0/255.0, blue: 55.0/255.0, alpha: 1.0)
+        labelDescription2RegrasTab.textColor = ColorsConstants.textColor
         labelDescription2RegrasTab.numberOfLines = 0
         
         contentView.addSubview(labelDescription2RegrasTab)
@@ -305,7 +306,7 @@ class HelpPopUpViewController: UIViewController {
         
         labelTitle1RegraTab.text = "Controles"
         labelTitle1RegraTab.font = UIFont(name: "Crang", size: 30)
-        labelTitle1RegraTab.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+        labelTitle1RegraTab.textColor = ColorsConstants.tittlesColor
         
         contentView.addSubview(labelTitle1RegraTab)
         
@@ -361,7 +362,7 @@ class HelpPopUpViewController: UIViewController {
         
         labelTitle1RegraTab.text = "Partira Rápida"
         labelTitle1RegraTab.font = UIFont(name: "Crang", size: 30)
-        labelTitle1RegraTab.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+        labelTitle1RegraTab.textColor = ColorsConstants.tittlesColor
         
         contentView.addSubview(labelTitle1RegraTab)
         
@@ -377,7 +378,7 @@ class HelpPopUpViewController: UIViewController {
         labelDescription1RegraTab.text = "Nesse estilo de conexão, você pode jogar com qualquer outro jogador conectado ao GameCenter no mesmo momento que você. Basta clicar em \"partida rápida” após iniciar o jogo e aguardar que a conexão será feita automaticamente, direcionando vocês para a partida em seguida."
         
         labelDescription1RegraTab.font = UIFont(name: "Inter", size: 13)
-        labelDescription1RegraTab.textColor = UIColor(red: 32.0/255.0, green: 46.0/255.0, blue: 55.0/255.0, alpha: 1.0)
+        labelDescription1RegraTab.textColor = ColorsConstants.textColor
         labelDescription1RegraTab.numberOfLines = 0
         
         contentView.addSubview(labelDescription1RegraTab)
@@ -394,7 +395,7 @@ class HelpPopUpViewController: UIViewController {
         
         LabelTitle2RegrasTab.text = "Convidar seu amigo"
         LabelTitle2RegrasTab.font = UIFont(name: "Crang", size: 30)
-        LabelTitle2RegrasTab.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+        LabelTitle2RegrasTab.textColor = ColorsConstants.tittlesColor
         
         contentView.addSubview(LabelTitle2RegrasTab)
         
@@ -409,7 +410,7 @@ class HelpPopUpViewController: UIViewController {
         
         labelDescription2RegrasTab.text = "Para esse tipo de conexão, é necessário saber o nome de usuário do GameCenter de seu amigo. Em seguida, deve-se clicar em \"convidar jogador” após iniciar o jogo e aguardar o GameCenter enviar o convite para ele. O seu amigo deve aceitá-lo e aguardar até que a conexão seja feita."
         labelDescription2RegrasTab.font = UIFont(name: "Inter", size: 13)
-        labelDescription2RegrasTab.textColor = UIColor(red: 32.0/255.0, green: 46.0/255.0, blue: 55.0/255.0, alpha: 1.0)
+        labelDescription2RegrasTab.textColor = ColorsConstants.textColor
         labelDescription2RegrasTab.numberOfLines = 0
         
         contentView.addSubview(labelDescription2RegrasTab)
@@ -453,7 +454,7 @@ class HelpPopUpViewController: UIViewController {
         
         labelTitle1RegraTab.text = "Desenvolvedores"
         labelTitle1RegraTab.font = UIFont(name: "Crang", size: 30)
-        labelTitle1RegraTab.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+        labelTitle1RegraTab.textColor = ColorsConstants.tittlesColor
         
         contentView.addSubview(labelTitle1RegraTab)
         
@@ -480,7 +481,7 @@ class HelpPopUpViewController: UIViewController {
             for developerName in developers {
                 var label = UILabel()
                 label.font = UIFont(name: "Inter", size: 13)
-                label.textColor = UIColor(red: 32.0/255.0, green: 46.0/255.0, blue: 55.0/255.0, alpha: 1.0)
+                label.textColor = ColorsConstants.textColor
                 label.numberOfLines = 1
                 label.text = developerName
                 stackViewCreditosTab.addArrangedSubview(label)

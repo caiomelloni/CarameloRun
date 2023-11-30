@@ -40,7 +40,7 @@ class PreparingViewController: UIViewController {
         lobbyHelper.initLobby(match)
         //==================
         
-        view.backgroundColor = UIColor(red: 232.0/255.0, green: 214.0/255.0, blue: 166.0/255.0, alpha: 1.0)
+        view.backgroundColor = ColorsConstants.backgroundColor
         
         view.addSubview(buttonImReady)
         configureImReadyButton()
@@ -102,7 +102,7 @@ class PreparingViewController: UIViewController {
             playerNameLabel.text = "\(players[i].displayName)"
             playerNameLabel.textAlignment = .center
             playerNameLabel.font = .boldSystemFont(ofSize: minFontSize)
-            playerNameLabel.textColor = UIColor(red: 32.0/255.0, green: 46.0/255.0, blue: 55.0/255.0, alpha: 1.0)
+            playerNameLabel.textColor = ColorsConstants.textColor
             playerNameLabel.alpha = 1.0
             playerNameLabel.numberOfLines = 1
             playerNameLabel.setContentCompressionResistancePriority(.required, for: .vertical)
@@ -121,9 +121,9 @@ class PreparingViewController: UIViewController {
             playerTypeLabel.font = UIFont(name: "Crang", size: 16)
             
             if players[i].ready {
-                playerTypeLabel.textColor = UIColor(red: 57.0/255.0, green: 103.0/255.0, blue: 41.0/255.0, alpha: 1.0)
+                playerTypeLabel.textColor = ColorsConstants.tittlesColor
             } else {
-                playerTypeLabel.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+                playerTypeLabel.textColor = ColorsConstants.tittlesColor
                 
             }
             playerTypeLabel.alpha = 1.0
@@ -157,7 +157,7 @@ class PreparingViewController: UIViewController {
         buttonImReady.frame = CGRect(x: xCoordinate, y: yCoordinate, width: buttonWidth, height: 56)
         buttonImReady.setTitleColor(UIColor.white, for: .normal) // Defina a cor do texto como branca
         buttonImReady.addTarget(self, action: #selector(ImReadyButtonTapped), for: .touchUpInside)
-        buttonImReady.backgroundColor = UIColor(_colorLiteralRed: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0) // Defina a cor de fundo como laranja
+        buttonImReady.backgroundColor = ColorsConstants.buttonColor
         buttonImReady.titleLabel?.font = UIFont(name: "Crang", size: 16)
         
     }
