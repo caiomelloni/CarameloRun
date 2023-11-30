@@ -51,10 +51,6 @@ extension MenuInicialViewController {
         helpButton.translatesAutoresizingMaskIntoConstraints = false
         helpButton.setImage(helpButtonImage, for: .normal)
         helpButton.addTarget(self, action: #selector(showHelpPopUp), for: .touchUpInside)
-        
-        settingsButton.translatesAutoresizingMaskIntoConstraints = false
-        settingsButton.setImage(settingsButtonImage, for: .normal)
-        settingsButton.addTarget(self, action: #selector(showSettingsPopUp), for: .touchUpInside)
       
     }
     
@@ -118,10 +114,6 @@ extension MenuInicialViewController {
         self.present(vc, animated: true, completion: nil)
     }
     
-    @objc func showSettingsPopUp(){
-        let vc = SettingsPopUpViewController()
-        self.present(vc, animated: true, completion: nil)
-    }
 }
 
 

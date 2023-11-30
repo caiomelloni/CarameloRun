@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		61970CD02AFCF9DA0099760B /* HelpPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61970CCF2AFCF9DA0099760B /* HelpPopUpViewController.swift */; };
 		61A2428E2AFD79AC001D152A /* Crang.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61A2428D2AFD79AC001D152A /* Crang.ttf */; };
-		61A242912AFE48EB001D152A /* SettingsPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A242902AFE48EB001D152A /* SettingsPopUpViewController.swift */; };
 		F811A48E2B1759EA00E01031 /* RemotePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F811A48D2B1759EA00E01031 /* RemotePlayer.swift */; };
 		F811A4902B17829400E01031 /* SpawnComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F811A48F2B17829400E01031 /* SpawnComponent.swift */; };
 		F811A4952B179CE600E01031 /* AddedToScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F811A4942B179CE600E01031 /* AddedToScene.swift */; };
@@ -66,7 +65,6 @@
 		61970CCF2AFCF9DA0099760B /* HelpPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpPopUpViewController.swift; sourceTree = "<group>"; };
 		61A2428D2AFD79AC001D152A /* Crang.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Crang.ttf; sourceTree = "<group>"; };
 		61A2428F2AFD7B2D001D152A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		61A242902AFE48EB001D152A /* SettingsPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPopUpViewController.swift; sourceTree = "<group>"; };
 		F811A48D2B1759EA00E01031 /* RemotePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemotePlayer.swift; sourceTree = "<group>"; };
 		F811A48F2B17829400E01031 /* SpawnComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnComponent.swift; sourceTree = "<group>"; };
 		F811A4942B179CE600E01031 /* AddedToScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedToScene.swift; sourceTree = "<group>"; };
@@ -203,7 +201,6 @@
 				F85491892AE16F71004EA5B1 /* MenuInicialViewController.swift */,
 				FBB5FDAA2AE93AE600E37BE1 /* PreparingViewController.swift */,
 				61970CCF2AFCF9DA0099760B /* HelpPopUpViewController.swift */,
-				61A242902AFE48EB001D152A /* SettingsPopUpViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -492,7 +489,6 @@
 				F82A32822AE2B3C500A3639C /* PlayerState.swift in Sources */,
 				FB4134362AF919AB00C4F54C /* ScoreComponent.swift in Sources */,
 				F8BA5B732B162A9F003AF5F2 /* ComponentSystem.swift in Sources */,
-				61A242912AFE48EB001D152A /* SettingsPopUpViewController.swift in Sources */,
 				F82787032AC5A8250047111D /* Joystick.swift in Sources */,
 				F8D1A9042B0E48450075F6C4 /* LobbyHelper.swift in Sources */,
 				F87120C62AEEC9DE00697E21 /* JumpingState.swift in Sources */,

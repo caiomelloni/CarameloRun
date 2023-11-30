@@ -72,13 +72,16 @@ class HelpPopUpViewController: UIViewController {
     let labelDescription1: UILabel = UILabel()
     let labelTitle2: UILabel = UILabel()
     let labelDescription2: UILabel = UILabel()
-    let mainStackView = UIStackView()
+    let case1StackView = UIStackView()
+    let case3StackView = UIStackView()
     let labelStackView = UIStackView()
     let ButtonLeftImageView = UIImageView(image: UIImage(named: "ButtonLeftUp"))
     let ButtonRightImageView = UIImageView(image: UIImage(named: "ButtonRightUp"))
     let ButtonJumpImageView = UIImageView(image: UIImage(named: "JumpButtonUp"))
     var alreadyCalled = false
     var case1AlreadyAcessed = false
+    var case3AlreadyAcessed = false
+
     
  
     
@@ -108,7 +111,7 @@ class HelpPopUpViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    let items = [ "Regras" , "Controles" , "Como Conectar"]
+    let items = [ "Regras" , "Controles" , "Como Conectar", "créditos"]
     
     lazy var segmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(items: items)
@@ -214,6 +217,9 @@ class HelpPopUpViewController: UIViewController {
         case 2:
             print("case 2")
             configureCanvas2()
+            
+        case 3:
+            configureCanvas3()
             
         default:
             print("case default")
@@ -368,31 +374,30 @@ class HelpPopUpViewController: UIViewController {
         ])
         
         
-        contentView.addSubview(mainStackView)
+        contentView.addSubview(case1StackView)
         
-        mainStackView.alignment = .center
-        mainStackView.distribution = .equalSpacing
-        mainStackView.spacing = 0
-        mainStackView.axis = .vertical
+        case1StackView.alignment = .center
+        case1StackView.distribution = .equalSpacing
+        case1StackView.spacing = 0
+        case1StackView.axis = .vertical
         
         ButtonLeftImageView.contentMode = .scaleAspectFit
         ButtonRightImageView.contentMode = .scaleAspectFit
         ButtonJumpImageView.contentMode = .scaleAspectFit
         
         if !case1AlreadyAcessed {
-            mainStackView.addArrangedSubview(jumpView)
-            mainStackView.addArrangedSubview(leftView)
-            mainStackView.addArrangedSubview(rightView)
+            case1StackView.addArrangedSubview(jumpView)
+            case1StackView.addArrangedSubview(leftView)
+            case1StackView.addArrangedSubview(rightView)
         }
         
-        mainStackView.translatesAutoresizingMaskIntoConstraints = false
+        case1StackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: labelTitle1.bottomAnchor, constant: 26),
-            mainStackView.widthAnchor.constraint(equalToConstant: 150),
-            mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32),
-            //mainStackView.heightAnchor.constraint(equalToConstant: 300),
-            mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            case1StackView.topAnchor.constraint(equalTo: labelTitle1.bottomAnchor, constant: 26),
+            case1StackView.widthAnchor.constraint(equalToConstant: 150),
+            case1StackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32),
+            case1StackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
             
         ])
         
@@ -474,6 +479,82 @@ class HelpPopUpViewController: UIViewController {
             labelDescription2.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
             
         ])
+        
+    }
+    
+    func configureCanvas3() {
+        
+        let developers:[String] = ["Pamella de Alvarenga Souza", "Joshua Matheus", "Marcelo Pastana Duarte", "Luis Siqueira", "Caio Melloni"]
+        
+        for subview in contentView.subviews {
+            subview.removeFromSuperview()
+        }
+        
+        self.canvas.addSubview(contentView)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let hConst =  contentView.heightAnchor.constraint(equalTo: canvas.heightAnchor)
+        hConst.isActive = true
+        hConst.priority = UILayoutPriority(50)
+        
+        NSLayoutConstraint.activate([
+            
+            contentView.topAnchor.constraint(equalTo: self.canvas.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: self.canvas.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: self.canvas.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: self.canvas.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: self.canvas.widthAnchor)
+            
+        ])
+        
+        labelTitle1.text = "Desenvolvedores"
+        labelTitle1.font = UIFont(name: "Crang", size: 30)
+        labelTitle1.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+        
+        contentView.addSubview(labelTitle1)
+        
+        labelTitle1.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            
+            labelTitle1.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 68),
+            labelTitle1.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32)
+            
+        ])
+    
+        contentView.addSubview(case3StackView)
+        
+        case3StackView.alignment = .leading
+        case3StackView.distribution = .equalSpacing
+        case3StackView.spacing = 0
+        case3StackView.axis = .vertical
+        
+        ButtonLeftImageView.contentMode = .scaleAspectFit
+        ButtonRightImageView.contentMode = .scaleAspectFit
+        ButtonJumpImageView.contentMode = .scaleAspectFit
+        
+        if !case3AlreadyAcessed {
+            for developerName in developers {
+                var label = UILabel()
+                label.font = UIFont(name: "Inter", size: 13)
+                label.textColor = UIColor(red: 32.0/255.0, green: 46.0/255.0, blue: 55.0/255.0, alpha: 1.0)
+                label.numberOfLines = 0
+                label.text = developerName
+                case3StackView.addArrangedSubview(label)
+            }
+        }
+        
+        case3StackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            case3StackView.topAnchor.constraint(equalTo: labelTitle1.bottomAnchor, constant: 26),
+           //case3StackView.widthAnchor.constraint(equalToConstant: 150),
+            case3StackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32),
+            case3StackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            
+        ])
+        
+        case3AlreadyAcessed = true
     }
 }
 
