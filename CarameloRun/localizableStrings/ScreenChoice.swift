@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum Screen {
+enum ScreenChoice {
     case HelpPopUpView
 }
