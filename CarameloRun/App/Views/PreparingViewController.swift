@@ -12,12 +12,12 @@ import GameKit
 
 class PreparingViewController: UIViewController {
     let match: GKMatch
-    let button = UIButton(type: .system)
+    let buttonImReady = UIButton(type: .system)
     var controllerDelegate: GameControllerDelegate?
     var timer = ControllTimer()
     let lobbyHelper = LobbyHelper()
     var lobbyPlayers = [LobbyPlayer]()
-    var stackView = UIStackView()
+    var horizontalStackViewPlayers = UIStackView()
     var minFontSize = 100.0
     
     init(match: GKMatch) {
@@ -34,38 +34,39 @@ class PreparingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        button.isEnabled = true
+        buttonImReady.isEnabled = true
         
         //Handles match making logic
         lobbyHelper.initLobby(match)
         //==================
         
-        view.backgroundColor = UIColor(red: 232.0/255.0, green: 214.0/255.0, blue: 166.0/255.0, alpha: 1.0)
+        view.backgroundColor = ColorsConstants.backgroundColor
         
-        view.addSubview(button)
-        configureButton()
+        view.addSubview(buttonImReady)
+        configureImReadyButton()
+        
         
     }
     
     func configureStackView(players:[LobbyPlayer]) {
-        stackView.removeFromSuperview()
-        stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.spacing = 0
+        horizontalStackViewPlayers.removeFromSuperview()
+        horizontalStackViewPlayers = UIStackView()
+        horizontalStackViewPlayers.axis = .horizontal
+        horizontalStackViewPlayers.distribution = .fillEqually
+        horizontalStackViewPlayers.spacing = 0
         
         let screenWidth = UIScreen.main.bounds.width
         let stackViewWidth = screenWidth * 0.9
         
-        stackView.frame = CGRect(x: (screenWidth - stackViewWidth) / 2, y: (UIScreen.main.bounds.height / 2) - 120, width: stackViewWidth, height: 150)
+        horizontalStackViewPlayers.frame = CGRect(x: (screenWidth - stackViewWidth) / 2, y: (UIScreen.main.bounds.height / 2) - 120, width: stackViewWidth, height: 150)
         
         for i in 0...(players.count - 1){
             
             let playerImage = players[i].photo
             
-            let imageView = UIImageView()
-            imageView.image = playerImage
-            imageView.contentMode = .scaleAspectFit
+            let imageViewPlayer = UIImageView()
+            imageViewPlayer.image = playerImage
+            imageViewPlayer.contentMode = .scaleAspectFit
             
             let playerNameLabel = UILabel()
             var fontSize = 0.0
@@ -101,7 +102,7 @@ class PreparingViewController: UIViewController {
             playerNameLabel.text = "\(players[i].displayName)"
             playerNameLabel.textAlignment = .center
             playerNameLabel.font = .boldSystemFont(ofSize: minFontSize)
-            playerNameLabel.textColor = UIColor(red: 32.0/255.0, green: 46.0/255.0, blue: 55.0/255.0, alpha: 1.0)
+            playerNameLabel.textColor = ColorsConstants.textColor
             playerNameLabel.alpha = 1.0
             playerNameLabel.numberOfLines = 1
             playerNameLabel.setContentCompressionResistancePriority(.required, for: .vertical)
@@ -120,9 +121,9 @@ class PreparingViewController: UIViewController {
             playerTypeLabel.font = UIFont(name: "Crang", size: 16)
             
             if players[i].ready {
-                playerTypeLabel.textColor = UIColor(red: 57.0/255.0, green: 103.0/255.0, blue: 41.0/255.0, alpha: 1.0)
+                playerTypeLabel.textColor = ColorsConstants.tittlesColor
             } else {
-                playerTypeLabel.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+                playerTypeLabel.textColor = ColorsConstants.tittlesColor
                 
             }
             playerTypeLabel.alpha = 1.0
@@ -134,13 +135,14 @@ class PreparingViewController: UIViewController {
             verticalStackView.alignment = .center
             verticalStackView.spacing = 8
             
-            stackView.addArrangedSubview(verticalStackView)
+            horizontalStackViewPlayers.addArrangedSubview(verticalStackView)
         }
-        view.addSubview(stackView)
+        view.addSubview(horizontalStackViewPlayers)
     }
     
     
-    func configureButton() {
+    func configureImReadyButton() {
+        
         let screenWidth = UIScreen.main.bounds.width
         let buttonWidth: CGFloat = 248 // Largura do botão
         let xCoordinate = screenWidth / 2 - buttonWidth/2
@@ -148,20 +150,21 @@ class PreparingViewController: UIViewController {
         let buttonHeight: CGFloat = 56 // Largura do botão
         let yCoordinate = (screenHeight - 1.5*buttonHeight)
         
-        button.layer.borderWidth = 1.5
-        button.layer.borderColor = UIColor.black.cgColor
+        buttonImReady.layer.borderWidth = 1.5
+        buttonImReady.layer.borderColor = UIColor.black.cgColor
         
-        button.setTitle("Estou pronto!", for: .normal)
-        button.frame = CGRect(x: xCoordinate, y: yCoordinate, width: buttonWidth, height: 56)
-        button.setTitleColor(UIColor.white, for: .normal) // Defina a cor do texto como branca
-        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        button.backgroundColor = UIColor(_colorLiteralRed: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 0.5) // Defina a cor de fundo como laranja
-        button.titleLabel?.font = UIFont(name: "Crang", size: 16)
+        buttonImReady.setTitle("Estou pronto!", for: .normal)
+        buttonImReady.frame = CGRect(x: xCoordinate, y: yCoordinate, width: buttonWidth, height: 56)
+        buttonImReady.setTitleColor(UIColor.white, for: .normal) // Defina a cor do texto como branca
+        buttonImReady.addTarget(self, action: #selector(ImReadyButtonTapped), for: .touchUpInside)
+        buttonImReady.backgroundColor = ColorsConstants.buttonColor
+        buttonImReady.titleLabel?.font = UIFont(name: "Crang", size: 16)
+        
     }
     
-    @objc func buttonTapped() {
+    @objc func ImReadyButtonTapped() {
         
-        guard button.isEnabled else {
+        guard buttonImReady.isEnabled else {
             // O botao esta desativado, nada acontece
             return
         }
@@ -169,7 +172,7 @@ class PreparingViewController: UIViewController {
         lobbyHelper.getReadyToPlay()
     }
     
-    func allReady(_ players: [LobbyPlayer]) {
+    func allReadyToStartGame(_ players: [LobbyPlayer]) {
         self.navigationController?.isNavigationBarHidden = true
         //TODO: fazer subtituicao de telas ao inves de dar um push
         self.navigationController?.pushViewController(GameViewController(match: match, players: players, time: timer.n), animated: false)
@@ -179,7 +182,7 @@ class PreparingViewController: UIViewController {
 
 extension PreparingViewController: LobbyHelperDelegate {
     func allPlayersAreReadyToPlay(_ players: [LobbyPlayer]) {
-        allReady(players)
+        allReadyToStartGame(players)
     }
     
     func lobbyPlayersDidChange(_ players: [LobbyPlayer]) {
