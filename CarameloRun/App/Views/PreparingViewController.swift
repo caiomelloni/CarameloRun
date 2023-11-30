@@ -45,6 +45,7 @@ class PreparingViewController: UIViewController {
         view.addSubview(buttonImReady)
         configureImReadyButton()
         
+        
     }
     
     func configureStackView(players:[LobbyPlayer]) {
@@ -156,7 +157,7 @@ class PreparingViewController: UIViewController {
         buttonImReady.frame = CGRect(x: xCoordinate, y: yCoordinate, width: buttonWidth, height: 56)
         buttonImReady.setTitleColor(UIColor.white, for: .normal) // Defina a cor do texto como branca
         buttonImReady.addTarget(self, action: #selector(ImReadyButtonTapped), for: .touchUpInside)
-        buttonImReady.backgroundColor = UIColor(_colorLiteralRed: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 0.5) // Defina a cor de fundo como laranja
+        buttonImReady.backgroundColor = UIColor(_colorLiteralRed: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0) // Defina a cor de fundo como laranja
         buttonImReady.titleLabel?.font = UIFont(name: "Crang", size: 16)
         
     }
