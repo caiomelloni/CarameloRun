@@ -11,12 +11,10 @@ import UIKit
 import GameKit
 
 class MenuInicialViewController: UIViewController {
-    let stackView = UIStackView()
+    let stackViewMenuInicial = UIStackView()
     let logoImageView = UIImageView(image: UIImage(named: "Logo"))
     let helpButtonImage = UIImage(named: "helpButton") as UIImage?
     let helpButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
-    let settingsButtonImage = UIImage(named: "settingsButton") as UIImage?
-    let settingsButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
     let startButtonImage = UIImage(named: "startButton") as UIImage?
     let startButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
     let gameCenterHelper = GameCenterHelper()
@@ -54,42 +52,33 @@ extension MenuInicialViewController {
     }
     
     func configureStackView() {
-        view.addSubview(stackView)
-        stackView.axis = .vertical
-        stackView.spacing = 24
-        stackView.alignment = .center
-        stackView.addArrangedSubview(logoImageView)
-        stackView.addArrangedSubview(startButton)
-        stackView.addArrangedSubview(connectionStatusLabel)
+        view.addSubview(stackViewMenuInicial)
+        stackViewMenuInicial.axis = .vertical
+        stackViewMenuInicial.spacing = 24
+        stackViewMenuInicial.alignment = .center
+        stackViewMenuInicial.addArrangedSubview(logoImageView)
+        stackViewMenuInicial.addArrangedSubview(startButton)
+        stackViewMenuInicial.addArrangedSubview(connectionStatusLabel)
     }
     
     func setStackViewConstraints() {
         
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackViewMenuInicial.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            stackViewMenuInicial.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackViewMenuInicial.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
     
     func setButtonsContraints() {
         view.addSubview(helpButton)
-        view.addSubview(settingsButton)
         
         helpButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             helpButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 32),
             helpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -56)
-           
-        ])
-        
-        settingsButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            settingsButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 33),
-            settingsButton.trailingAnchor.constraint(equalTo: helpButton.leadingAnchor, constant: -13)
            
         ])
         
@@ -100,7 +89,6 @@ extension MenuInicialViewController {
         connectionStatusLabel.numberOfLines = 1
         connectionStatusLabel.text = "You are not connected to Game Center"
         connectionStatusLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        
         
     }
     
