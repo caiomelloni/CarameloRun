@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		61970CD02AFCF9DA0099760B /* HelpPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61970CCF2AFCF9DA0099760B /* HelpPopUpViewController.swift */; };
 		61A2428E2AFD79AC001D152A /* Crang.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61A2428D2AFD79AC001D152A /* Crang.ttf */; };
+		61CDA65E2B18C53A0063D089 /* IconLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CDA65D2B18C53A0063D089 /* IconLabelView.swift */; };
 		F811A48E2B1759EA00E01031 /* RemotePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F811A48D2B1759EA00E01031 /* RemotePlayer.swift */; };
 		F811A4902B17829400E01031 /* SpawnComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F811A48F2B17829400E01031 /* SpawnComponent.swift */; };
 		F811A4952B179CE600E01031 /* AddedToScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F811A4942B179CE600E01031 /* AddedToScene.swift */; };
@@ -65,6 +66,7 @@
 		61970CCF2AFCF9DA0099760B /* HelpPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpPopUpViewController.swift; sourceTree = "<group>"; };
 		61A2428D2AFD79AC001D152A /* Crang.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Crang.ttf; sourceTree = "<group>"; };
 		61A2428F2AFD7B2D001D152A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		61CDA65D2B18C53A0063D089 /* IconLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconLabelView.swift; sourceTree = "<group>"; };
 		F811A48D2B1759EA00E01031 /* RemotePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemotePlayer.swift; sourceTree = "<group>"; };
 		F811A48F2B17829400E01031 /* SpawnComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnComponent.swift; sourceTree = "<group>"; };
 		F811A4942B179CE600E01031 /* AddedToScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedToScene.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				F85491892AE16F71004EA5B1 /* MenuInicialViewController.swift */,
 				FBB5FDAA2AE93AE600E37BE1 /* PreparingViewController.swift */,
 				61970CCF2AFCF9DA0099760B /* HelpPopUpViewController.swift */,
+				61CDA65D2B18C53A0063D089 /* IconLabelView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 				61970CD02AFCF9DA0099760B /* HelpPopUpViewController.swift in Sources */,
 				F811A4902B17829400E01031 /* SpawnComponent.swift in Sources */,
 				F8A004A22AFA609600A9DAC3 /* GetCaughtComponent.swift in Sources */,
+				61CDA65E2B18C53A0063D089 /* IconLabelView.swift in Sources */,
 				F89283FD2AE964A900A3B499 /* Constants.swift in Sources */,
 				F82786E82AC59B170047111D /* AppDelegate.swift in Sources */,
 				F89807112ACDA4130044D237 /* Dimensions.swift in Sources */,
