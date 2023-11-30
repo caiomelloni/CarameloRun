@@ -5,3 +5,11 @@
 "Title2RegrasTabText" = "Zé Cadelo";
 
 "Description2RegrasTabText" = "O Zé cadelo precisa garantir seu emprego e, para isso, precisa tirar cães abandonas da rua e levá-los para o abrigo. Infelizmente, esses cãezinhos são malandros e conhecem os catons da cidade melhor que o Zé. Tente capturá-los, usando sua rede, para vencer a partida.";
+
+"Title1ComoConectarTabText" = "Partida Rápida";
+
+"Description1ComoConectarTabText" = "Nesse estilo de conexão, você pode jogar com qualquer outro jogador conectado ao GameCenter no mesmo momento que você. Basta clicar em \"partida rápida” após iniciar o jogo e aguardar que a conexão será feita automaticamente, direcionando vocês para a partida em seguida.";
+
+"Title2ComoConectarTabText" = "Convidar seu amigo";
+
+"Description2ComoConectarTabText" = "Para esse tipo de conexão, é necessário saber o nome de usuário do GameCenter de seu amigo. Em seguida, deve-se clicar em \"convidar jogador” após iniciar o jogo e aguardar o GameCenter enviar o convite para ele. O seu amigo deve aceitá-lo e aguardar até que a conexão seja feita.";

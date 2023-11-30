@@ -368,7 +368,8 @@ class HelpPopUpViewController: UIViewController {
         hConst.isActive = true
         hConst.priority = UILayoutPriority(50)
         
-        labelTitle1ComoConectarTab.text = "Partira Rápida"
+        labelTitle1ComoConectarTab.text = HelpPopUpViewStrings.Title1ComoConectarTabText.localized()
+        
         labelTitle1ComoConectarTab.font = UIFont(name: "Crang", size: 30)
         labelTitle1ComoConectarTab.textColor = ColorsConstants.tittlesColor
         
@@ -383,8 +384,7 @@ class HelpPopUpViewController: UIViewController {
             
         ])
         
-        labelDescription1ComoConectarTab.text = "Nesse estilo de conexão, você pode jogar com qualquer outro jogador conectado ao GameCenter no mesmo momento que você. Basta clicar em \"partida rápida” após iniciar o jogo e aguardar que a conexão será feita automaticamente, direcionando vocês para a partida em seguida."
-        
+        labelDescription1ComoConectarTab.text = HelpPopUpViewStrings.Description1ComoConectarTabText.localized()
         labelDescription1ComoConectarTab.font = UIFont(name: "Inter", size: 13)
         labelDescription1ComoConectarTab.textColor = ColorsConstants.textColor
         labelDescription1ComoConectarTab.numberOfLines = 0
@@ -401,7 +401,7 @@ class HelpPopUpViewController: UIViewController {
             
         ])
         
-        labelTitle2ComoConectarTab.text = "Convidar seu amigo"
+        labelTitle2ComoConectarTab.text = HelpPopUpViewStrings.Title2RegrasTabText.localized()
         labelTitle2ComoConectarTab.font = UIFont(name: "Crang", size: 30)
         labelTitle2ComoConectarTab.textColor = ColorsConstants.tittlesColor
         
@@ -416,7 +416,7 @@ class HelpPopUpViewController: UIViewController {
             
         ])
         
-        labelDescription2ComoConectarTab.text = "Para esse tipo de conexão, é necessário saber o nome de usuário do GameCenter de seu amigo. Em seguida, deve-se clicar em \"convidar jogador” após iniciar o jogo e aguardar o GameCenter enviar o convite para ele. O seu amigo deve aceitá-lo e aguardar até que a conexão seja feita."
+        labelDescription2ComoConectarTab.text = HelpPopUpViewStrings.Description2ComoConectarTabText.localized()
         labelDescription2ComoConectarTab.font = UIFont(name: "Inter", size: 13)
         labelDescription2ComoConectarTab.textColor = ColorsConstants.textColor
         labelDescription2ComoConectarTab.numberOfLines = 0
