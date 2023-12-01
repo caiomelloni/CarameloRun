@@ -25,6 +25,7 @@ class HelpPopUpViewController: UIViewController {
     
     let labelTitle1ComoConectarTab: UILabel = UILabel()
     let labelDescription1ComoConectarTab: UILabel = UILabel()
+    
     let labelTitle2ComoConectarTab: UILabel = UILabel()
     let labelDescription2ComoConectarTab: UILabel = UILabel()
     

@@ -17,6 +17,8 @@ extension String {
         case .HelpPopUpView:
             fileName = "HelpPopUpViewStrings"
             
+        case .MenuInicialView:
+            fileName = "MenuInicialViewStrings"
         }
         return NSLocalizedString(self, tableName: fileName, bundle: Bundle.main, value: String(), comment: String())
     }

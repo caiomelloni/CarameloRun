@@ -106,7 +106,7 @@ extension MenuInicialViewController {
 
 extension MenuInicialViewController: GameCenterHelperDelegate {
   func didChangeAuthStatus(isAuthenticated: Bool) {
-      print("changed status is auth: \(isAuthenticated)")
+      //print("changed status is auth: \(isAuthenticated)")
     startButton.isEnabled = isAuthenticated
     connectionStatusLabel.text = "Connected to Game Center"
     connectionStatusLabel.font = UIFont.boldSystemFont(ofSize: 16)

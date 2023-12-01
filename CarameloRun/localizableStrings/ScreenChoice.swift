@@ -9,4 +9,5 @@ import Foundation
 
 enum ScreenChoice {
     case HelpPopUpView
+    case MenuInicialView
 }
