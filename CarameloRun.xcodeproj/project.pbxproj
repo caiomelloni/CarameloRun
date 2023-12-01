@@ -40,6 +40,7 @@
 		F87120D22AF0142A00697E21 /* LocalPlayerCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120D12AF0142A00697E21 /* LocalPlayerCamera.swift */; };
 		F87D81F92AEACE5E0006CDD8 /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D81F82AEACE5E0006CDD8 /* SpriteComponent.swift */; };
 		F88C86542B18AEBE00DBF0AB /* JumpButtonPressed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C86532B18AEBE00DBF0AB /* JumpButtonPressed.swift */; };
+		F88C86582B1A175C00DBF0AB /* SendPlayerUpdatesComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C86572B1A175C00DBF0AB /* SendPlayerUpdatesComponent.swift */; };
 		F89283FD2AE964A900A3B499 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89283FC2AE964A900A3B499 /* Constants.swift */; };
 		F898070F2ACDA1880044D237 /* Zposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F898070E2ACDA1880044D237 /* Zposition.swift */; };
 		F89807112ACDA4130044D237 /* Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89807102ACDA4130044D237 /* Dimensions.swift */; };
@@ -99,6 +100,7 @@
 		F87120D12AF0142A00697E21 /* LocalPlayerCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPlayerCamera.swift; sourceTree = "<group>"; };
 		F87D81F82AEACE5E0006CDD8 /* SpriteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
 		F88C86532B18AEBE00DBF0AB /* JumpButtonPressed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpButtonPressed.swift; sourceTree = "<group>"; };
+		F88C86572B1A175C00DBF0AB /* SendPlayerUpdatesComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPlayerUpdatesComponent.swift; sourceTree = "<group>"; };
 		F89283FC2AE964A900A3B499 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F898070E2ACDA1880044D237 /* Zposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zposition.swift; sourceTree = "<group>"; };
 		F89807102ACDA4130044D237 /* Dimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dimensions.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 				FB3E27CC2AFBD21000430E2D /* ProgressBarComponent.swift */,
 				FB3E27CE2AFBD3EE00430E2D /* CompleteTaskComponent.swift */,
 				F811A48F2B17829400E01031 /* SpawnComponent.swift */,
+				F88C86572B1A175C00DBF0AB /* SendPlayerUpdatesComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -496,6 +499,7 @@
 				F82787032AC5A8250047111D /* Joystick.swift in Sources */,
 				F8D1A9042B0E48450075F6C4 /* LobbyHelper.swift in Sources */,
 				F87120C62AEEC9DE00697E21 /* JumpingState.swift in Sources */,
+				F88C86582B1A175C00DBF0AB /* SendPlayerUpdatesComponent.swift in Sources */,
 				F82787052AC5B8CB0047111D /* JumpButton.swift in Sources */,
 				F8BA5B742B162A9F003AF5F2 /* EntityManager.swift in Sources */,
 				F87120CB2AEECA6100697E21 /* RunningState.swift in Sources */,

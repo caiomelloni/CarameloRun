@@ -90,9 +90,6 @@ class GameScene: SKScene {
         jumpButton.update(sceneCamera, frame)
         timer.update(sceneCamera, frame)
         
-        //game center online updates
-        updatePlayerPositionForOtherPlayers()
-        
         handlePlayerCollision()
         
         verifyDoingTask()

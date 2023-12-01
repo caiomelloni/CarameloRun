@@ -132,11 +132,13 @@ protocol GameControllerDelegate {
     func sendMatchState(_ state: matchState)
     var players: [LobbyPlayer] { get }
     func finishGame()
+    var match: GKMatch { get }
 }
 
 extension GameViewController: GameControllerDelegate {
     
     func sendPlayerState(_ state: PlayerState) {
+        
         do {
             let data = try JSONEncoder().encode(state)
             try match.sendData(toAllPlayers: data, with: GKMatch.SendDataMode.unreliable)

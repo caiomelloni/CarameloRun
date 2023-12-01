@@ -26,6 +26,7 @@ class EntityManager {
     func addEntity(_ entity: GKEntity) {
         entities.insert(entity)
         
+        entity.component(ofType: SendPlayerUpdatesComponent.self)?.match = scene.controllerDelegate?.match
         
         componentSystem.addEntityComponents(entity)
         componentSystem.notifyAddedToScene(scene: scene)
@@ -69,16 +70,14 @@ class EntityManager {
         }
     }
     
+    //TODO: use component notification for remote players update
     func updateRemotePlayerPosition(_ playerState: PlayerState) {
         let newPosition = CGPoint(x: playerState.positionX, y: playerState.positionY)
         let remotePlayer = getRemotePlayer(ofPlayerNumber: playerState.playerNumber)
         
         let stateStringIdentifier = PlayerStateStringIdentifier(rawValue: playerState.state)
         
-
-        
         remotePlayer?.updateFromDataReceived(newPosition, stateStringIdentifier)
-        
     }
     
 }

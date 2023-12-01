@@ -20,7 +20,8 @@ class ComponentSystem {
             GKComponentSystem(componentClass: JumpComponent.self),
             GKComponentSystem(componentClass: CatchComponent.self),
             GKComponentSystem(componentClass: SpawnComponent.self),
-            GKComponentSystem(componentClass: VelocityComponent.self)
+            GKComponentSystem(componentClass: VelocityComponent.self),
+            GKComponentSystem(componentClass: SendPlayerUpdatesComponent.self)
         ]
     }()
     

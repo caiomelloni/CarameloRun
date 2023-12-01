@@ -45,7 +45,7 @@ class LocalPlayer: GKEntity {
             VelocityComponent(Constants.playerVelocity),
             ScoreComponent(),
             PlayerAnimationComponent(type == .dog ? PlayerStateMachine(spriteComponent) : CatcherStateMachine(spriteComponent)),
-                        
+            SendPlayerUpdatesComponent()
         ]
         
         components.forEach { component in
