@@ -23,45 +23,6 @@ extension GameScene {
         
     }
     
-    func updatePlayersPosition(_ playerState: PlayerState) {
-        print("received player data")
-        let newPosition = CGPoint(x: playerState.positionX, y: playerState.positionY)
-        let player = entityManager.getRemotePlayer(ofPlayerNumber: playerState.playerNumber)
-        let spriteComp = player?.component(ofType: SpriteComponent.self)
-        
-        let oldX = spriteComp?.position.x
-        spriteComp?.position = newPosition
-        
-        let animationComp = player?.component(ofType: PlayerAnimationComponent.self)
-        
-        switch PlayerStateStringIdentifier(rawValue: playerState.state) {
-        case .idleState:
-            animationComp?.idle()
-        case .runState:
-            animationComp?.run()
-        case .fallState:
-            animationComp?.fall()
-        case .jumpState:
-            animationComp?.jump()
-        case .arrestState:
-            animationComp?.arrest()
-        case .deadState:
-            animationComp?.dead()
-        default:
-            print("=> func updatePlayerPosition: no state detected for the remote player")
-        }
-        
-        // fixes player orientation
-        let directionComp = player?.component(ofType: DirectionComponent.self)
-        let dx = (oldX ?? 0) - newPosition.x
-        if dx > 0 {
-            directionComp?.changeDirection(.left)
-        } else if dx < 0{
-            directionComp?.changeDirection(.right)
-        }
-        
-    }
-    
     func handlePlayerCollision() {
         let localPlayer = entityManager.localPlayer!
         let remotePlayers = entityManager.remotePlayers
@@ -119,7 +80,7 @@ extension GameScene {
     
     func removeJoystickAndJumpButton() {
         joystick.removeFromScene()
-        jumpButton.node.removeFromParent()
+        jumpButton.removeFromScene()
     }
     
 }

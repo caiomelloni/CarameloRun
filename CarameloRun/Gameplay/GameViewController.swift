@@ -115,15 +115,13 @@ extension GameViewController: GKMatchDelegate {
         let dataJsonString = String(decoding: data, as: UTF8.self)
         let jsonData = dataJsonString.data(using: .utf8)!
         
+        gameScene?.didReceiveData(match, data, player)
+        
         do {
-            if let playerState = try? JSONDecoder().decode(PlayerState.self, from: jsonData) {
-                gameScene?.updatePlayersPosition(playerState)
-            } else if let matchState = try? JSONDecoder().decode(matchState.self, from: jsonData) {
+           if let matchState = try? JSONDecoder().decode(matchState.self, from: jsonData) {
                 if matchState.finish {
                     finishGame()
                 }
-            } else {
-                print("Error reciving data")
             }
         }
     }

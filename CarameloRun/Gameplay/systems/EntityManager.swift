@@ -69,6 +69,18 @@ class EntityManager {
         }
     }
     
+    func updateRemotePlayerPosition(_ playerState: PlayerState) {
+        let newPosition = CGPoint(x: playerState.positionX, y: playerState.positionY)
+        let remotePlayer = getRemotePlayer(ofPlayerNumber: playerState.playerNumber)
+        
+        let stateStringIdentifier = PlayerStateStringIdentifier(rawValue: playerState.state)
+        
+
+        
+        remotePlayer?.updateFromDataReceived(newPosition, stateStringIdentifier)
+        
+    }
+    
 }
 
 

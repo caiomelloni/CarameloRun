@@ -8,7 +8,7 @@
 import SpriteKit
 
 class JumpButton {
-    var node = SKSpriteNode(texture: SKTexture(imageNamed: "JumpButtonUp"))
+    private var node = SKSpriteNode(texture: SKTexture(imageNamed: "JumpButtonUp"))
     private var scene: GameScene!
 
     init() {
@@ -41,6 +41,10 @@ class JumpButton {
         if(node.frame.contains(location)) {
                 node.texture = SKTexture(imageNamed: "JumpButtonUp")
         }
+    }
+    
+    func removeFromScene() {
+        node.removeFromParent()
     }
     
     func setJumpBtnPositionRelativeToCamera(_ camera: LocalPlayerCamera, _ screenFrame: CGRect) {

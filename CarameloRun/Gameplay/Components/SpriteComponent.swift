@@ -64,6 +64,20 @@ class SpriteComponent: GKComponent {
             node.position
         }
         set {
+            
+            // update sprite direction ###
+            let oldX = position.x
+            let newXPosition = newValue.x
+            
+            let directionComp = entity?.component(ofType: DirectionComponent.self)
+            let dx = (oldX) - newXPosition
+            if dx > 0 {
+                directionComp?.changeDirection(.left)
+            } else if dx < 0{
+                directionComp?.changeDirection(.right)
+            }
+            // ###########################
+            
             node.position = newValue
         }
     }

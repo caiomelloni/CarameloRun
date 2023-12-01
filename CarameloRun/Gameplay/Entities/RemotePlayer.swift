@@ -72,5 +72,29 @@ class RemotePlayer: GKEntity {
         return spriteComponent
     }
     
+    func updateFromDataReceived(_ newPosition: CGPoint, _ stateStringIdentifier: PlayerStateStringIdentifier?){
+        let spriteComp = component(ofType: SpriteComponent.self)
+        spriteComp?.position = newPosition
+        
+        let animationComp = component(ofType: PlayerAnimationComponent.self)
+        
+        switch stateStringIdentifier {
+        case .idleState:
+            animationComp?.idle()
+        case .runState:
+            animationComp?.run()
+        case .fallState:
+            animationComp?.fall()
+        case .jumpState:
+            animationComp?.jump()
+        case .arrestState:
+            animationComp?.arrest()
+        case .deadState:
+            animationComp?.dead()
+        default:
+            print("=> func updatePlayerPosition: no state detected for the remote player")
+        }
+    }
+    
 }
 
