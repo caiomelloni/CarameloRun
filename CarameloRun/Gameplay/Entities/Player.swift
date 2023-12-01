@@ -24,6 +24,7 @@ class Player: GKEntity {
     var type: typeOfPlayer
     var ready: Bool = false
     var photo: UIImage?
+    var adopted: Bool = false
 //    var score: Int = 0
     
     

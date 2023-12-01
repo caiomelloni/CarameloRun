@@ -66,6 +66,8 @@ extension GameScene {
             animationComp?.arrest()
         case .deadState:
             animationComp?.dead()
+        case .winnerState:
+            animationComp?.winner()
         default:
             print("=> func updatePlayerPosition: no state detected for the remote player")
         }

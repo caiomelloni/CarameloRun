@@ -29,6 +29,8 @@ class GameScene: SKScene {
     var task2: Tasks! = nil
     var task3: Tasks! = nil
     
+    var dogsCanBeAdopted: Bool = false
+    
     // Update time
     var lastUpdateTimeInterval: TimeInterval = 0
     
@@ -105,9 +107,15 @@ class GameScene: SKScene {
         
         handlePlayerCollision()
         
-        verifyDoingTask(task1)
-        verifyDoingTask(task2)
-        verifyDoingTask(task3)
+        if !dogsCanBeAdopted {
+            verifyDoingTask(task1)
+            verifyDoingTask(task2)
+            verifyDoingTask(task3)
+        } else {
+            verifyAdopted(task1)
+            verifyAdopted(task2)
+            verifyAdopted(task3)
+        }
         
     }
     

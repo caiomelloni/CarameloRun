@@ -21,7 +21,7 @@ class PositionHistory {
     func hasPositionChanged(_ player: Player) -> Bool {
         let playerPosition = player.component(ofType: SpriteComponent.self)!.position
         let currentState = (player.component(ofType: PlayerAnimationComponent.self)?.stateMachine.currentState as? CodableState)?.stringIdentifier
-        let hasChanged = oldX != playerPosition.x || oldY != playerPosition.y || currentState != oldState
+        let hasChanged = oldX != playerPosition.x || oldY != playerPosition.y || currentState != oldState || currentState == PlayerStateStringIdentifier.deadState.rawValue
         oldX = playerPosition.x
         oldY = playerPosition.y
         oldState = currentState

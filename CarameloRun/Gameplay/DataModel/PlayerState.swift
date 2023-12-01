@@ -42,6 +42,7 @@ enum PlayerStateStringIdentifier: String {
     case jumpState = "jump"
     case arrestState = "arrest"
     case deadState = "dead"
+    case winnerState = "winner"
 }
 
 

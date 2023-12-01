@@ -51,7 +51,7 @@ class ProgressBarComponent: GKComponent {
         scene.addChild(timerOfTheTaskAvaiableThatApearsForThePlayer)
     }
     
-    func verify() {
+    func verifyIfIsDoingTask() {
         
         if avaiable {
             
@@ -62,8 +62,6 @@ class ProgressBarComponent: GKComponent {
             self.entity?.component(ofType: CompleteTaskComponent.self)?.ChangeAvaiable(true)
             self.entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(false)
 
-            //TODO: fazer com que as tasks apareça que está sendo feita, para todos os jogadores
-            
             var thereAreSomeoneInsideTheTask = 0
             for player in scene.remotePlayers.values {
                 
@@ -149,7 +147,7 @@ class ProgressBarComponent: GKComponent {
     }
     
     func updateTimer(_ new: Int) {
-        var n = new
+        let n = new
         let minutos = n / 60
         let segundos = n % 60
         var z = ""

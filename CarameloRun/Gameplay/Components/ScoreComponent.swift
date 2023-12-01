@@ -34,11 +34,6 @@ class ScoreComponent: GKComponent {
         victory = true
     }
     
-    // dog not adopted
-    func dogNotAdopted() {
-        score = score - 10
-    }
-    
     // ------------
     
     //func for the man

@@ -56,7 +56,9 @@
 		FB3E27CF2AFBD3EE00430E2D /* CompleteTaskComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3E27CE2AFBD3EE00430E2D /* CompleteTaskComponent.swift */; };
 		FB4134362AF919AB00C4F54C /* ScoreComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4134352AF919AB00C4F54C /* ScoreComponent.swift */; };
 		FB4DF37A2B161143001BD050 /* TasksCompleted.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4DF3792B161143001BD050 /* TasksCompleted.swift */; };
+		FB4ED3BD2B177F8400BF7EA6 /* CanBeAdoptedComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4ED3BC2B177F8400BF7EA6 /* CanBeAdoptedComponent.swift */; };
 		FBB5FDAB2AE93AE600E37BE1 /* PreparingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB5FDAA2AE93AE600E37BE1 /* PreparingViewController.swift */; };
+		FBC30D292B1A058A00C31E6A /* WinnerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC30D282B1A058A00C31E6A /* WinnerState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,7 +114,9 @@
 		FB3E27CE2AFBD3EE00430E2D /* CompleteTaskComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteTaskComponent.swift; sourceTree = "<group>"; };
 		FB4134352AF919AB00C4F54C /* ScoreComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreComponent.swift; sourceTree = "<group>"; };
 		FB4DF3792B161143001BD050 /* TasksCompleted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksCompleted.swift; sourceTree = "<group>"; };
+		FB4ED3BC2B177F8400BF7EA6 /* CanBeAdoptedComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanBeAdoptedComponent.swift; sourceTree = "<group>"; };
 		FBB5FDAA2AE93AE600E37BE1 /* PreparingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparingViewController.swift; sourceTree = "<group>"; };
+		FBC30D282B1A058A00C31E6A /* WinnerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +243,7 @@
 				F8EE82692AF2932F00158D9B /* CatcherStateMachine.swift */,
 				F8E4B1772AFBC87F0066BBFC /* ArrestedState.swift */,
 				F84D86822AFCF98600774AF5 /* DeadState.swift */,
+				FBC30D282B1A058A00C31E6A /* WinnerState.swift */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -285,6 +290,7 @@
 				F8A004A32AFA71D500A9DAC3 /* HealthComponent.swift */,
 				FB3E27CC2AFBD21000430E2D /* ProgressBarComponent.swift */,
 				FB3E27CE2AFBD3EE00430E2D /* CompleteTaskComponent.swift */,
+				FB4ED3BC2B177F8400BF7EA6 /* CanBeAdoptedComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -452,9 +458,11 @@
 				FBB5FDAB2AE93AE600E37BE1 /* PreparingViewController.swift in Sources */,
 				F84D86832AFCF98600774AF5 /* DeadState.swift in Sources */,
 				F82786EE2AC59B170047111D /* GameScene.swift in Sources */,
+				FB4ED3BD2B177F8400BF7EA6 /* CanBeAdoptedComponent.swift in Sources */,
 				FB3E27CD2AFBD21000430E2D /* ProgressBarComponent.swift in Sources */,
 				F89283FA2AE94D6F00A3B499 /* PositionHistory.swift in Sources */,
 				F87120B82AEBEB1C00697E21 /* DirectionComponent.swift in Sources */,
+				FBC30D292B1A058A00C31E6A /* WinnerState.swift in Sources */,
 				FB3E27CF2AFBD3EE00430E2D /* CompleteTaskComponent.swift in Sources */,
 				F87120BE2AEBF87600697E21 /* PlayerAnimationComponent.swift in Sources */,
 				F8D1A9062B0E5E9C0075F6C4 /* LobbyPlayer.swift in Sources */,

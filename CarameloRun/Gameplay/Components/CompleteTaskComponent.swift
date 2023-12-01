@@ -43,7 +43,7 @@ class CompleteTaskComponent: GKComponent {
     }
     
     func TaskAvaiable(_ status: Bool){
-        if status{
+        if status && !(scene.dogsCanBeAdopted) {
             Label.text = ""
         } else {
             Label.text = "Indisponível"
@@ -55,10 +55,15 @@ class CompleteTaskComponent: GKComponent {
     }
     
     func ChangeAvaiable(_ status: Bool) {
-        if status{
+        if status && !(scene.dogsCanBeAdopted) {
             Label.text = ""
         } else {
             Label.text = "Indisponível"
         }
+    }
+    
+    func dogsCanBeAdopted() {
+        Label.text = "Entre para"
+        completeLabel.text = "ser adotado"
     }
 }

@@ -23,7 +23,8 @@ extension GameScene {
     }
     
     func verifyDoingTask(_ task: Tasks){
-        task.component(ofType: ProgressBarComponent.self)?.verify()
+        
+        task.component(ofType: ProgressBarComponent.self)?.verifyIfIsDoingTask()
 
     }
     
@@ -31,11 +32,32 @@ extension GameScene {
         task.component(ofType: CompleteTaskComponent.self)?.tasksCompleted += 1
         
         //TODO: fazer o update da barra de tarefas completas aqui
-        NTasksCompleted.updateNumberOfTasksCompleted(numberOfTasksCompleted())
+        let nTasksCompleted = numberOfTasksCompleted()
+        NTasksCompleted.updateNumberOfTasksCompleted(nTasksCompleted)
+        
+        if nTasksCompleted >= Constants.numberOfTasksThatTheDogsNeedToBeAdopted {
+            dogsCanBeAdopted = true
+            changeTasksToAdopted(task1)
+            changeTasksToAdopted(task2)
+            changeTasksToAdopted(task3)
+        }
         
     }
     
     func numberOfTasksCompleted() -> Int {
         return task1.component(ofType: CompleteTaskComponent.self)!.tasksCompleted + task2.component(ofType: CompleteTaskComponent.self)!.tasksCompleted + task3.component(ofType: CompleteTaskComponent.self)!.tasksCompleted
     }
+    
+    func verifyAdopted(_ task: Tasks) {
+        task.component(ofType: CanBeAdoptedComponent.self)?.verifyIfTheDosHasBeenAdopted()
+    }
+    
+    func changeTasksToAdopted(_ task: Tasks) {
+        task.component(ofType: ProgressBarComponent.self)?.progress = 0.00
+        task.component(ofType: ProgressBarComponent.self)?.progressBar.xScale = 0.00
+        task.component(ofType: ProgressBarComponent.self)?.avaiable = false
+        task.component(ofType: ProgressBarComponent.self)?.timerOfTheTaskAvaiableThatApearsForThePlayer.text = ""
+        task.component(ofType: CompleteTaskComponent.self)?.dogsCanBeAdopted()
+    }
+    
 }

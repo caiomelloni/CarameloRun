@@ -23,7 +23,8 @@ class Tasks: GKEntity {
         
         let components = [
             ProgressBarComponent(scene, frame, possibleTimeToDoTheTask),
-            CompleteTaskComponent(scene, frame)
+            CompleteTaskComponent(scene, frame),
+            CanBeAdoptedComponent(scene, frame)
         ]
         
         components.forEach{ component in
