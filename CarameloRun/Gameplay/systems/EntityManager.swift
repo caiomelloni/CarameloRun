@@ -27,6 +27,7 @@ class EntityManager {
         entities.insert(entity)
         
         entity.component(ofType: SendPlayerUpdatesComponent.self)?.match = scene.controllerDelegate?.match
+        entity.component(ofType: SpawnComponent.self)?.respawns = scene.getRespawns()
         
         componentSystem.addEntityComponents(entity)
         componentSystem.notifyAddedToScene(scene: scene)

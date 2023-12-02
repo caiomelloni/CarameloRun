@@ -32,7 +32,7 @@ class RemotePlayer: GKEntity {
             spriteComponent,
             DirectionComponent(),
             ScoreComponent(),
-            PlayerAnimationComponent(type == .dog ? PlayerStateMachine(spriteComponent) : CatcherStateMachine(spriteComponent)),
+            PlayerStateComponent(type == .dog ? PlayerStateMachine(spriteComponent) : CatcherStateMachine(spriteComponent)),
             PhysicsComponent(shouldContactWith: .player)
         ]
         
@@ -40,12 +40,12 @@ class RemotePlayer: GKEntity {
             addComponent(component)
         }
         
-        if type == .man {
-            addComponent(CatchComponent())
-        } else {
-            addComponent(GetCaughtComponent())
-            addComponent(HealthComponent())
-        }
+//        if type == .man {
+//            addComponent(CatchComponent())
+//        } else {
+//            addComponent(GetCaughtComponent())
+//            addComponent(HealthComponent())
+//        }
     }
     
     required init?(coder: NSCoder) {
@@ -72,7 +72,7 @@ class RemotePlayer: GKEntity {
         let spriteComp = component(ofType: SpriteComponent.self)
         spriteComp?.position = newPosition
         
-        let animationComp = component(ofType: PlayerAnimationComponent.self)
+        let animationComp = component(ofType: PlayerStateComponent.self)
         
         switch stateStringIdentifier {
         case .idleState:

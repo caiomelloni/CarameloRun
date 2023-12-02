@@ -31,7 +31,7 @@
 		F87120B82AEBEB1C00697E21 /* DirectionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120B72AEBEB1C00697E21 /* DirectionComponent.swift */; };
 		F87120BA2AEBF20C00697E21 /* JumpComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120B92AEBF20C00697E21 /* JumpComponent.swift */; };
 		F87120BC2AEBF62600697E21 /* VelocityComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120BB2AEBF62600697E21 /* VelocityComponent.swift */; };
-		F87120BE2AEBF87600697E21 /* PlayerAnimationComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120BD2AEBF87600697E21 /* PlayerAnimationComponent.swift */; };
+		F87120BE2AEBF87600697E21 /* PlayerStateComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120BD2AEBF87600697E21 /* PlayerStateComponent.swift */; };
 		F87120C42AEEC8F200697E21 /* IdleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120C32AEEC8F200697E21 /* IdleState.swift */; };
 		F87120C62AEEC9DE00697E21 /* JumpingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120C52AEEC9DE00697E21 /* JumpingState.swift */; };
 		F87120C82AEEC9FF00697E21 /* FallingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120C72AEEC9FF00697E21 /* FallingState.swift */; };
@@ -94,7 +94,7 @@
 		F87120B72AEBEB1C00697E21 /* DirectionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionComponent.swift; sourceTree = "<group>"; };
 		F87120B92AEBF20C00697E21 /* JumpComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpComponent.swift; sourceTree = "<group>"; };
 		F87120BB2AEBF62600697E21 /* VelocityComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VelocityComponent.swift; sourceTree = "<group>"; };
-		F87120BD2AEBF87600697E21 /* PlayerAnimationComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerAnimationComponent.swift; sourceTree = "<group>"; };
+		F87120BD2AEBF87600697E21 /* PlayerStateComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStateComponent.swift; sourceTree = "<group>"; };
 		F87120C32AEEC8F200697E21 /* IdleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleState.swift; sourceTree = "<group>"; };
 		F87120C52AEEC9DE00697E21 /* JumpingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpingState.swift; sourceTree = "<group>"; };
 		F87120C72AEEC9FF00697E21 /* FallingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallingState.swift; sourceTree = "<group>"; };
@@ -313,7 +313,7 @@
 				F87120B72AEBEB1C00697E21 /* DirectionComponent.swift */,
 				F87120B92AEBF20C00697E21 /* JumpComponent.swift */,
 				F87120BB2AEBF62600697E21 /* VelocityComponent.swift */,
-				F87120BD2AEBF87600697E21 /* PlayerAnimationComponent.swift */,
+				F87120BD2AEBF87600697E21 /* PlayerStateComponent.swift */,
 				F85FD5472AF90C6D009CB45A /* CatchComponent.swift */,
 				F8A004A12AFA609600A9DAC3 /* GetCaughtComponent.swift */,
 				F8A004A32AFA71D500A9DAC3 /* HealthComponent.swift */,
@@ -504,7 +504,7 @@
 				F811A4972B17B91300E01031 /* JoystickStateChanged.swift in Sources */,
 				F87120B82AEBEB1C00697E21 /* DirectionComponent.swift in Sources */,
 				FB3E27CF2AFBD3EE00430E2D /* CompleteTaskComponent.swift in Sources */,
-				F87120BE2AEBF87600697E21 /* PlayerAnimationComponent.swift in Sources */,
+				F87120BE2AEBF87600697E21 /* PlayerStateComponent.swift in Sources */,
 				F8D1A9062B0E5E9C0075F6C4 /* LobbyPlayer.swift in Sources */,
 				F811A48E2B1759EA00E01031 /* RemotePlayer.swift in Sources */,
 				F8E4B1782AFBC87F0066BBFC /* ArrestedState.swift in Sources */,

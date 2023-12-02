@@ -36,5 +36,5 @@ class Constants {
     static let catcherFramesPrefix: String = "catcher"
 
     //respawn
-    static let respawnCount: Int = 2
+    static let respawnCount: Int = 4
 }

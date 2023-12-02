@@ -40,12 +40,12 @@ class JumpComponent: GKComponent {
     
     override func update(deltaTime seconds: TimeInterval) {
         let dy = entity?.component(ofType: SpriteComponent.self)?.dy
-        let animationComponent = entity?.component(ofType: PlayerAnimationComponent.self)
+        let stateComponent = entity?.component(ofType: PlayerStateComponent.self)
         if let dy = dy {
             if dy > 0 {
-                animationComponent?.jump()
+                stateComponent?.jump()
             } else if dy < 0 {
-                animationComponent?.fall()
+                stateComponent?.fall()
             }
         }
     }

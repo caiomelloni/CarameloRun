@@ -28,8 +28,8 @@ extension GameScene {
         for remotePlayer in remotePlayers {
             if CGRectIntersectsRect(localPlayer.component(ofType: SpriteComponent.self)!.frame, remotePlayer.component(ofType: SpriteComponent.self)!.frame) {
                 if remotePlayer.type == .man {
-                    localPlayer.component(ofType: GetCaughtComponent.self)?.gotCaught(emptyRespawnPoint(localPlayer))
-                } else if (remotePlayer.component(ofType: PlayerAnimationComponent.self)?.stateMachine.currentState as? ArrestedState) == nil {
+                    localPlayer.component(ofType: GetCaughtComponent.self)?.gotCaught()
+                } else if (remotePlayer.component(ofType: PlayerStateComponent.self)?.stateMachine.currentState as? ArrestedState) == nil {
                     localPlayer.component(ofType: GetCaughtComponent.self)?.gotFreed()
                 }
                 
@@ -48,33 +48,14 @@ extension GameScene {
         }
     }
     
-    private func emptyRespawnPoint(_ player: GKEntity) -> CGPoint {
+    func getRespawns() -> [SKNode] {
         var respawns = [SKNode]()
         
         for i in 1...Constants.respawnCount {
             respawns.append(scene!.childNode(withName: "respawn\(i)")!)
         }
         
-        var emptyRespawn = respawns[0]
-        
-        for respawn in respawns {
-            var isAvailable = true
-            for player in entityManager.remotePlayers {
-                if CGRectIntersectsRect(player.component(ofType: SpriteComponent.self)!.frame, respawn.frame) {
-                    isAvailable = false
-                    break
-                }
-            }
-            
-            if isAvailable {
-                emptyRespawn = respawn
-                break
-            }
-            
-        }
-        
-        return emptyRespawn.position
-        
+        return respawns
     }
     
     func removeJoystickAndJumpButton() {

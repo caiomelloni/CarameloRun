@@ -10,10 +10,17 @@ import GameplayKit
 class GetCaughtComponent: GKComponent {
     var isArrested: Bool = false
     
-    func gotCaught(_ respawn: CGPoint) {
+    func gotCaught() {
+        guard let respawn = entity?.component(ofType: SpawnComponent.self)?.getRespawnPoint() else {
+            print("ERROR: when got caught, the GetCaughtComponent did not find an respawn point")
+            return
+        }
+        
         if !isArrested {
             isArrested = true
-            entity?.component(ofType: SpriteComponent.self)?.position = respawn
+//            entity?.component(ofType: SpriteComponent.self)?.position = respawn
+//            entity?.component(ofType: SpriteComponent.self)?.position = CGPoint(x: 0, y: 0)
+            print(entity?.component(ofType: SpriteComponent.self)?.position)
             
             entity?.component(ofType: ScoreComponent.self)?.dogWasCatched()
             
@@ -23,7 +30,7 @@ class GetCaughtComponent: GKComponent {
             
             // must be called after lose velocity end jump components
             let healthPoints = entity?.component(ofType: HealthComponent.self)?.decreaseLife()
-            let animationComponent = entity?.component(ofType: PlayerAnimationComponent.self)
+            let animationComponent = entity?.component(ofType: PlayerStateComponent.self)
             if healthPoints == 0 {
                 animationComponent?.dead()
             } else {
@@ -35,7 +42,7 @@ class GetCaughtComponent: GKComponent {
     func gotFreed() {
         isArrested = false
         
-        entity?.component(ofType: PlayerAnimationComponent.self)?.idle()
+        entity?.component(ofType: PlayerStateComponent.self)?.idle()
         
         // adds player movement
         entity?.addComponent(VelocityComponent(Constants.playerVelocity))
@@ -45,11 +52,30 @@ class GetCaughtComponent: GKComponent {
 
 extension GetCaughtComponent: GetNotifiedWhenContactHappens {
     func didBegin(_ contact: SKPhysicsContact) {
-        print("bati em alguem")
+        let contactedEntities = [contact.bodyA.node?.entity, contact.bodyB.node?.entity]
+        
+        let wasMyEntityContacted = contactedEntities.contains(where: {$0 == entity})
+        
+        if !wasMyEntityContacted {
+            return
+        }
+        
+        for contactEntity in contactedEntities {
+            let thisIsNotMyEntity = contactEntity != entity
+            let entityType = (contactEntity as? RemotePlayer)?.type
+            let entityIsARemoteCatcher = entityType == .man
+            
+            let entityIsAFreeRemoteDog = entityType == .dog && !((contactEntity as? RemotePlayer)?.component(ofType: GetCaughtComponent.self)?.isArrested ?? true)
+            
+            if  thisIsNotMyEntity && entityIsARemoteCatcher {
+                gotCaught()
+            } else if thisIsNotMyEntity && entityIsAFreeRemoteDog && isArrested {
+                gotFreed()
+            }
+        }
     }
     
     func didEnd(_ contact: SKPhysicsContact) {
-       print("parei de bater")
     }
     
     

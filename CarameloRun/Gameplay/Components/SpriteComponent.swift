@@ -64,19 +64,11 @@ class SpriteComponent: GKComponent {
             node.position
         }
         set {
-            
-            // update sprite direction ###
+
             let oldX = position.x
-            let newXPosition = newValue.x
             
             let directionComp = entity?.component(ofType: DirectionComponent.self)
-            let dx = (oldX) - newXPosition
-            if dx > 0 {
-                directionComp?.changeDirection(.left)
-            } else if dx < 0{
-                directionComp?.changeDirection(.right)
-            }
-            // ###########################
+            directionComp?.positionChanged(oldX, newValue.x)
             
             node.position = newValue
         }
@@ -127,11 +119,11 @@ class SpriteComponent: GKComponent {
     
     private func setReferencePosition() {
         oldPosition = CGPoint(x: position.x, y: position.y)
-        oldState = (entity?.component(ofType: PlayerAnimationComponent.self)?.stateMachine.currentState as? CodableState)?.stringIdentifier
+        oldState = (entity?.component(ofType: PlayerStateComponent.self)?.stateMachine.currentState as? CodableState)?.stringIdentifier
     }
     
     func hasChanged() -> Bool {
-        let hasStateChanged = entity?.component(ofType: PlayerAnimationComponent.self)?.hasStateChanged() ?? false
+        let hasStateChanged = entity?.component(ofType: PlayerStateComponent.self)?.hasStateChanged() ?? false
         
         let hasChanged = positionChangedOnFrameUpdate || hasStateChanged
 

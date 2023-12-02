@@ -10,11 +10,13 @@ import GameplayKit
 
 // The entity must have a SpriteComponent to work
 // And a state machine with the states: Idle, Jumping, falling, running
-class PlayerAnimationComponent: GKComponent {
+class PlayerStateComponent: GKComponent {
     
     let stateMachine: GKStateMachine
     private var oldStateStringIdentifier: String = PlayerStateStringIdentifier.idleState.rawValue
     private var currentStateStringIdentifier: String = PlayerStateStringIdentifier.idleState.rawValue
+    
+    var currentStateType = StateType.idle
     
     init(_ stateMachine: GKStateMachine) {
         self.stateMachine = stateMachine
@@ -24,27 +26,33 @@ class PlayerAnimationComponent: GKComponent {
     
     func run() {
         stateMachine.enter(RunningState.self)
+        currentStateType = .run
     }
     
     func idle() {
         stateMachine.enter(IdleState.self)
+        currentStateType = .idle
     }
     
     func jump() {
         stateMachine.enter(JumpingState.self)
+        currentStateType = .jump
     }
     
     func fall() {
         stateMachine.enter(FallingState.self)
+        currentStateType = .fall
     }
     
     func arrest() {
         stateMachine.enter(ArrestedState.self)
+        currentStateType = .arrest
     }
     
     func dead() {
         stateMachine.enter(DeadState.self)
         entity?.component(ofType: SpriteComponent.self)?.removeFromParent()
+        currentStateType = .dead
     }
     
     required init?(coder: NSCoder) {
@@ -66,4 +74,13 @@ class PlayerAnimationComponent: GKComponent {
         return (stateMachine.currentState as? CodableState)?.stringIdentifier ?? PlayerStateStringIdentifier.idleState.rawValue
     }
     
+}
+
+enum StateType {
+    case run
+    case idle
+    case jump
+    case fall
+    case arrest
+    case dead
 }

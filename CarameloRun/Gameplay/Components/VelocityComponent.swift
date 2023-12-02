@@ -24,7 +24,7 @@ class VelocityComponent: GKComponent {
     }
     
     func addVelocity(_ direction: Direction) {
-        entity?.component(ofType: PlayerAnimationComponent.self)?.run()
+        entity?.component(ofType: PlayerStateComponent.self)?.run()
         let spriteComponent = entity?.component(ofType: SpriteComponent.self)
         let directionComponent = entity?.component(ofType: DirectionComponent.self)
         switch direction {
@@ -41,7 +41,7 @@ class VelocityComponent: GKComponent {
     func stop() {
         let dy = entity?.component(ofType: SpriteComponent.self)?.dy
         if(dy == 0){
-            entity?.component(ofType: PlayerAnimationComponent.self)?.idle()
+            entity?.component(ofType: PlayerStateComponent.self)?.idle()
         }
     }
 
