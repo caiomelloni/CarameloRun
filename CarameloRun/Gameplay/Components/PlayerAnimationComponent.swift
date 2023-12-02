@@ -52,13 +52,14 @@ class PlayerAnimationComponent: GKComponent {
     }
     
     override func update(deltaTime seconds: TimeInterval) {
-        oldStateStringIdentifier = currentStateStringIdentifier
         currentStateStringIdentifier = getCurrentStateStringIdentifier()
         stateMachine.currentState?.update(deltaTime: seconds)
     }
     
     func hasStateChanged() -> Bool {
-       oldStateStringIdentifier != currentStateStringIdentifier
+        let hasChanged = oldStateStringIdentifier != currentStateStringIdentifier
+        oldStateStringIdentifier = currentStateStringIdentifier
+        return hasChanged
     }
     
     private func getCurrentStateStringIdentifier() -> String {

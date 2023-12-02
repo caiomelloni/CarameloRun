@@ -131,14 +131,29 @@ class SpriteComponent: GKComponent {
     }
     
     func hasChanged() -> Bool {
-//        let hasStateChanged = entity?.component(ofType: PlayerAnimationComponent.self)?.hasStateChanged() ?? false
-        let hasStateChanged = false
+        let hasStateChanged = entity?.component(ofType: PlayerAnimationComponent.self)?.hasStateChanged() ?? false
         
         let hasChanged = positionChangedOnFrameUpdate || hasStateChanged
 
 
         
         return hasChanged
+    }
+    
+    var contactTestBitMask: UInt32? {
+        get {
+            node.physicsBody?.contactTestBitMask
+        }
+        set {
+            guard let newValue = newValue else {
+                return
+            }
+            node.physicsBody?.contactTestBitMask = newValue
+        }
+    }
+    
+    override func didAddToEntity() {
+        node.entity = self.entity
     }
     
 }

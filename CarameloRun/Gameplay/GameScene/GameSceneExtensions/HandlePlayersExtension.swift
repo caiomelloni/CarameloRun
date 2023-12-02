@@ -20,7 +20,6 @@ extension GameScene {
         }
         
         entityManager.initPlayersEntities(lobbyPlayers: players)
-        
     }
     
     func handlePlayerCollision() {

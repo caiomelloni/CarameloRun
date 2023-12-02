@@ -26,6 +26,7 @@ class GameScene: SKScene {
     var entityManager: EntityManager!
     
     override func didMove(to view: SKView){
+        physicsWorld.contactDelegate = self
         entityManager = EntityManager(scene: self)
                 
         backgroundColor = .white
@@ -90,7 +91,7 @@ class GameScene: SKScene {
         jumpButton.update(sceneCamera, frame)
         timer.update(sceneCamera, frame)
         
-        handlePlayerCollision()
+        //handlePlayerCollision()
         
         verifyDoingTask()
         
@@ -102,5 +103,16 @@ class GameScene: SKScene {
     
     func getVictory() -> Bool{
         return entityManager.localPlayer!.component(ofType: ScoreComponent.self)?.victory ?? false
+    }
+}
+
+// MARK: - Physics
+extension GameScene: SKPhysicsContactDelegate {
+    func didBegin(_ contact: SKPhysicsContact) {
+        entityManager?.didBegin(contact)
+    }
+    
+    func didEnd(_ contact: SKPhysicsContact) {
+        entityManager?.didEnd(contact)
     }
 }

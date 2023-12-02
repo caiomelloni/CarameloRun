@@ -83,7 +83,8 @@ class EntityManager {
 }
 
 
-//Events
+//MARK: Events
+//component notification
 extension EntityManager {
     func update(_ deltaTime: CFTimeInterval) {
         componentSystem.update(deltaTime)
@@ -95,6 +96,14 @@ extension EntityManager {
     
     func jumpButtonPressed() {
         componentSystem.notifyJumpButtonPressed()
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        componentSystem.notifyContactBegin(contact)
+    }
+    
+    func didEnd(_ contact: SKPhysicsContact) {
+        componentSystem.notifyContactEnd(contact)
     }
 }
 
@@ -116,7 +125,7 @@ extension EntityManager {
 }
 
 
-//Private helper tools
+//MARK: Helper tools
 extension EntityManager {
     private func getEntities<T: AnyObject>(ofType type: T.Type) -> [T] {
         var array: [T] = []

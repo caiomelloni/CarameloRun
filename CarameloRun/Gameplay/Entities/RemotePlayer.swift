@@ -33,7 +33,7 @@ class RemotePlayer: GKEntity {
             DirectionComponent(),
             ScoreComponent(),
             PlayerAnimationComponent(type == .dog ? PlayerStateMachine(spriteComponent) : CatcherStateMachine(spriteComponent)),
-                        
+            PhysicsComponent(shouldContactWith: .player)
         ]
         
         components.forEach { component in
@@ -62,11 +62,7 @@ class RemotePlayer: GKEntity {
         body.allowsRotation = false
         body.mass = Constants.playerMass
         
-        body.contactTestBitMask = Constants.charactersCollisionMask
-        body.categoryBitMask = Constants.charactersCollisionMask
-        
         spriteComponent.physicsBody = body
-        
         spriteComponent.zPosition = Zposition.player.rawValue
         
         return spriteComponent

@@ -42,3 +42,15 @@ class GetCaughtComponent: GKComponent {
         entity?.addComponent(JumpComponent(Constants.playerJumpXMultiplier, Constants.playerJumpYMultiplier))
     }
 }
+
+extension GetCaughtComponent: GetNotifiedWhenContactHappens {
+    func didBegin(_ contact: SKPhysicsContact) {
+        print("bati em alguem")
+    }
+    
+    func didEnd(_ contact: SKPhysicsContact) {
+       print("parei de bater")
+    }
+    
+    
+}

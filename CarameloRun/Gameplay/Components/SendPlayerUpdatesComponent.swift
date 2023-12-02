@@ -23,6 +23,7 @@ class SendPlayerUpdatesComponent: GKComponent {
             do {
                 let data = try JSONEncoder().encode(playerState)
                 try match!.sendData(toAllPlayers: data, with: GKMatch.SendDataMode.unreliable)
+                print("send player data")
             } catch {
                 print("ERROR sending data")
             }

@@ -45,7 +45,8 @@ class LocalPlayer: GKEntity {
             VelocityComponent(Constants.playerVelocity),
             ScoreComponent(),
             PlayerAnimationComponent(type == .dog ? PlayerStateMachine(spriteComponent) : CatcherStateMachine(spriteComponent)),
-            SendPlayerUpdatesComponent()
+            SendPlayerUpdatesComponent(),
+            PhysicsComponent(shouldContactWith: .player)
         ]
         
         components.forEach { component in
@@ -74,11 +75,8 @@ class LocalPlayer: GKEntity {
         body.allowsRotation = false
         body.mass = Constants.playerMass
         
-        body.contactTestBitMask = Constants.charactersCollisionMask
-        body.categoryBitMask = Constants.charactersCollisionMask
         
         spriteComponent.physicsBody = body
-        
         spriteComponent.zPosition = Zposition.player.rawValue
         
         return spriteComponent

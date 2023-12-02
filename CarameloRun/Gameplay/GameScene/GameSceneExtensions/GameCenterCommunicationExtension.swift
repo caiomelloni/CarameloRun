@@ -8,11 +8,9 @@
 import GameKit
 
 extension GameScene {
-    
     func didReceiveData(_ match: GKMatch, _ jsonData: Data, _ fromRemotePlayer: GKPlayer) {
         if let playerState = try? JSONDecoder().decode(PlayerState.self, from: jsonData) {
             entityManager.updateRemotePlayerPosition(playerState)
         }
     }
-    
 }
