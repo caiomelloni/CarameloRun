@@ -13,6 +13,7 @@
 		6101567A2B1CA57C004A475E /* PreparingViewControllerStrings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 610156792B1CA57C004A475E /* PreparingViewControllerStrings.strings */; };
 		6101567C2B1CC3A7004A475E /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6101567B2B1CC3A7004A475E /* Images.swift */; };
 		6101567F2B1CE063004A475E /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6101567E2B1CE063004A475E /* Fonts.swift */; };
+		610156812B1D3E91004A475E /* HelpPopUpViewControllerTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610156802B1D3E91004A475E /* HelpPopUpViewControllerTabs.swift */; };
 		61970CD02AFCF9DA0099760B /* HelpPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61970CCF2AFCF9DA0099760B /* HelpPopUpViewController.swift */; };
 		61A2428E2AFD79AC001D152A /* Crang.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61A2428D2AFD79AC001D152A /* Crang.ttf */; };
 		61CDA65E2B18C53A0063D089 /* IconLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CDA65D2B18C53A0063D089 /* IconLabelView.swift */; };
@@ -80,6 +81,7 @@
 		610156792B1CA57C004A475E /* PreparingViewControllerStrings.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = PreparingViewControllerStrings.strings; sourceTree = "<group>"; };
 		6101567B2B1CC3A7004A475E /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		6101567E2B1CE063004A475E /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		610156802B1D3E91004A475E /* HelpPopUpViewControllerTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpPopUpViewControllerTabs.swift; sourceTree = "<group>"; };
 		61970CCF2AFCF9DA0099760B /* HelpPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpPopUpViewController.swift; sourceTree = "<group>"; };
 		61A2428D2AFD79AC001D152A /* Crang.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Crang.ttf; sourceTree = "<group>"; };
 		61A2428F2AFD7B2D001D152A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				F85491892AE16F71004EA5B1 /* MenuInicialViewController.swift */,
 				FBB5FDAA2AE93AE600E37BE1 /* PreparingViewController.swift */,
 				61970CCF2AFCF9DA0099760B /* HelpPopUpViewController.swift */,
+				610156802B1D3E91004A475E /* HelpPopUpViewControllerTabs.swift */,
 				61CDA65D2B18C53A0063D089 /* IconLabelView.swift */,
 			);
 			path = Views;
@@ -537,6 +540,7 @@
 				610156782B1CA568004A475E /* PreparingViewControllerStrings.swift in Sources */,
 				F89283FA2AE94D6F00A3B499 /* PositionHistory.swift in Sources */,
 				F811A4972B17B91300E01031 /* JoystickStateChanged.swift in Sources */,
+				610156812B1D3E91004A475E /* HelpPopUpViewControllerTabs.swift in Sources */,
 				F87120B82AEBEB1C00697E21 /* DirectionComponent.swift in Sources */,
 				FB3E27CF2AFBD3EE00430E2D /* CompleteTaskComponent.swift in Sources */,
 				F87120BE2AEBF87600697E21 /* PlayerAnimationComponent.swift in Sources */,

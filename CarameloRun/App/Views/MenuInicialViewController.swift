@@ -20,7 +20,6 @@ class MenuInicialViewController: UIViewController {
     let gameCenterHelper = GameCenterHelper()
     let connectionStatusLabel = UILabel()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,7 +43,7 @@ extension MenuInicialViewController {
     
     
     
-    func configureButton(_ chosenButton: UIButton, _ buttonImage: UIImage?, action: Selector) {
+    public func configureButton(_ chosenButton: UIButton, _ buttonImage: UIImage?, action: Selector) {
         chosenButton.translatesAutoresizingMaskIntoConstraints = false
         chosenButton.setImage(buttonImage, for: .normal)
         chosenButton.addTarget(self, action: action, for: .touchUpInside)
