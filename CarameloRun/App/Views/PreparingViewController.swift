@@ -110,9 +110,9 @@ class PreparingViewController: UIViewController {
             let playerTypeLabel = UILabel()
             
             if players[i].playerType == .man {
-                playerTypeLabel.text = "Zé Cadelo"
+                playerTypeLabel.text = PreparingViewControllerStrings.ManTypePlayer.localized()
             } else {
-                playerTypeLabel.text = "Caramelo"
+                playerTypeLabel.text = PreparingViewControllerStrings.DogTypePlayer.localized()
                 
             }
             
@@ -153,7 +153,7 @@ class PreparingViewController: UIViewController {
         buttonImReady.layer.borderWidth = 1.5
         buttonImReady.layer.borderColor = UIColor.black.cgColor
         
-        buttonImReady.setTitle("Estou pronto!", for: .normal)
+        buttonImReady.setTitle(PreparingViewControllerStrings.ButtonTitleText.localized(), for: .normal)
         buttonImReady.frame = CGRect(x: xCoordinate, y: yCoordinate, width: buttonWidth, height: 56)
         buttonImReady.setTitleColor(UIColor.white, for: .normal) // Defina a cor do texto como branca
         buttonImReady.addTarget(self, action: #selector(ImReadyButtonTapped), for: .touchUpInside)

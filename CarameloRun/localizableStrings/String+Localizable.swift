@@ -8,7 +8,7 @@
 import Foundation
 
 extension String {
-    func localized(_ screen: ScreenChoice = .HelpPopUpViewControllerStrings) -> String {
+    func localized(_ screen: ScreenChoice) -> String {
         
         var fileName = String()
         

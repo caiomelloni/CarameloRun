@@ -19,10 +19,6 @@ class MenuInicialViewController: UIViewController {
     let startButton = UIButton(type: UIButton.ButtonType.custom)
     let gameCenterHelper = GameCenterHelper()
     let connectionStatusLabel = UILabel()
-    
-//    let logoImage = MenuInicialViewControllerStrings.LogoImage.localized()
-//    let helpButtonImage = MenuInicialViewControllerStrings.HelpButtonImage.localized()
-//    let startButtonImage = MenuInicialViewControllerStrings.StartButtonImage.localized()
 
     
     override func viewDidLoad() {

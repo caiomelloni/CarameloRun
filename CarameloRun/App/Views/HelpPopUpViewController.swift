@@ -39,9 +39,6 @@ class HelpPopUpViewController: UIViewController {
     var ControlesTabAlreadyAcessed = false
     var CreditosTabAlreadyAcessed = false
 
-    
- 
-    
     private var canvas: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = ColorsConstants.backgroundColor
@@ -70,6 +67,8 @@ class HelpPopUpViewController: UIViewController {
     
     let items = [ "Regras" , "Controles" , "Como Conectar", "créditos"]
     
+    let developers:[String] = ["Pamella de Alvarenga Souza", "Joshua Matheus", "Marcelo Pastana Duarte", "Luis Siqueira", "Caio Melloni"]
+    
     lazy var segmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(items: items)
         control.selectedSegmentIndex = 0
@@ -88,6 +87,9 @@ class HelpPopUpViewController: UIViewController {
         
         return control
     }()
+    
+    
+    
     
     
     public override func viewDidLoad() {
@@ -288,13 +290,13 @@ class HelpPopUpViewController: UIViewController {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
         let jumpView = IconLabelView()
-        jumpView.configure(with: Images.jumpButton, text: "Pular")
+        jumpView.configure(with: Images.jumpButton, text: HelpPopUpViewControllerStrings.JumpButtonControlLegend.localized())
         
         let leftView = IconLabelView()
-        leftView.configure(with: Images.leftUpButton, text: "Andar para a esquerda")
+        leftView.configure(with: Images.leftUpButton, text: HelpPopUpViewControllerStrings.LeftButtonControlLegend.localized())
         
         let rightView = IconLabelView()
-        rightView.configure(with: Images.rightUpButton, text: "Andar para a direita")
+        rightView.configure(with: Images.rightUpButton, text: HelpPopUpViewControllerStrings.RightButtonControlLegend.localized())
         
         self.canvas.addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -436,8 +438,6 @@ class HelpPopUpViewController: UIViewController {
     
     func configureCanvas3() {
         
-        let developers:[String] = ["Pamella de Alvarenga Souza", "Joshua Matheus", "Marcelo Pastana Duarte", "Luis Siqueira", "Caio Melloni"]
-        
         for subview in contentView.subviews {
             subview.removeFromSuperview()
         }
@@ -458,7 +458,7 @@ class HelpPopUpViewController: UIViewController {
             contentView.widthAnchor.constraint(equalTo: self.canvas.widthAnchor)
         ])
         
-        labelTitle1CreditosTab.text = "Desenvolvedores"
+        labelTitle1CreditosTab.text = HelpPopUpViewControllerStrings.Title1CreditosTabText.localized()
         labelTitle1CreditosTab.font = UIFont(name: "Crang", size: 30)
         labelTitle1CreditosTab.textColor = ColorsConstants.tittlesColor
         

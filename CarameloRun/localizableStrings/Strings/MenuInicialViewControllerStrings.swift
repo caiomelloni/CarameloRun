@@ -21,6 +21,6 @@ enum MenuInicialViewControllerStrings: String {
     case ConnectionStatusLabelTextConnected = "ConnectionStatusLabelTextConnected"
     
     
-    func localized() -> String { rawValue.localized() }
+    func localized() -> String { rawValue.localized(.MenuInicialViewControllerStrings) }
     
 }

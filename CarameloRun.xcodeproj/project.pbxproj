@@ -152,7 +152,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		610156722B1CA2D7004A475E /* Screens */ = {
+		6101567D2B1CDFDE004A475E /* Strings */ = {
 			isa = PBXGroup;
 			children = (
 				61CDA66A2B18F9B70063D089 /* HelpPopUpViewControllerStrings.swift */,
@@ -162,7 +162,7 @@
 				610156772B1CA568004A475E /* PreparingViewControllerStrings.swift */,
 				610156792B1CA57C004A475E /* PreparingViewControllerStrings.strings */,
 			);
-			path = Screens;
+			path = Strings;
 			sourceTree = "<group>";
 		};
 		61A2428C2AFD796D001D152A /* Fonts */ = {
@@ -176,7 +176,7 @@
 		61CDA6652B18F90C0063D089 /* localizableStrings */ = {
 			isa = PBXGroup;
 			children = (
-				610156722B1CA2D7004A475E /* Screens */,
+				6101567D2B1CDFDE004A475E /* Strings */,
 				61CDA66E2B18FC160063D089 /* String+Localizable.swift */,
 				61CDA66C2B18FBB60063D089 /* ScreenChoice.swift */,
 			);
