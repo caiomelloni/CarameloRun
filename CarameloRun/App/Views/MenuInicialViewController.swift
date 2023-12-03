@@ -12,13 +12,18 @@ import GameKit
 
 class MenuInicialViewController: UIViewController {
     let stackViewMenuInicial = UIStackView()
-    let logoImageView = UIImageView(image: UIImage(named: "Logo"))
-    let helpButtonImage = UIImage(named: "helpButton") as UIImage?
-    let helpButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
-    let startButtonImage = UIImage(named: "startButton") as UIImage?
-    let startButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
+    let logoImageView = UIImageView(image: Images.logoImage)
+    let helpButtonImage = Images.helpButtonImage
+    let helpButton = UIButton(type: UIButton.ButtonType.custom)
+    let startButtonImage = Images.startButtonImage
+    let startButton = UIButton(type: UIButton.ButtonType.custom)
     let gameCenterHelper = GameCenterHelper()
     let connectionStatusLabel = UILabel()
+    
+//    let logoImage = MenuInicialViewControllerStrings.LogoImage.localized()
+//    let helpButtonImage = MenuInicialViewControllerStrings.HelpButtonImage.localized()
+//    let startButtonImage = MenuInicialViewControllerStrings.StartButtonImage.localized()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,7 +92,7 @@ extension MenuInicialViewController {
     func configureConnectionStatusLabel() {
         connectionStatusLabel.textAlignment = .center
         connectionStatusLabel.numberOfLines = 1
-        connectionStatusLabel.text = "You are not connected to Game Center"
+        connectionStatusLabel.text = MenuInicialViewControllerStrings.ConnectionStatusLabelTextNotConnected.localized()
         connectionStatusLabel.font = UIFont.boldSystemFont(ofSize: 16)
         
     }
@@ -106,9 +111,9 @@ extension MenuInicialViewController {
 
 extension MenuInicialViewController: GameCenterHelperDelegate {
   func didChangeAuthStatus(isAuthenticated: Bool) {
-      //print("changed status is auth: \(isAuthenticated)")
+
     startButton.isEnabled = isAuthenticated
-    connectionStatusLabel.text = "Connected to Game Center"
+      connectionStatusLabel.text = MenuInicialViewControllerStrings.ConnectionStatusLabelTextConnected.localized()
     connectionStatusLabel.font = UIFont.boldSystemFont(ofSize: 16)
   }
   func presentGameCenterAuth(viewController: UIViewController?) {

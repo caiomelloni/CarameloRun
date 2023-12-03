@@ -15,8 +15,8 @@ import GameKit
 
 class HelpPopUpViewController: UIViewController {
     
-    let exitButtonImage = UIImage(named: "ExitButton") as UIImage?
-    let exitButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
+    let exitButtonImage = Images.exitButtonImage
+    let exitButton = UIButton(type: UIButton.ButtonType.custom)
     
     let labelTitle1RegrasTab: UILabel = UILabel()
     let labelDescription1RegrasTab: UILabel = UILabel()
@@ -26,15 +26,15 @@ class HelpPopUpViewController: UIViewController {
     let labelTitle1ComoConectarTab: UILabel = UILabel()
     let labelDescription1ComoConectarTab: UILabel = UILabel()
     
+    let labelTitle1ControlesTab: UILabel = UILabel()
+    
+    let labelTitle1CreditosTab: UILabel = UILabel()
+    
     let labelTitle2ComoConectarTab: UILabel = UILabel()
     let labelDescription2ComoConectarTab: UILabel = UILabel()
     
     let stackViewControlesTab = UIStackView()
     let stackViewCreditosTab = UIStackView()
-    
-    let ButtonLeftControlImageView = UIImageView(image: UIImage(named: "ButtonLeftUp"))
-    let ButtonRightControlImageView = UIImageView(image: UIImage(named: "ButtonRightUp"))
-    let ButtonJumpControlImageView = UIImageView(image: UIImage(named: "JumpButtonUp"))
     
     var ControlesTabAlreadyAcessed = false
     var CreditosTabAlreadyAcessed = false
@@ -207,7 +207,7 @@ class HelpPopUpViewController: UIViewController {
             
         ])
         
-        labelTitle1RegrasTab.text = HelpPopUpViewStrings.Title1RegrasTabText.localized()
+        labelTitle1RegrasTab.text = HelpPopUpViewControllerStrings.Title1RegrasTabText.localized()
         labelTitle1RegrasTab.font = UIFont(name: "Crang", size: 30)
         labelTitle1RegrasTab.textColor = ColorsConstants.tittlesColor
         
@@ -222,7 +222,7 @@ class HelpPopUpViewController: UIViewController {
             
         ])
         
-        labelDescription1RegrasTab.text = HelpPopUpViewStrings.Description1RegrasTabText.localized()
+        labelDescription1RegrasTab.text = HelpPopUpViewControllerStrings.Description1RegrasTabText.localized()
         
         labelDescription1RegrasTab.font = UIFont(name: "Inter", size: 13)
         labelDescription1RegrasTab.textColor = ColorsConstants.textColor
@@ -241,7 +241,7 @@ class HelpPopUpViewController: UIViewController {
         ])
         
         
-        labelTitle2RegrasTab.text = HelpPopUpViewStrings.Title2RegrasTabText.localized()
+        labelTitle2RegrasTab.text = HelpPopUpViewControllerStrings.Title2RegrasTabText.localized()
         
         //"Zé Cadelo"
         labelTitle2RegrasTab.font = UIFont(name: "Crang", size: 30)
@@ -258,7 +258,7 @@ class HelpPopUpViewController: UIViewController {
             
         ])
         
-        labelDescription2RegrasTab.text = HelpPopUpViewStrings.Description2RegrasTabText.localized()
+        labelDescription2RegrasTab.text = HelpPopUpViewControllerStrings.Description2RegrasTabText.localized()
         labelDescription2RegrasTab.font = UIFont(name: "Inter", size: 13)
         labelDescription2RegrasTab.textColor = ColorsConstants.textColor
         labelDescription2RegrasTab.numberOfLines = 0
@@ -288,13 +288,13 @@ class HelpPopUpViewController: UIViewController {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
         let jumpView = IconLabelView()
-        jumpView.configure(with: UIImage(named: "JumpButtonUp"), text: "Pular")
+        jumpView.configure(with: Images.jumpButton, text: "Pular")
         
         let leftView = IconLabelView()
-        leftView.configure(with: UIImage(named: "ButtonLeftUp"), text: "Andar para a esquerda")
+        leftView.configure(with: Images.leftUpButton, text: "Andar para a esquerda")
         
         let rightView = IconLabelView()
-        rightView.configure(with: UIImage(named: "ButtonRightUp"), text: "Andar para a direita")
+        rightView.configure(with: Images.rightUpButton, text: "Andar para a direita")
         
         self.canvas.addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -313,18 +313,18 @@ class HelpPopUpViewController: UIViewController {
             
         ])
         
-        labelTitle1RegrasTab.text = "Controles"
-        labelTitle1RegrasTab.font = UIFont(name: "Crang", size: 30)
-        labelTitle1RegrasTab.textColor = ColorsConstants.tittlesColor
+        labelTitle1ControlesTab.text = HelpPopUpViewControllerStrings.Title1ControlesTabText.localized()
+        labelTitle1ControlesTab.font = UIFont(name: "Crang", size: 30)
+        labelTitle1ControlesTab.textColor = ColorsConstants.tittlesColor
         
-        contentView.addSubview(labelTitle1RegrasTab)
+        contentView.addSubview(labelTitle1ControlesTab)
         
-        labelTitle1RegrasTab.translatesAutoresizingMaskIntoConstraints = false
+        labelTitle1ControlesTab.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
-            labelTitle1RegrasTab.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 68),
-            labelTitle1RegrasTab.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32)
+            labelTitle1ControlesTab.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 68),
+            labelTitle1ControlesTab.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32)
             
         ])
         
@@ -335,10 +335,7 @@ class HelpPopUpViewController: UIViewController {
         stackViewControlesTab.distribution = .equalSpacing
         stackViewControlesTab.spacing = 0
         stackViewControlesTab.axis = .vertical
-        
-        ButtonLeftControlImageView.contentMode = .scaleAspectFit
-        ButtonRightControlImageView.contentMode = .scaleAspectFit
-        ButtonJumpControlImageView.contentMode = .scaleAspectFit
+           
         
         if !ControlesTabAlreadyAcessed {
             stackViewControlesTab.addArrangedSubview(jumpView)
@@ -349,7 +346,7 @@ class HelpPopUpViewController: UIViewController {
         stackViewControlesTab.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            stackViewControlesTab.topAnchor.constraint(equalTo: labelTitle1RegrasTab.bottomAnchor, constant: 26),
+            stackViewControlesTab.topAnchor.constraint(equalTo: labelTitle1ControlesTab.bottomAnchor, constant: 26),
             stackViewControlesTab.widthAnchor.constraint(equalToConstant: 150),
             stackViewControlesTab.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32),
             stackViewControlesTab.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
@@ -369,7 +366,7 @@ class HelpPopUpViewController: UIViewController {
         hConst.isActive = true
         hConst.priority = UILayoutPriority(50)
         
-        labelTitle1ComoConectarTab.text = HelpPopUpViewStrings.Title1ComoConectarTabText.localized()
+        labelTitle1ComoConectarTab.text = HelpPopUpViewControllerStrings.Title1ComoConectarTabText.localized()
         
         labelTitle1ComoConectarTab.font = UIFont(name: "Crang", size: 30)
         labelTitle1ComoConectarTab.textColor = ColorsConstants.tittlesColor
@@ -385,7 +382,7 @@ class HelpPopUpViewController: UIViewController {
             
         ])
         
-        labelDescription1ComoConectarTab.text = HelpPopUpViewStrings.Description1ComoConectarTabText.localized()
+        labelDescription1ComoConectarTab.text = HelpPopUpViewControllerStrings.Description1ComoConectarTabText.localized()
         labelDescription1ComoConectarTab.font = UIFont(name: "Inter", size: 13)
         labelDescription1ComoConectarTab.textColor = ColorsConstants.textColor
         labelDescription1ComoConectarTab.numberOfLines = 0
@@ -402,7 +399,7 @@ class HelpPopUpViewController: UIViewController {
             
         ])
         
-        labelTitle2ComoConectarTab.text = HelpPopUpViewStrings.Title2RegrasTabText.localized()
+        labelTitle2ComoConectarTab.text = HelpPopUpViewControllerStrings.Title2RegrasTabText.localized()
         labelTitle2ComoConectarTab.font = UIFont(name: "Crang", size: 30)
         labelTitle2ComoConectarTab.textColor = ColorsConstants.tittlesColor
         
@@ -417,7 +414,7 @@ class HelpPopUpViewController: UIViewController {
             
         ])
         
-        labelDescription2ComoConectarTab.text = HelpPopUpViewStrings.Description2ComoConectarTabText.localized()
+        labelDescription2ComoConectarTab.text = HelpPopUpViewControllerStrings.Description2ComoConectarTabText.localized()
         labelDescription2ComoConectarTab.font = UIFont(name: "Inter", size: 13)
         labelDescription2ComoConectarTab.textColor = ColorsConstants.textColor
         labelDescription2ComoConectarTab.numberOfLines = 0
@@ -461,18 +458,18 @@ class HelpPopUpViewController: UIViewController {
             contentView.widthAnchor.constraint(equalTo: self.canvas.widthAnchor)
         ])
         
-        labelTitle1RegrasTab.text = "Desenvolvedores"
-        labelTitle1RegrasTab.font = UIFont(name: "Crang", size: 30)
-        labelTitle1RegrasTab.textColor = ColorsConstants.tittlesColor
+        labelTitle1CreditosTab.text = "Desenvolvedores"
+        labelTitle1CreditosTab.font = UIFont(name: "Crang", size: 30)
+        labelTitle1CreditosTab.textColor = ColorsConstants.tittlesColor
         
-        contentView.addSubview(labelTitle1RegrasTab)
+        contentView.addSubview(labelTitle1CreditosTab)
         
-        labelTitle1RegrasTab.translatesAutoresizingMaskIntoConstraints = false
+        labelTitle1CreditosTab.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
-            labelTitle1RegrasTab.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 68),
-            labelTitle1RegrasTab.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32)
+            labelTitle1CreditosTab.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 68),
+            labelTitle1CreditosTab.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32)
         ])
     
         contentView.addSubview(stackViewCreditosTab)
@@ -482,10 +479,7 @@ class HelpPopUpViewController: UIViewController {
         stackViewCreditosTab.spacing = 12
         stackViewCreditosTab.axis = .vertical
         
-        ButtonLeftControlImageView.contentMode = .scaleAspectFit
-        ButtonRightControlImageView.contentMode = .scaleAspectFit
-        ButtonJumpControlImageView.contentMode = .scaleAspectFit
-        
+   
         if !CreditosTabAlreadyAcessed {
             for developerName in developers {
                 let label = UILabel()
@@ -501,7 +495,7 @@ class HelpPopUpViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            stackViewCreditosTab.topAnchor.constraint(equalTo: labelTitle1RegrasTab.bottomAnchor, constant: 26),
+            stackViewCreditosTab.topAnchor.constraint(equalTo: labelTitle1CreditosTab.bottomAnchor, constant: 26),
             stackViewCreditosTab.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32)
             
         ])

@@ -8,17 +8,20 @@
 import Foundation
 
 extension String {
-    func localized(_ screen: ScreenChoice = .HelpPopUpView) -> String {
+    func localized(_ screen: ScreenChoice = .HelpPopUpViewControllerStrings) -> String {
         
         var fileName = String()
         
         switch screen{
             
-        case .HelpPopUpView:
-            fileName = "HelpPopUpViewStrings"
+        case .PreparingViewControllerStrings:
+            fileName = "PreparingViewControllerStrings"
             
-        case .MenuInicialView:
-            fileName = "MenuInicialViewStrings"
+        case .MenuInicialViewControllerStrings:
+            fileName = "MenuInicialViewControllerStrings"
+            
+        case .HelpPopUpViewControllerStrings:
+            fileName = "HelpPopUpViewControllerStrings"
         }
         return NSLocalizedString(self, tableName: fileName, bundle: Bundle.main, value: String(), comment: String())
     }

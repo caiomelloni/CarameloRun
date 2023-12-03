@@ -8,6 +8,7 @@
 import Foundation
 
 enum ScreenChoice {
-    case HelpPopUpView
-    case MenuInicialView
+    case MenuInicialViewControllerStrings
+    case PreparingViewControllerStrings
+    case HelpPopUpViewControllerStrings
 }
