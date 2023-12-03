@@ -118,7 +118,7 @@ class PreparingViewController: UIViewController {
             
             playerTypeLabel.textAlignment = .center
             
-            playerTypeLabel.font = UIFont(name: "Crang", size: 16)
+            playerTypeLabel.font = Fonts.subTitleFont
             
             if players[i].ready {
                 playerTypeLabel.textColor = ColorsConstants.tittlesColor
@@ -158,7 +158,7 @@ class PreparingViewController: UIViewController {
         buttonImReady.setTitleColor(UIColor.white, for: .normal) // Defina a cor do texto como branca
         buttonImReady.addTarget(self, action: #selector(ImReadyButtonTapped), for: .touchUpInside)
         buttonImReady.backgroundColor = ColorsConstants.buttonColor
-        buttonImReady.titleLabel?.font = UIFont(name: "Crang", size: 16)
+        buttonImReady.titleLabel?.font = Fonts.subTitleFont
         
     }
     

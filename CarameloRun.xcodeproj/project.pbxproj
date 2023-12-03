@@ -12,6 +12,7 @@
 		610156782B1CA568004A475E /* PreparingViewControllerStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610156772B1CA568004A475E /* PreparingViewControllerStrings.swift */; };
 		6101567A2B1CA57C004A475E /* PreparingViewControllerStrings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 610156792B1CA57C004A475E /* PreparingViewControllerStrings.strings */; };
 		6101567C2B1CC3A7004A475E /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6101567B2B1CC3A7004A475E /* Images.swift */; };
+		6101567F2B1CE063004A475E /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6101567E2B1CE063004A475E /* Fonts.swift */; };
 		61970CD02AFCF9DA0099760B /* HelpPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61970CCF2AFCF9DA0099760B /* HelpPopUpViewController.swift */; };
 		61A2428E2AFD79AC001D152A /* Crang.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61A2428D2AFD79AC001D152A /* Crang.ttf */; };
 		61CDA65E2B18C53A0063D089 /* IconLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CDA65D2B18C53A0063D089 /* IconLabelView.swift */; };
@@ -78,6 +79,7 @@
 		610156772B1CA568004A475E /* PreparingViewControllerStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparingViewControllerStrings.swift; sourceTree = "<group>"; };
 		610156792B1CA57C004A475E /* PreparingViewControllerStrings.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = PreparingViewControllerStrings.strings; sourceTree = "<group>"; };
 		6101567B2B1CC3A7004A475E /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		6101567E2B1CE063004A475E /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		61970CCF2AFCF9DA0099760B /* HelpPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpPopUpViewController.swift; sourceTree = "<group>"; };
 		61A2428D2AFD79AC001D152A /* Crang.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Crang.ttf; sourceTree = "<group>"; };
 		61A2428F2AFD7B2D001D152A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 				F89807102ACDA4130044D237 /* Dimensions.swift */,
 				F89283FC2AE964A900A3B499 /* Constants.swift */,
 				61CDA65F2B18CE3B0063D089 /* ColorsConstants.swift */,
+				6101567E2B1CE063004A475E /* Fonts.swift */,
 				6101567B2B1CC3A7004A475E /* Images.swift */,
 			);
 			name = Utils;
@@ -545,6 +548,7 @@
 				F87D81F92AEACE5E0006CDD8 /* SpriteComponent.swift in Sources */,
 				F82A32822AE2B3C500A3639C /* PlayerState.swift in Sources */,
 				FB4134362AF919AB00C4F54C /* ScoreComponent.swift in Sources */,
+				6101567F2B1CE063004A475E /* Fonts.swift in Sources */,
 				F8BA5B732B162A9F003AF5F2 /* ComponentSystem.swift in Sources */,
 				F82787032AC5A8250047111D /* Joystick.swift in Sources */,
 				F8D1A9042B0E48450075F6C4 /* LobbyHelper.swift in Sources */,

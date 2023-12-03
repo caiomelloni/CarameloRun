@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ColorsConstants {
+struct ColorsConstants {
     
     static let backgroundColor = UIColor(red: 232.0/255.0, green: 214.0/255.0, blue: 166.0/255.0, alpha: 1.0)
     static let buttonColor = UIColor(_colorLiteralRed: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)

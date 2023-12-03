@@ -23,14 +23,18 @@ class MenuInicialViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        startButton.isEnabled = false
         
-        configureButtons()
+        configureButton(startButton, startButtonImage, action: #selector(initGame))
+        configureButton(helpButton, helpButtonImage, action: #selector(showHelpPopUp))
+        
+        startButton.isEnabled = false
         configureStackView()
-        setStackViewConstraints()
-        setButtonsContraints()
+        setConstraints()
         gameCenterHelper.delegate = self
         gameCenterHelper.authenticatePlayer()
+        
+        view.addSubview(helpButton)
+
         self.view.backgroundColor = ColorsConstants.menuBackgroundImage
 
     }
@@ -40,16 +44,11 @@ extension MenuInicialViewController {
     
     
     
-    func configureButtons() {
-    
-        startButton.translatesAutoresizingMaskIntoConstraints = false
-        startButton.setImage(startButtonImage, for: .normal)
-        startButton.addTarget(self, action: #selector(initGame), for: .touchUpInside)
-        
-        helpButton.translatesAutoresizingMaskIntoConstraints = false
-        helpButton.setImage(helpButtonImage, for: .normal)
-        helpButton.addTarget(self, action: #selector(showHelpPopUp), for: .touchUpInside)
-      
+    func configureButton(_ chosenButton: UIButton, _ buttonImage: UIImage?, action: Selector) {
+        chosenButton.translatesAutoresizingMaskIntoConstraints = false
+        chosenButton.setImage(buttonImage, for: .normal)
+        chosenButton.addTarget(self, action: action, for: .touchUpInside)
+        view.addSubview(chosenButton)
     }
     
     func configureStackView() {
@@ -62,28 +61,22 @@ extension MenuInicialViewController {
         stackViewMenuInicial.addArrangedSubview(connectionStatusLabel)
     }
     
-    func setStackViewConstraints() {
+    func setConstraints() {
         
         stackViewMenuInicial.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             stackViewMenuInicial.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackViewMenuInicial.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-    }
-    
-    func setButtonsContraints() {
-        view.addSubview(helpButton)
         
         helpButton.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             helpButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 32),
             helpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -56)
            
         ])
-        
     }
+   
     
     func configureConnectionStatusLabel() {
         connectionStatusLabel.textAlignment = .center

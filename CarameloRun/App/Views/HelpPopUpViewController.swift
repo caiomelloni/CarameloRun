@@ -73,7 +73,7 @@ class HelpPopUpViewController: UIViewController {
         let control = UISegmentedControl(items: items)
         control.selectedSegmentIndex = 0
         
-        let font = UIFont(name: "Crang", size: 16)
+        let font = Fonts.subTitleFont
         
         let attributes: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.font: font as Any,
@@ -210,7 +210,7 @@ class HelpPopUpViewController: UIViewController {
         ])
         
         labelTitle1RegrasTab.text = HelpPopUpViewControllerStrings.Title1RegrasTabText.localized()
-        labelTitle1RegrasTab.font = UIFont(name: "Crang", size: 30)
+        labelTitle1RegrasTab.font = Fonts.titleFont
         labelTitle1RegrasTab.textColor = ColorsConstants.tittlesColor
         
         contentView.addSubview(labelTitle1RegrasTab)
@@ -226,7 +226,7 @@ class HelpPopUpViewController: UIViewController {
         
         labelDescription1RegrasTab.text = HelpPopUpViewControllerStrings.Description1RegrasTabText.localized()
         
-        labelDescription1RegrasTab.font = UIFont(name: "Inter", size: 13)
+        labelDescription1RegrasTab.font = Fonts.bodyFont
         labelDescription1RegrasTab.textColor = ColorsConstants.textColor
         labelDescription1RegrasTab.numberOfLines = 0
         
@@ -246,7 +246,7 @@ class HelpPopUpViewController: UIViewController {
         labelTitle2RegrasTab.text = HelpPopUpViewControllerStrings.Title2RegrasTabText.localized()
         
         //"Zé Cadelo"
-        labelTitle2RegrasTab.font = UIFont(name: "Crang", size: 30)
+        labelTitle2RegrasTab.font = Fonts.titleFont
         labelTitle2RegrasTab.textColor = ColorsConstants.tittlesColor
         
         contentView.addSubview(labelTitle2RegrasTab)
@@ -261,7 +261,7 @@ class HelpPopUpViewController: UIViewController {
         ])
         
         labelDescription2RegrasTab.text = HelpPopUpViewControllerStrings.Description2RegrasTabText.localized()
-        labelDescription2RegrasTab.font = UIFont(name: "Inter", size: 13)
+        labelDescription2RegrasTab.font = Fonts.bodyFont
         labelDescription2RegrasTab.textColor = ColorsConstants.textColor
         labelDescription2RegrasTab.numberOfLines = 0
         
@@ -316,7 +316,7 @@ class HelpPopUpViewController: UIViewController {
         ])
         
         labelTitle1ControlesTab.text = HelpPopUpViewControllerStrings.Title1ControlesTabText.localized()
-        labelTitle1ControlesTab.font = UIFont(name: "Crang", size: 30)
+        labelTitle1ControlesTab.font = Fonts.titleFont
         labelTitle1ControlesTab.textColor = ColorsConstants.tittlesColor
         
         contentView.addSubview(labelTitle1ControlesTab)
@@ -370,7 +370,7 @@ class HelpPopUpViewController: UIViewController {
         
         labelTitle1ComoConectarTab.text = HelpPopUpViewControllerStrings.Title1ComoConectarTabText.localized()
         
-        labelTitle1ComoConectarTab.font = UIFont(name: "Crang", size: 30)
+        labelTitle1ComoConectarTab.font = Fonts.titleFont
         labelTitle1ComoConectarTab.textColor = ColorsConstants.tittlesColor
         
         contentView.addSubview(labelTitle1ComoConectarTab)
@@ -385,7 +385,7 @@ class HelpPopUpViewController: UIViewController {
         ])
         
         labelDescription1ComoConectarTab.text = HelpPopUpViewControllerStrings.Description1ComoConectarTabText.localized()
-        labelDescription1ComoConectarTab.font = UIFont(name: "Inter", size: 13)
+        labelDescription1ComoConectarTab.font = Fonts.bodyFont
         labelDescription1ComoConectarTab.textColor = ColorsConstants.textColor
         labelDescription1ComoConectarTab.numberOfLines = 0
         
@@ -402,7 +402,7 @@ class HelpPopUpViewController: UIViewController {
         ])
         
         labelTitle2ComoConectarTab.text = HelpPopUpViewControllerStrings.Title2RegrasTabText.localized()
-        labelTitle2ComoConectarTab.font = UIFont(name: "Crang", size: 30)
+        labelTitle2ComoConectarTab.font = Fonts.titleFont
         labelTitle2ComoConectarTab.textColor = ColorsConstants.tittlesColor
         
         contentView.addSubview(labelTitle2ComoConectarTab)
@@ -417,7 +417,7 @@ class HelpPopUpViewController: UIViewController {
         ])
         
         labelDescription2ComoConectarTab.text = HelpPopUpViewControllerStrings.Description2ComoConectarTabText.localized()
-        labelDescription2ComoConectarTab.font = UIFont(name: "Inter", size: 13)
+        labelDescription2ComoConectarTab.font = Fonts.bodyFont
         labelDescription2ComoConectarTab.textColor = ColorsConstants.textColor
         labelDescription2ComoConectarTab.numberOfLines = 0
         
@@ -459,7 +459,7 @@ class HelpPopUpViewController: UIViewController {
         ])
         
         labelTitle1CreditosTab.text = HelpPopUpViewControllerStrings.Title1CreditosTabText.localized()
-        labelTitle1CreditosTab.font = UIFont(name: "Crang", size: 30)
+        labelTitle1CreditosTab.font = Fonts.titleFont
         labelTitle1CreditosTab.textColor = ColorsConstants.tittlesColor
         
         contentView.addSubview(labelTitle1CreditosTab)
@@ -483,7 +483,7 @@ class HelpPopUpViewController: UIViewController {
         if !CreditosTabAlreadyAcessed {
             for developerName in developers {
                 let label = UILabel()
-                label.font = UIFont(name: "Inter", size: 13)
+                label.font = Fonts.bodyFont
                 label.textColor = ColorsConstants.textColor
                 label.numberOfLines = 1
                 label.text = developerName
