@@ -18,7 +18,6 @@ class MenuInicialViewController: UIViewController {
     let startButtonImage = Images.startButtonImage
     let startButton = UIButton(type: UIButton.ButtonType.custom)
     let gameCenterHelper = GameCenterHelper()
-    let connectionStatusLabel = UILabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +56,7 @@ extension MenuInicialViewController {
         stackViewMenuInicial.alignment = .center
         stackViewMenuInicial.addArrangedSubview(logoImageView)
         stackViewMenuInicial.addArrangedSubview(startButton)
-        stackViewMenuInicial.addArrangedSubview(connectionStatusLabel)
+        
     }
     
     func setConstraints() {
@@ -75,15 +74,6 @@ extension MenuInicialViewController {
            
         ])
     }
-   
-    
-    func configureConnectionStatusLabel() {
-        connectionStatusLabel.textAlignment = .center
-        connectionStatusLabel.numberOfLines = 1
-        connectionStatusLabel.text = MenuInicialViewControllerStrings.ConnectionStatusLabelTextNotConnected.localized()
-        connectionStatusLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        
-    }
     
     @objc func initGame() {
         gameCenterHelper.presentMatchmaker()
@@ -99,10 +89,7 @@ extension MenuInicialViewController {
 
 extension MenuInicialViewController: GameCenterHelperDelegate {
   func didChangeAuthStatus(isAuthenticated: Bool) {
-
     startButton.isEnabled = isAuthenticated
-      connectionStatusLabel.text = MenuInicialViewControllerStrings.ConnectionStatusLabelTextConnected.localized()
-    connectionStatusLabel.font = UIFont.boldSystemFont(ofSize: 16)
   }
   func presentGameCenterAuth(viewController: UIViewController?) {
     guard let vc = viewController else {return}
