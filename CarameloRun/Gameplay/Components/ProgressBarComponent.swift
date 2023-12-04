@@ -63,7 +63,7 @@ class ProgressBarComponent: GKComponent {
             self.entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(false)
 
             var thereAreSomeoneInsideTheTask = 0
-            for player in scene.remotePlayers.values {
+            for player in scene.entityManager.remotePlayers {
                 
                 if player.type == .dog {
                     if (frame.contains((player.component(ofType: SpriteComponent.self)!.position))) == true {
@@ -75,9 +75,9 @@ class ProgressBarComponent: GKComponent {
                 }
             }
             
-            if scene.localPlayer.type == .dog {
+            if scene.entityManager.localPlayer!.type == .dog {
                 
-                if (frame.contains((scene.localPlayer.component(ofType: SpriteComponent.self)!.position))) == true {
+                if (frame.contains((scene.entityManager.localPlayer!.component(ofType: SpriteComponent.self)!.position))) == true {
                     progress += 0.01
                     progressBar.xScale = progress
                 } else {
@@ -88,8 +88,8 @@ class ProgressBarComponent: GKComponent {
             if progress >= 2.00 {
                 entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(true)
                 avaiable = false
-                if (frame.contains((scene.localPlayer.component(ofType: SpriteComponent.self)!.position))) == true && scene.localPlayer.type == .dog{
-                    scene.localPlayer.component(ofType: ScoreComponent.self)?.dogMakeTask()
+                if (frame.contains((scene.entityManager.localPlayer!.component(ofType: SpriteComponent.self)!.position))) == true && scene.entityManager.localPlayer!.type == .dog{
+                    scene.entityManager.localPlayer!.component(ofType: ScoreComponent.self)?.dogMakeTask()
                     
                     //send data
                     let state = taskDone(frameOfTheTask: frame, done: true)
@@ -100,7 +100,7 @@ class ProgressBarComponent: GKComponent {
                 
             }
             
-            if thereAreSomeoneInsideTheTask == scene.remotePlayers.count {
+            if thereAreSomeoneInsideTheTask == scene.entityManager.remotePlayers.count {
                 progress = 0.00
                 entity?.component(ofType: CompleteTaskComponent.self)?.changeLabel(false)
                 progressBar.xScale = progress

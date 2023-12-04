@@ -10,81 +10,31 @@ import Foundation
 import Foundation
 import UIKit
 import GameKit
-//import TinyConstraints
 
-class IconLabelView: UIView {
-    let imageView: UIImageView = {
-            let imageView = UIImageView()
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            return imageView
-        }()
-    
-    let label: UILabel = {
-            let label = UILabel()
-            label.textAlignment = .center
-            label.numberOfLines = 0
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
-    
-    override init(frame: CGRect) {
-            super.init(frame: frame)
-            setupSubviews()
-        }
-    
-    required init?(coder aDecoder: NSCoder) {
-            super.init(coder: aDecoder)
-            setupSubviews()
-        }
-    
-    private func setupSubviews() {
-            addSubview(imageView)
-            addSubview(label)
-            
-            NSLayoutConstraint.activate([
-                imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-                imageView.topAnchor.constraint(equalTo: topAnchor),
-                imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5),
-                imageView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            
-                label.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 8),
-                label.centerYAnchor.constraint(equalTo: imageView.centerYAnchor)
-                
-            ])
-        
-            label.font = UIFont.systemFont(ofSize: 17.0, weight: .semibold)
 
-        }
-        
-        func configure(with image: UIImage?, text: String) {
-            imageView.image = image
-            label.text = text
-          
-        }
-}
 
 class HelpPopUpViewController: UIViewController {
     
     let exitButtonImage = UIImage(named: "ExitButton") as UIImage?
     let exitButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
-    var labelTitle1: UILabel = UILabel()
-    let labelDescription1: UILabel = UILabel()
-    let labelTitle2: UILabel = UILabel()
-    let labelDescription2: UILabel = UILabel()
-    let mainStackView = UIStackView()
-    let labelStackView = UIStackView()
-    let ButtonLeftImageView = UIImageView(image: UIImage(named: "ButtonLeftUp"))
-    let ButtonRightImageView = UIImageView(image: UIImage(named: "ButtonRightUp"))
-    let ButtonJumpImageView = UIImageView(image: UIImage(named: "JumpButtonUp"))
-    var alreadyCalled = false
-    var case1AlreadyAcessed = false
+    var labelTitle1RegraTab: UILabel = UILabel()
+    let labelDescription1RegraTab: UILabel = UILabel()
+    let LabelTitle2RegrasTab: UILabel = UILabel()
+    let labelDescription2RegrasTab: UILabel = UILabel()
+    let stackViewControlesTab = UIStackView()
+    let stackViewCreditosTab = UIStackView()
+    let ButtonLeftControlImageView = UIImageView(image: UIImage(named: "ButtonLeftUp"))
+    let ButtonRightControlImageView = UIImageView(image: UIImage(named: "ButtonRightUp"))
+    let ButtonJumpControlImageView = UIImageView(image: UIImage(named: "JumpButtonUp"))
+    var ControlesTabAlreadyAcessed = false
+    var CreditosTabAlreadyAcessed = false
+
     
  
     
     private var canvas: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = UIColor(red: 248.0/255.0, green: 228.0/255.0, blue: 172.0/255.0, alpha: 1.0)
+        scrollView.backgroundColor = ColorsConstants.backgroundColor
         scrollView.layer.borderWidth = 3
         scrollView.layer.borderColor = UIColor.black.cgColor
         
@@ -108,7 +58,7 @@ class HelpPopUpViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    let items = [ "Regras" , "Controles" , "Como Conectar"]
+    let items = [ "Regras" , "Controles" , "Como Conectar", "créditos"]
     
     lazy var segmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(items: items)
@@ -118,12 +68,12 @@ class HelpPopUpViewController: UIViewController {
         
         let attributes: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.font: font as Any,
-            NSAttributedString.Key.foregroundColor: UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+            NSAttributedString.Key.foregroundColor: ColorsConstants.tittlesColor
         ]
         
         control.setTitleTextAttributes(attributes, for: .normal)
-        control.selectedSegmentTintColor = UIColor(red: 255.0/255.0, green: 240.0/255.0, blue: 199.0/255.0, alpha: 1.0)
-        control.backgroundColor = UIColor(red: 232.0/255.0, green: 214.0/255.0, blue: 166.0/255.0, alpha: 1.0)
+        control.selectedSegmentTintColor = ColorsConstants.selectedSegment
+        control.backgroundColor = ColorsConstants.unselectedSegment
         control.addTarget(self, action: #selector(handleSegmentedControlValueCHanged), for: .valueChanged)
         
         return control
@@ -215,6 +165,9 @@ class HelpPopUpViewController: UIViewController {
             print("case 2")
             configureCanvas2()
             
+        case 3:
+            configureCanvas3()
+            
         default:
             print("case default")
             configureCanvas0()
@@ -247,77 +200,76 @@ class HelpPopUpViewController: UIViewController {
             
         ])
         
-        labelTitle1.text = "Caramelo"
-        labelTitle1.font = UIFont(name: "Crang", size: 30)
-        labelTitle1.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+        labelTitle1RegraTab.text = "Caramelo"
+        labelTitle1RegraTab.font = UIFont(name: "Crang", size: 30)
+        labelTitle1RegraTab.textColor = ColorsConstants.tittlesColor
         
-        contentView.addSubview(labelTitle1)
+        contentView.addSubview(labelTitle1RegraTab)
         
-        labelTitle1.translatesAutoresizingMaskIntoConstraints = false
+        labelTitle1RegraTab.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
-            labelTitle1.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 68),
-            labelTitle1.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 24)
+            labelTitle1RegraTab.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 68),
+            labelTitle1RegraTab.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 24)
             
         ])
         
-        labelDescription1.text = "O Caramelo é um cãozinho fofo e malandro que vive feliz pelas ruas brasileiras. Mas, infelizmente, o Zé Cadelo, funcionário da carrocinha, está prestes a Capturar o Caramelo! O seu objetivo nessa missão é ajudar nosso querido cãozinho a fazer amizade com os moradores da vizinhança e ser adotado antes que o Zé cadelo o alcance!"
+        labelDescription1RegraTab.text = "O Caramelo é um cãozinho fofo e malandro que vive feliz pelas ruas brasileiras. Mas, infelizmente, o Zé Cadelo, funcionário da carrocinha, está prestes a Capturar o Caramelo! O seu objetivo nessa missão é ajudar nosso querido cãozinho a fazer amizade com os moradores da vizinhança e ser adotado antes que o Zé cadelo o alcance!"
         
-        labelDescription1.font = UIFont(name: "Inter", size: 13)
-        labelDescription1.textColor = UIColor(red: 32.0/255.0, green: 46.0/255.0, blue: 55.0/255.0, alpha: 1.0)
-        labelDescription1.numberOfLines = 0
+        labelDescription1RegraTab.font = UIFont(name: "Inter", size: 13)
+        labelDescription1RegraTab.textColor = ColorsConstants.textColor
+        labelDescription1RegraTab.numberOfLines = 0
         
-        contentView.addSubview(labelDescription1)
+        contentView.addSubview(labelDescription1RegraTab)
         
-        labelDescription1.translatesAutoresizingMaskIntoConstraints = false
+        labelDescription1RegraTab.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
-            labelDescription1.topAnchor.constraint(equalTo: labelTitle1.bottomAnchor, constant: 12),
-            labelDescription1.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
-            labelDescription1.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24)
+            labelDescription1RegraTab.topAnchor.constraint(equalTo: labelTitle1RegraTab.bottomAnchor, constant: 12),
+            labelDescription1RegraTab.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
+            labelDescription1RegraTab.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24)
             
         ])
         
         
-        labelTitle2.text = "Zé Cadelo"
-        labelTitle2.font = UIFont(name: "Crang", size: 30)
-        labelTitle2.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+        LabelTitle2RegrasTab.text = "Zé Cadelo"
+        LabelTitle2RegrasTab.font = UIFont(name: "Crang", size: 30)
+        LabelTitle2RegrasTab.textColor = ColorsConstants.tittlesColor
         
-        contentView.addSubview(labelTitle2)
+        contentView.addSubview(LabelTitle2RegrasTab)
         
-        labelTitle2.translatesAutoresizingMaskIntoConstraints = false
+        LabelTitle2RegrasTab.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
-            labelTitle2.topAnchor.constraint(equalTo: labelDescription1.bottomAnchor, constant: 24),
-            labelTitle2.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24)
+            LabelTitle2RegrasTab.topAnchor.constraint(equalTo: labelDescription1RegraTab.bottomAnchor, constant: 24),
+            LabelTitle2RegrasTab.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24)
             
         ])
         
-        labelDescription2.text = "O Zé cadelo precisa garantir seu emprego e, para isso, precisa tirar cães abandonas da rua e levá-los para o abrigo. Infelizmente, esses cãezinhos são malandros e conhecem os catons da cidade melhor que o Zé. Tente capturá-los, usando sua rede, para vencer a partida."
-        labelDescription2.font = UIFont(name: "Inter", size: 13)
-        labelDescription2.textColor = UIColor(red: 32.0/255.0, green: 46.0/255.0, blue: 55.0/255.0, alpha: 1.0)
-        labelDescription2.numberOfLines = 0
+        labelDescription2RegrasTab.text = "O Zé cadelo precisa garantir seu emprego e, para isso, precisa tirar cães abandonas da rua e levá-los para o abrigo. Infelizmente, esses cãezinhos são malandros e conhecem os catons da cidade melhor que o Zé. Tente capturá-los, usando sua rede, para vencer a partida."
+        labelDescription2RegrasTab.font = UIFont(name: "Inter", size: 13)
+        labelDescription2RegrasTab.textColor = ColorsConstants.textColor
+        labelDescription2RegrasTab.numberOfLines = 0
         
-        contentView.addSubview(labelDescription2)
+        contentView.addSubview(labelDescription2RegrasTab)
         
-        labelDescription2.translatesAutoresizingMaskIntoConstraints = false
+        labelDescription2RegrasTab.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
-            labelDescription2.topAnchor.constraint(equalTo: labelTitle2.bottomAnchor, constant: 12),
-            labelDescription2.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
-            labelDescription2.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
-            labelDescription2.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            labelDescription2RegrasTab.topAnchor.constraint(equalTo: LabelTitle2RegrasTab.bottomAnchor, constant: 12),
+            labelDescription2RegrasTab.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
+            labelDescription2RegrasTab.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
+            labelDescription2RegrasTab.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
             
         ])
         
     }
     
     func configureCanvas1() {
-        
         
         for subview in contentView.subviews {
             subview.removeFromSuperview()
@@ -352,51 +304,50 @@ class HelpPopUpViewController: UIViewController {
             
         ])
         
-        labelTitle1.text = "Controles"
-        labelTitle1.font = UIFont(name: "Crang", size: 30)
-        labelTitle1.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+        labelTitle1RegraTab.text = "Controles"
+        labelTitle1RegraTab.font = UIFont(name: "Crang", size: 30)
+        labelTitle1RegraTab.textColor = ColorsConstants.tittlesColor
         
-        contentView.addSubview(labelTitle1)
+        contentView.addSubview(labelTitle1RegraTab)
         
-        labelTitle1.translatesAutoresizingMaskIntoConstraints = false
+        labelTitle1RegraTab.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
-            labelTitle1.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 68),
-            labelTitle1.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32)
+            labelTitle1RegraTab.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 68),
+            labelTitle1RegraTab.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32)
             
         ])
         
         
-        contentView.addSubview(mainStackView)
+        contentView.addSubview(stackViewControlesTab)
         
-        mainStackView.alignment = .center
-        mainStackView.distribution = .equalSpacing
-        mainStackView.spacing = 0
-        mainStackView.axis = .vertical
+        stackViewControlesTab.alignment = .center
+        stackViewControlesTab.distribution = .equalSpacing
+        stackViewControlesTab.spacing = 0
+        stackViewControlesTab.axis = .vertical
         
-        ButtonLeftImageView.contentMode = .scaleAspectFit
-        ButtonRightImageView.contentMode = .scaleAspectFit
-        ButtonJumpImageView.contentMode = .scaleAspectFit
+        ButtonLeftControlImageView.contentMode = .scaleAspectFit
+        ButtonRightControlImageView.contentMode = .scaleAspectFit
+        ButtonJumpControlImageView.contentMode = .scaleAspectFit
         
-        if !case1AlreadyAcessed {
-            mainStackView.addArrangedSubview(jumpView)
-            mainStackView.addArrangedSubview(leftView)
-            mainStackView.addArrangedSubview(rightView)
+        if !ControlesTabAlreadyAcessed {
+            stackViewControlesTab.addArrangedSubview(jumpView)
+            stackViewControlesTab.addArrangedSubview(leftView)
+            stackViewControlesTab.addArrangedSubview(rightView)
         }
         
-        mainStackView.translatesAutoresizingMaskIntoConstraints = false
+        stackViewControlesTab.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: labelTitle1.bottomAnchor, constant: 26),
-            mainStackView.widthAnchor.constraint(equalToConstant: 150),
-            mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32),
-            //mainStackView.heightAnchor.constraint(equalToConstant: 300),
-            mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            stackViewControlesTab.topAnchor.constraint(equalTo: labelTitle1RegraTab.bottomAnchor, constant: 26),
+            stackViewControlesTab.widthAnchor.constraint(equalToConstant: 150),
+            stackViewControlesTab.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32),
+            stackViewControlesTab.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
             
         ])
         
-        case1AlreadyAcessed = true
+        ControlesTabAlreadyAcessed = true
     }
     
     func configureCanvas2() {
@@ -409,71 +360,144 @@ class HelpPopUpViewController: UIViewController {
         hConst.isActive = true
         hConst.priority = UILayoutPriority(50)
         
-        labelTitle1.text = "Partira Rápida"
-        labelTitle1.font = UIFont(name: "Crang", size: 30)
-        labelTitle1.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+        labelTitle1RegraTab.text = "Partira Rápida"
+        labelTitle1RegraTab.font = UIFont(name: "Crang", size: 30)
+        labelTitle1RegraTab.textColor = ColorsConstants.tittlesColor
         
-        contentView.addSubview(labelTitle1)
+        contentView.addSubview(labelTitle1RegraTab)
         
-        labelTitle1.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            
-            labelTitle1.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 68),
-            labelTitle1.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32)
-            
-        ])
-        
-        labelDescription1.text = "Nesse estilo de conexão, você pode jogar com qualquer outro jogador conectado ao GameCenter no mesmo momento que você. Basta clicar em \"partida rápida” após iniciar o jogo e aguardar que a conexão será feita automaticamente, direcionando vocês para a partida em seguida."
-        
-        labelDescription1.font = UIFont(name: "Inter", size: 13)
-        labelDescription1.textColor = UIColor(red: 32.0/255.0, green: 46.0/255.0, blue: 55.0/255.0, alpha: 1.0)
-        labelDescription1.numberOfLines = 0
-        
-        contentView.addSubview(labelDescription1)
-        
-        labelDescription1.translatesAutoresizingMaskIntoConstraints = false
+        labelTitle1RegraTab.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
-            labelDescription1.topAnchor.constraint(equalTo: labelTitle1.bottomAnchor, constant: 12),
-            labelDescription1.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32),
-            labelDescription1.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -32)
+            labelTitle1RegraTab.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 68),
+            labelTitle1RegraTab.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32)
             
         ])
         
-        labelTitle2.text = "Convidar seu amigo"
-        labelTitle2.font = UIFont(name: "Crang", size: 30)
-        labelTitle2.textColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+        labelDescription1RegraTab.text = "Nesse estilo de conexão, você pode jogar com qualquer outro jogador conectado ao GameCenter no mesmo momento que você. Basta clicar em \"partida rápida” após iniciar o jogo e aguardar que a conexão será feita automaticamente, direcionando vocês para a partida em seguida."
         
-        contentView.addSubview(labelTitle2)
+        labelDescription1RegraTab.font = UIFont(name: "Inter", size: 13)
+        labelDescription1RegraTab.textColor = ColorsConstants.textColor
+        labelDescription1RegraTab.numberOfLines = 0
         
-        labelTitle2.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(labelDescription1RegraTab)
+        
+        labelDescription1RegraTab.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
-            labelTitle2.topAnchor.constraint(equalTo: labelDescription1.bottomAnchor, constant: 24),
-            labelTitle2.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32)
+            labelDescription1RegraTab.topAnchor.constraint(equalTo: labelTitle1RegraTab.bottomAnchor, constant: 12),
+            labelDescription1RegraTab.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32),
+            labelDescription1RegraTab.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -32)
             
         ])
         
-        labelDescription2.text = "Para esse tipo de conexão, é necessário saber o nome de usuário do GameCenter de seu amigo. Em seguida, deve-se clicar em \"convidar jogador” após iniciar o jogo e aguardar o GameCenter enviar o convite para ele. O seu amigo deve aceitá-lo e aguardar até que a conexão seja feita."
-        labelDescription2.font = UIFont(name: "Inter", size: 13)
-        labelDescription2.textColor = UIColor(red: 32.0/255.0, green: 46.0/255.0, blue: 55.0/255.0, alpha: 1.0)
-        labelDescription2.numberOfLines = 0
+        LabelTitle2RegrasTab.text = "Convidar seu amigo"
+        LabelTitle2RegrasTab.font = UIFont(name: "Crang", size: 30)
+        LabelTitle2RegrasTab.textColor = ColorsConstants.tittlesColor
         
-        contentView.addSubview(labelDescription2)
+        contentView.addSubview(LabelTitle2RegrasTab)
         
-        labelDescription2.translatesAutoresizingMaskIntoConstraints = false
+        LabelTitle2RegrasTab.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
-            labelDescription2.topAnchor.constraint(equalTo: labelTitle2.bottomAnchor, constant: 12),
-            labelDescription2.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32),
-            labelDescription2.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -32),
-            labelDescription2.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            LabelTitle2RegrasTab.topAnchor.constraint(equalTo: labelDescription1RegraTab.bottomAnchor, constant: 24),
+            LabelTitle2RegrasTab.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32)
             
         ])
+        
+        labelDescription2RegrasTab.text = "Para esse tipo de conexão, é necessário saber o nome de usuário do GameCenter de seu amigo. Em seguida, deve-se clicar em \"convidar jogador” após iniciar o jogo e aguardar o GameCenter enviar o convite para ele. O seu amigo deve aceitá-lo e aguardar até que a conexão seja feita."
+        labelDescription2RegrasTab.font = UIFont(name: "Inter", size: 13)
+        labelDescription2RegrasTab.textColor = ColorsConstants.textColor
+        labelDescription2RegrasTab.numberOfLines = 0
+        
+        contentView.addSubview(labelDescription2RegrasTab)
+        
+        labelDescription2RegrasTab.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+
+            labelDescription2RegrasTab.topAnchor.constraint(equalTo: LabelTitle2RegrasTab.bottomAnchor, constant: 12),
+            labelDescription2RegrasTab.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32),
+            labelDescription2RegrasTab.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -32),
+            labelDescription2RegrasTab.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            
+        ])
+        
+    }
+    
+    func configureCanvas3() {
+        
+        let developers:[String] = ["Pamella de Alvarenga Souza", "Joshua Matheus", "Marcelo Pastana Duarte", "Luis Siqueira", "Caio Melloni"]
+        
+        for subview in contentView.subviews {
+            subview.removeFromSuperview()
+        }
+        
+        self.canvas.addSubview(contentView)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let hConst =  contentView.heightAnchor.constraint(equalTo: canvas.heightAnchor)
+        hConst.isActive = true
+        hConst.priority = UILayoutPriority(50)
+        
+        NSLayoutConstraint.activate([
+            
+            contentView.topAnchor.constraint(equalTo: self.canvas.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: self.canvas.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: self.canvas.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: self.canvas.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: self.canvas.widthAnchor)
+        ])
+        
+        labelTitle1RegraTab.text = "Desenvolvedores"
+        labelTitle1RegraTab.font = UIFont(name: "Crang", size: 30)
+        labelTitle1RegraTab.textColor = ColorsConstants.tittlesColor
+        
+        contentView.addSubview(labelTitle1RegraTab)
+        
+        labelTitle1RegraTab.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            
+            labelTitle1RegraTab.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 68),
+            labelTitle1RegraTab.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32)
+        ])
+    
+        contentView.addSubview(stackViewCreditosTab)
+        
+        stackViewCreditosTab.alignment = .leading
+        stackViewCreditosTab.distribution = .equalSpacing
+        stackViewCreditosTab.spacing = 12
+        stackViewCreditosTab.axis = .vertical
+        
+        ButtonLeftControlImageView.contentMode = .scaleAspectFit
+        ButtonRightControlImageView.contentMode = .scaleAspectFit
+        ButtonJumpControlImageView.contentMode = .scaleAspectFit
+        
+        if !CreditosTabAlreadyAcessed {
+            for developerName in developers {
+                var label = UILabel()
+                label.font = UIFont(name: "Inter", size: 13)
+                label.textColor = ColorsConstants.textColor
+                label.numberOfLines = 1
+                label.text = developerName
+                stackViewCreditosTab.addArrangedSubview(label)
+            }
+        }
+        
+        stackViewCreditosTab.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            
+            stackViewCreditosTab.topAnchor.constraint(equalTo: labelTitle1RegraTab.bottomAnchor, constant: 26),
+            stackViewCreditosTab.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32)
+            
+        ])
+        
+        CreditosTabAlreadyAcessed = true
     }
 }
 

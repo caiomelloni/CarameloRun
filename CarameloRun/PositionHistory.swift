@@ -11,14 +11,14 @@ class PositionHistory {
     var oldY: CGFloat = 0
     var oldState: String?
     
-    func setReferencePosition(_ player: Player) {
+    func setReferencePosition(_ player: LocalPlayer) {
         let playerPosition = player.component(ofType: SpriteComponent.self)!.position
         oldX = playerPosition.x
         oldY = playerPosition.y
         oldState = (player.component(ofType: PlayerAnimationComponent.self)?.stateMachine.currentState as? CodableState)?.stringIdentifier
     }
     
-    func hasPositionChanged(_ player: Player) -> Bool {
+    func hasPositionChanged(_ player: LocalPlayer) -> Bool {
         let playerPosition = player.component(ofType: SpriteComponent.self)!.position
         let currentState = (player.component(ofType: PlayerAnimationComponent.self)?.stateMachine.currentState as? CodableState)?.stringIdentifier
         let hasChanged = oldX != playerPosition.x || oldY != playerPosition.y || currentState != oldState || currentState == PlayerStateStringIdentifier.deadState.rawValue

@@ -9,6 +9,7 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
+//MARK: a known way to improve performance is to make the access to certain entity faster
 class EntityManager {
     
     var entities = Set<GKEntity>()
@@ -21,18 +22,12 @@ class EntityManager {
         self.scene = scene
     }
     
-    func addEntity(_ entity: GKEntity, spawnPoint: CGPoint? = nil) {
+    func addEntity(_ entity: GKEntity) {
         entities.insert(entity)
         
-        if let spriteComponent = entity.component(ofType: SpriteComponent.self) {
-            spriteComponent.addToScene(scene)
-            if let spawnPoint {
-                spriteComponent.position = spawnPoint
-            }
-        }
         
         componentSystem.addEntityComponents(entity)
-        
+        componentSystem.notifyAddedToScene(scene: scene)
     }
     
     func remove(_ entity: GKEntity) {
@@ -46,5 +41,41 @@ class EntityManager {
     
     func update(_ deltaTime: CFTimeInterval) {
         componentSystem.update(deltaTime)
+    }
+    
+    func joystickStateChanged(inUse: Bool, direction: Direction) {
+        componentSystem.notifyJoystickStateChanged(inUse: inUse, direction: direction)
+    }
+
+    
+}
+
+//Getter methods
+extension EntityManager {
+    var localPlayer: LocalPlayer? {
+        return getEntities(ofType: LocalPlayer.self).first
+    }
+    
+    func getRemotePlayer(ofPlayerNumber playerNumber: Int) -> RemotePlayer? {
+        let remotePlayers = getEntities(ofType: RemotePlayer.self)
+        return remotePlayers.first(where: {$0.playerNumber == playerNumber})
+    }
+    
+    var remotePlayers: [RemotePlayer] {
+        getEntities(ofType: RemotePlayer.self)
+    }
+}
+
+
+//Private helper tools
+extension EntityManager {
+    private func getEntities<T: AnyObject>(ofType type: T.Type) -> [T] {
+        var array: [T] = []
+        for elem in entities {
+            if let elem = elem as? T {
+                array.append(elem)
+            }
+        }
+        return array
     }
 }

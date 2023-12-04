@@ -9,7 +9,7 @@ import Foundation
 import GameplayKit
 
 class CatchComponent: GKComponent {
-    func didCollideWithPlayer(_ player: Player, _ allRemotePlayers: [Int:Player], finishGame: (() -> Void)?) {
+    func didCollideWithPlayer(_ player: RemotePlayer, _ allRemotePlayers: [RemotePlayer], finishGame: (() -> Void)?) {
         
         //TODO: add score to the catcher
         if (player.component(ofType: PlayerAnimationComponent.self)?.stateMachine.currentState as? ArrestedState) == nil {
@@ -22,7 +22,7 @@ class CatchComponent: GKComponent {
         // if all players are arrested, them ends the game
         var allPlayersCaught = true
         var hasDogWinner = false
-        for player in allRemotePlayers.values {
+        for player in allRemotePlayers {
             let state = player.component(ofType: PlayerAnimationComponent.self)?.stateMachine.currentState as! CodableState
             let currentPlayerState = PlayerStateStringIdentifier(rawValue: state.stringIdentifier)
             if  currentPlayerState != .arrestState && currentPlayerState != .deadState && currentPlayerState != .winnerState{

@@ -26,24 +26,27 @@ class CanBeAdoptedComponent: GKComponent {
     }
     
     func verifyIfTheDosHasBeenAdopted() {
-        for player in scene.remotePlayers.values {
+        let localPlayer = scene.entityManager.localPlayer!
+        let remotePlayers = scene.entityManager.remotePlayers
+        
+        for player in remotePlayers {
             if player.type == .dog && frame.contains(player.component(ofType: SpriteComponent.self)!.position) == true && player.adopted == false{
                 player.adopted = true
                 player.component(ofType: PlayerAnimationComponent.self)?.winner()
                 
-                if scene.remotePlayers.count == countPlayersThatDontMove(){
+                if remotePlayers.count == countPlayersThatDontMove(){
                     scene.controllerDelegate?.finishGame()
                 }
             }
         }
         
-        if scene.localPlayer.type == .dog && frame.contains(scene.localPlayer.component(ofType: SpriteComponent.self)!.position) == true && scene.localPlayer.adopted == false{
-            scene.localPlayer.adopted = true
-            scene.localPlayer.component(ofType: ScoreComponent.self)?.dogAdopted()
-            scene.localPlayer.component(ofType: PlayerAnimationComponent.self)?.winner()
+        if localPlayer.type == .dog && frame.contains(localPlayer.component(ofType: SpriteComponent.self)!.position) == true && localPlayer.adopted == false{
+            localPlayer.adopted = true
+            localPlayer.component(ofType: ScoreComponent.self)?.dogAdopted()
+            localPlayer.component(ofType: PlayerAnimationComponent.self)?.winner()
             scene.killPlayer()
             
-            if scene.remotePlayers.count == countPlayersThatDontMove(){
+            if remotePlayers.count == countPlayersThatDontMove(){
                 scene.controllerDelegate?.finishGame()
             }
             
@@ -53,8 +56,11 @@ class CanBeAdoptedComponent: GKComponent {
     
     
     func countPlayersThatDontMove() -> Int{
+        let localPlayer = scene.entityManager.localPlayer!
+        let remotePlayers = scene.entityManager.remotePlayers
+        
         var numberOfDogsArrestedOrDeadOrWinner = 0
-        for player in scene.remotePlayers.values {
+        for player in remotePlayers {
             let state = player.component(ofType: PlayerAnimationComponent.self)?.stateMachine.currentState as? CodableState
             let currentPlayerState = PlayerStateStringIdentifier(rawValue: state?.stringIdentifier ?? PlayerStateStringIdentifier.deadState.rawValue)
             if currentPlayerState == .arrestState || currentPlayerState == .deadState || currentPlayerState == .winnerState {
@@ -63,25 +69,28 @@ class CanBeAdoptedComponent: GKComponent {
             print("\(player.displayName) - \(player.type): \(currentPlayerState?.rawValue ?? "nulo")")
         }
         
-        let state = scene.localPlayer.component(ofType: PlayerAnimationComponent.self)?.stateMachine.currentState as? CodableState
+        let state = localPlayer.component(ofType: PlayerAnimationComponent.self)?.stateMachine.currentState as? CodableState
         let currentPlayerState = PlayerStateStringIdentifier(rawValue: state?.stringIdentifier ?? PlayerStateStringIdentifier.deadState.rawValue)
         if currentPlayerState == .arrestState || currentPlayerState == .deadState || currentPlayerState == .winnerState {
             numberOfDogsArrestedOrDeadOrWinner += 1
         }
-        print("\(scene.localPlayer.displayName) - \(scene.localPlayer.type): \(currentPlayerState?.rawValue ?? "nulo")")
+        print("\(localPlayer.displayName) - \(localPlayer.type): \(currentPlayerState?.rawValue ?? "nulo")")
         
         return numberOfDogsArrestedOrDeadOrWinner
     }
     
     func countPlayersAdopteds() -> Int {
+        let localPlayer = scene.entityManager.localPlayer!
+        let remotePlayers = scene.entityManager.remotePlayers
+        
         var numberOfDogsAdopteds = 0
-        for player in scene.remotePlayers.values {
+        for player in remotePlayers {
             if player.adopted {
                 numberOfDogsAdopteds += 1
             }
         }
         
-        if scene.localPlayer.adopted {
+        if localPlayer.adopted {
             numberOfDogsAdopteds += 1
         }
         

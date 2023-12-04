@@ -19,7 +19,7 @@ class JumpButton {
         node.position = CGPoint(x: x - node.frame.width - 80, y: y + 85 + node.frame.height)
     }
     
-    func touchBegan(_ touch: UITouch, _ scene: SKScene, _ player: Player) {
+    func touchBegan(_ touch: UITouch, _ scene: SKScene, _ player: LocalPlayer) {
         let location = touch.location(in: scene)
         
         if(node.frame.contains(location)) {
