@@ -105,9 +105,9 @@ class PreparingViewController: UIViewController {
             playerTypeLabel.setContentCompressionResistancePriority(.required, for: .vertical)
             
             if player.ready {
-                playerTypeLabel.textColor = ColorsConstants.tittlesColor
+                playerTypeLabel.textColor = ColorsConstants.connectedColor
             } else {
-                playerTypeLabel.textColor = UIColor.green
+                playerTypeLabel.textColor = ColorsConstants.tittlesColor
             }
             
             let verticalStackView = UIStackView(arrangedSubviews: [imageViewPlayer, playerNameLabel, playerTypeLabel])

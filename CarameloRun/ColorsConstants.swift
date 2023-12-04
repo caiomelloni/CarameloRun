@@ -14,6 +14,7 @@ struct ColorsConstants {
     static let buttonColor = UIColor(_colorLiteralRed: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
     static let tittlesColor = UIColor(red: 215.0/255.0, green: 94.0/255.0, blue: 64.0/255.0, alpha: 1.0)
     static let textColor = UIColor(red: 32.0/255.0, green: 46.0/255.0, blue: 55.0/255.0, alpha: 1.0)
+    static let connectedColor = UIColor(red: 45.0/255.0, green: 77.0/255.0, blue: 45.0/255.0, alpha: 1.0)
     
     static let menuBackgroundImage: UIColor = {
         guard let backgroundImage = Images.menuBackgroundImage else {
