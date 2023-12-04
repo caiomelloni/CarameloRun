@@ -16,6 +16,12 @@
 		610156812B1D3E91004A475E /* HelpPopUpViewControllerTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610156802B1D3E91004A475E /* HelpPopUpViewControllerTabs.swift */; };
 		61970CD02AFCF9DA0099760B /* HelpPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61970CCF2AFCF9DA0099760B /* HelpPopUpViewController.swift */; };
 		61A2428E2AFD79AC001D152A /* Crang.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61A2428D2AFD79AC001D152A /* Crang.ttf */; };
+		61B4D1E82B1E1A1E004A4A35 /* Catcher.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61B4D1E72B1E1A1E004A4A35 /* Catcher.xcassets */; };
+		61B4D1EB2B1E1A62004A4A35 /* Controls.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61B4D1EA2B1E1A62004A4A35 /* Controls.xcassets */; };
+		61B4D1ED2B1E1AF9004A4A35 /* NPC.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61B4D1EC2B1E1AF9004A4A35 /* NPC.xcassets */; };
+		61B4D1EF2B1E1B31004A4A35 /* screenElements.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61B4D1EE2B1E1B31004A4A35 /* screenElements.xcassets */; };
+		61B4D1F12B1E1B78004A4A35 /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61B4D1F02B1E1B78004A4A35 /* AppIcon.xcassets */; };
+		61B4D1F32B1E1BC5004A4A35 /* Scenario.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61B4D1F22B1E1BC5004A4A35 /* Scenario.xcassets */; };
 		61CDA65E2B18C53A0063D089 /* IconLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CDA65D2B18C53A0063D089 /* IconLabelView.swift */; };
 		61CDA6602B18CE3B0063D089 /* ColorsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CDA65F2B18CE3B0063D089 /* ColorsConstants.swift */; };
 		61CDA6692B18F9600063D089 /* HelpPopUpViewControllerStrings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 61CDA6682B18F9600063D089 /* HelpPopUpViewControllerStrings.strings */; };
@@ -29,7 +35,7 @@
 		F82786E82AC59B170047111D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82786E72AC59B170047111D /* AppDelegate.swift */; };
 		F82786EE2AC59B170047111D /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82786ED2AC59B170047111D /* GameScene.swift */; };
 		F82786F02AC59B170047111D /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82786EF2AC59B170047111D /* GameViewController.swift */; };
-		F82786F52AC59B180047111D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F82786F42AC59B180047111D /* Assets.xcassets */; };
+		F82786F52AC59B180047111D /* Caramelo.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F82786F42AC59B180047111D /* Caramelo.xcassets */; };
 		F82787012AC5A2F20047111D /* LocalPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82787002AC5A2F20047111D /* LocalPlayer.swift */; };
 		F82787032AC5A8250047111D /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82787022AC5A8250047111D /* Joystick.swift */; };
 		F82787052AC5B8CB0047111D /* JumpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82787042AC5B8CB0047111D /* JumpButton.swift */; };
@@ -85,6 +91,12 @@
 		61970CCF2AFCF9DA0099760B /* HelpPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpPopUpViewController.swift; sourceTree = "<group>"; };
 		61A2428D2AFD79AC001D152A /* Crang.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Crang.ttf; sourceTree = "<group>"; };
 		61A2428F2AFD7B2D001D152A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		61B4D1E72B1E1A1E004A4A35 /* Catcher.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Catcher.xcassets; sourceTree = "<group>"; };
+		61B4D1EA2B1E1A62004A4A35 /* Controls.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Controls.xcassets; sourceTree = "<group>"; };
+		61B4D1EC2B1E1AF9004A4A35 /* NPC.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NPC.xcassets; sourceTree = "<group>"; };
+		61B4D1EE2B1E1B31004A4A35 /* screenElements.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = screenElements.xcassets; sourceTree = "<group>"; };
+		61B4D1F02B1E1B78004A4A35 /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
+		61B4D1F22B1E1BC5004A4A35 /* Scenario.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Scenario.xcassets; sourceTree = "<group>"; };
 		61CDA65D2B18C53A0063D089 /* IconLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconLabelView.swift; sourceTree = "<group>"; };
 		61CDA65F2B18CE3B0063D089 /* ColorsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsConstants.swift; sourceTree = "<group>"; };
 		61CDA6682B18F9600063D089 /* HelpPopUpViewControllerStrings.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = HelpPopUpViewControllerStrings.strings; sourceTree = "<group>"; };
@@ -99,7 +111,7 @@
 		F82786E72AC59B170047111D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F82786ED2AC59B170047111D /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		F82786EF2AC59B170047111D /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		F82786F42AC59B180047111D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F82786F42AC59B180047111D /* Caramelo.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Caramelo.xcassets; sourceTree = "<group>"; };
 		F82787002AC5A2F20047111D /* LocalPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPlayer.swift; sourceTree = "<group>"; };
 		F82787022AC5A8250047111D /* Joystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
 		F82787042AC5B8CB0047111D /* JumpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpButton.swift; sourceTree = "<group>"; };
@@ -393,7 +405,13 @@
 		F898070C2ACDA0D60044D237 /* Files */ = {
 			isa = PBXGroup;
 			children = (
-				F82786F42AC59B180047111D /* Assets.xcassets */,
+				F82786F42AC59B180047111D /* Caramelo.xcassets */,
+				61B4D1E72B1E1A1E004A4A35 /* Catcher.xcassets */,
+				61B4D1EA2B1E1A62004A4A35 /* Controls.xcassets */,
+				61B4D1EC2B1E1AF9004A4A35 /* NPC.xcassets */,
+				61B4D1EE2B1E1B31004A4A35 /* screenElements.xcassets */,
+				61B4D1F02B1E1B78004A4A35 /* AppIcon.xcassets */,
+				61B4D1F22B1E1BC5004A4A35 /* Scenario.xcassets */,
 			);
 			name = Files;
 			sourceTree = "<group>";
@@ -498,11 +516,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8F97E382ACB08350006A4BA /* Background.sks in Resources */,
+				61B4D1EB2B1E1A62004A4A35 /* Controls.xcassets in Resources */,
+				61B4D1E82B1E1A1E004A4A35 /* Catcher.xcassets in Resources */,
 				6101567A2B1CA57C004A475E /* PreparingViewControllerStrings.strings in Resources */,
 				61CDA6692B18F9600063D089 /* HelpPopUpViewControllerStrings.strings in Resources */,
 				61A2428E2AFD79AC001D152A /* Crang.ttf in Resources */,
+				61B4D1EF2B1E1B31004A4A35 /* screenElements.xcassets in Resources */,
 				610156762B1CA558004A475E /* MenuInicialViewControllerStrings.strings in Resources */,
-				F82786F52AC59B180047111D /* Assets.xcassets in Resources */,
+				F82786F52AC59B180047111D /* Caramelo.xcassets in Resources */,
+				61B4D1F32B1E1BC5004A4A35 /* Scenario.xcassets in Resources */,
+				61B4D1ED2B1E1AF9004A4A35 /* NPC.xcassets in Resources */,
+				61B4D1F12B1E1B78004A4A35 /* AppIcon.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
