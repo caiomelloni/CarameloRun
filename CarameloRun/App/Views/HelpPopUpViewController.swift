@@ -15,9 +15,6 @@ class HelpPopUpViewController: UIViewController {
     
     let exitButtonImage = Images.exitButtonImage
     let exitButton = UIButton(type: UIButton.ButtonType.custom)
-
-    //var ControlesTabAlreadyAcessed = false
-    var CreditosTabAlreadyAcessed = false
     
     var canvas: UIScrollView = {
         let scrollView = UIScrollView()
@@ -30,7 +27,6 @@ class HelpPopUpViewController: UIViewController {
     
     var contentView: UIView = {
         let view = UIView()
-        
         
         return view
     }()
@@ -88,38 +84,6 @@ class HelpPopUpViewController: UIViewController {
         exitButton.addTarget(self, action: #selector(showMenuInicial), for: .touchUpInside)
     }
     
-    func configureConstraints() {
-        exitButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            exitButton.widthAnchor.constraint(equalToConstant: 40),
-            exitButton.heightAnchor.constraint(equalToConstant: 40),
-            exitButton.trailingAnchor.constraint(equalTo: canvas.trailingAnchor, constant: 10),
-            exitButton.topAnchor.constraint(equalTo: canvas.topAnchor, constant: -10)
-            
-        ])
-        
-        canvas.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            canvas.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            canvas.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            canvas.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
-            canvas.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
-            canvas.topAnchor.constraint(equalTo: view.topAnchor, constant: 24),
-            canvas.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -24)
-            
-        ])
-        
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            
-            segmentedControl.topAnchor.constraint(equalTo: canvas.topAnchor, constant: 16),
-            segmentedControl.leadingAnchor.constraint(equalTo: canvas.leadingAnchor, constant: 24),
-            segmentedControl.trailingAnchor.constraint(equalTo: canvas.trailingAnchor, constant: -24),
-            segmentedControl.heightAnchor.constraint(equalToConstant: 32)
-            
-        ])
-        
-    }
     
     @objc func showMenuInicial(){
         self.dismiss(animated: true, completion: nil)
@@ -151,6 +115,43 @@ class HelpPopUpViewController: UIViewController {
         view.addSubview(segmentedControl)
         view.addSubview(exitButton)
         configureConstraints()
+    }
+    
+}
+
+extension HelpPopUpViewController { // Just defining constraints
+    
+    func configureConstraints() {
+        exitButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            exitButton.widthAnchor.constraint(equalToConstant: 40),
+            exitButton.heightAnchor.constraint(equalToConstant: 40),
+            exitButton.trailingAnchor.constraint(equalTo: canvas.trailingAnchor, constant: 10),
+            exitButton.topAnchor.constraint(equalTo: canvas.topAnchor, constant: -10)
+            
+        ])
+        
+        canvas.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            canvas.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            canvas.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            canvas.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+            canvas.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            canvas.topAnchor.constraint(equalTo: view.topAnchor, constant: 24),
+            canvas.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -24)
+            
+        ])
+        
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            
+            segmentedControl.topAnchor.constraint(equalTo: canvas.topAnchor, constant: 16),
+            segmentedControl.leadingAnchor.constraint(equalTo: canvas.leadingAnchor, constant: 24),
+            segmentedControl.trailingAnchor.constraint(equalTo: canvas.trailingAnchor, constant: -24),
+            segmentedControl.heightAnchor.constraint(equalToConstant: 32)
+            
+        ])
+        
     }
     
 }
