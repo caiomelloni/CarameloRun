@@ -102,7 +102,7 @@ class GameViewController: UIViewController {
                 
                 let victory = gameScene?.getVictory() ?? false
                 
-                self.navigationController?.pushViewController(EndGame(score, GKLocalPlayer.local.displayName, victory), animated: true)
+                self.navigationController?.pushViewController(EndGame(score, GKLocalPlayer.local.displayName, victory, gameScene?.entityManager.localPlayer?.type ?? .dog), animated: true)
                 
                 controllerFinishGame = 1
             }
