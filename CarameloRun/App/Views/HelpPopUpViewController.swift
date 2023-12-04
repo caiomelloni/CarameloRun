@@ -16,7 +16,7 @@ class HelpPopUpViewController: UIViewController {
     let exitButtonImage = Images.exitButtonImage
     let exitButton = UIButton(type: UIButton.ButtonType.custom)
 
-    var ControlesTabAlreadyAcessed = false
+    //var ControlesTabAlreadyAcessed = false
     var CreditosTabAlreadyAcessed = false
     
     var canvas: UIScrollView = {

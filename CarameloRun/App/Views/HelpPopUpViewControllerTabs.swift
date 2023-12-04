@@ -24,6 +24,11 @@ extension HelpPopUpViewController {
         hConst.isActive = true
         hConst.priority = UILayoutPriority(50)
         
+        setLabel(labelTitle1RegrasTab, Fonts.titleFont, ColorsConstants.tittlesColor, numberOfLines: 0, text: HelpPopUpViewControllerStrings.Title1RegrasTabText.localized())
+        setLabel(labelDescription1RegrasTab, Fonts.bodyFont, ColorsConstants.textColor, numberOfLines: 0, text: HelpPopUpViewControllerStrings.Description1RegrasTabText.localized())
+        setLabel(labelTitle2RegrasTab, Fonts.titleFont, ColorsConstants.tittlesColor, numberOfLines: 0, text: HelpPopUpViewControllerStrings.Title2RegrasTabText.localized())
+        setLabel(labelDescription2RegrasTab, Fonts.bodyFont, ColorsConstants.textColor, numberOfLines: 0, text: HelpPopUpViewControllerStrings.Description2RegrasTabText.localized())
+        
         NSLayoutConstraint.activate([
             
             contentView.topAnchor.constraint(equalTo: self.canvas.topAnchor),
@@ -34,29 +39,12 @@ extension HelpPopUpViewController {
             
         ])
         
-        labelTitle1RegrasTab.text = HelpPopUpViewControllerStrings.Title1RegrasTabText.localized()
-        labelTitle1RegrasTab.font = Fonts.titleFont
-        labelTitle1RegrasTab.textColor = ColorsConstants.tittlesColor
-        
-        contentView.addSubview(labelTitle1RegrasTab)
-        
-        labelTitle1RegrasTab.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             
             labelTitle1RegrasTab.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 68),
             labelTitle1RegrasTab.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 24)
             
         ])
-        
-        labelDescription1RegrasTab.text = HelpPopUpViewControllerStrings.Description1RegrasTabText.localized()
-        labelDescription1RegrasTab.font = Fonts.bodyFont
-        labelDescription1RegrasTab.textColor = ColorsConstants.textColor
-        labelDescription1RegrasTab.numberOfLines = 0
-        
-        contentView.addSubview(labelDescription1RegrasTab)
-        
-        labelDescription1RegrasTab.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
@@ -66,30 +54,12 @@ extension HelpPopUpViewController {
             
         ])
         
-        
-        labelTitle2RegrasTab.text = HelpPopUpViewControllerStrings.Title2RegrasTabText.localized()
-        labelTitle2RegrasTab.font = Fonts.titleFont
-        labelTitle2RegrasTab.textColor = ColorsConstants.tittlesColor
-        
-        contentView.addSubview(labelTitle2RegrasTab)
-        
-        labelTitle2RegrasTab.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             
             labelTitle2RegrasTab.topAnchor.constraint(equalTo: labelDescription1RegrasTab.bottomAnchor, constant: 24),
             labelTitle2RegrasTab.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24)
             
         ])
-        
-        labelDescription2RegrasTab.text = HelpPopUpViewControllerStrings.Description2RegrasTabText.localized()
-        labelDescription2RegrasTab.font = Fonts.bodyFont
-        labelDescription2RegrasTab.textColor = ColorsConstants.textColor
-        labelDescription2RegrasTab.numberOfLines = 0
-        
-        contentView.addSubview(labelDescription2RegrasTab)
-        
-        labelDescription2RegrasTab.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
@@ -137,13 +107,7 @@ extension HelpPopUpViewController {
             
         ])
         
-        labelTitle1ControlesTab.text = HelpPopUpViewControllerStrings.Title1ControlesTabText.localized()
-        labelTitle1ControlesTab.font = Fonts.titleFont
-        labelTitle1ControlesTab.textColor = ColorsConstants.tittlesColor
-        
-        contentView.addSubview(labelTitle1ControlesTab)
-        
-        labelTitle1ControlesTab.translatesAutoresizingMaskIntoConstraints = false
+        setLabel(labelTitle1ControlesTab, Fonts.titleFont, ColorsConstants.tittlesColor, numberOfLines: 0, text: HelpPopUpViewControllerStrings.Title1ControlesTabText.localized())
         
         NSLayoutConstraint.activate([
             
@@ -151,6 +115,7 @@ extension HelpPopUpViewController {
             labelTitle1ControlesTab.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32)
             
         ])
+    
         
         
         contentView.addSubview(stackViewControlesTab)
@@ -161,12 +126,11 @@ extension HelpPopUpViewController {
         stackViewControlesTab.axis = .vertical
            
         
-        if !ControlesTabAlreadyAcessed {
+
             stackViewControlesTab.addArrangedSubview(jumpView)
             stackViewControlesTab.addArrangedSubview(leftView)
             stackViewControlesTab.addArrangedSubview(rightView)
-        }
-        
+     
         stackViewControlesTab.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -177,7 +141,6 @@ extension HelpPopUpViewController {
             
         ])
         
-        ControlesTabAlreadyAcessed = true
     }
     
     func configureCanvas2() {
@@ -196,14 +159,7 @@ extension HelpPopUpViewController {
         hConst.isActive = true
         hConst.priority = UILayoutPriority(50)
         
-        labelTitle1ComoConectarTab.text = HelpPopUpViewControllerStrings.Title1ComoConectarTabText.localized()
-        
-        labelTitle1ComoConectarTab.font = Fonts.titleFont
-        labelTitle1ComoConectarTab.textColor = ColorsConstants.tittlesColor
-        
-        contentView.addSubview(labelTitle1ComoConectarTab)
-        
-        labelTitle1ComoConectarTab.translatesAutoresizingMaskIntoConstraints = false
+        setLabel(labelTitle1ComoConectarTab, Fonts.titleFont, ColorsConstants.tittlesColor, numberOfLines: 0, text: HelpPopUpViewControllerStrings.Title1ComoConectarTabText.localized())
         
         NSLayoutConstraint.activate([
             
@@ -212,14 +168,7 @@ extension HelpPopUpViewController {
             
         ])
         
-        labelDescription1ComoConectarTab.text = HelpPopUpViewControllerStrings.Description1ComoConectarTabText.localized()
-        labelDescription1ComoConectarTab.font = Fonts.bodyFont
-        labelDescription1ComoConectarTab.textColor = ColorsConstants.textColor
-        labelDescription1ComoConectarTab.numberOfLines = 0
-        
-        contentView.addSubview(labelDescription1ComoConectarTab)
-        
-        labelDescription1ComoConectarTab.translatesAutoresizingMaskIntoConstraints = false
+        setLabel(labelDescription1ComoConectarTab, Fonts.bodyFont, ColorsConstants.textColor, numberOfLines: 0, text: HelpPopUpViewControllerStrings.Description1ComoConectarTabText.localized())
         
         NSLayoutConstraint.activate([
             
@@ -229,13 +178,7 @@ extension HelpPopUpViewController {
             
         ])
         
-        labelTitle2ComoConectarTab.text = HelpPopUpViewControllerStrings.Title2RegrasTabText.localized()
-        labelTitle2ComoConectarTab.font = Fonts.titleFont
-        labelTitle2ComoConectarTab.textColor = ColorsConstants.tittlesColor
-        
-        contentView.addSubview(labelTitle2ComoConectarTab)
-        
-        labelTitle2ComoConectarTab.translatesAutoresizingMaskIntoConstraints = false
+        setLabel(labelTitle2ComoConectarTab, Fonts.titleFont, ColorsConstants.tittlesColor, numberOfLines: 0, text: HelpPopUpViewControllerStrings.Title2RegrasTabText.localized())
         
         NSLayoutConstraint.activate([
             
@@ -244,14 +187,7 @@ extension HelpPopUpViewController {
             
         ])
         
-        labelDescription2ComoConectarTab.text = HelpPopUpViewControllerStrings.Description2ComoConectarTabText.localized()
-        labelDescription2ComoConectarTab.font = Fonts.bodyFont
-        labelDescription2ComoConectarTab.textColor = ColorsConstants.textColor
-        labelDescription2ComoConectarTab.numberOfLines = 0
-        
-        contentView.addSubview(labelDescription2ComoConectarTab)
-        
-        labelDescription2ComoConectarTab.translatesAutoresizingMaskIntoConstraints = false
+        setLabel(labelDescription2ComoConectarTab, Fonts.bodyFont, ColorsConstants.textColor, numberOfLines: 0, text: HelpPopUpViewControllerStrings.Description2ComoConectarTabText.localized())
         
         NSLayoutConstraint.activate([
 
@@ -288,13 +224,7 @@ extension HelpPopUpViewController {
             contentView.widthAnchor.constraint(equalTo: self.canvas.widthAnchor)
         ])
         
-        labelTitle1CreditosTab.text = HelpPopUpViewControllerStrings.Title1CreditosTabText.localized()
-        labelTitle1CreditosTab.font = Fonts.titleFont
-        labelTitle1CreditosTab.textColor = ColorsConstants.tittlesColor
-        
-        contentView.addSubview(labelTitle1CreditosTab)
-        
-        labelTitle1CreditosTab.translatesAutoresizingMaskIntoConstraints = false
+        setLabel(labelTitle1CreditosTab, Fonts.titleFont, ColorsConstants.tittlesColor, numberOfLines: 0, text: HelpPopUpViewControllerStrings.Title1CreditosTabText.localized())
         
         NSLayoutConstraint.activate([
             
@@ -331,5 +261,15 @@ extension HelpPopUpViewController {
         ])
         
         CreditosTabAlreadyAcessed = true
+    }
+    
+    func setLabel(_ customLabel: UILabel, _ font: UIFont?, _ color: UIColor?, numberOfLines: Int, text: String?) {
+        customLabel.text = text
+        customLabel.font = font
+        customLabel.textColor = color
+        customLabel.numberOfLines = numberOfLines
+        customLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        return contentView.addSubview(customLabel)
     }
 }
