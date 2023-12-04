@@ -30,10 +30,11 @@ class MenuInicialViewController: UIViewController {
         setConstraints()
         gameCenterHelper.delegate = self
         gameCenterHelper.authenticatePlayer()
-        
-        view.addSubview(helpButton)
 
+        view.addSubview(helpButton)
+    
         self.view.backgroundColor = ColorsConstants.menuBackgroundImage
+
 
     }
 }
