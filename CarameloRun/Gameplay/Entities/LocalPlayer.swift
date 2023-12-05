@@ -44,7 +44,7 @@ class LocalPlayer: GKEntity {
             spriteComponent,
             DirectionComponent(),
             JumpComponent(Constants.playerJumpXMultiplier, Constants.playerJumpYMultiplier),
-            VelocityComponent(Constants.playerVelocity),
+            VelocityComponent(type == .dog ? Constants.playerVelocity : Constants.catcherVelocity),
             ScoreComponent(),
             PlayerAnimationComponent(type == .dog ? PlayerStateMachine(spriteComponent) : CatcherStateMachine(spriteComponent)),
                         

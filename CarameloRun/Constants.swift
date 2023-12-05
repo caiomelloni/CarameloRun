@@ -15,6 +15,7 @@ struct Constants {
     
     
     static let playerVelocity: Double = 15
+    static let catcherVelocity: Double = 20
     static let playerWidth: Double = 123
     static let playerHeight: Double = 123  * 0.6
     static let catcherHeight: Double = 216
