@@ -15,11 +15,13 @@ class EndGame: UIViewController, GKGameCenterControllerDelegate {
     var score: Int
     var name: String
     var victory: Bool
+    let type: typeOfPlayer
     
-    init(_ score: Int, _ name: String, _ victory: Bool) {
+    init(_ score: Int, _ name: String, _ victory: Bool, _ type: typeOfPlayer) {
         self.score = score
         self.name = name
         self.victory = victory
+        self.type = type
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -30,26 +32,37 @@ class EndGame: UIViewController, GKGameCenterControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Configure a view com uma cor de fundo verde se venceu, vermelha se perdeu
-        if victory{
-            view.backgroundColor = .green
-        } else {
-            view.backgroundColor = .red
-        }
         
+        view.backgroundColor = .black
     
         // Crie uma label para o texto "Fim de Jogo"
         let label = UILabel()
+        let descriptionLabel = UILabel()
         if victory {
             label.text = "Vitória"
+            label.textColor = .green
+            if type == .dog {
+                descriptionLabel.text = "Você conseguiu ser adotado"
+            } else if type == .man{
+                descriptionLabel.text = "Você pegou todos os cachorros"
+            }
         } else {
             label.text = "Derrota"
+            label.textColor = .red
+            if type == .dog {
+                descriptionLabel.text = "Você não conseguiu ser adotado"
+            } else if type == .man{
+                descriptionLabel.text = "Você não pegou todos os cachorros"
+            }
         }
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 36)
+        label.font = UIFont(name: "Crang", size: 40)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
+        
+        descriptionLabel.textColor = .white
+        descriptionLabel.font = UIFont(name: "Crang", size: 16)
+        descriptionLabel.textAlignment = .center
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
 
         // Adicione a label à vista
         view.addSubview(label)
@@ -57,6 +70,11 @@ class EndGame: UIViewController, GKGameCenterControllerDelegate {
         // Defina restrições para centralizar a label na tela
         label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        
+        view.addSubview(descriptionLabel)
+        descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 40).isActive = true
         
         
         // add score for all players
@@ -88,6 +106,7 @@ class EndGame: UIViewController, GKGameCenterControllerDelegate {
             try? await Task.sleep(nanoseconds: 3_000_000_000)
             label.text = "Fim de jogo"
             label.textColor = .white
+            descriptionLabel.text = ""
             view.backgroundColor = .black
             addButtons()
             showLeaderBoard()
@@ -112,17 +131,19 @@ class EndGame: UIViewController, GKGameCenterControllerDelegate {
     func addButtons() {
         let button = UIButton()
         button.setTitle("LeaderBoard", for: .normal)
-        button.frame = CGRect(x: 2*UIScreen.main.bounds.size.width/3, y: 3*UIScreen.main.bounds.size.height/4, width: 200, height: 40)
+        button.frame = CGRect(x: 4*UIScreen.main.bounds.size.width/6, y: 3*UIScreen.main.bounds.size.height/4, width: 200, height: 40)
+        button.titleLabel?.font = UIFont(name: "Crang", size: 16)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        button.backgroundColor = .orange
+        button.backgroundColor = ColorsConstants.buttonColor
         
         view.addSubview(button)
             
         let button2 = UIButton()
         button2.setTitle("Menu Principal", for: .normal)
-        button2.frame = CGRect(x: UIScreen.main.bounds.size.width/6, y: 3*UIScreen.main.bounds.size.height/4, width: 200, height: 40)
+        button2.frame = CGRect(x: UIScreen.main.bounds.size.width/8, y: 3*UIScreen.main.bounds.size.height/4, width: 200, height: 40)
+        button2.titleLabel?.font = UIFont(name: "Crang", size: 16)
         button2.addTarget(self, action: #selector(buttonTappedToMenu), for: .touchUpInside)
-        button2.backgroundColor = .orange
+        button2.backgroundColor = ColorsConstants.buttonColor
 
         view.addSubview(button2)
     }

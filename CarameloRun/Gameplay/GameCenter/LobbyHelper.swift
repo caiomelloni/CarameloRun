@@ -96,8 +96,7 @@ class LobbyHelper {
     }
     
     private func pickRandomCatcherArrayIndex(_ numberOfPlayers: Int) -> Int {
-//        return Int.random(in: 0...(numberOfPlayers - 1))
-        return 1
+        return Int.random(in: 0...(numberOfPlayers - 1))
     }
     
     private func pickCatcherAndNotifyPlayers(_ match:GKMatch) {

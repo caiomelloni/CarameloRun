@@ -21,6 +21,14 @@ class GameScene: SKScene {
     var controllerDelegate: GameControllerDelegate?
     let timer = ControllTimer()
     
+    let NTasksCompleted = TasksCompleted()
+    
+    var task1: Tasks! = nil
+    var task2: Tasks! = nil
+    var task3: Tasks! = nil
+    
+    var dogsCanBeAdopted: Bool = false
+    
     // Update time
     var lastUpdateTimeInterval: TimeInterval = 0
     
@@ -46,9 +54,15 @@ class GameScene: SKScene {
         
         addChild(timer.node)
         
-        InsertTask()
-
+        addChild(NTasksCompleted.node)
         
+        task1 = Tasks(scene! as! GameScene, (scene?.childNode(withName: "task1")!.frame)!, Constants.timerTask1BeAvaiable)
+        task2 = Tasks(scene! as! GameScene, (scene?.childNode(withName: "task2")!.frame)!, Constants.timerTask2BeAvaiable)
+        task3 = Tasks(scene! as! GameScene, (scene?.childNode(withName: "task3")!.frame)!, Constants.timerTask3BeAvaiable)
+        
+        InsertTask(task1)
+        InsertTask(task2)
+        InsertTask(task3)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -87,13 +101,22 @@ class GameScene: SKScene {
         joystick.update(sceneCamera, frame, entityManager.localPlayer!)
         jumpButton.update(sceneCamera, frame)
         timer.update(sceneCamera, frame)
+        NTasksCompleted.update(sceneCamera, frame)
         
         //game center online updates
         updatePlayerPositionForOtherPlayers()
         
         handlePlayerCollision()
         
-        verifyDoingTask()
+        if !dogsCanBeAdopted {
+            verifyDoingTask(task1)
+            verifyDoingTask(task2)
+            verifyDoingTask(task3)
+        } else {
+            verifyAdopted(task1)
+            verifyAdopted(task2)
+            verifyAdopted(task3)
+        }
         
     }
     

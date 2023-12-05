@@ -30,6 +30,10 @@ class PlayerStateMachine: GKStateMachine {
             ArrestedState(spriteComponent, 
                           statePrefix: Constants.playerFramesPrefix,
                           frameCount: Constants.playerArrestedFramesCount),
+            
+            WinnerState(spriteComponent,
+                          statePrefix: Constants.playerFramesPrefix,
+                          frameCount: Constants.playerArrestedFramesCount),
         ])
     }
 }

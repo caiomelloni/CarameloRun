@@ -77,7 +77,10 @@
 		FB3E27CD2AFBD21000430E2D /* ProgressBarComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3E27CC2AFBD21000430E2D /* ProgressBarComponent.swift */; };
 		FB3E27CF2AFBD3EE00430E2D /* CompleteTaskComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3E27CE2AFBD3EE00430E2D /* CompleteTaskComponent.swift */; };
 		FB4134362AF919AB00C4F54C /* ScoreComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4134352AF919AB00C4F54C /* ScoreComponent.swift */; };
+		FB4DF37A2B161143001BD050 /* TasksCompleted.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4DF3792B161143001BD050 /* TasksCompleted.swift */; };
+		FB4ED3BD2B177F8400BF7EA6 /* CanBeAdoptedComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4ED3BC2B177F8400BF7EA6 /* CanBeAdoptedComponent.swift */; };
 		FBB5FDAB2AE93AE600E37BE1 /* PreparingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB5FDAA2AE93AE600E37BE1 /* PreparingViewController.swift */; };
+		FBC30D292B1A058A00C31E6A /* WinnerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC30D282B1A058A00C31E6A /* WinnerState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -154,7 +157,10 @@
 		FB3E27CC2AFBD21000430E2D /* ProgressBarComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarComponent.swift; sourceTree = "<group>"; };
 		FB3E27CE2AFBD3EE00430E2D /* CompleteTaskComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteTaskComponent.swift; sourceTree = "<group>"; };
 		FB4134352AF919AB00C4F54C /* ScoreComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreComponent.swift; sourceTree = "<group>"; };
+		FB4DF3792B161143001BD050 /* TasksCompleted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksCompleted.swift; sourceTree = "<group>"; };
+		FB4ED3BC2B177F8400BF7EA6 /* CanBeAdoptedComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanBeAdoptedComponent.swift; sourceTree = "<group>"; };
 		FBB5FDAA2AE93AE600E37BE1 /* PreparingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparingViewController.swift; sourceTree = "<group>"; };
+		FBC30D282B1A058A00C31E6A /* WinnerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -324,6 +330,7 @@
 				F8EE82692AF2932F00158D9B /* CatcherStateMachine.swift */,
 				F8E4B1772AFBC87F0066BBFC /* ArrestedState.swift */,
 				F84D86822AFCF98600774AF5 /* DeadState.swift */,
+				FBC30D282B1A058A00C31E6A /* WinnerState.swift */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -334,6 +341,7 @@
 				F8EE82642AF273E800158D9B /* ControllTimer */,
 				F87120D02AF013E000697E21 /* Buttons */,
 				F87120CF2AF013D600697E21 /* Camera */,
+				FB4DF3792B161143001BD050 /* TasksCompleted.swift */,
 			);
 			path = GameTools;
 			sourceTree = "<group>";
@@ -369,6 +377,7 @@
 				F8A004A32AFA71D500A9DAC3 /* HealthComponent.swift */,
 				FB3E27CC2AFBD21000430E2D /* ProgressBarComponent.swift */,
 				FB3E27CE2AFBD3EE00430E2D /* CompleteTaskComponent.swift */,
+				FB4ED3BC2B177F8400BF7EA6 /* CanBeAdoptedComponent.swift */,
 				F811A48F2B17829400E01031 /* SpawnComponent.swift */,
 			);
 			path = Components;
@@ -559,6 +568,7 @@
 				FBB5FDAB2AE93AE600E37BE1 /* PreparingViewController.swift in Sources */,
 				F84D86832AFCF98600774AF5 /* DeadState.swift in Sources */,
 				F82786EE2AC59B170047111D /* GameScene.swift in Sources */,
+				FB4ED3BD2B177F8400BF7EA6 /* CanBeAdoptedComponent.swift in Sources */,
 				FB3E27CD2AFBD21000430E2D /* ProgressBarComponent.swift in Sources */,
 				61CDA66F2B18FC160063D089 /* String+Localizable.swift in Sources */,
 				610156782B1CA568004A475E /* PreparingViewControllerStrings.swift in Sources */,
@@ -566,6 +576,7 @@
 				F811A4972B17B91300E01031 /* JoystickStateChanged.swift in Sources */,
 				610156812B1D3E91004A475E /* HelpPopUpViewControllerTabs.swift in Sources */,
 				F87120B82AEBEB1C00697E21 /* DirectionComponent.swift in Sources */,
+				FBC30D292B1A058A00C31E6A /* WinnerState.swift in Sources */,
 				FB3E27CF2AFBD3EE00430E2D /* CompleteTaskComponent.swift in Sources */,
 				F87120BE2AEBF87600697E21 /* PlayerAnimationComponent.swift in Sources */,
 				F8D1A9062B0E5E9C0075F6C4 /* LobbyPlayer.swift in Sources */,
@@ -576,6 +587,7 @@
 				F87D81F92AEACE5E0006CDD8 /* SpriteComponent.swift in Sources */,
 				F82A32822AE2B3C500A3639C /* PlayerState.swift in Sources */,
 				FB4134362AF919AB00C4F54C /* ScoreComponent.swift in Sources */,
+				FB4DF37A2B161143001BD050 /* TasksCompleted.swift in Sources */,
 				6101567F2B1CE063004A475E /* Fonts.swift in Sources */,
 				F8BA5B732B162A9F003AF5F2 /* ComponentSystem.swift in Sources */,
 				F82787032AC5A8250047111D /* Joystick.swift in Sources */,

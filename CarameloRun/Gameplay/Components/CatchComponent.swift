@@ -21,18 +21,22 @@ class CatchComponent: GKComponent {
         // TODO: associar o estado dos outros jogadores | por enquanto a finalizacao do jogo nao funciona quando todos foram presos
         // if all players are arrested, them ends the game
         var allPlayersCaught = true
+        var hasDogWinner = false
         for player in allRemotePlayers {
             let state = player.component(ofType: PlayerAnimationComponent.self)?.stateMachine.currentState as! CodableState
             let currentPlayerState = PlayerStateStringIdentifier(rawValue: state.stringIdentifier)
-            if  currentPlayerState != .arrestState && currentPlayerState != .deadState {
+            if  currentPlayerState != .arrestState && currentPlayerState != .deadState && currentPlayerState != .winnerState{
                 allPlayersCaught = false
                 break
+            } else if currentPlayerState == .winnerState {
+                hasDogWinner = true
             }
         }
         
         if allPlayersCaught {
-            entity?.component(ofType: ScoreComponent.self)?.humanCatchAllDogs()
-            
+            if !hasDogWinner {
+                entity?.component(ofType: ScoreComponent.self)?.humanCatchAllDogs()
+            }
             finishGame?()
         }
         

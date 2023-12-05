@@ -45,6 +45,11 @@ class PlayerAnimationComponent: GKComponent {
         entity?.component(ofType: SpriteComponent.self)?.removeFromParent()
     }
     
+    func winner() {
+        stateMachine.enter(WinnerState.self)
+        entity?.component(ofType: SpriteComponent.self)?.removeFromParent()
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
