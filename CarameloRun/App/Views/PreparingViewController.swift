@@ -60,83 +60,64 @@ class PreparingViewController: UIViewController {
         
         horizontalStackViewPlayers.frame = CGRect(x: (screenWidth - stackViewWidth) / 2, y: (UIScreen.main.bounds.height / 2) - 120, width: stackViewWidth, height: 150)
         
-        for i in 0...(players.count - 1){
+        for player in players{
             
-            let playerImage = players[i].photo
+            let playerImage = player.photo
+            
+            let playerTypeLabel = UILabel()
             
             let imageViewPlayer = UIImageView()
+            
             imageViewPlayer.image = playerImage
             imageViewPlayer.contentMode = .scaleAspectFit
             
             let playerNameLabel = UILabel()
             var fontSize = 0.0
             
-            playerNameLabel.text = "\(players[i].displayName)"
+            playerNameLabel.text = "\(player.displayName)"
             playerNameLabel.textAlignment = .center
             playerNameLabel.adjustsFontSizeToFitWidth = true
-            
             playerNameLabel.numberOfLines = 1
             playerNameLabel.setContentCompressionResistancePriority(.required, for: .vertical)
-            
+            playerNameLabel.textColor = ColorsConstants.textColor
+            playerNameLabel.alpha = 1.0
+            playerNameLabel.setContentCompressionResistancePriority(.required, for: .vertical)
+        
             fontSize = playerNameLabel.font.pointSize
-            
+        
             if fontSize < minFontSize {
                 minFontSize = fontSize
             }
             
-        }
-        
-        print("minFontSize: \(minFontSize)")
-        
-        for i in 0...(players.count - 1){
-            
-            let playerImage = players[i].photo
-            
-            let imageView = UIImageView()
-            imageView.image = playerImage
-            imageView.contentMode = .scaleAspectFit
-            
-            let playerNameLabel = UILabel()
-            
-            
-            playerNameLabel.text = "\(players[i].displayName)"
-            playerNameLabel.textAlignment = .center
             playerNameLabel.font = .boldSystemFont(ofSize: minFontSize)
-            playerNameLabel.textColor = ColorsConstants.textColor
-            playerNameLabel.alpha = 1.0
-            playerNameLabel.numberOfLines = 1
-            playerNameLabel.setContentCompressionResistancePriority(.required, for: .vertical)
             
-            let playerTypeLabel = UILabel()
-            
-            if players[i].playerType == .man {
-                playerTypeLabel.text = "Zé Cadelo"
+            if player.playerType == .man {
+                playerTypeLabel.text = PreparingViewControllerStrings.ManTypePlayer.localized()
             } else {
-                playerTypeLabel.text = "Caramelo"
+                playerTypeLabel.text = PreparingViewControllerStrings.DogTypePlayer.localized()
                 
             }
             
             playerTypeLabel.textAlignment = .center
-            
-            playerTypeLabel.font = UIFont(name: "Crang", size: 16)
-            
-            if players[i].ready {
-                playerTypeLabel.textColor = ColorsConstants.tittlesColor
-            } else {
-                playerTypeLabel.textColor = ColorsConstants.tittlesColor
-                
-            }
+            playerTypeLabel.font = Fonts.subTitleFont
             playerTypeLabel.alpha = 1.0
             playerTypeLabel.numberOfLines = 1
             playerTypeLabel.setContentCompressionResistancePriority(.required, for: .vertical)
             
-            let verticalStackView = UIStackView(arrangedSubviews: [imageView, playerNameLabel, playerTypeLabel])
+            if player.ready {
+                playerTypeLabel.textColor = ColorsConstants.connectedColor
+            } else {
+                playerTypeLabel.textColor = ColorsConstants.tittlesColor
+            }
+            
+            let verticalStackView = UIStackView(arrangedSubviews: [imageViewPlayer, playerNameLabel, playerTypeLabel])
             verticalStackView.axis = .vertical
             verticalStackView.alignment = .center
             verticalStackView.spacing = 8
-            
+        
             horizontalStackViewPlayers.addArrangedSubview(verticalStackView)
         }
+        
         view.addSubview(horizontalStackViewPlayers)
     }
     
@@ -153,12 +134,12 @@ class PreparingViewController: UIViewController {
         buttonImReady.layer.borderWidth = 1.5
         buttonImReady.layer.borderColor = UIColor.black.cgColor
         
-        buttonImReady.setTitle("Estou pronto!", for: .normal)
+        buttonImReady.setTitle(PreparingViewControllerStrings.ButtonTitleText.localized(), for: .normal)
         buttonImReady.frame = CGRect(x: xCoordinate, y: yCoordinate, width: buttonWidth, height: 56)
         buttonImReady.setTitleColor(UIColor.white, for: .normal) // Defina a cor do texto como branca
         buttonImReady.addTarget(self, action: #selector(ImReadyButtonTapped), for: .touchUpInside)
         buttonImReady.backgroundColor = ColorsConstants.buttonColor
-        buttonImReady.titleLabel?.font = UIFont(name: "Crang", size: 16)
+        buttonImReady.titleLabel?.font = Fonts.subTitleFont
         
     }
     

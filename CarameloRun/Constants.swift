@@ -5,7 +5,7 @@
 //  Created by Caio Melloni dos Santos on 25/10/23.
 //
 
-class Constants {
+struct Constants {
     static let gameTime: Int = 300
     
     static let playerJumpXMultiplier: Double = 250
