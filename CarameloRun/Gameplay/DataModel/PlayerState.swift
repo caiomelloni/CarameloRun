@@ -25,18 +25,3 @@ struct IsCatcher: Codable {
     var catcher: Int
     var name: String
 }
-
-struct matchState: Codable {
-    var finish: Bool
-}
-
-enum PlayerStateStringIdentifier: String {
-    case idleState = "idle"
-    case runState = "run"
-    case fallState = "fall"
-    case jumpState = "jump"
-    case arrestState = "arrest"
-    case deadState = "dead"
-}
-
-

@@ -10,7 +10,7 @@ import GameplayKit
 class SpawnComponent: GKComponent {
     let spawnPrefix: String
     let spawnNumber: Int
-    var respawns: [SKNode]?
+    var respawns: [CGPoint]?
 
     init(spawnPrefix: String, spawnNumber: Int) {
         self.spawnNumber = spawnNumber
@@ -33,14 +33,10 @@ class SpawnComponent: GKComponent {
             fatalError("ERROR: could not find respawns because there is none")
         }
 
-        return respawns[Int.random(in: 0..<Constants.respawnCount)].position
+        return respawns[Int.random(in: 0..<Constants.respawnCount)]
     }
     
-}
-
-
-extension SpawnComponent: GetNotifiedWhenAddedToScene {
-    func didAddToScene(_ scene: SKScene) {
+    func addToSceneInSpawnPoint(_ scene: SKScene) {
         
         //TODO: treat errors in a better way
         guard let spriteComponent = entity?.component(ofType: SpriteComponent.self) else {
@@ -54,4 +50,5 @@ extension SpawnComponent: GetNotifiedWhenAddedToScene {
         spriteComponent.addToScene(scene)
         spriteComponent.position = spawnPosition
     }
+    
 }

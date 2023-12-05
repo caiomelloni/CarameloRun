@@ -37,7 +37,7 @@ class DirectionComponent:GKComponent {
     
     func positionChanged(_ oldX: Double, _ newX: Double) {
         let dx = (oldX) - newX
-        if entity?.component(ofType: PlayerStateComponent.self)?.currentStateType == .arrest {
+        if entity?.component(ofType: PlayerStateComponent.self)?.currentStateType == .arrestState {
             changeDirection(.right)
         } else if dx > 0 {
             changeDirection(.left)

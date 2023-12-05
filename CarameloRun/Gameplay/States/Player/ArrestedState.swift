@@ -41,6 +41,6 @@ class ArrestedState: GKState {
 }
 extension ArrestedState: CodableState {
     var stringIdentifier: String {
-        PlayerStateStringIdentifier.arrestState.rawValue
+        StateType.arrestState.rawValue
     }
 }

@@ -41,6 +41,6 @@ class RunningState: GKState {
 
 extension RunningState: CodableState {
     var stringIdentifier: String {
-        PlayerStateStringIdentifier.runState.rawValue
+        StateType.runState.rawValue
     }
 }

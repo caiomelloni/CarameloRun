@@ -23,6 +23,7 @@ class DeadState: GKState {
         // runs as it enters this state
         // has access to the previous state
         // spriteComponent?.run(.animate(with: spriteSheet, timePerFrame: 0.1))
+        spriteComponent?.removeFromParent()
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
@@ -42,6 +43,6 @@ class DeadState: GKState {
 
 extension DeadState: CodableState {
     var stringIdentifier: String {
-        PlayerStateStringIdentifier.deadState.rawValue
+        StateType.deadState.rawValue
     }
 }

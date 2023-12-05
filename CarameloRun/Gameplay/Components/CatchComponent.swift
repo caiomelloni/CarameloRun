@@ -9,16 +9,20 @@ import Foundation
 import GameplayKit
 
 class CatchComponent: GKComponent {
-    func didCollideWithPlayer(_ player: RemotePlayer, _ allRemotePlayers: [RemotePlayer], finishGame: (() -> Void)?) {
+    var allRemotePlayers: (() -> [RemotePlayer]?)?
+    var finishGame: (()->Void)?
+    
+    func finishGameIfAllPlayersWereCaught() {
+        guard let allRemotePlayers = allRemotePlayers?() else {
+            fatalError("ERROR: CatchComponent does not have a reference to remote players")
+        }
         
         // TODO: associar o estado dos outros jogadores | por enquanto a finalizacao do jogo nao funciona quando todos foram presos
         // if all players are arrested, them ends the game
         var allPlayersCaught = true
         for player in allRemotePlayers {
-            print(player.component(ofType: PlayerStateComponent.self)?.currentStateType)
-            let state = player.component(ofType: PlayerStateComponent.self)?.stateMachine.currentState as! CodableState
-            let currentPlayerState = PlayerStateStringIdentifier(rawValue: state.stringIdentifier)
-            if  currentPlayerState != .arrestState && currentPlayerState != .deadState {
+            let state = player.component(ofType: PlayerStateComponent.self)?.currentStateType
+            if  state != .arrestState && state != .deadState {
                 allPlayersCaught = false
                 break
             }
@@ -27,7 +31,12 @@ class CatchComponent: GKComponent {
         if allPlayersCaught {
             entity?.component(ofType: ScoreComponent.self)?.humanCatchAllDogs()
             
-            finishGame?()
+            guard let finishGame = finishGame else {
+                fatalError("ERROR: CatchComponent does not have a reference to finish game function")
+            }
+            
+            finishGame()
+            entity?.component(ofType: SendPlayerUpdatesComponent.self)?.finishMatch()
         }
         
         
@@ -36,9 +45,27 @@ class CatchComponent: GKComponent {
 
 extension CatchComponent: GetNotifiedWhenContactHappens {
     func didBegin(_ contact: SKPhysicsContact) {
+        let contactedEntities = [contact.bodyA.node?.entity, contact.bodyB.node?.entity]
+        
+        let wasMyEntityContacted = contactedEntities.contains(where: {$0 == entity})
+        
+        if !wasMyEntityContacted {
+            return
+        }
+        
+        for contactEntity in contactedEntities {
+            let entityType = (contactEntity as? RemotePlayer)?.type
+            
+            let entityIsADog = entityType == .dog
+            
+            if  entityIsADog {
+//               didCollideWithPlayer()
+            }
+        }
     }
     
     func didEnd(_ contact: SKPhysicsContact) {
+
     }
     
     

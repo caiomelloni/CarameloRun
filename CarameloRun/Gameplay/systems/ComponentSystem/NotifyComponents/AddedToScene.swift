@@ -7,6 +7,7 @@
 
 import GameplayKit
 
+// Notifies everyone when something is added to scene
 extension ComponentSystem {
     func notifyAddedToScene(scene: SKScene) {
         for comp in components(ofType: GetNotifiedWhenAddedToScene.self) {

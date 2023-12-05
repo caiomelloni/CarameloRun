@@ -42,6 +42,6 @@ class JumpingState: GKState {
 
 extension JumpingState: CodableState {
     var stringIdentifier: String {
-        PlayerStateStringIdentifier.jumpState.rawValue
+        StateType.jumpState.rawValue
     }
 }

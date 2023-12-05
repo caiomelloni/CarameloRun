@@ -27,7 +27,7 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView){
         physicsWorld.contactDelegate = self
-        entityManager = EntityManager(scene: self)
+        entityManager = EntityManager(scene: self, finishGame: controllerDelegate!.finishGame)
                 
         backgroundColor = .white
         
@@ -90,8 +90,6 @@ class GameScene: SKScene {
         joystick.update(sceneCamera, frame, entityManager.localPlayer!)
         jumpButton.update(sceneCamera, frame)
         timer.update(sceneCamera, frame)
-        
-        //handlePlayerCollision()
         
         verifyDoingTask()
         

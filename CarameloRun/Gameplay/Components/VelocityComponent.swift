@@ -24,7 +24,8 @@ class VelocityComponent: GKComponent {
     }
     
     func addVelocity(_ direction: Direction) {
-        entity?.component(ofType: PlayerStateComponent.self)?.run()
+        
+        entity?.component(ofType: PlayerStateComponent.self)?.enterRunState()
         let spriteComponent = entity?.component(ofType: SpriteComponent.self)
         let directionComponent = entity?.component(ofType: DirectionComponent.self)
         switch direction {
@@ -41,12 +42,18 @@ class VelocityComponent: GKComponent {
     func stop() {
         let dy = entity?.component(ofType: SpriteComponent.self)?.dy
         if(dy == 0){
-            entity?.component(ofType: PlayerStateComponent.self)?.idle()
+            entity?.component(ofType: PlayerStateComponent.self)?.enterIdleState()
         }
     }
 
     
     override func update(deltaTime seconds: TimeInterval) {
+        let stateType = entity?.component(ofType: PlayerStateComponent.self)?.currentStateType
+        
+        if stateType == .arrestState || stateType == .deadState {
+            return
+        }
+        
         if isJoystickInUse {
             addVelocity(joystickDirection)
         } else {

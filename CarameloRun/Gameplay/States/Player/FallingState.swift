@@ -41,6 +41,6 @@ class FallingState: GKState {
 
 extension FallingState: CodableState {
     var stringIdentifier: String {
-        PlayerStateStringIdentifier.fallState.rawValue
+        StateType.fallState.rawValue
     }
 }

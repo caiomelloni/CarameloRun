@@ -16,11 +16,13 @@ class EntityManager {
     var entities = Set<GKEntity>()
     let scene: GameScene
     let componentSystem = ComponentSystem()
+    let finishGame: (()->Void)
     
     
     
-    init(scene: GameScene) {
+    init(scene: GameScene, finishGame: @escaping (()->Void)) {
         self.scene = scene
+        self.finishGame = finishGame
     }
     
     func addEntity(_ entity: GKEntity) {
@@ -28,6 +30,11 @@ class EntityManager {
         
         entity.component(ofType: SendPlayerUpdatesComponent.self)?.match = scene.controllerDelegate?.match
         entity.component(ofType: SpawnComponent.self)?.respawns = scene.getRespawns()
+        entity.component(ofType: SpawnComponent.self)?.addToSceneInSpawnPoint(scene)
+        
+        let catchComponent = entity.component(ofType: CatchComponent.self)
+        catchComponent?.finishGame = finishGame
+        catchComponent?.allRemotePlayers = {self.remotePlayers}
         
         componentSystem.addEntityComponents(entity)
         componentSystem.notifyAddedToScene(scene: scene)
@@ -76,9 +83,16 @@ class EntityManager {
         let newPosition = CGPoint(x: playerState.positionX, y: playerState.positionY)
         let remotePlayer = getRemotePlayer(ofPlayerNumber: playerState.playerNumber)
         
-        let stateStringIdentifier = PlayerStateStringIdentifier(rawValue: playerState.state)
+        let stateStringIdentifier = StateType(rawValue: playerState.state)
         
-        remotePlayer?.updateFromDataReceived(newPosition, stateStringIdentifier)
+        remotePlayer?.updateFromDataReceived(newPosition, stateStringIdentifier!)
+        
+        print("******DATA RECEIVED******")
+        for player in self.remotePlayers {
+            print(player.displayName)
+            print(player.component(ofType: PlayerStateComponent.self)?.currentStateType.rawValue)
+            print(player.type)
+        }
     }
     
 }

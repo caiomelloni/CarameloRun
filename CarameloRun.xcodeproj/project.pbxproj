@@ -39,6 +39,7 @@
 		F87120CD2AEFDE2600697E21 /* PlayerStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120CC2AEFDE2600697E21 /* PlayerStateMachine.swift */; };
 		F87120D22AF0142A00697E21 /* LocalPlayerCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87120D12AF0142A00697E21 /* LocalPlayerCamera.swift */; };
 		F87D81F92AEACE5E0006CDD8 /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87D81F82AEACE5E0006CDD8 /* SpriteComponent.swift */; };
+		F888B8612B1E01A8004C4457 /* MatchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F888B8602B1E01A7004C4457 /* MatchState.swift */; };
 		F88C86542B18AEBE00DBF0AB /* JumpButtonPressed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C86532B18AEBE00DBF0AB /* JumpButtonPressed.swift */; };
 		F88C86582B1A175C00DBF0AB /* SendPlayerUpdatesComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C86572B1A175C00DBF0AB /* SendPlayerUpdatesComponent.swift */; };
 		F88C865B2B1A5ADB00DBF0AB /* PhysicsCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C865A2B1A5ADB00DBF0AB /* PhysicsCategory.swift */; };
@@ -102,6 +103,7 @@
 		F87120CC2AEFDE2600697E21 /* PlayerStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStateMachine.swift; sourceTree = "<group>"; };
 		F87120D12AF0142A00697E21 /* LocalPlayerCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPlayerCamera.swift; sourceTree = "<group>"; };
 		F87D81F82AEACE5E0006CDD8 /* SpriteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
+		F888B8602B1E01A7004C4457 /* MatchState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchState.swift; sourceTree = "<group>"; };
 		F88C86532B18AEBE00DBF0AB /* JumpButtonPressed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpButtonPressed.swift; sourceTree = "<group>"; };
 		F88C86572B1A175C00DBF0AB /* SendPlayerUpdatesComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPlayerUpdatesComponent.swift; sourceTree = "<group>"; };
 		F88C865A2B1A5ADB00DBF0AB /* PhysicsCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsCategory.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 			children = (
 				F82A32812AE2B3C500A3639C /* PlayerState.swift */,
 				F8D1A9052B0E5E9C0075F6C4 /* LobbyPlayer.swift */,
+				F888B8602B1E01A7004C4457 /* MatchState.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -486,6 +489,7 @@
 				F854918D2AE174A8004EA5B1 /* GameCenterHelper.swift in Sources */,
 				FB3E27CB2AFBB9F500430E2D /* Tasks.swift in Sources */,
 				F898070F2ACDA1880044D237 /* Zposition.swift in Sources */,
+				F888B8612B1E01A8004C4457 /* MatchState.swift in Sources */,
 				F85FD5482AF90C6D009CB45A /* CatchComponent.swift in Sources */,
 				F870AAF32AF12ADE00195173 /* HandlePlayersExtension.swift in Sources */,
 				F854918A2AE16F71004EA5B1 /* MenuInicialViewController.swift in Sources */,

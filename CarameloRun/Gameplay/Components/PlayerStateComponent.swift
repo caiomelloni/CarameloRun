@@ -13,10 +13,9 @@ import GameplayKit
 class PlayerStateComponent: GKComponent {
     
     let stateMachine: GKStateMachine
-    private var oldStateStringIdentifier: String = PlayerStateStringIdentifier.idleState.rawValue
-    private var currentStateStringIdentifier: String = PlayerStateStringIdentifier.idleState.rawValue
     
-    var currentStateType = StateType.idle
+    var currentStateType = StateType.idleState
+    private var oldStateType = StateType.idleState
     
     init(_ stateMachine: GKStateMachine) {
         self.stateMachine = stateMachine
@@ -24,35 +23,34 @@ class PlayerStateComponent: GKComponent {
         super.init()
     }
     
-    func run() {
+    func enterRunState() {
         stateMachine.enter(RunningState.self)
-        currentStateType = .run
+        currentStateType = .runState
     }
     
-    func idle() {
+    func enterIdleState() {
         stateMachine.enter(IdleState.self)
-        currentStateType = .idle
+        currentStateType = .idleState
     }
     
-    func jump() {
+    func enterJumpState() {
         stateMachine.enter(JumpingState.self)
-        currentStateType = .jump
+        currentStateType = .jumpState
     }
     
-    func fall() {
+    func enterFallState() {
         stateMachine.enter(FallingState.self)
-        currentStateType = .fall
+        currentStateType = .fallState
     }
     
-    func arrest() {
+    func enterArrestState() {
         stateMachine.enter(ArrestedState.self)
-        currentStateType = .arrest
+        currentStateType = .arrestState
     }
     
-    func dead() {
+    func enterDeadState() {
         stateMachine.enter(DeadState.self)
-        entity?.component(ofType: SpriteComponent.self)?.removeFromParent()
-        currentStateType = .dead
+        currentStateType = .deadState
     }
     
     required init?(coder: NSCoder) {
@@ -60,27 +58,22 @@ class PlayerStateComponent: GKComponent {
     }
     
     override func update(deltaTime seconds: TimeInterval) {
-        currentStateStringIdentifier = getCurrentStateStringIdentifier()
         stateMachine.currentState?.update(deltaTime: seconds)
     }
     
     func hasStateChanged() -> Bool {
-        let hasChanged = oldStateStringIdentifier != currentStateStringIdentifier
-        oldStateStringIdentifier = currentStateStringIdentifier
+        let hasChanged = oldStateType != currentStateType
+        oldStateType = currentStateType
         return hasChanged
-    }
-    
-    private func getCurrentStateStringIdentifier() -> String {
-        return (stateMachine.currentState as? CodableState)?.stringIdentifier ?? PlayerStateStringIdentifier.idleState.rawValue
     }
     
 }
 
-enum StateType {
-    case run
-    case idle
-    case jump
-    case fall
-    case arrest
-    case dead
+enum StateType: String {
+    case runState = "runState"
+    case idleState = "idleState"
+    case jumpState = "jumpState"
+    case fallState = "fallState"
+    case arrestState = "arrestState"
+    case deadState = "deadState"
 }

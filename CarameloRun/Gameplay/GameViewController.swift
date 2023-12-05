@@ -83,7 +83,7 @@ class GameViewController: UIViewController {
                 self.time -= 1
                 
                 if self.time == 0 {
-                    self.sendMatchState(matchState.init(finish: true))
+                    self.sendMatchState(MatchState.init(finish: true))
                     self.finishGame()
                     timer.invalidate()
                 }
@@ -118,7 +118,7 @@ extension GameViewController: GKMatchDelegate {
         gameScene?.didReceiveData(match, data, player)
         
         do {
-           if let matchState = try? JSONDecoder().decode(matchState.self, from: jsonData) {
+           if let matchState = try? JSONDecoder().decode(MatchState.self, from: jsonData) {
                 if matchState.finish {
                     finishGame()
                 }
@@ -129,7 +129,7 @@ extension GameViewController: GKMatchDelegate {
 
 protocol GameControllerDelegate {
     func sendPlayerState(_ state: PlayerState)
-    func sendMatchState(_ state: matchState)
+    func sendMatchState(_ state: MatchState)
     var players: [LobbyPlayer] { get }
     func finishGame()
     var match: GKMatch { get }
@@ -147,7 +147,7 @@ extension GameViewController: GameControllerDelegate {
         }
     }
     
-    func sendMatchState(_ state: matchState) {
+    func sendMatchState(_ state: MatchState) {
         do {
             let data = try JSONEncoder().encode(state)
             try match.sendData(toAllPlayers: data, with: GKMatch.SendDataMode.unreliable)
@@ -160,5 +160,5 @@ extension GameViewController: GameControllerDelegate {
 
 enum GameState {
     case playerState(PlayerState)
-    case matchState(matchState)
+    case matchState(MatchState)
 }

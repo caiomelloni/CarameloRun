@@ -18,14 +18,24 @@ class SendPlayerUpdatesComponent: GKComponent {
                                           playerNumber: localPlayer.playerNumber,
                                           positionX: localPlayer.component(ofType: SpriteComponent.self)!.position.x,
                                           positionY: localPlayer.component(ofType: SpriteComponent.self)!.position.y,
-                                          state: (localPlayer.component(ofType: PlayerStateComponent.self)?.stateMachine.currentState as? CodableState)?.stringIdentifier ?? PlayerStateStringIdentifier.deadState.rawValue)
+                                          state: (localPlayer.component(ofType: PlayerStateComponent.self)?.currentStateType.rawValue ?? StateType.deadState.rawValue))
             
             do {
                 let data = try JSONEncoder().encode(playerState)
+                
                 try match!.sendData(toAllPlayers: data, with: GKMatch.SendDataMode.unreliable)
             } catch {
                 print("ERROR sending data")
             }
+        }
+    }
+    
+    func finishMatch() {
+        do {
+            let data = try JSONEncoder().encode(MatchState(finish: true))
+            try match!.sendData(toAllPlayers: data, with: GKMatch.SendDataMode.unreliable)
+        } catch {
+            print("ERROR sending data")
         }
     }
     

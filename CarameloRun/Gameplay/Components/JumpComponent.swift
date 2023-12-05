@@ -23,6 +23,12 @@ class JumpComponent: GKComponent {
     }
     
     func jump() {
+        
+        let stateType = entity?.component(ofType: PlayerStateComponent.self)?.currentStateType
+        if stateType == .arrestState || stateType == .deadState {
+            return
+        }
+        
         if let spritComponent = entity?.component(ofType: SpriteComponent.self), let directionComponent = entity?.component(ofType: DirectionComponent.self) {
             if spritComponent.physicsBody?.velocity.dy != 0 {
                 return
@@ -43,9 +49,9 @@ class JumpComponent: GKComponent {
         let stateComponent = entity?.component(ofType: PlayerStateComponent.self)
         if let dy = dy {
             if dy > 0 {
-                stateComponent?.jump()
+                stateComponent?.enterJumpState()
             } else if dy < 0 {
-                stateComponent?.fall()
+                stateComponent?.enterFallState()
             }
         }
     }

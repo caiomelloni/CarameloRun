@@ -85,7 +85,6 @@ class PreparingViewController: UIViewController {
             
         }
         
-        print("minFontSize: \(minFontSize)")
         
         for i in 0...(players.count - 1){
             

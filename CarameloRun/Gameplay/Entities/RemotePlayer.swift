@@ -39,13 +39,6 @@ class RemotePlayer: GKEntity {
         components.forEach { component in
             addComponent(component)
         }
-        
-//        if type == .man {
-//            addComponent(CatchComponent())
-//        } else {
-//            addComponent(GetCaughtComponent())
-//            addComponent(HealthComponent())
-//        }
     }
     
     required init?(coder: NSCoder) {
@@ -68,25 +61,25 @@ class RemotePlayer: GKEntity {
         return spriteComponent
     }
     
-    func updateFromDataReceived(_ newPosition: CGPoint, _ stateStringIdentifier: PlayerStateStringIdentifier?){
+    func updateFromDataReceived(_ newPosition: CGPoint, _ stateType: StateType){
         let spriteComp = component(ofType: SpriteComponent.self)
         spriteComp?.position = newPosition
         
         let animationComp = component(ofType: PlayerStateComponent.self)
         
-        switch stateStringIdentifier {
+        switch stateType {
         case .idleState:
-            animationComp?.idle()
+            animationComp?.enterIdleState()
         case .runState:
-            animationComp?.run()
+            animationComp?.enterRunState()
         case .fallState:
-            animationComp?.fall()
+            animationComp?.enterFallState()
         case .jumpState:
-            animationComp?.jump()
+            animationComp?.enterJumpState()
         case .arrestState:
-            animationComp?.arrest()
+            animationComp?.enterArrestState()
         case .deadState:
-            animationComp?.dead()
+            animationComp?.enterDeadState()
         default:
             print("=> func updatePlayerPosition: no state detected for the remote player")
         }

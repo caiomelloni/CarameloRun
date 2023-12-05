@@ -9,7 +9,7 @@ import SpriteKit
 import GameplayKit
 
 class SpriteComponent: GKComponent {
-    private let node: SKSpriteNode
+    let node: SKSpriteNode
     
     //sprite frames updates changes controll
     private var oldPosition =  CGPoint(x: 0, y: 0)
@@ -75,7 +75,6 @@ class SpriteComponent: GKComponent {
     }
     
     func addToScene(_ scene: SKScene) {
-        node.removeFromParent()
         scene.addChild(node)
         setReferencePosition()
     }
