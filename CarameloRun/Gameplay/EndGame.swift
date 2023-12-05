@@ -143,7 +143,7 @@ class EndGame: UIViewController, GKGameCenterControllerDelegate {
         button2.frame = CGRect(x: UIScreen.main.bounds.size.width/8, y: 3*UIScreen.main.bounds.size.height/4, width: 200, height: 40)
         button2.titleLabel?.font = UIFont(name: "Crang", size: 16)
         button2.addTarget(self, action: #selector(buttonTappedToMenu), for: .touchUpInside)
-        button.backgroundColor = ColorsConstants.buttonColor
+        button2.backgroundColor = ColorsConstants.buttonColor
 
         view.addSubview(button2)
     }
