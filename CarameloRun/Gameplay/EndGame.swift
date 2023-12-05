@@ -42,17 +42,17 @@ class EndGame: UIViewController, GKGameCenterControllerDelegate {
             label.text = "Vitória"
             label.textColor = .green
             if type == .dog {
-                descriptionLabel.text = "Você conseguiu ser adotado"
+                descriptionLabel.text = "Conseguiu ser adotado"
             } else if type == .man{
-                descriptionLabel.text = "Você pegou todos os cachorros"
+                descriptionLabel.text = "Pegou todos os cachorros"
             }
         } else {
             label.text = "Derrota"
             label.textColor = .red
             if type == .dog {
-                descriptionLabel.text = "Você não conseguiu ser adotado"
+                descriptionLabel.text = "Não conseguiu ser adotado"
             } else if type == .man{
-                descriptionLabel.text = "Você não pegou todos os cachorros"
+                descriptionLabel.text = "Alguns cachorros continuam soltos"
             }
         }
         label.font = UIFont(name: "Crang", size: 40)

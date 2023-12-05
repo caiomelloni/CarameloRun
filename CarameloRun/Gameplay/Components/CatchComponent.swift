@@ -23,8 +23,9 @@ class CatchComponent: GKComponent {
         var allPlayersCaught = true
         var hasDogWinner = false
         for player in allRemotePlayers {
-            let state = player.component(ofType: PlayerAnimationComponent.self)?.stateMachine.currentState as! CodableState
-            let currentPlayerState = PlayerStateStringIdentifier(rawValue: state.stringIdentifier)
+            
+            let state = player.component(ofType: PlayerAnimationComponent.self)?.stateMachine.currentState as? CodableState
+            let currentPlayerState = PlayerStateStringIdentifier(rawValue: state?.stringIdentifier ?? "dead")
             if  currentPlayerState != .arrestState && currentPlayerState != .deadState && currentPlayerState != .winnerState{
                 allPlayersCaught = false
                 break
@@ -38,6 +39,7 @@ class CatchComponent: GKComponent {
                 entity?.component(ofType: ScoreComponent.self)?.humanCatchAllDogs()
             }
             finishGame?()
+            
         }
         
         
