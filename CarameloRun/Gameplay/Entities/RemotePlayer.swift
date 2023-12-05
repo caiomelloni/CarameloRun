@@ -14,6 +14,7 @@ class RemotePlayer: GKEntity {
     var type: typeOfPlayer
     var ready: Bool = false
     var photo: UIImage?
+    var adopted: Bool = false
     
     
     init(displayName: String, playerNumber: Int, playerType: typeOfPlayer, photo: UIImage?) {
@@ -21,6 +22,7 @@ class RemotePlayer: GKEntity {
         self.playerNumber = playerNumber
         self.type = playerType
         self.photo = photo
+        
         
         
         super.init()

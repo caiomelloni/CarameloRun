@@ -30,6 +30,11 @@ struct matchState: Codable {
     var finish: Bool
 }
 
+struct taskDone: Codable {
+    var frameOfTheTask: CGRect
+    var done: Bool
+}
+
 enum PlayerStateStringIdentifier: String {
     case idleState = "idle"
     case runState = "run"
@@ -37,6 +42,7 @@ enum PlayerStateStringIdentifier: String {
     case jumpState = "jump"
     case arrestState = "arrest"
     case deadState = "dead"
+    case winnerState = "winner"
 }
 
 

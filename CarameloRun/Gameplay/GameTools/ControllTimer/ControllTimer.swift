@@ -10,7 +10,7 @@ import SpriteKit
 class ControllTimer {
     var n: Int = Constants.gameTime
 
-    var number = SKLabelNode(fontNamed: "Helvetica")
+    var number = SKLabelNode(fontNamed: .localizedName(of: .symbol))
     var node = SKSpriteNode()
     
     init() {
@@ -21,11 +21,10 @@ class ControllTimer {
         number.fontColor = .blue
         
         node.addChild(number)
-        node.scene?.backgroundColor = .blue
     }
     
     private func position(x: Double, y: Double) {
-        node.position = CGPoint(x: x - 668, y: y + 540 + UIScreen.main.bounds.size.height/6)
+        node.position = CGPoint(x: x, y: y)
     }
     
     func updateTimer(_ new: Int) {
@@ -39,8 +38,10 @@ class ControllTimer {
         number.text = "0\(minutos):\(z)\(segundos)"
     }
     
-    func update(_ camera: SKCameraNode, _ frame: CGRect) {
-        position(x: camera.position.x + frame.maxX,
-                 y: camera.position.y - frame.maxY)
+    func update(_ camera: LocalPlayerCamera, _ screenFrame: CGRect) {
+        position(
+            x: camera.position.x,
+            y: camera.position.y + 0.72 * (screenFrame.maxY * camera.scaleFactorY)
+        )
     }
 }

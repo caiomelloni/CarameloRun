@@ -100,9 +100,9 @@ class GameViewController: UIViewController {
                     score = 0
                 }
                 
-                var victory = gameScene?.getVictory() ?? false
+                let victory = gameScene?.getVictory() ?? false
                 
-                self.navigationController?.pushViewController(EndGame(score, GKLocalPlayer.local.displayName, victory), animated: true)
+                self.navigationController?.pushViewController(EndGame(score, GKLocalPlayer.local.displayName, victory, gameScene?.entityManager.localPlayer?.type ?? .dog), animated: true)
                 
                 controllerFinishGame = 1
             }
@@ -122,6 +122,10 @@ extension GameViewController: GKMatchDelegate {
                 if matchState.finish {
                     finishGame()
                 }
+            } else if let tasks = try? JSONDecoder().decode(taskDone.self, from: jsonData) {
+                if tasks.done == true {
+                    addOneTaskDone(tasks.frameOfTheTask)
+                }
             } else {
                 print("Error reciving data")
             }
@@ -132,8 +136,10 @@ extension GameViewController: GKMatchDelegate {
 protocol GameControllerDelegate {
     func sendPlayerState(_ state: PlayerState)
     func sendMatchState(_ state: matchState)
+    func sendTaskDone(_ state: taskDone)
     var players: [LobbyPlayer] { get }
     func finishGame()
+    func addOneTaskDone(_ frame: CGRect)
 }
 
 extension GameViewController: GameControllerDelegate {
@@ -153,6 +159,25 @@ extension GameViewController: GameControllerDelegate {
             try match.sendData(toAllPlayers: data, with: GKMatch.SendDataMode.unreliable)
         } catch {
             print("error sending data")
+        }
+    }
+    
+    func sendTaskDone(_ state: taskDone) {
+        do {
+            let data = try JSONEncoder().encode(state)
+            try match.sendData(toAllPlayers: data, with: GKMatch.SendDataMode.unreliable)
+        } catch {
+            print("error sending data")
+        }
+    }
+    
+    func addOneTaskDone(_ frame: CGRect) {
+        if frame == gameScene?.task1.frame {
+            gameScene?.addToGeneral((gameScene?.task1)!)
+        } else if frame == gameScene?.task2.frame {
+            gameScene?.addToGeneral((gameScene?.task2)!)
+        } else if frame == gameScene?.task3.frame {
+            gameScene?.addToGeneral((gameScene?.task2)!)
         }
     }
     

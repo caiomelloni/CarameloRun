@@ -10,12 +10,15 @@ import SpriteKit
 
 class CompleteTaskComponent: GKComponent {
     var complete: Bool = false
-    var scene: SKScene
+    var scene: GameScene
     var completeLabel = SKLabelNode()
     var Label = SKLabelNode()
+    var frame: CGRect
+    var tasksCompleted: Int = 0
     
-    init(_ scene: SKScene) {
+    init(_ scene: GameScene, _ frame: CGRect) {
         self.scene = scene
+        self.frame = frame
         super.init()
     }
     
@@ -24,10 +27,9 @@ class CompleteTaskComponent: GKComponent {
     }
     
     func addCompleteLabel() {
-        let task1 = scene.childNode(withName: "task1")!.frame
         completeLabel = SKLabelNode()
-        completeLabel.fontName = "San Francisco"
-        completeLabel.position = CGPoint(x: task1.midX, y: task1.midY+30)
+        completeLabel.fontName = .localizedName(of: .symbol)
+        completeLabel.position = CGPoint(x: frame.midX, y: frame.midY+30)
         completeLabel.fontColor = SKColor.black
         scene.addChild(completeLabel)
     }
@@ -41,23 +43,27 @@ class CompleteTaskComponent: GKComponent {
     }
     
     func TaskAvaiable(_ status: Bool){
-        let task1 = scene.childNode(withName: "task1")!.frame
-        if status{
-            Label.text = "Disponível"
+        if status && !(scene.dogsCanBeAdopted) {
+            Label.text = ""
         } else {
             Label.text = "Indisponível"
         }
-        Label.fontName = "San Francisco"
-        Label.position = CGPoint(x: task1.midX, y: task1.midY+100)
+        Label.fontName = .localizedName(of: .symbol)
+        Label.position = CGPoint(x: frame.midX, y: frame.midY+75)
         Label.fontColor = SKColor.black
         scene.addChild(Label)
     }
     
     func ChangeAvaiable(_ status: Bool) {
-        if status{
-            Label.text = "Disponível"
+        if status && !(scene.dogsCanBeAdopted) {
+            Label.text = ""
         } else {
             Label.text = "Indisponível"
         }
+    }
+    
+    func dogsCanBeAdopted() {
+        Label.text = "Entre para"
+        completeLabel.text = "ser adotado"
     }
 }
