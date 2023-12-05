@@ -13,6 +13,7 @@ import GameplayKit
 class PlayerAnimationComponent: GKComponent {
     
     let stateMachine: GKStateMachine
+    var canChange: Bool = true
     
     init(_ stateMachine: GKStateMachine) {
         self.stateMachine = stateMachine
@@ -20,34 +21,46 @@ class PlayerAnimationComponent: GKComponent {
         super.init()
     }
     
-    func run() {
-        stateMachine.enter(RunningState.self)
+    func isRunning() {
+        if canChange {
+            stateMachine.enter(RunningState.self)
+        }
     }
     
     func idle() {
-        stateMachine.enter(IdleState.self)
+        if canChange {
+            stateMachine.enter(IdleState.self)
+        }
     }
     
     func jump() {
-        stateMachine.enter(JumpingState.self)
+        if canChange {
+            stateMachine.enter(JumpingState.self)
+        }
     }
     
     func fall() {
-        stateMachine.enter(FallingState.self)
+        if canChange {
+            stateMachine.enter(FallingState.self)
+        }
     }
     
     func arrest() {
-        stateMachine.enter(ArrestedState.self)
+            stateMachine.enter(ArrestedState.self)
     }
     
     func dead() {
+        canChange = false
         stateMachine.enter(DeadState.self)
         entity?.component(ofType: SpriteComponent.self)?.removeFromParent()
+
     }
     
     func winner() {
-        stateMachine.enter(WinnerState.self)
-        entity?.component(ofType: SpriteComponent.self)?.removeFromParent()
+        if canChange {
+            stateMachine.enter(WinnerState.self)
+            entity?.component(ofType: SpriteComponent.self)?.removeFromParent()
+        }
     }
     
     required init?(coder: NSCoder) {

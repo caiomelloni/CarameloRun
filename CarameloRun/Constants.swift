@@ -44,5 +44,5 @@ struct Constants {
     static let timerTask2BeAvaiable: Int = 30
     static let timerTask3BeAvaiable: Int = 35
     
-    static let numberOfTasksThatTheDogsNeedToBeAdopted: Int = 10
+    static let numberOfTasksThatTheDogsNeedToBeAdopted: Int = 5
 }

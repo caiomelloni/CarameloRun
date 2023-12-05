@@ -11,6 +11,7 @@ import GameplayKit
 // Adds velocity to a entity that has a SpriteComponent
 class VelocityComponent: GKComponent {
     let velocity: Double
+    var canMove: Bool = true
     private var isJoystickInUse: Bool = false
     private var joystickDirection: Direction = .left
     
@@ -24,16 +25,18 @@ class VelocityComponent: GKComponent {
     }
     
     func addVelocity(_ direction: Direction) {
-        entity?.component(ofType: PlayerAnimationComponent.self)?.run()
-        let spriteComponent = entity?.component(ofType: SpriteComponent.self)
-        let directionComponent = entity?.component(ofType: DirectionComponent.self)
-        switch direction {
-        case .right:
-            spriteComponent?.position.x += velocity
-            directionComponent?.changeDirection(.right)
-        case .left:
-            spriteComponent?.position.x -= velocity
-            directionComponent?.changeDirection(.left)
+        if canMove{
+            entity?.component(ofType: PlayerAnimationComponent.self)?.isRunning()
+            let spriteComponent = entity?.component(ofType: SpriteComponent.self)
+            let directionComponent = entity?.component(ofType: DirectionComponent.self)
+            switch direction {
+            case .right:
+                spriteComponent?.position.x += velocity
+                directionComponent?.changeDirection(.right)
+            case .left:
+                spriteComponent?.position.x -= velocity
+                directionComponent?.changeDirection(.left)
+            }
         }
         
     }
