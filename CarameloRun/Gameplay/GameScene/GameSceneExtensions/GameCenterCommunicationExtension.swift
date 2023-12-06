@@ -9,15 +9,15 @@ import GameKit
 
 extension GameScene {
     func didReceiveData(_ match: GKMatch, _ jsonData: Data, _ fromRemotePlayer: GKPlayer) {
-        if let playerState = try? JSONDecoder().decode(PlayerState.self, from: jsonData) {
-            entityManager.updateRemotePlayerPosition(playerState)
+        if let playerData = try? JSONDecoder().decode(PlayerData.self, from: jsonData) {
+            entityManager.updateRemotePlayerPosition(playerData)
             if entityManager.localPlayer?.type == .man {
                 entityManager.localPlayer?.component(ofType: CatchComponent.self)?.finishGameIfAllPlayersWereCaught()
             }
         }
         
-        if let finishGameMessage = try? JSONDecoder().decode(MatchState.self, from: jsonData) {
-            if finishGameMessage.finish {
+        if let matchState = try? JSONDecoder().decode(MatchState.self, from: jsonData) {
+            if matchState.finish {
                 controllerDelegate?.finishGame()
             }
         }

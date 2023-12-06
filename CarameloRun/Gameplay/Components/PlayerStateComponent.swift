@@ -70,10 +70,10 @@ class PlayerStateComponent: GKComponent {
 }
 
 enum StateType: String {
-    case runState = "runState"
-    case idleState = "idleState"
-    case jumpState = "jumpState"
-    case fallState = "fallState"
-    case arrestState = "arrestState"
-    case deadState = "deadState"
+    case runState = "Run"
+    case idleState = "Idle"
+    case jumpState = "Jump"
+    case fallState = "Fall"
+    case arrestState = "Arrested"
+    case deadState = "Dead"
 }

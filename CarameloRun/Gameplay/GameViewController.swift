@@ -128,8 +128,6 @@ extension GameViewController: GKMatchDelegate {
 }
 
 protocol GameControllerDelegate {
-    func sendPlayerState(_ state: PlayerState)
-    func sendMatchState(_ state: MatchState)
     var players: [LobbyPlayer] { get }
     func finishGame()
     var match: GKMatch { get }
@@ -137,7 +135,7 @@ protocol GameControllerDelegate {
 
 extension GameViewController: GameControllerDelegate {
     
-    func sendPlayerState(_ state: PlayerState) {
+    func sendPlayerState(_ state: PlayerData) {
         
         do {
             let data = try JSONEncoder().encode(state)

@@ -9,31 +9,27 @@ import GameplayKit
 
 class PlayerStateMachine: GKStateMachine {
     
-    init(_ spriteComponent: SpriteComponent) {
+    init(_ entity: GKEntity) {
         super.init(states:  [
-            IdleState(spriteComponent,
+            IdleState(entity,
                       statePrefix: Constants.playerFramesPrefix,
                       frameCount: Constants.playerIdleFramesCount),
             
-            JumpingState(spriteComponent,
+            JumpingState(entity,
                          statePrefix: Constants.playerFramesPrefix,
                          frameCount: Constants.playerJumpFramesCount),
             
-            FallingState(spriteComponent,
+            FallingState(entity,
                          statePrefix: Constants.playerFramesPrefix,
                          frameCount: Constants.playerFallFramesCount),
             
-            RunningState(spriteComponent,
+            RunningState(entity,
                          statePrefix: Constants.playerFramesPrefix,
                          frameCount: Constants.playerRunFramesCount),
             
-            ArrestedState(spriteComponent, 
+            ArrestedState(entity, 
                           statePrefix: Constants.playerFramesPrefix,
                           frameCount: Constants.playerArrestedFramesCount),
         ])
     }
-}
-
-protocol CodableState {
-    var stringIdentifier: String { get }
 }

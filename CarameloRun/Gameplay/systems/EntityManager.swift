@@ -79,7 +79,7 @@ class EntityManager {
     }
     
     //TODO: use component notification for remote players update
-    func updateRemotePlayerPosition(_ playerState: PlayerState) {
+    func updateRemotePlayerPosition(_ playerState: PlayerData) {
         let newPosition = CGPoint(x: playerState.positionX, y: playerState.positionY)
         let remotePlayer = getRemotePlayer(ofPlayerNumber: playerState.playerNumber)
         

@@ -25,6 +25,11 @@ class VelocityComponent: GKComponent {
     
     func addVelocity(_ direction: Direction) {
         
+        let dy = entity?.component(ofType: SpriteComponent.self)?.dy
+        if(dy != 0){
+            return
+        }
+        
         entity?.component(ofType: PlayerStateComponent.self)?.enterRunState()
         let spriteComponent = entity?.component(ofType: SpriteComponent.self)
         let directionComponent = entity?.component(ofType: DirectionComponent.self)
@@ -48,9 +53,8 @@ class VelocityComponent: GKComponent {
 
     
     override func update(deltaTime seconds: TimeInterval) {
-        let stateType = entity?.component(ofType: PlayerStateComponent.self)?.currentStateType
-        
-        if stateType == .arrestState || stateType == .deadState {
+        let currentState = entity?.component(ofType: PlayerStateComponent.self)?.currentStateType
+        if currentState == .arrestState || currentState == .deadState {
             return
         }
         

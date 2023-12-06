@@ -7,17 +7,10 @@
 
 import GameplayKit
 
-class JumpingState: GKState {
+class JumpingState: PlayerState {
     
-    let spriteComponent: SpriteComponent
-    var spriteSheet = [SKTexture]()
-    
-    init(_ spriteComponent: SpriteComponent, statePrefix: String, frameCount: Int) {
-        for i in 1...frameCount {
-            spriteSheet.append(SKTexture(imageNamed: "\(statePrefix)Jump\(i)"))
-        }
-        
-        self.spriteComponent = spriteComponent
+    init(_ entity: GKEntity, statePrefix: String, frameCount: Int) {
+        super.init(entity, statePrefix: statePrefix, frameCount: frameCount, stateType: StateType.jumpState)
     }
     
     override func didEnter(from previousState: GKState?) {
@@ -37,11 +30,5 @@ class JumpingState: GKState {
     
     override func update(deltaTime seconds: TimeInterval) {
         
-    }
-}
-
-extension JumpingState: CodableState {
-    var stringIdentifier: String {
-        StateType.jumpState.rawValue
     }
 }

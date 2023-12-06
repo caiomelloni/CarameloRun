@@ -6,7 +6,7 @@
 //
 import GameplayKit
 
-struct PlayerState: Codable {
+struct PlayerData: Codable {
     let name: String
     let playerNumber: Int
     let positionX: Double

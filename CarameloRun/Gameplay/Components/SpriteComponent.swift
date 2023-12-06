@@ -14,7 +14,6 @@ class SpriteComponent: GKComponent {
     //sprite frames updates changes controll
     private var oldPosition =  CGPoint(x: 0, y: 0)
     private var positionChangedOnFrameUpdate = false
-    private var oldState: String?
     
 
     init(imageName: String, size: CGSize) {
@@ -118,7 +117,6 @@ class SpriteComponent: GKComponent {
     
     private func setReferencePosition() {
         oldPosition = CGPoint(x: position.x, y: position.y)
-        oldState = (entity?.component(ofType: PlayerStateComponent.self)?.stateMachine.currentState as? CodableState)?.stringIdentifier
     }
     
     func hasChanged() -> Bool {

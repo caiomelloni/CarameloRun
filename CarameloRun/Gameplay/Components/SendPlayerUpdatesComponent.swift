@@ -14,7 +14,7 @@ class SendPlayerUpdatesComponent: GKComponent {
     func updatePlayerPositionForOtherPlayers() {
         let localPlayer = entity as! LocalPlayer
         if entity?.component(ofType: SpriteComponent.self)?.hasChanged() ?? false {
-            let playerState = PlayerState(name: GKLocalPlayer.local.displayName,
+            let playerState = PlayerData(name: GKLocalPlayer.local.displayName,
                                           playerNumber: localPlayer.playerNumber,
                                           positionX: localPlayer.component(ofType: SpriteComponent.self)!.position.x,
                                           positionY: localPlayer.component(ofType: SpriteComponent.self)!.position.y,

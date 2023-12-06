@@ -32,13 +32,14 @@ class RemotePlayer: GKEntity {
             spriteComponent,
             DirectionComponent(),
             ScoreComponent(),
-            PlayerStateComponent(type == .dog ? PlayerStateMachine(spriteComponent) : CatcherStateMachine(spriteComponent)),
             PhysicsComponent(shouldContactWith: .player)
         ]
         
         components.forEach { component in
             addComponent(component)
         }
+        
+        addComponent(PlayerStateComponent(type == .dog ? PlayerStateMachine(self) : CatcherStateMachine(self)))
     }
     
     required init?(coder: NSCoder) {
@@ -80,6 +81,7 @@ class RemotePlayer: GKEntity {
             animationComp?.enterArrestState()
         case .deadState:
             animationComp?.enterDeadState()
+            spriteComp?.removeFromParent()
         default:
             print("=> func updatePlayerPosition: no state detected for the remote player")
         }

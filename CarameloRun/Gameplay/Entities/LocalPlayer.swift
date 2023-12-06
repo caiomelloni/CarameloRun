@@ -42,9 +42,8 @@ class LocalPlayer: GKEntity {
             spriteComponent,
             DirectionComponent(),
             JumpComponent(Constants.playerJumpXMultiplier, Constants.playerJumpYMultiplier),
-            VelocityComponent(Constants.playerVelocity),
+            VelocityComponent(type == .dog ? Constants.playerVelocity : Constants.catcherVelocity),
             ScoreComponent(),
-            PlayerStateComponent(type == .dog ? PlayerStateMachine(spriteComponent) : CatcherStateMachine(spriteComponent)),
             SendPlayerUpdatesComponent(),
             PhysicsComponent(shouldContactWith: .player)
         ]
@@ -59,6 +58,8 @@ class LocalPlayer: GKEntity {
             addComponent(GetCaughtComponent())
             addComponent(HealthComponent())
         }
+        
+        addComponent(PlayerStateComponent(type == .dog ? PlayerStateMachine(self) : CatcherStateMachine(self)))
     }
     
     required init?(coder: NSCoder) {
