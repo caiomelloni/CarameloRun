@@ -25,16 +25,12 @@ class JumpComponent: GKComponent {
     
     func jump() {
         if canJump{
-            if let spritComponent = entity?.component(ofType: SpriteComponent.self), let directionComponent = entity?.component(ofType: DirectionComponent.self) {
+            if let spritComponent = entity?.component(ofType: SpriteComponent.self) {
                 if spritComponent.physicsBody?.velocity.dy != 0 {
                     return
                 }
-                var direction = 1.00
-                if directionComponent.direction == .left {
-                    direction = -1
-                }
                 spritComponent.physicsBody?.applyImpulse(
-                    .init(dx: direction * jumpXMultiplyer, dy: jumpYMultiplyer)
+                    .init(dx: 0, dy: jumpYMultiplyer)
                 )
             }
         }
