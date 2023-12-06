@@ -81,7 +81,6 @@ class RemotePlayer: GKEntity {
             animationComp?.enterArrestState()
         case .deadState:
             animationComp?.enterDeadState()
-            spriteComp?.removeFromParent()
         default:
             print("=> func updatePlayerPosition: no state detected for the remote player")
         }

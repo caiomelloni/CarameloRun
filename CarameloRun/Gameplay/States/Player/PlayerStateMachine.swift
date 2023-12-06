@@ -30,6 +30,9 @@ class PlayerStateMachine: GKStateMachine {
             ArrestedState(entity, 
                           statePrefix: Constants.playerFramesPrefix,
                           frameCount: Constants.playerArrestedFramesCount),
+            DeadState(entity,
+                      statePrefix: Constants.playerFramesPrefix,
+                      frameCount: Constants.playerArrestedFramesCount)
         ])
     }
 }
