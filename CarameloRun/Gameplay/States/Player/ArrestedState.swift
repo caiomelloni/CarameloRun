@@ -28,7 +28,7 @@ class ArrestedState: GKState {
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         // returns true if can go to the next state
         
-        return !(stateClass is ArrestedState.Type || stateClass is FallingState.Type || stateClass is JumpingState.Type)
+        return !(stateClass is ArrestedState.Type)
     }
     
     override func willExit(to nextState: GKState) {

@@ -44,6 +44,7 @@ class CanBeAdoptedComponent: GKComponent {
             localPlayer.adopted = true
             localPlayer.component(ofType: ScoreComponent.self)?.dogAdopted()
             localPlayer.component(ofType: PlayerAnimationComponent.self)?.winner()
+            localPlayer.component(ofType: SpriteComponent.self)?.removeFromParent()
             scene.killPlayer()
             
             if remotePlayers.count == countPlayersThatDontMove(){

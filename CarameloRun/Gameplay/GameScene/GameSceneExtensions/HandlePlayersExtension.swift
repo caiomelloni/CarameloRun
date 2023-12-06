@@ -50,7 +50,7 @@ extension GameScene {
         case .idleState:
             animationComp?.idle()
         case .runState:
-            animationComp?.run()
+            animationComp?.isRunning()
         case .fallState:
             animationComp?.fall()
         case .jumpState:
@@ -84,7 +84,9 @@ extension GameScene {
                 if remotePlayer.type == .man {
                     localPlayer.component(ofType: GetCaughtComponent.self)?.gotCaught(emptyRespawnPoint(localPlayer))
                 } else if (remotePlayer.component(ofType: PlayerAnimationComponent.self)?.stateMachine.currentState as? ArrestedState) == nil {
-                    localPlayer.component(ofType: GetCaughtComponent.self)?.gotFreed()
+                    if (localPlayer.component(ofType: PlayerAnimationComponent.self)?.stateMachine.currentState as? DeadState) == nil {
+                        localPlayer.component(ofType: GetCaughtComponent.self)?.gotFreed()
+                    }
                 }
                 
                 // just called by a catcher

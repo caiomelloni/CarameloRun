@@ -37,7 +37,7 @@ struct taskDone: Codable {
 
 enum PlayerStateStringIdentifier: String {
     case idleState = "idle"
-    case runState = "run"
+    case runState = "isRunnig"
     case fallState = "fall"
     case jumpState = "jump"
     case arrestState = "arrest"

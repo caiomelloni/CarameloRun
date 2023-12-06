@@ -12,6 +12,7 @@ import GameplayKit
 class JumpComponent: GKComponent {
     let jumpXMultiplyer: Double
     let jumpYMultiplyer: Double
+    var canJump: Bool = true
     init(_ jumpXMultiplyer: Double,_ jumpYMultiplyer: Double) {
         self.jumpXMultiplyer = jumpXMultiplyer
         self.jumpYMultiplyer = jumpYMultiplyer
@@ -23,17 +24,15 @@ class JumpComponent: GKComponent {
     }
     
     func jump() {
-        if let spritComponent = entity?.component(ofType: SpriteComponent.self), let directionComponent = entity?.component(ofType: DirectionComponent.self) {
-            if spritComponent.physicsBody?.velocity.dy != 0 {
-                return
+        if canJump{
+            if let spritComponent = entity?.component(ofType: SpriteComponent.self) {
+                if spritComponent.physicsBody?.velocity.dy != 0 {
+                    return
+                }
+                spritComponent.physicsBody?.applyImpulse(
+                    .init(dx: 0, dy: jumpYMultiplyer)
+                )
             }
-            var direction = 1.00
-            if directionComponent.direction == .left {
-                direction = -1
-            }
-            spritComponent.physicsBody?.applyImpulse(
-                .init(dx: direction * jumpXMultiplyer, dy: jumpYMultiplyer)
-            )
         }
 
     }

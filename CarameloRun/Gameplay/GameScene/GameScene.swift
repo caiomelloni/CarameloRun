@@ -36,7 +36,7 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView){
         entityManager = EntityManager(scene: self)
-                
+        
         backgroundColor = .white
         
         placePlayersInitialPositionInMap()
@@ -73,6 +73,10 @@ class GameScene: SKScene {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for t in touches {
+            joystick.touchMoved(t)
+            
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

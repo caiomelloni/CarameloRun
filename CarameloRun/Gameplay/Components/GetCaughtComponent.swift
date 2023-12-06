@@ -13,13 +13,14 @@ class GetCaughtComponent: GKComponent {
     func gotCaught(_ respawn: CGPoint) {
         if !isArrested {
             isArrested = true
+            entity?.component(ofType: PlayerAnimationComponent.self)?.canChange = false
             entity?.component(ofType: SpriteComponent.self)?.position = respawn
             
             entity?.component(ofType: ScoreComponent.self)?.dogWasCatched()
             
             // removes player movement
-            entity?.removeComponent(ofType: VelocityComponent.self)
-            entity?.removeComponent(ofType: JumpComponent.self)
+            entity?.component(ofType: JumpComponent.self)?.canJump = false
+            entity?.component(ofType: VelocityComponent.self)?.canMove = false
             
             // must be called after lose velocity end jump components
             let healthPoints = entity?.component(ofType: HealthComponent.self)?.decreaseLife()
@@ -34,11 +35,11 @@ class GetCaughtComponent: GKComponent {
     
     func gotFreed() {
         isArrested = false
-        
+        entity?.component(ofType: PlayerAnimationComponent.self)?.canChange = true
         entity?.component(ofType: PlayerAnimationComponent.self)?.idle()
         
         // adds player movement
-        entity?.addComponent(VelocityComponent(Constants.playerVelocity))
-        entity?.addComponent(JumpComponent(Constants.playerJumpXMultiplier, Constants.playerJumpYMultiplier))
+        entity?.component(ofType: JumpComponent.self)?.canJump = true
+        entity?.component(ofType: VelocityComponent.self)?.canMove = true
     }
 }
