@@ -14,6 +14,8 @@ class Joystick {
     private var movementDirection: Direction = .right
     private var scene: GameScene?
     private var node = SKSpriteNode()
+    private var currentTouch: UITouch?
+    
     
     init() {
         node.zPosition = Zposition.joystick.rawValue
@@ -47,11 +49,13 @@ class Joystick {
         if right.frame.contains(location) {
             inUse = true
             movementDirection = .right
+            currentTouch = touch
             right.texture = SKTexture(imageNamed: "ButtonRightDown")
             
         } else if left.frame.contains(location) {
             inUse = true
             movementDirection = .left
+            currentTouch = touch
             left.texture = SKTexture(imageNamed: "ButtonLeftDown")
             
         }
@@ -63,7 +67,7 @@ class Joystick {
     
     func touchEnded(_ touch: UITouch) {
         let location = touch.location(in: scene!)
-        if !node.frame.contains(location) {
+        if currentTouch == touch {
             inUse = false
             right.texture = SKTexture(imageNamed: "ButtonRightUp")
             left.texture = SKTexture(imageNamed: "ButtonLeftUp")
