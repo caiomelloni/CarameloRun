@@ -29,12 +29,13 @@ class EntityManager {
         entities.insert(entity)
         
         entity.component(ofType: SendPlayerUpdatesComponent.self)?.match = scene.controllerDelegate?.match
+        
         entity.component(ofType: SpawnComponent.self)?.respawns = scene.getRespawns()
+        
         entity.component(ofType: SpawnComponent.self)?.addToSceneInSpawnPoint(scene)
         
         let catchComponent = entity.component(ofType: CatchComponent.self)
         catchComponent?.finishGame = finishGame
-        catchComponent?.allRemotePlayers = {self.remotePlayers}
         
         componentSystem.addEntityComponents(entity)
         componentSystem.notifyAddedToScene(scene: scene)
@@ -81,18 +82,16 @@ class EntityManager {
     //TODO: use component notification for remote players update
     func updateRemotePlayerPosition(_ playerState: PlayerData) {
         let newPosition = CGPoint(x: playerState.positionX, y: playerState.positionY)
-        let remotePlayer = getRemotePlayer(ofPlayerNumber: playerState.playerNumber)
+        guard let remotePlayer = getRemotePlayer(ofPlayerNumber: playerState.playerNumber), let localPlayer = localPlayer else {
+            print("ERROR on EntityManager updateRemotePlayerPosition :remote player not found on update")
+            return
+        }
         
         let stateStringIdentifier = StateType(rawValue: playerState.state)
         
-        remotePlayer?.updateFromDataReceived(newPosition, stateStringIdentifier!)
+        remotePlayer.updateFromDataReceived(newPosition, stateStringIdentifier!)
         
-        print("******DATA RECEIVED******")
-        for player in self.remotePlayers {
-            print(player.displayName)
-            print(player.component(ofType: PlayerStateComponent.self)?.currentStateType.rawValue)
-            print(player.type)
-        }
+        componentSystem.notifyPlayerUpdate(localPlayer, remotePlayers, remotePlayer)
     }
     
 }

@@ -64,9 +64,9 @@ class ProgressBarComponent: GKComponent {
 
             var thereAreSomeoneInsideTheTask = 0
             for player in scene.entityManager.remotePlayers {
-                
+                let playerState = player.component(ofType: PlayerStateComponent.self)?.currentStateType
                 if player.type == .dog {
-                    if (frame.contains((player.component(ofType: SpriteComponent.self)!.position))) == true {
+                    if (frame.contains((player.component(ofType: SpriteComponent.self)!.position))) == true && playerState != .deadState && playerState != .winnerState {
                         progress += 0.01
                         progressBar.xScale = progress
                     } else {

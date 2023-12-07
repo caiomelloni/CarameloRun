@@ -40,6 +40,8 @@
 		F82787032AC5A8250047111D /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82787022AC5A8250047111D /* Joystick.swift */; };
 		F82787052AC5B8CB0047111D /* JumpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82787042AC5B8CB0047111D /* JumpButton.swift */; };
 		F82A32822AE2B3C500A3639C /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A32812AE2B3C500A3639C /* PlayerData.swift */; };
+		F82DBB362B22148100A50A37 /* PlayerUpdated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82DBB352B22148100A50A37 /* PlayerUpdated.swift */; };
+		F82DBB382B223F6500A50A37 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82DBB372B223F6500A50A37 /* Task.swift */; };
 		F834E3212B1F86AC00DF6FFC /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F834E3202B1F86AC00DF6FFC /* PlayerState.swift */; };
 		F84D86832AFCF98600774AF5 /* DeadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84D86822AFCF98600774AF5 /* DeadState.swift */; };
 		F854918A2AE16F71004EA5B1 /* MenuInicialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85491892AE16F71004EA5B1 /* MenuInicialViewController.swift */; };
@@ -125,6 +127,8 @@
 		F82787022AC5A8250047111D /* Joystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
 		F82787042AC5B8CB0047111D /* JumpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpButton.swift; sourceTree = "<group>"; };
 		F82A32812AE2B3C500A3639C /* PlayerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerData.swift; sourceTree = "<group>"; };
+		F82DBB352B22148100A50A37 /* PlayerUpdated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerUpdated.swift; sourceTree = "<group>"; };
+		F82DBB372B223F6500A50A37 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		F834E3202B1F86AC00DF6FFC /* PlayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerState.swift; sourceTree = "<group>"; };
 		F84D86822AFCF98600774AF5 /* DeadState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadState.swift; sourceTree = "<group>"; };
 		F85491892AE16F71004EA5B1 /* MenuInicialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInicialViewController.swift; sourceTree = "<group>"; };
@@ -233,6 +237,7 @@
 				F811A4962B17B91300E01031 /* JoystickStateChanged.swift */,
 				F88C86532B18AEBE00DBF0AB /* JumpButtonPressed.swift */,
 				F88C865E2B1A637E00DBF0AB /* ContactHappend.swift */,
+				F82DBB352B22148100A50A37 /* PlayerUpdated.swift */,
 			);
 			path = NotifyComponents;
 			sourceTree = "<group>";
@@ -272,6 +277,7 @@
 				FB3E27CA2AFBB9F500430E2D /* Tasks.swift */,
 				F82787002AC5A2F20047111D /* LocalPlayer.swift */,
 				F811A48D2B1759EA00E01031 /* RemotePlayer.swift */,
+				F82DBB372B223F6500A50A37 /* Task.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -572,6 +578,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F82DBB362B22148100A50A37 /* PlayerUpdated.swift in Sources */,
 				F87120CD2AEFDE2600697E21 /* PlayerStateMachine.swift in Sources */,
 				F811A4952B179CE600E01031 /* AddedToScene.swift in Sources */,
 				F8EE82662AF2740000158D9B /* ControllTimer.swift in Sources */,
@@ -583,6 +590,7 @@
 				F888B8612B1E01A8004C4457 /* MatchState.swift in Sources */,
 				61CDA66B2B18F9B70063D089 /* HelpPopUpViewControllerStrings.swift in Sources */,
 				F85FD5482AF90C6D009CB45A /* CatchComponent.swift in Sources */,
+				F82DBB382B223F6500A50A37 /* Task.swift in Sources */,
 				F834E3212B1F86AC00DF6FFC /* PlayerState.swift in Sources */,
 				F870AAF32AF12ADE00195173 /* HandlePlayersExtension.swift in Sources */,
 				F854918A2AE16F71004EA5B1 /* MenuInicialViewController.swift in Sources */,

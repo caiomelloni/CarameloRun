@@ -9,14 +9,10 @@ import Foundation
 import GameplayKit
 
 class CatchComponent: GKComponent {
-    var allRemotePlayers: (() -> [RemotePlayer]?)?
     var finishGame: (()->Void)?
     
-    func finishGameIfAllPlayersWereCaught() {
-        guard let allRemotePlayers = allRemotePlayers?() else {
-            fatalError("ERROR: CatchComponent does not have a reference to remote players")
-        }
-        
+    func finishGameIfAllPlayersWereCaught(_ allRemotePlayers: [GKEntity]) {
+
         // if all players are in arrested/dead/winner state, ends the game
         var allPlayersCaught = true
         for player in allRemotePlayers {
@@ -42,30 +38,8 @@ class CatchComponent: GKComponent {
     }
 }
 
-extension CatchComponent: GetNotifiedWhenContactHappens {
-    func didBegin(_ contact: SKPhysicsContact) {
-        let contactedEntities = [contact.bodyA.node?.entity, contact.bodyB.node?.entity]
-        
-        let wasMyEntityContacted = contactedEntities.contains(where: {$0 == entity})
-        
-        if !wasMyEntityContacted {
-            return
-        }
-        
-        for contactEntity in contactedEntities {
-            let entityType = (contactEntity as? RemotePlayer)?.type
-            
-            let entityIsADog = entityType == .dog
-            
-            if  entityIsADog {
-//               didCollideWithPlayer()
-            }
-        }
+extension CatchComponent: GetNotifiedWhenRemotePlayerUpdates {
+    func playerUpdated(_ localPlayer: GKEntity, _ remotePlayers: [GKEntity], _ updatedPlayer: GKEntity) {
+        finishGameIfAllPlayersWereCaught(remotePlayers)
     }
-    
-    func didEnd(_ contact: SKPhysicsContact) {
-
-    }
-    
-    
 }
