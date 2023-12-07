@@ -25,13 +25,12 @@ class LocalPlayer: GKEntity {
     var ready: Bool = false
     var photo: UIImage?
     
-    
+
     init(displayName: String, playerNumber: Int, playerType: typeOfPlayer, photo: UIImage?) {
         self.displayName = displayName
         self.playerNumber = playerNumber
         self.type = playerType
         self.photo = photo
-        
         
         super.init()
         

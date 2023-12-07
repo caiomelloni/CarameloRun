@@ -5,6 +5,7 @@
 //  Created by Caio Melloni dos Santos on 25/10/23.
 //
 
+
 class Constants {
     static let gameTime: Int = 300
     
@@ -37,4 +38,8 @@ class Constants {
 
     //respawn
     static let respawnCount: Int = 2
+
+    //Camera distance
+    static let scaleFactorY: Double = 1.75
+    static let scaleFactorX: Double = 1.75
 }

@@ -10,6 +10,9 @@
 		61970CD02AFCF9DA0099760B /* HelpPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61970CCF2AFCF9DA0099760B /* HelpPopUpViewController.swift */; };
 		61A2428E2AFD79AC001D152A /* Crang.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61A2428D2AFD79AC001D152A /* Crang.ttf */; };
 		61A242912AFE48EB001D152A /* SettingsPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A242902AFE48EB001D152A /* SettingsPopUpViewController.swift */; };
+		956877E02B18DA4E003D62C4 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956877DF2B18DA4E003D62C4 /* Avatar.swift */; };
+		956877E32B1A2051003D62C4 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956877E22B1A2051003D62C4 /* ProgressBar.swift */; };
+		9581DD162B1F46EC00AA11CA /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9581DD152B1F46EC00AA11CA /* HUD.swift */; };
 		F811A48E2B1759EA00E01031 /* RemotePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F811A48D2B1759EA00E01031 /* RemotePlayer.swift */; };
 		F811A4902B17829400E01031 /* SpawnComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F811A48F2B17829400E01031 /* SpawnComponent.swift */; };
 		F811A4952B179CE600E01031 /* AddedToScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F811A4942B179CE600E01031 /* AddedToScene.swift */; };
@@ -67,6 +70,9 @@
 		61A2428D2AFD79AC001D152A /* Crang.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Crang.ttf; sourceTree = "<group>"; };
 		61A2428F2AFD7B2D001D152A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		61A242902AFE48EB001D152A /* SettingsPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPopUpViewController.swift; sourceTree = "<group>"; };
+		956877DF2B18DA4E003D62C4 /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
+		956877E22B1A2051003D62C4 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		9581DD152B1F46EC00AA11CA /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		F811A48D2B1759EA00E01031 /* RemotePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemotePlayer.swift; sourceTree = "<group>"; };
 		F811A48F2B17829400E01031 /* SpawnComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnComponent.swift; sourceTree = "<group>"; };
 		F811A4942B179CE600E01031 /* AddedToScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedToScene.swift; sourceTree = "<group>"; };
@@ -138,6 +144,30 @@
 				61A2428D2AFD79AC001D152A /* Crang.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		956877DE2B18DA3E003D62C4 /* Avatar */ = {
+			isa = PBXGroup;
+			children = (
+				956877DF2B18DA4E003D62C4 /* Avatar.swift */,
+			);
+			path = Avatar;
+			sourceTree = "<group>";
+		};
+		956877E12B1A203E003D62C4 /* ProgressBar */ = {
+			isa = PBXGroup;
+			children = (
+				956877E22B1A2051003D62C4 /* ProgressBar.swift */,
+			);
+			path = ProgressBar;
+			sourceTree = "<group>";
+		};
+		9581DD142B1F46DF00AA11CA /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				9581DD152B1F46EC00AA11CA /* HUD.swift */,
+			);
+			path = HUD;
 			sourceTree = "<group>";
 		};
 		F811A4912B17881000E01031 /* ComponentSystem */ = {
@@ -271,6 +301,9 @@
 		F87120CE2AF013CE00697E21 /* GameTools */ = {
 			isa = PBXGroup;
 			children = (
+				9581DD142B1F46DF00AA11CA /* HUD */,
+				956877E12B1A203E003D62C4 /* ProgressBar */,
+				956877DE2B18DA3E003D62C4 /* Avatar */,
 				F8EE82642AF273E800158D9B /* ControllTimer */,
 				F87120D02AF013E000697E21 /* Buttons */,
 				F87120CF2AF013D600697E21 /* Camera */,
@@ -461,12 +494,14 @@
 				F87120CD2AEFDE2600697E21 /* PlayerStateMachine.swift in Sources */,
 				F811A4952B179CE600E01031 /* AddedToScene.swift in Sources */,
 				F8EE82662AF2740000158D9B /* ControllTimer.swift in Sources */,
+				956877E02B18DA4E003D62C4 /* Avatar.swift in Sources */,
 				F82787012AC5A2F20047111D /* LocalPlayer.swift in Sources */,
 				F854918D2AE174A8004EA5B1 /* GameCenterHelper.swift in Sources */,
 				FB3E27CB2AFBB9F500430E2D /* Tasks.swift in Sources */,
 				F898070F2ACDA1880044D237 /* Zposition.swift in Sources */,
 				F85FD5482AF90C6D009CB45A /* CatchComponent.swift in Sources */,
 				F870AAF32AF12ADE00195173 /* HandlePlayersExtension.swift in Sources */,
+				956877E32B1A2051003D62C4 /* ProgressBar.swift in Sources */,
 				F854918A2AE16F71004EA5B1 /* MenuInicialViewController.swift in Sources */,
 				F8EE826A2AF2932F00158D9B /* CatcherStateMachine.swift in Sources */,
 				F87120BA2AEBF20C00697E21 /* JumpComponent.swift in Sources */,
@@ -484,6 +519,7 @@
 				F87120B82AEBEB1C00697E21 /* DirectionComponent.swift in Sources */,
 				FB3E27CF2AFBD3EE00430E2D /* CompleteTaskComponent.swift in Sources */,
 				F87120BE2AEBF87600697E21 /* PlayerAnimationComponent.swift in Sources */,
+				9581DD162B1F46EC00AA11CA /* HUD.swift in Sources */,
 				F8D1A9062B0E5E9C0075F6C4 /* LobbyPlayer.swift in Sources */,
 				F811A48E2B1759EA00E01031 /* RemotePlayer.swift in Sources */,
 				F8E4B1782AFBC87F0066BBFC /* ArrestedState.swift in Sources */,
@@ -655,7 +691,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -686,7 +722,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

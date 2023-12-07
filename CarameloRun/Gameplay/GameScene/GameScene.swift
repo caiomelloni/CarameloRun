@@ -20,19 +20,19 @@ class GameScene: SKScene {
     let localPlayerPositionHistory = PositionHistory()
     var controllerDelegate: GameControllerDelegate?
     let timer = ControllTimer()
-    
+    var hud: HUD?
+
     // Update time
     var lastUpdateTimeInterval: TimeInterval = 0
-    
+
     var entityManager: EntityManager!
     
     override func didMove(to view: SKView){
         entityManager = EntityManager(scene: self)
-                
+
         backgroundColor = .white
-        
         placePlayersInitialPositionInMap()
-        
+
         // set camera
         sceneCamera = LocalPlayerCamera(entityManager.localPlayer!)
         camera = sceneCamera
@@ -44,8 +44,11 @@ class GameScene: SKScene {
         addChild(jumpButton.node)
         jumpButton.setJumpBtnPositionRelativeToCamera(sceneCamera, frame)
         
-        addChild(timer.node)
-        
+//        addChild(timer.node)
+
+        hud = HUD(width: self.frame.width, height: self.frame.height)
+        addChild(hud?.hudNode ?? SKNode())
+
         InsertTask()
 
         
@@ -86,8 +89,9 @@ class GameScene: SKScene {
         sceneCamera.update(deltaTime)
         joystick.update(sceneCamera, frame, entityManager.localPlayer!)
         jumpButton.update(sceneCamera, frame)
-        timer.update(sceneCamera, frame)
-        
+//        timer.update(sceneCamera, frame)
+        hud?.update(sceneCamera, frame)
+
         //game center online updates
         updatePlayerPositionForOtherPlayers()
         
@@ -105,3 +109,4 @@ class GameScene: SKScene {
         return entityManager.localPlayer!.component(ofType: ScoreComponent.self)?.victory ?? false
     }
 }
+

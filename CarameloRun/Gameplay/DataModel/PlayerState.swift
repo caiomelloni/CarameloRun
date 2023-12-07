@@ -39,4 +39,18 @@ enum PlayerStateStringIdentifier: String {
     case deadState = "dead"
 }
 
+enum dogMatchState: String {
+    case fullLife = "fullLife"
+    case halfLife = "halfLife"
+    case arrested = "arrested"
+    case catched = "catched"
+}
+enum dogPlayerColor: String {
+    case blue = "Blue"
+    case red = "Red"
+    case green = "Green"
+    case pink = "Pink"
+    case yellow = "Yellow"
+}
+
 

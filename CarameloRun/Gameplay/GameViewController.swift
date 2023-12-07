@@ -87,8 +87,8 @@ class GameViewController: UIViewController {
                     self.finishGame()
                     timer.invalidate()
                 }
-                
-                self.gameScene?.timer.updateTimer(self.time)
+
+                self.gameScene?.hud?.timer.updateTimer(self.time)
             })
         }
         

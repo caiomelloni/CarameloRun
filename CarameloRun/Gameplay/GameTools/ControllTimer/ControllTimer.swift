@@ -10,23 +10,28 @@ import SpriteKit
 class ControllTimer {
     var n: Int = Constants.gameTime
 
-    var number = SKLabelNode(fontNamed: "Helvetica")
+    var number = SKLabelNode(fontNamed: "Crang")
     var node = SKSpriteNode()
     
     init() {
         node.size = CGSize(width: Dimensions.buttonWidth.rawValue, height: Dimensions.buttonHeight.rawValue)
         let m = n/60
         let s = n%60
+        let timerImage = timerAsset()
         number.text = "0\(m):0\(s)"
-        number.fontColor = .blue
-        
+        number.fontSize = 48
+        number.fontColor = .black
+
+        timerImage.position = CGPoint(x: -(Int(timerImage.size.width * 0.7)), y: 0)
+        number.position = CGPoint(x: Int(timerImage.position.x) + Int(timerImage.size.width), y: -(Dimensions.buttonHeight.rawValue)/4)
+        node.addChild(timerImage)
         node.addChild(number)
+
+
         node.scene?.backgroundColor = .blue
+
     }
-    
-    private func position(x: Double, y: Double) {
-        node.position = CGPoint(x: x - 668, y: y + 540 + UIScreen.main.bounds.size.height/6)
-    }
+
     
     func updateTimer(_ new: Int) {
         n = new
@@ -39,8 +44,12 @@ class ControllTimer {
         number.text = "0\(minutos):\(z)\(segundos)"
     }
     
-    func update(_ camera: SKCameraNode, _ frame: CGRect) {
-        position(x: camera.position.x + frame.maxX,
-                 y: camera.position.y - frame.maxY)
+    func timerAsset() -> SKSpriteNode {
+        let timerImageNode: SKSpriteNode = SKSpriteNode()
+        timerImageNode.texture = SKTexture(image: UIImage(named: "timer") ?? UIImage())
+        timerImageNode.size = CGSize(width: Dimensions.buttonWidth.rawValue, height: Dimensions.buttonHeight.rawValue)
+        timerImageNode.zPosition = Zposition.hud.rawValue
+        return timerImageNode
     }
+
 }
