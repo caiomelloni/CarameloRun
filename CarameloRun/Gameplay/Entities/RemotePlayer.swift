@@ -14,6 +14,7 @@ class RemotePlayer: GKEntity {
     var type: typeOfPlayer
     var ready: Bool = false
     var photo: UIImage?
+    var adopted: Bool = false
     
     
     init(displayName: String, playerNumber: Int, playerType: typeOfPlayer, photo: UIImage?) {
@@ -21,6 +22,7 @@ class RemotePlayer: GKEntity {
         self.playerNumber = playerNumber
         self.type = playerType
         self.photo = photo
+        
         
         
         super.init()
@@ -66,23 +68,23 @@ class RemotePlayer: GKEntity {
         let spriteComp = component(ofType: SpriteComponent.self)
         spriteComp?.position = newPosition
         
-        let animationComp = component(ofType: PlayerStateComponent.self)
+        let stateComp = component(ofType: PlayerStateComponent.self)
         
         switch stateType {
         case .idleState:
-            animationComp?.enterIdleState()
+            stateComp?.enterIdleState()
         case .runState:
-            animationComp?.enterRunState()
+            stateComp?.enterRunState()
         case .fallState:
-            animationComp?.enterFallState()
+            stateComp?.enterFallState()
         case .jumpState:
-            animationComp?.enterJumpState()
+            stateComp?.enterJumpState()
         case .arrestState:
-            animationComp?.enterArrestState()
+            stateComp?.enterArrestState()
         case .deadState:
-            animationComp?.enterDeadState()
-        default:
-            print("=> func updatePlayerPosition: no state detected for the remote player")
+            stateComp?.enterDeadState()
+        case .winnerState:
+            stateComp?.enterWinnerState()
         }
     }
     

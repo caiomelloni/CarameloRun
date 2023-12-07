@@ -24,6 +24,8 @@ class LocalPlayer: GKEntity {
     var type: typeOfPlayer
     var ready: Bool = false
     var photo: UIImage?
+    var adopted: Bool = false
+    
     
     
     init(displayName: String, playerNumber: Int, playerType: typeOfPlayer, photo: UIImage?) {

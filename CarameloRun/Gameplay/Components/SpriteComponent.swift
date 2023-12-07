@@ -145,4 +145,13 @@ class SpriteComponent: GKComponent {
         node.entity = self.entity
     }
     
+    var dx: CGFloat? {
+        get {
+            node.physicsBody?.velocity.dy
+        }
+        set {
+            node.physicsBody?.velocity.dx = newValue ?? 0
+        }
+    }
+    
 }

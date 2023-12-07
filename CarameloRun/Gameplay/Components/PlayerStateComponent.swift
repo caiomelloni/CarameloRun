@@ -52,6 +52,11 @@ class PlayerStateComponent: GKComponent {
         stateMachine.enter(DeadState.self)
         currentStateType = .deadState
     }
+
+    func enterWinnerState() {
+        stateMachine.enter(WinnerState.self)
+        currentStateType = .winnerState
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -76,4 +81,5 @@ enum StateType: String {
     case fallState = "Fall"
     case arrestState = "Arrested"
     case deadState = "Dead"
+    case winnerState = "Winner"
 }

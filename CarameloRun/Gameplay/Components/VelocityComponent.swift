@@ -11,6 +11,7 @@ import GameplayKit
 // Adds velocity to a entity that has a SpriteComponent
 class VelocityComponent: GKComponent {
     let velocity: Double
+    var canMove: Bool = true
     private var isJoystickInUse: Bool = false
     private var joystickDirection: Direction = .left
     
@@ -25,36 +26,33 @@ class VelocityComponent: GKComponent {
     
     func addVelocity(_ direction: Direction) {
         
-        let dy = entity?.component(ofType: SpriteComponent.self)?.dy
-        if(dy != 0){
-            return
-        }
-        
         entity?.component(ofType: PlayerStateComponent.self)?.enterRunState()
         let spriteComponent = entity?.component(ofType: SpriteComponent.self)
         let directionComponent = entity?.component(ofType: DirectionComponent.self)
         switch direction {
         case .right:
-            spriteComponent?.position.x += velocity
+            spriteComponent?.dx = velocity
             directionComponent?.changeDirection(.right)
         case .left:
-            spriteComponent?.position.x -= velocity
+            spriteComponent?.dx = -1 * velocity
             directionComponent?.changeDirection(.left)
         }
         
     }
     
     func stop() {
-        let dy = entity?.component(ofType: SpriteComponent.self)?.dy
+        let spriteComp = entity?.component(ofType: SpriteComponent.self)
+        let dy = spriteComp?.dy
         if(dy == 0){
             entity?.component(ofType: PlayerStateComponent.self)?.enterIdleState()
+            spriteComp?.dx = 0
         }
     }
 
     
     override func update(deltaTime seconds: TimeInterval) {
         let currentState = entity?.component(ofType: PlayerStateComponent.self)?.currentStateType
-        if currentState == .arrestState || currentState == .deadState {
+        if currentState == .arrestState || currentState == .deadState || currentState == .winnerState {
             return
         }
         

@@ -25,3 +25,7 @@ struct IsCatcher: Codable {
     var catcher: Int
     var name: String
 }
+struct taskDone: Codable {
+    var frameOfTheTask: CGRect
+    var done: Bool
+}

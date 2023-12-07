@@ -5,7 +5,7 @@
 //  Created by Caio Melloni dos Santos on 25/10/23.
 //
 
-class Constants {
+struct Constants {
     static let gameTime: Int = 300
     
     static let playerJumpXMultiplier: Double = 250
@@ -14,8 +14,8 @@ class Constants {
     static let charactersCollisionMask: UInt32 = 1
     
     
-    static let playerVelocity: Double = 15
-    static let catcherVelocity: Double = 20
+    static let playerVelocity: Double = 400
+    static let catcherVelocity: Double = 460
     static let playerWidth: Double = 123
     static let playerHeight: Double = 123  * 0.6
     static let catcherHeight: Double = 216
@@ -38,4 +38,12 @@ class Constants {
 
     //respawn
     static let respawnCount: Int = 4
+    
+    //tasks timers
+    static let timerForThrTaskBeAvaiableAgain: Int = 15
+    static let timerTask1BeAvaiable: Int = 25
+    static let timerTask2BeAvaiable: Int = 30
+    static let timerTask3BeAvaiable: Int = 35
+    
+    static let numberOfTasksThatTheDogsNeedToBeAdopted: Int = 2
 }

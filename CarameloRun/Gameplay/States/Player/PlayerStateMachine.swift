@@ -32,6 +32,9 @@ class PlayerStateMachine: GKStateMachine {
                           frameCount: Constants.playerArrestedFramesCount),
             DeadState(entity,
                       statePrefix: Constants.playerFramesPrefix,
+                      frameCount: Constants.playerArrestedFramesCount),
+            WinnerState(entity,
+                      statePrefix: Constants.playerFramesPrefix,
                       frameCount: Constants.playerArrestedFramesCount)
         ])
     }

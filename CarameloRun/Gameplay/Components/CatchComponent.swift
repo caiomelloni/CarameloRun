@@ -17,8 +17,7 @@ class CatchComponent: GKComponent {
             fatalError("ERROR: CatchComponent does not have a reference to remote players")
         }
         
-        // TODO: associar o estado dos outros jogadores | por enquanto a finalizacao do jogo nao funciona quando todos foram presos
-        // if all players are arrested, them ends the game
+        // if all players are in arrested/dead/winner state, ends the game
         var allPlayersCaught = true
         for player in allRemotePlayers {
             let state = player.component(ofType: PlayerStateComponent.self)?.currentStateType
