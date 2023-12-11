@@ -22,16 +22,7 @@ extension GameScene {
         entityManager.initPlayersEntities(lobbyPlayers: players)
     }
     
-    func getRespawns() -> [CGPoint] {
-        var respawns = [CGPoint]()
-        
-        for i in 1...Constants.respawnCount {
-            let respawnNode = scene!.childNode(withName: "respawn\(i)")!
-            respawns.append(convert(respawnNode.position, to: respawnNode))
-        }
-        
-        return respawns
-    }
+
     
     func removeJoystickAndJumpButton() {
         joystick.removeFromScene()
