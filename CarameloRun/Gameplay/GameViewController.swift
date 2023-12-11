@@ -181,6 +181,17 @@ extension GameViewController: GameControllerDelegate {
         }
     }
     
+    func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
+        switch state {
+        case .connected:
+            break
+        case .disconnected:
+            gameScene?.playerDisconnected(player.displayName)
+        default:
+            break
+        }
+    }
+    
 }
 
 enum GameState {

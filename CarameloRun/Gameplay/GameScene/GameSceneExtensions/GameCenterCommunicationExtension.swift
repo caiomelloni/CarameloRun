@@ -19,4 +19,12 @@ extension GameScene {
             }
         }
     }
+    
+    func playerDisconnected(_ playerName: String) {
+        for player in entityManager.remotePlayers {
+            if player.displayName == playerName {
+                player.component(ofType: PlayerStateComponent.self)?.enterDeadState()
+            }
+        }
+    }
 }
