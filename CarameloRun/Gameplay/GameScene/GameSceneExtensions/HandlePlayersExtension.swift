@@ -21,6 +21,7 @@ extension GameScene {
         
         entityManager.initPlayersEntities(lobbyPlayers: players)
     }
+    
 
     
     func removeJoystickAndJumpButton() {

@@ -47,5 +47,6 @@ struct Constants {
     static let timerTask2BeAvaiable: Int = 30
     static let timerTask3BeAvaiable: Int = 35
     
-    static let numberOfTasksThatTheDogsNeedToBeAdopted: Int = 2
+    //tasks per player
+    static let numberOfTasksThatTheDogsNeedToBeAdopted: Int = 10
 }
