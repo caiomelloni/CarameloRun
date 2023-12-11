@@ -27,17 +27,13 @@ class CanBeAdoptedComponent: GKComponent {
     
     func verifyIfTheDosHasBeenAdopted() {
         let localPlayer = scene.entityManager.localPlayer!
-        let remotePlayers = scene.entityManager.remotePlayers
         
         if localPlayer.type == .dog && frame.contains(localPlayer.component(ofType: SpriteComponent.self)!.position) == true && localPlayer.adopted == false{
+            localPlayer.component(ofType: PlayerStateComponent.self)?.enterWinnerState()
+            localPlayer.component(ofType: SendPlayerUpdatesComponent.self)?.updatePlayerPositionForOtherPlayers()
             localPlayer.adopted = true
             localPlayer.component(ofType: ScoreComponent.self)?.dogAdopted()
-            localPlayer.component(ofType: PlayerStateComponent.self)?.enterWinnerState()
             scene.entityManager.killPlayer()
-            
-            if remotePlayers.count == countPlayersThatDontMove(){
-                scene.controllerDelegate?.finishGame()
-            }
             
         }
         
