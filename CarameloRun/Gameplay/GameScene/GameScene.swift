@@ -35,17 +35,7 @@ class GameScene: SKScene {
     var lastUpdateTimeInterval: TimeInterval = 0
     
     var entityManager: EntityManager!
-    
-//    override init(size: CGSize) {
-//        self.plataforma_terreo = SKNode()
-//        super.init(size: size)
-//        // Other initialization code goes here
-//    }
-//
-//    required init?(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-    
+        
     override func didMove(to view: SKView){
         entityManager = EntityManager(scene: self)
         
@@ -67,8 +57,6 @@ class GameScene: SKScene {
         addChild(timer.node)
         
         addChild(NTasksCompleted.node)
-        
-        //plataforma_terreo = (scene?.childNode(withName: "platforma_terreo"))
         
         task1 = Tasks(scene! as! GameScene, (scene?.childNode(withName: "task1")!.frame)!, Constants.timerTask1BeAvaiable)
         task2 = Tasks(scene! as! GameScene, (scene?.childNode(withName: "task2")!.frame)!, Constants.timerTask2BeAvaiable)
