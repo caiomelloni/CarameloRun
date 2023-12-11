@@ -67,6 +67,7 @@ class HUD {
         for avatar in avatars {
             avatar.avatarNode.removeFromParent()
         }
+        avatars.removeAll()
     }
 
     private func updateAvatars(_ allPlayers: [Player]) {
