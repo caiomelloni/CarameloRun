@@ -30,8 +30,6 @@ class EntityManager {
         
         entity.component(ofType: SendPlayerUpdatesComponent.self)?.match = scene.controllerDelegate?.match
         
-        entity.component(ofType: SpawnComponent.self)?.respawns = scene.getRespawns()
-        
         entity.component(ofType: SpawnComponent.self)?.addToSceneInSpawnPoint(scene)
         
         let catchComponent = entity.component(ofType: CatchComponent.self)
