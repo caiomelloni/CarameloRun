@@ -27,6 +27,7 @@ class GameViewController: UIViewController {
         self.match = match
         self.players = players
         self.time = time
+
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -44,7 +45,7 @@ class GameViewController: UIViewController {
             // Load the SKScene from 'GameScene.sks'
             if let scene = GameScene(fileNamed: "Background") {
                 gameScene = scene
-                
+                //scene.players = self.players
                 scene.controllerDelegate = self
                 
                 // Set the scale mode to scale to fit the window

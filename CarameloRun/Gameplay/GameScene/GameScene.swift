@@ -20,18 +20,33 @@ class GameScene: SKScene {
     let localPlayerPositionHistory = PositionHistory()
     var controllerDelegate: GameControllerDelegate?
     let timer = ControllTimer()
+
     var hud: HUD?
+
 
     // Update time
     var lastUpdateTimeInterval: TimeInterval = 0
 
     var entityManager: EntityManager!
-    
+
+    override func sceneDidLoad() {
+
+    }
+
     override func didMove(to view: SKView){
-        entityManager = EntityManager(scene: self)
+
 
         backgroundColor = .white
         placePlayersInitialPositionInMap()
+        entityManager = EntityManager(scene: self)
+        var allPlayers = [entityManager.localPlayer]
+        for player in entityManager.remotePlayers {
+            allPlayers.append(LocalPlayer(displayName: player.displayName, playerNumber: player.playerNumber, playerType: player.type, photo: player.photo))
+            print(player)
+        }
+
+
+        hud = HUD(width: self.frame.width, height: self.frame.height, players: allPlayers)
 
         // set camera
         sceneCamera = LocalPlayerCamera(entityManager.localPlayer!)
@@ -46,7 +61,7 @@ class GameScene: SKScene {
         
 //        addChild(timer.node)
 
-        hud = HUD(width: self.frame.width, height: self.frame.height)
+
         addChild(hud?.hudNode ?? SKNode())
 
         InsertTask()

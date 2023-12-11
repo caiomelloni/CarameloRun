@@ -12,14 +12,18 @@ class HUD {
     var width: Double
     var height: Double
     var timer = ControllTimer()
-    var progressBar = ProgressBar(progressBarImage: "progress_bar_fill", progressBarStroke: "progress_bar_stroke", taskDone: 1)
+    var players: [LocalPlayer?]
+    var progressBar = ProgressBar(progressBarImage: "progress_bar_fill", progressBarStroke: "progress_bar_stroke", taskTotal: 5, taskDone: 1)
 //    var sceneFrame:
 
-    init(hudNode: SKSpriteNode = SKSpriteNode(), width: Double, height: Double) {
+    init(hudNode: SKSpriteNode = SKSpriteNode(), width: Double, height: Double, players: [LocalPlayer?]) {
         self.hudNode = hudNode
         self.width = width
         self.height = height
-
+        self.players = players
+        for player in players {
+            print(player)
+        }
         let avatar1 = Avatar(playerName: "NudeDoJoshuaMatheus", playerType: .man)
         let avatar2 = Avatar(playerName: "JoshuaMatheusNudeDo", playerType: .dog, dogColor: .blue, dogState: .fullLife)
         let avatar3 = Avatar(playerName: "NudeDoJoshuaMatheus", playerType: .dog, dogColor: .green, dogState: .arrested)
@@ -53,7 +57,6 @@ class HUD {
     }
 
     private func position(x: Double, y: Double) {
-        print(width, height)
         hudNode.position = CGPoint(x: x - (self.width/2), y: y + (self.height * 1.1))
     }
 
