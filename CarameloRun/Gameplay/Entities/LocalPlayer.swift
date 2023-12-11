@@ -27,13 +27,12 @@ class LocalPlayer: GKEntity {
     var adopted: Bool = false
     
     
-    
+
     init(displayName: String, playerNumber: Int, playerType: typeOfPlayer, photo: UIImage?) {
         self.displayName = displayName
         self.playerNumber = playerNumber
         self.type = playerType
         self.photo = photo
-        
         
         super.init()
         
@@ -86,3 +85,5 @@ class LocalPlayer: GKEntity {
     }
     
 }
+
+extension LocalPlayer: Player {}

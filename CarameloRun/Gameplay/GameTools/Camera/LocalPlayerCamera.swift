@@ -10,8 +10,8 @@ import SpriteKit
 // cria uma camera que segue o jogador especificado
 class LocalPlayerCamera: SKCameraNode {
     var playerSpriteComponent: SpriteComponent
-    let scaleFactorY: CGFloat = 1.75
-    let scaleFactorX: CGFloat = 1.75
+    let scaleFactorY: CGFloat = Constants.scaleFactorY
+    let scaleFactorX: CGFloat = Constants.scaleFactorX
     init(_ playerToFollow: LocalPlayer) {
         guard let spriteComp = playerToFollow.component(ofType: SpriteComponent.self) else {
             //TODO: treat error in a better way

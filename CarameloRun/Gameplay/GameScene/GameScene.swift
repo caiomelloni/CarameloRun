@@ -18,7 +18,9 @@ class GameScene: SKScene {
     let jumpButton = JumpButton()
     var sceneCamera: LocalPlayerCamera!
     var controllerDelegate: GameControllerDelegate?
-    let timer = ControllTimer()
+    var hud: HUD?
+
+
     
     let NTasksCompleted = TasksCompleted()
     
@@ -27,20 +29,25 @@ class GameScene: SKScene {
     var task3: Tasks! = nil
         
     var dogsCanBeAdopted: Bool = false
-    
+
     // Update time
     var lastUpdateTimeInterval: TimeInterval = 0
-    
+
     var entityManager: EntityManager!
         
     override func didMove(to view: SKView){
         physicsWorld.contactDelegate = self
         entityManager = EntityManager(scene: self, finishGame: controllerDelegate!.finishGame)
-                
+
         backgroundColor = .white
-        
+
         placePlayersInitialPositionInMap()
-        
+
+
+
+
+        hud = HUD(width: self.frame.width, height: self.frame.height, players: entityManager.allPlayers)
+
         // set camera
         sceneCamera = LocalPlayerCamera(entityManager.localPlayer!)
         camera = sceneCamera
@@ -50,9 +57,9 @@ class GameScene: SKScene {
         
         // set jump button
         jumpButton.addToScene(self)
-        
-        addChild(timer.node)
-        
+
+        addChild(hud?.hudNode ?? SKNode())
+
         addChild(NTasksCompleted.node)
         
         task1 = Tasks(scene! as! GameScene, (scene?.childNode(withName: "task1")!.frame)!, Constants.timerTask1BeAvaiable)
@@ -107,9 +114,9 @@ class GameScene: SKScene {
         sceneCamera.update(deltaTime)
         joystick.update(sceneCamera, frame, entityManager.localPlayer!)
         jumpButton.update(sceneCamera, frame)
-        timer.update(sceneCamera, frame)
-        NTasksCompleted.update(sceneCamera, frame)
-        
+        hud?.update(sceneCamera, frame, entityManager.allPlayers, numberOfTasksCompleted())
+
+        NTasksCompleted.update(sceneCamera, frame)    
         if !dogsCanBeAdopted {
             verifyDoingTask(task1)
             verifyDoingTask(task2)

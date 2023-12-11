@@ -10,4 +10,5 @@ enum Zposition: CGFloat {
     case ground = 1
     case player
     case joystick
+    case hud
 }

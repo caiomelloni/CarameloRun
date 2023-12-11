@@ -20,4 +20,10 @@ class HealthComponent: GKComponent {
         
         return healthPoints
     }
+
+    var getHealthPoints: Int {
+        get {
+            healthPoints
+        }
+    }
 }

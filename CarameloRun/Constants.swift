@@ -36,7 +36,9 @@ struct Constants {
     static let catcherRunFramesCount: Int = 8
     static let catcherFramesPrefix: String = "catcher"
 
-    //respawn
+    //Camera distance
+    static let scaleFactorY: Double = 1.75
+    static let scaleFactorX: Double = 1.75
     static let respawnCount: Int = 4
     
     //tasks timers
