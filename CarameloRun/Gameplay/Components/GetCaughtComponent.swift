@@ -11,15 +11,10 @@ class GetCaughtComponent: GKComponent {
     var isArrested: Bool = false
     
     func gotCaught() {
-        guard let respawn = entity?.component(ofType: SpawnComponent.self)?.getRespawnPoint() else {
-            fatalError("ERROR: when got caught, the GetCaughtComponent did not find an respawn point")
-        }
         
         if !isArrested {
             isArrested = true
             
-//            entity?.component(ofType: SpriteComponent.self)?.position.x = respawn.x
-//            entity?.component(ofType: SpriteComponent.self)?.position.y = respawn.y
             
             entity?.component(ofType: ScoreComponent.self)?.dogWasCatched()
             

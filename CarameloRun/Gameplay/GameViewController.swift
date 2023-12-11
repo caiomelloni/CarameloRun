@@ -27,6 +27,7 @@ class GameViewController: UIViewController {
         self.match = match
         self.players = players
         self.time = time
+
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -44,7 +45,7 @@ class GameViewController: UIViewController {
             // Load the SKScene from 'GameScene.sks'
             if let scene = GameScene(fileNamed: "Background") {
                 gameScene = scene
-                
+                //scene.players = self.players
                 scene.controllerDelegate = self
                 
                 // Set the scale mode to scale to fit the window
@@ -87,8 +88,8 @@ class GameViewController: UIViewController {
                     self.finishGame()
                     timer.invalidate()
                 }
-                
-                self.gameScene?.timer.updateTimer(self.time)
+
+                self.gameScene?.hud?.timer.updateTimer(self.time)
             })
         }
         
@@ -127,7 +128,6 @@ extension GameViewController: GKMatchDelegate {
                     addOneTaskDone(tasks.frameOfTheTask)
                 }
             } else {
-                print("Error reciving data")
             }
         }
     }
@@ -178,6 +178,17 @@ extension GameViewController: GameControllerDelegate {
             gameScene?.addToGeneral((gameScene?.task2)!)
         } else if frame == gameScene?.task3.frame {
             gameScene?.addToGeneral((gameScene?.task2)!)
+        }
+    }
+    
+    func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
+        switch state {
+        case .connected:
+            break
+        case .disconnected:
+            gameScene?.playerDisconnected(player.displayName)
+        default:
+            break
         }
     }
     

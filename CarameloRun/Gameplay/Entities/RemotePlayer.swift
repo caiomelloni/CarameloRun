@@ -90,3 +90,4 @@ class RemotePlayer: GKEntity {
     
 }
 
+extension RemotePlayer: Player {}

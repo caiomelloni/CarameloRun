@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -51,3 +52,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+
+extension UIView {
+    func getWidth() -> CGFloat {
+        return UIScreen.main.bounds.width
+    }
+    func getHeight() -> CGFloat {
+        return UIScreen.main.bounds.height
+    }
+}
