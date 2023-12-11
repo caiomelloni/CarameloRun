@@ -25,14 +25,14 @@ class GameScene: SKScene {
     var task1: Tasks! = nil
     var task2: Tasks! = nil
     var task3: Tasks! = nil
-    
+        
     var dogsCanBeAdopted: Bool = false
     
     // Update time
     var lastUpdateTimeInterval: TimeInterval = 0
     
     var entityManager: EntityManager!
-    
+        
     override func didMove(to view: SKView){
         physicsWorld.contactDelegate = self
         entityManager = EntityManager(scene: self, finishGame: controllerDelegate!.finishGame)
