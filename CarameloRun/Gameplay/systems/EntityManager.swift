@@ -122,7 +122,7 @@ extension EntityManager {
 }
 
 //TODO: Remove it, and place the entity logic inside the entity manager
-//Getter methods
+//MARK: Getter methods
 extension EntityManager {
     var localPlayer: LocalPlayer? {
         return getEntities(ofType: LocalPlayer.self).first
@@ -135,6 +135,14 @@ extension EntityManager {
     
     var remotePlayers: [RemotePlayer] {
         getEntities(ofType: RemotePlayer.self)
+    }
+
+    var allPlayers: [Player] {
+        guard let localPlayer = localPlayer else {
+            fatalError("ERROR: localPlayer was nil in entityManager")
+        }
+
+        return [localPlayer] + remotePlayers
     }
 }
 

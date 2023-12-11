@@ -85,3 +85,5 @@ class LocalPlayer: GKEntity {
     }
     
 }
+
+extension LocalPlayer: Player {}

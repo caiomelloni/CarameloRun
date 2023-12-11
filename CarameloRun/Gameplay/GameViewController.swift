@@ -128,7 +128,6 @@ extension GameViewController: GKMatchDelegate {
                     addOneTaskDone(tasks.frameOfTheTask)
                 }
             } else {
-                print("Error reciving data")
             }
         }
     }

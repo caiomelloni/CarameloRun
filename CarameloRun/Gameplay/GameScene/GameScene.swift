@@ -27,18 +27,14 @@ class GameScene: SKScene {
     var task1: Tasks! = nil
     var task2: Tasks! = nil
     var task3: Tasks! = nil
-    
+        
     var dogsCanBeAdopted: Bool = false
 
     // Update time
     var lastUpdateTimeInterval: TimeInterval = 0
 
     var entityManager: EntityManager!
-
-    override func sceneDidLoad() {
-
-    }
-
+        
     override func didMove(to view: SKView){
         physicsWorld.contactDelegate = self
         entityManager = EntityManager(scene: self, finishGame: controllerDelegate!.finishGame)
@@ -49,12 +45,8 @@ class GameScene: SKScene {
 
 
 
-        var allPlayers = [entityManager.localPlayer]
-        for player in entityManager.remotePlayers {
-            allPlayers.append(LocalPlayer(displayName: player.displayName, playerNumber: player.playerNumber, playerType: player.type, photo: player.photo))
-        }
 
-        hud = HUD(width: self.frame.width, height: self.frame.height, players: allPlayers)
+        hud = HUD(width: self.frame.width, height: self.frame.height, players: entityManager.allPlayers)
 
         // set camera
         sceneCamera = LocalPlayerCamera(entityManager.localPlayer!)
@@ -127,7 +119,7 @@ class GameScene: SKScene {
         joystick.update(sceneCamera, frame, entityManager.localPlayer!)
         jumpButton.update(sceneCamera, frame)
 //        timer.update(sceneCamera, frame)
-        hud?.update(sceneCamera, frame)
+        hud?.update(sceneCamera, frame, entityManager.allPlayers, numberOfTasksCompleted())
 
         //game center online updates
         //updatePlayerPositionForOtherPlayers()
