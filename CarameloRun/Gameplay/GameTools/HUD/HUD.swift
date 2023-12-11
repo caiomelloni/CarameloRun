@@ -13,7 +13,7 @@ class HUD {
     var height: Double
     var timer = ControllTimer()
     var players: [LocalPlayer?]
-    var progressBar = ProgressBar(progressBarImage: "progress_bar_fill", progressBarStroke: "progress_bar_stroke", taskTotal: 5, taskDone: 1)
+    var progressBar = ProgressBar(progressBarImage: "progress_bar_fill", progressBarStroke: "progress_bar_stroke", taskTotal: 6, taskDone: 3)
 //    var sceneFrame:
 
     init(hudNode: SKSpriteNode = SKSpriteNode(), width: Double, height: Double, players: [LocalPlayer?]) {
@@ -21,37 +21,41 @@ class HUD {
         self.width = width
         self.height = height
         self.players = players
-        for player in players {
-            print(player)
-        }
-        let avatar1 = Avatar(playerName: "NudeDoJoshuaMatheus", playerType: .man)
-        let avatar2 = Avatar(playerName: "JoshuaMatheusNudeDo", playerType: .dog, dogColor: .blue, dogState: .fullLife)
-        let avatar3 = Avatar(playerName: "NudeDoJoshuaMatheus", playerType: .dog, dogColor: .green, dogState: .arrested)
-        let avatar4 = Avatar(playerName: "NudeDoJoshuaMatheus", playerType: .dog, dogColor: .red, dogState: .catched)
-        let avatar5 = Avatar(playerName: "NudeDoJoshuaMatheus", playerType: .dog, dogColor: .yellow, dogState: .halfLife)
-        let avatar6 = Avatar(playerName: "NudeDoJoshuaMatheus", playerType: .dog, dogColor: .pink, dogState: .fullLife)
+
 
         hudNode.size = CGSize(width: width * Constants.scaleFactorY , height: height/5)
-//        hudNode.color = SKColor.systemGray2
         hudNode.zPosition = Zposition.hud.rawValue
 
         hudNode.addChild(timer.node)
         timer.node.position = CGPoint(x: hudNode.position.x - height/6, y: 0)
         hudNode.addChild(progressBar.progressNode)
 
-        hudNode.addChild(avatar1.avatarNode)
-        hudNode.addChild(avatar2.avatarNode)
-        hudNode.addChild(avatar3.avatarNode)
-        hudNode.addChild(avatar4.avatarNode)
-        hudNode.addChild(avatar5.avatarNode)
-        hudNode.addChild(avatar6.avatarNode)
+        for player in players {
+            let avatar: Avatar
+            if player?.type == .man {
+                avatar = Avatar(playerName: player?.displayName ?? "", playerType: player?.type ?? .man)
+            }
+            else {
+                var dogState: dogMatchState
+                if player?.component(ofType: HealthComponent.self)?.getHealthPoints == 2 {
+                    dogState = .fullLife
+                } else if player?.component(ofType: HealthComponent.self)?.getHealthPoints == 1 {
 
-        avatar1.avatarNode.position = CGPoint(x: timer.node.size.width/1.2, y: 0)
-        avatar2.avatarNode.position = CGPoint(x: 2 * timer.node.size.width/1.2, y: 0)
-        avatar3.avatarNode.position = CGPoint(x: 3 * timer.node.size.width/1.2, y: 0)
-        avatar4.avatarNode.position = CGPoint(x: 4 * timer.node.size.width/1.2, y: 0)
-        avatar5.avatarNode.position = CGPoint(x: 5 * timer.node.size.width/1.2, y: 0)
-        avatar6.avatarNode.position = CGPoint(x: 6 * timer.node.size.width/1.2, y: 0)
+                    dogState = .halfLife
+
+                    if player?.component(ofType: PlayerStateComponent.self)?.currentStateType == .arrestState {
+                        dogState = .arrested
+                    }
+
+                } else {
+                    dogState = .catched
+                }
+                let dogColors: [dogPlayerColor] = [.blue, .green, .pink, .red, .yellow]
+                avatar = Avatar(playerName: player?.displayName ?? "", playerType: player?.type ?? .dog, dogColor: dogColors[player?.playerNumber ?? 0], dogState: dogState)
+            }
+            avatar.avatarNode.position = CGPoint(x: Int((timer.node.size.width/1.2)) * (player?.playerNumber ?? 1), y: 0)
+            hudNode.addChild(avatar.avatarNode)
+        }
 
 
     }

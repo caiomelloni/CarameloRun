@@ -7,16 +7,10 @@
 
 import GameplayKit
 
-class FallingState: GKState {
-    let spriteComponent: SpriteComponent
-    var spriteSheet = [SKTexture]()
-    
-    init(_ spriteComponent: SpriteComponent, statePrefix: String, frameCount: Int) {
-        for i in 1...frameCount {
-            spriteSheet.append(SKTexture(imageNamed: "\(statePrefix)Fall\(i)"))
-        }
-        
-        self.spriteComponent = spriteComponent
+class FallingState: PlayerState {
+
+    init(_ entity: GKEntity, statePrefix: String, frameCount: Int) {
+        super.init(entity, statePrefix: statePrefix, frameCount: frameCount, stateType: StateType.fallState)
     }
     
     override func didEnter(from previousState: GKState?) {
@@ -36,11 +30,5 @@ class FallingState: GKState {
     
     override func update(deltaTime seconds: TimeInterval) {
         
-    }
-}
-
-extension FallingState: CodableState {
-    var stringIdentifier: String {
-        PlayerStateStringIdentifier.fallState.rawValue
     }
 }

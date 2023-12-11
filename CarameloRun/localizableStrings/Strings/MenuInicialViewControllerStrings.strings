@@ -1,0 +1,9 @@
+"LogoImage" = "Logo";
+
+"HelpButtonImage" = "helpButton.png";
+
+"StartButtonImage" = "startButton.png";
+
+"ConnectionStatusLabelTextNotConnected" = "You are not connected to Game Center";
+
+"ConnectionStatusLabelTextConnected" = "Connected to Game Center";

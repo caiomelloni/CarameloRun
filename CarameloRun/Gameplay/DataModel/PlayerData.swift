@@ -6,7 +6,7 @@
 //
 import GameplayKit
 
-struct PlayerState: Codable {
+struct PlayerData: Codable {
     let name: String
     let playerNumber: Int
     let positionX: Double
@@ -25,9 +25,9 @@ struct IsCatcher: Codable {
     var catcher: Int
     var name: String
 }
-
-struct matchState: Codable {
-    var finish: Bool
+struct taskDone: Codable {
+    var frameOfTheTask: CGRect
+    var done: Bool
 }
 
 enum PlayerStateStringIdentifier: String {

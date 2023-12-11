@@ -9,7 +9,12 @@ import SpriteKit
 import GameplayKit
 
 class SpriteComponent: GKComponent {
-    private let node: SKSpriteNode
+    let node: SKSpriteNode
+    
+    //sprite frames updates changes controll
+    private var oldPosition =  CGPoint(x: 0, y: 0)
+    private var positionChangedOnFrameUpdate = false
+    
 
     init(imageName: String, size: CGSize) {
         node = SKSpriteNode(imageNamed: imageName)
@@ -58,13 +63,19 @@ class SpriteComponent: GKComponent {
             node.position
         }
         set {
+
+            let oldX = position.x
+            
+            let directionComp = entity?.component(ofType: DirectionComponent.self)
+            directionComp?.positionChanged(oldX, newValue.x)
+            
             node.position = newValue
         }
     }
     
     func addToScene(_ scene: SKScene) {
-        node.removeFromParent()
         scene.addChild(node)
+        setReferencePosition()
     }
    
     func removeFromParent() {
@@ -96,6 +107,50 @@ class SpriteComponent: GKComponent {
     var dy: CGFloat? {
         get {
             node.physicsBody?.velocity.dy
+        }
+    }
+    
+    override func update(deltaTime seconds: TimeInterval) {
+        positionChangedOnFrameUpdate = position.x != oldPosition.x || position.y != oldPosition.y
+        oldPosition = CGPoint(x: position.x, y: position.y)
+    }
+    
+    private func setReferencePosition() {
+        oldPosition = CGPoint(x: position.x, y: position.y)
+    }
+    
+    func hasChanged() -> Bool {
+        let hasStateChanged = entity?.component(ofType: PlayerStateComponent.self)?.hasStateChanged() ?? false
+        
+        let hasChanged = positionChangedOnFrameUpdate || hasStateChanged
+
+
+        
+        return hasChanged
+    }
+    
+    var contactTestBitMask: UInt32? {
+        get {
+            node.physicsBody?.contactTestBitMask
+        }
+        set {
+            guard let newValue = newValue else {
+                return
+            }
+            node.physicsBody?.contactTestBitMask = newValue
+        }
+    }
+    
+    override func didAddToEntity() {
+        node.entity = self.entity
+    }
+    
+    var dx: CGFloat? {
+        get {
+            node.physicsBody?.velocity.dy
+        }
+        set {
+            node.physicsBody?.velocity.dx = newValue ?? 0
         }
     }
     

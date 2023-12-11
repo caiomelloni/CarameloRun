@@ -23,30 +23,51 @@ class JumpComponent: GKComponent {
     }
     
     func jump() {
-        if let spritComponent = entity?.component(ofType: SpriteComponent.self), let directionComponent = entity?.component(ofType: DirectionComponent.self) {
+        guard let stateComponent = entity?.component(ofType: PlayerStateComponent.self) else {
+            fatalError("ERROR: PlayerStateComponent was nil when jump button was pressed")
+        }
+
+        let currentState = stateComponent.currentStateType
+        if currentState == .arrestState || currentState == .deadState {
+            return
+        }
+        
+        
+        if let spritComponent = entity?.component(ofType: SpriteComponent.self) {
             if spritComponent.physicsBody?.velocity.dy != 0 {
                 return
             }
-            var direction = 1.00
-            if directionComponent.direction == .left {
-                direction = -1
-            }
+
             spritComponent.physicsBody?.applyImpulse(
-                .init(dx: direction * jumpXMultiplyer, dy: jumpYMultiplyer)
+                .init(dx: 0, dy: jumpYMultiplyer)
             )
         }
 
     }
     
     override func update(deltaTime seconds: TimeInterval) {
+        guard let stateComponent = entity?.component(ofType: PlayerStateComponent.self) else {
+            fatalError("ERROR: PlayerStateComponent was nil when jump button was pressed")
+        }
+
+        let currentState = stateComponent.currentStateType
+        if currentState == .arrestState || currentState == .deadState {
+            return
+        }
+        
         let dy = entity?.component(ofType: SpriteComponent.self)?.dy
-        let animationComponent = entity?.component(ofType: PlayerAnimationComponent.self)
         if let dy = dy {
             if dy > 0 {
-                animationComponent?.jump()
+                stateComponent.enterJumpState()
             } else if dy < 0 {
-                animationComponent?.fall()
+                stateComponent.enterFallState()
             }
         }
+    }
+}
+
+extension JumpComponent: GetNotifiedWhenJumpButtonIsPressed {
+    func jumpButtonPressed() {
+        jump()
     }
 }

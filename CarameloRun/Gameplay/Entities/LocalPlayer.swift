@@ -24,6 +24,8 @@ class LocalPlayer: GKEntity {
     var type: typeOfPlayer
     var ready: Bool = false
     var photo: UIImage?
+    var adopted: Bool = false
+    
     
 
     init(displayName: String, playerNumber: Int, playerType: typeOfPlayer, photo: UIImage?) {
@@ -37,14 +39,14 @@ class LocalPlayer: GKEntity {
         let spriteComponent = setPlayerBodySpriteComponent()
         
         let components = [
-            SpawnComponent(spawnNumber: playerNumber),
+            SpawnComponent(spawnPrefix: "spawn", spawnNumber: playerNumber),
             spriteComponent,
             DirectionComponent(),
             JumpComponent(Constants.playerJumpXMultiplier, Constants.playerJumpYMultiplier),
-            VelocityComponent(Constants.playerVelocity),
+            VelocityComponent(type == .dog ? Constants.playerVelocity : Constants.catcherVelocity),
             ScoreComponent(),
-            PlayerAnimationComponent(type == .dog ? PlayerStateMachine(spriteComponent) : CatcherStateMachine(spriteComponent)),
-                        
+            SendPlayerUpdatesComponent(),
+            PhysicsComponent(shouldContactWith: .player)
         ]
         
         components.forEach { component in
@@ -57,6 +59,8 @@ class LocalPlayer: GKEntity {
             addComponent(GetCaughtComponent())
             addComponent(HealthComponent())
         }
+        
+        addComponent(PlayerStateComponent(type == .dog ? PlayerStateMachine(self) : CatcherStateMachine(self)))
     }
     
     required init?(coder: NSCoder) {
@@ -73,11 +77,8 @@ class LocalPlayer: GKEntity {
         body.allowsRotation = false
         body.mass = Constants.playerMass
         
-        body.contactTestBitMask = Constants.charactersCollisionMask
-        body.categoryBitMask = Constants.charactersCollisionMask
         
         spriteComponent.physicsBody = body
-        
         spriteComponent.zPosition = Zposition.player.rawValue
         
         return spriteComponent

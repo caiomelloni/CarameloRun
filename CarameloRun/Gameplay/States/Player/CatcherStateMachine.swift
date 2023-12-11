@@ -9,21 +9,21 @@ import GameplayKit
 
 class CatcherStateMachine: GKStateMachine {
     
-    init(_ spriteComponent: SpriteComponent) {
+    init(_ entity: GKEntity) {
         super.init(states:  [
-            IdleState(spriteComponent,
+            IdleState(entity,
                       statePrefix: Constants.catcherFramesPrefix,
                       frameCount: Constants.catcherIdleFramesCount),
             
-            JumpingState(spriteComponent,
+            JumpingState(entity,
                          statePrefix: Constants.catcherFramesPrefix,
                          frameCount: Constants.catcherJumpFramesCount),
             
-            FallingState(spriteComponent,
+            FallingState(entity,
                          statePrefix: Constants.catcherFramesPrefix,
                          frameCount: Constants.catcherFallFramesCount),
             
-            RunningState(spriteComponent,
+            RunningState(entity,
                          statePrefix: Constants.catcherFramesPrefix,
                          frameCount: Constants.catcherRunFramesCount)
         ])

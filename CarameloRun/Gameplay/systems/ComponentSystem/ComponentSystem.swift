@@ -14,11 +14,14 @@ class ComponentSystem {
     // add the components that needs to be update by each frame
     lazy var componentSystems: [GKComponentSystem] = {
         return [
-            GKComponentSystem(componentClass: PlayerAnimationComponent.self),
+            GKComponentSystem(componentClass: SpriteComponent.self),
+            GKComponentSystem(componentClass: PlayerStateComponent.self),
             GKComponentSystem(componentClass: JumpComponent.self),
             GKComponentSystem(componentClass: CatchComponent.self),
             GKComponentSystem(componentClass: SpawnComponent.self),
-            GKComponentSystem(componentClass: VelocityComponent.self)
+            GKComponentSystem(componentClass: VelocityComponent.self),
+            GKComponentSystem(componentClass: SendPlayerUpdatesComponent.self),
+            GKComponentSystem(componentClass: GetCaughtComponent.self)
         ]
     }()
     
@@ -53,7 +56,6 @@ class ComponentSystem {
             for comp in system.components {
                 comps.append(comp as! T)
             }
-            break
         }
         
         return comps

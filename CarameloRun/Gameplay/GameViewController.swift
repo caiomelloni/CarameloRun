@@ -84,7 +84,7 @@ class GameViewController: UIViewController {
                 self.time -= 1
                 
                 if self.time == 0 {
-                    self.sendMatchState(matchState.init(finish: true))
+                    self.sendMatchState(MatchState.init(finish: true))
                     self.finishGame()
                     timer.invalidate()
                 }
@@ -101,9 +101,9 @@ class GameViewController: UIViewController {
                     score = 0
                 }
                 
-                var victory = gameScene?.getVictory() ?? false
+                let victory = gameScene?.getVictory() ?? false
                 
-                self.navigationController?.pushViewController(EndGame(score, GKLocalPlayer.local.displayName, victory), animated: true)
+                self.navigationController?.pushViewController(EndGame(score, GKLocalPlayer.local.displayName, victory, gameScene?.entityManager.localPlayer?.type ?? .dog), animated: true)
                 
                 controllerFinishGame = 1
             }
@@ -116,12 +116,16 @@ extension GameViewController: GKMatchDelegate {
         let dataJsonString = String(decoding: data, as: UTF8.self)
         let jsonData = dataJsonString.data(using: .utf8)!
         
+        gameScene?.didReceiveData(match, data, player)
+        
         do {
-            if let playerState = try? JSONDecoder().decode(PlayerState.self, from: jsonData) {
-                gameScene?.updatePlayersPosition(playerState)
-            } else if let matchState = try? JSONDecoder().decode(matchState.self, from: jsonData) {
+           if let matchState = try? JSONDecoder().decode(MatchState.self, from: jsonData) {
                 if matchState.finish {
                     finishGame()
+                }
+            } else if let tasks = try? JSONDecoder().decode(taskDone.self, from: jsonData) {
+                if tasks.done == true {
+                    addOneTaskDone(tasks.frameOfTheTask)
                 }
             } else {
                 print("Error reciving data")
@@ -131,15 +135,17 @@ extension GameViewController: GKMatchDelegate {
 }
 
 protocol GameControllerDelegate {
-    func sendPlayerState(_ state: PlayerState)
-    func sendMatchState(_ state: matchState)
     var players: [LobbyPlayer] { get }
     func finishGame()
+    var match: GKMatch { get }
+    func sendTaskDone(_ state: taskDone)
+    func addOneTaskDone(_ frame: CGRect)
 }
 
 extension GameViewController: GameControllerDelegate {
     
-    func sendPlayerState(_ state: PlayerState) {
+    func sendPlayerState(_ state: PlayerData) {
+        
         do {
             let data = try JSONEncoder().encode(state)
             try match.sendData(toAllPlayers: data, with: GKMatch.SendDataMode.unreliable)
@@ -148,12 +154,31 @@ extension GameViewController: GameControllerDelegate {
         }
     }
     
-    func sendMatchState(_ state: matchState) {
+    func sendMatchState(_ state: MatchState) {
         do {
             let data = try JSONEncoder().encode(state)
             try match.sendData(toAllPlayers: data, with: GKMatch.SendDataMode.unreliable)
         } catch {
             print("error sending data")
+        }
+    }
+    
+    func sendTaskDone(_ state: taskDone) {
+        do {
+            let data = try JSONEncoder().encode(state)
+            try match.sendData(toAllPlayers: data, with: GKMatch.SendDataMode.unreliable)
+        } catch {
+            print("error sending data")
+        }
+    }
+    
+    func addOneTaskDone(_ frame: CGRect) {
+        if frame == gameScene?.task1.frame {
+            gameScene?.addToGeneral((gameScene?.task1)!)
+        } else if frame == gameScene?.task2.frame {
+            gameScene?.addToGeneral((gameScene?.task2)!)
+        } else if frame == gameScene?.task3.frame {
+            gameScene?.addToGeneral((gameScene?.task2)!)
         }
     }
     
@@ -161,5 +186,5 @@ extension GameViewController: GameControllerDelegate {
 
 enum GameState {
     case playerState(PlayerState)
-    case matchState(matchState)
+    case matchState(MatchState)
 }

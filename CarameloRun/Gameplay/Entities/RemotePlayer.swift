@@ -14,6 +14,7 @@ class RemotePlayer: GKEntity {
     var type: typeOfPlayer
     var ready: Bool = false
     var photo: UIImage?
+    var adopted: Bool = false
     
     
     init(displayName: String, playerNumber: Int, playerType: typeOfPlayer, photo: UIImage?) {
@@ -23,30 +24,24 @@ class RemotePlayer: GKEntity {
         self.photo = photo
         
         
+        
         super.init()
         
         let spriteComponent = setPlayerBodySpriteComponent()
         
         let components = [
-            SpawnComponent(spawnNumber: playerNumber),
+            SpawnComponent(spawnPrefix: "spawn", spawnNumber: playerNumber),
             spriteComponent,
             DirectionComponent(),
-            JumpComponent(Constants.playerJumpXMultiplier, Constants.playerJumpYMultiplier),
             ScoreComponent(),
-            PlayerAnimationComponent(type == .dog ? PlayerStateMachine(spriteComponent) : CatcherStateMachine(spriteComponent)),
-                        
+            PhysicsComponent(shouldContactWith: .player)
         ]
         
         components.forEach { component in
             addComponent(component)
         }
         
-        if type == .man {
-            addComponent(CatchComponent())
-        } else {
-            addComponent(GetCaughtComponent())
-            addComponent(HealthComponent())
-        }
+        addComponent(PlayerStateComponent(type == .dog ? PlayerStateMachine(self) : CatcherStateMachine(self)))
     }
     
     required init?(coder: NSCoder) {
@@ -63,14 +58,34 @@ class RemotePlayer: GKEntity {
         body.allowsRotation = false
         body.mass = Constants.playerMass
         
-        body.contactTestBitMask = Constants.charactersCollisionMask
-        body.categoryBitMask = Constants.charactersCollisionMask
-        
         spriteComponent.physicsBody = body
-        
         spriteComponent.zPosition = Zposition.player.rawValue
         
         return spriteComponent
+    }
+    
+    func updateFromDataReceived(_ newPosition: CGPoint, _ stateType: StateType){
+        let spriteComp = component(ofType: SpriteComponent.self)
+        spriteComp?.position = newPosition
+        
+        let stateComp = component(ofType: PlayerStateComponent.self)
+        
+        switch stateType {
+        case .idleState:
+            stateComp?.enterIdleState()
+        case .runState:
+            stateComp?.enterRunState()
+        case .fallState:
+            stateComp?.enterFallState()
+        case .jumpState:
+            stateComp?.enterJumpState()
+        case .arrestState:
+            stateComp?.enterArrestState()
+        case .deadState:
+            stateComp?.enterDeadState()
+        case .winnerState:
+            stateComp?.enterWinnerState()
+        }
     }
     
 }

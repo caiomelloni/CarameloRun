@@ -7,17 +7,10 @@
 
 import GameplayKit
 
-class RunningState: GKState {
+class RunningState: PlayerState {
     
-    let spriteComponent: SpriteComponent
-    var spriteSheet = [SKTexture]()
-    
-    init(_ spriteComponent: SpriteComponent, statePrefix: String, frameCount: Int) {
-        for i in 1...frameCount {
-            spriteSheet.append(SKTexture(imageNamed: "\(statePrefix)Run\(i)"))
-        }
-        
-        self.spriteComponent = spriteComponent
+    init(_ entity: GKEntity, statePrefix: String, frameCount: Int) {
+        super.init(entity, statePrefix: statePrefix, frameCount: frameCount, stateType: StateType.runState)
     }
     
     override func didEnter(from previousState: GKState?) {
@@ -36,11 +29,5 @@ class RunningState: GKState {
     }
     
     override func update(deltaTime seconds: TimeInterval) {
-    }
-}
-
-extension RunningState: CodableState {
-    var stringIdentifier: String {
-        PlayerStateStringIdentifier.runState.rawValue
     }
 }

@@ -7,16 +7,10 @@
 
 import GameplayKit
 
-class ArrestedState: GKState {
-    let spriteComponent: SpriteComponent
-    var spriteSheet: [SKTexture] = []
-    
-    init(_ spriteComponent: SpriteComponent, statePrefix: String, frameCount: Int) {
-        for i in 1...frameCount {
-            spriteSheet.append(SKTexture(imageNamed: "\(statePrefix)Arrested\(i)"))
-        }
-        
-        self.spriteComponent = spriteComponent
+class ArrestedState: PlayerState {
+
+    init(_ entity: GKEntity, statePrefix: String, frameCount: Int) {
+        super.init(entity, statePrefix: statePrefix, frameCount: frameCount, stateType: StateType.arrestState)
     }
     
     override func didEnter(from previousState: GKState?) {
@@ -27,8 +21,13 @@ class ArrestedState: GKState {
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         // returns true if can go to the next state
+        let isArrested = entity.component(ofType: GetCaughtComponent.self)?.isArrested ?? true
         
-        return !(stateClass is ArrestedState.Type || stateClass is FallingState.Type || stateClass is JumpingState.Type)
+        // remote players can change its state inconditionally
+        // because its state is represented by the player data that is send
+        let isRemotePlayer = (entity as? RemotePlayer) != nil
+        
+        return !(isArrested) || isRemotePlayer
     }
     
     override func willExit(to nextState: GKState) {
@@ -37,10 +36,5 @@ class ArrestedState: GKState {
     
     override func update(deltaTime seconds: TimeInterval) {
         
-    }
-}
-extension ArrestedState: CodableState {
-    var stringIdentifier: String {
-        PlayerStateStringIdentifier.arrestState.rawValue
     }
 }

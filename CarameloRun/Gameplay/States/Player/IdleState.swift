@@ -7,17 +7,10 @@
 
 import GameplayKit
 
-class IdleState: GKState {
+class IdleState: PlayerState {
     
-    let spriteComponent: SpriteComponent
-    var spriteSheet: [SKTexture] = []
-    
-    init(_ spriteComponent: SpriteComponent, statePrefix: String, frameCount: Int) {
-        for i in 1...frameCount {
-            spriteSheet.append(SKTexture(imageNamed: "\(statePrefix)Idle\(i)"))
-        }
-        
-        self.spriteComponent = spriteComponent
+    init(_ entity: GKEntity, statePrefix: String, frameCount: Int) {
+        super.init(entity, statePrefix: statePrefix, frameCount: frameCount, stateType: StateType.idleState)
     }
     
     override func didEnter(from previousState: GKState?) {
@@ -41,8 +34,3 @@ class IdleState: GKState {
     }
 }
 
-extension IdleState: CodableState {
-    var stringIdentifier: String {
-        PlayerStateStringIdentifier.idleState.rawValue
-    }
-}

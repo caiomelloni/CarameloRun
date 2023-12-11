@@ -7,22 +7,17 @@
 
 import GameplayKit
 
-class DeadState: GKState {
-    let spriteComponent: SpriteComponent?
-    var spriteSheet: [SKTexture] = []
-    
-    init(_ spriteComponent: SpriteComponent, statePrefix: String, frameCount: Int) {
-        for i in 1...frameCount {
-            spriteSheet.append(SKTexture(imageNamed: "\(statePrefix)Dead\(i)"))
-        }
-        
-        self.spriteComponent = spriteComponent
+class DeadState: PlayerState {
+
+    init(_ entity: GKEntity, statePrefix: String, frameCount: Int) {
+        super.init(entity, statePrefix: statePrefix, frameCount: frameCount, stateType: StateType.deadState)
     }
     
     override func didEnter(from previousState: GKState?) {
         // runs as it enters this state
         // has access to the previous state
         // spriteComponent?.run(.animate(with: spriteSheet, timePerFrame: 0.1))
+        spriteComponent.removeFromParent()
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
@@ -37,11 +32,5 @@ class DeadState: GKState {
     
     override func update(deltaTime seconds: TimeInterval) {
         
-    }
-}
-
-extension DeadState: CodableState {
-    var stringIdentifier: String {
-        PlayerStateStringIdentifier.deadState.rawValue
     }
 }

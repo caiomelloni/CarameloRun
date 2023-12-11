@@ -17,12 +17,18 @@ class GameScene: SKScene {
     let joystick = Joystick()
     let jumpButton = JumpButton()
     var sceneCamera: LocalPlayerCamera!
-    let localPlayerPositionHistory = PositionHistory()
     var controllerDelegate: GameControllerDelegate?
-    let timer = ControllTimer()
-
     var hud: HUD?
 
+
+    
+    let NTasksCompleted = TasksCompleted()
+    
+    var task1: Tasks! = nil
+    var task2: Tasks! = nil
+    var task3: Tasks! = nil
+    
+    var dogsCanBeAdopted: Bool = false
 
     // Update time
     var lastUpdateTimeInterval: TimeInterval = 0
@@ -34,17 +40,19 @@ class GameScene: SKScene {
     }
 
     override func didMove(to view: SKView){
-
+        physicsWorld.contactDelegate = self
+        entityManager = EntityManager(scene: self, finishGame: controllerDelegate!.finishGame)
 
         backgroundColor = .white
+
         placePlayersInitialPositionInMap()
-        entityManager = EntityManager(scene: self)
+
+
+
         var allPlayers = [entityManager.localPlayer]
         for player in entityManager.remotePlayers {
             allPlayers.append(LocalPlayer(displayName: player.displayName, playerNumber: player.playerNumber, playerType: player.type, photo: player.photo))
-            print(player)
         }
-
 
         hud = HUD(width: self.frame.width, height: self.frame.height, players: allPlayers)
 
@@ -56,27 +64,37 @@ class GameScene: SKScene {
         joystick.addToScene(self)
         
         // set jump button
-        addChild(jumpButton.node)
-        jumpButton.setJumpBtnPositionRelativeToCamera(sceneCamera, frame)
+        jumpButton.addToScene(self)
         
+
 //        addChild(timer.node)
 
 
         addChild(hud?.hudNode ?? SKNode())
 
-        InsertTask()
-
+        addChild(NTasksCompleted.node)
         
+        task1 = Tasks(scene! as! GameScene, (scene?.childNode(withName: "task1")!.frame)!, Constants.timerTask1BeAvaiable)
+        task2 = Tasks(scene! as! GameScene, (scene?.childNode(withName: "task2")!.frame)!, Constants.timerTask2BeAvaiable)
+        task3 = Tasks(scene! as! GameScene, (scene?.childNode(withName: "task3")!.frame)!, Constants.timerTask3BeAvaiable)
+        
+        InsertTask(task1)
+        InsertTask(task2)
+        InsertTask(task3)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
             joystick.touchBegan(t)
-            jumpButton.touchBegan(t, self, entityManager.localPlayer!)
+            jumpButton.touchBegan(t)
         }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for t in touches {
+            joystick.touchMoved(t)
+            
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -91,6 +109,10 @@ class GameScene: SKScene {
     
     func joystickStateChanged(inUse: Bool, direction: Direction) {
         entityManager.joystickStateChanged(inUse: inUse, direction: direction)
+    }
+    
+    func jumpButtonPressed() {
+        entityManager.jumpButtonPressed()
     }
     
     // Called before each frame is rendered
@@ -108,11 +130,23 @@ class GameScene: SKScene {
         hud?.update(sceneCamera, frame)
 
         //game center online updates
-        updatePlayerPositionForOtherPlayers()
+        //updatePlayerPositionForOtherPlayers()
         
-        handlePlayerCollision()
+        //handlePlayerCollision()
+
+        //verifyDoingTask()
+
+        NTasksCompleted.update(sceneCamera, frame)
         
-        verifyDoingTask()
+        if !dogsCanBeAdopted {
+            verifyDoingTask(task1)
+            verifyDoingTask(task2)
+            verifyDoingTask(task3)
+        } else {
+            verifyAdopted(task1)
+            verifyAdopted(task2)
+            verifyAdopted(task3)
+        }
         
     }
     
@@ -125,3 +159,13 @@ class GameScene: SKScene {
     }
 }
 
+// MARK: - Physics
+extension GameScene: SKPhysicsContactDelegate {
+    func didBegin(_ contact: SKPhysicsContact) {
+        entityManager?.didBegin(contact)
+    }
+    
+    func didEnd(_ contact: SKPhysicsContact) {
+        entityManager?.didEnd(contact)
+    }
+}
