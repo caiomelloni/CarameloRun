@@ -14,17 +14,23 @@ class CatchComponent: GKComponent {
     func finishGameIfAllPlayersWereCaught(_ allRemotePlayers: [GKEntity]) {
 
         // if all players are in arrested/dead/winner state, ends the game
-        var allPlayersCaught = true
+        var shouldEndGame = true
+        var somePlayerWasAdopted = false
         for player in allRemotePlayers {
             let state = player.component(ofType: PlayerStateComponent.self)?.currentStateType
-            if  state != .arrestState && state != .deadState {
-                allPlayersCaught = false
+            if state == .winnerState {
+                somePlayerWasAdopted = true
+            }
+            if  state != .arrestState && state != .deadState && state != .winnerState{
+                shouldEndGame = false
                 break
             }
         }
         
-        if allPlayersCaught {
-            entity?.component(ofType: ScoreComponent.self)?.humanCatchAllDogs()
+        if shouldEndGame {
+            if !somePlayerWasAdopted {
+                entity?.component(ofType: ScoreComponent.self)?.humanCatchAllDogs()
+            }
             
             guard let finishGame = finishGame else {
                 fatalError("ERROR: CatchComponent does not have a reference to finish game function")
