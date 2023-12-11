@@ -7,7 +7,6 @@
 import Foundation
 
 enum Zposition: CGFloat {
-    case ground = 1
-    case player
-    case joystick
+    case player = 4
+    case joystick = 5
 }

@@ -13,7 +13,8 @@ class JumpButton {
 
     init() {
         node.size = CGSize(width: Dimensions.buttonWidth.rawValue, height: Dimensions.buttonWidth.rawValue)
-        node.zPosition = Zposition.joystick.rawValue
+        node.zPosition = 5
+        //Zposition.joystick.rawValue
     }
     
     private func position(x: Double, y: Double) {
