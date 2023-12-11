@@ -23,7 +23,12 @@ extension GameScene {
     func playerDisconnected(_ playerName: String) {
         for player in entityManager.remotePlayers {
             if player.displayName == playerName {
-                player.component(ofType: PlayerStateComponent.self)?.enterDeadState()
+                if player.type == .man {
+                    //TODO: Implement better feedback to the user. For instance, say that the catcher disconnected
+                    controllerDelegate?.finishGame()
+                } else {
+                    entityManager.updateRemotePlayerPosition(PlayerData(name: player.displayName, playerNumber: player.playerNumber, positionX: 0, positionY: 0, state: StateType.deadState.rawValue))
+                }
             }
         }
     }
