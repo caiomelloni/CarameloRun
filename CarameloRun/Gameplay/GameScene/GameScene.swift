@@ -26,9 +26,7 @@ class GameScene: SKScene {
     var task1: Tasks! = nil
     var task2: Tasks! = nil
     var task3: Tasks! = nil
-    
-    var plataforma_terreo: SKNode?
-    
+        
     var dogsCanBeAdopted: Bool = false
     
     // Update time
