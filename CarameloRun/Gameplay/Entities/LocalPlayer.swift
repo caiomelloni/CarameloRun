@@ -80,9 +80,7 @@ class LocalPlayer: GKEntity {
         
         
         spriteComponent.physicsBody = body
-        spriteComponent.zPosition = 4
-        
-        //Zposition.player.rawValue
+        spriteComponent.zPosition = Zposition.player.rawValue
         
         return spriteComponent
     }

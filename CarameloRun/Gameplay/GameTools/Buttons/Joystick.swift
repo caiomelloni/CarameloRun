@@ -18,9 +18,7 @@ class Joystick {
     
     
     init() {
-        node.zPosition = 5
-        
-        //Zposition.joystick.rawValue
+        node.zPosition = Zposition.joystick.rawValue
         
         let size = CGSize(width: Dimensions.buttonWidth.rawValue, height: Dimensions.buttonHeight.rawValue)
         left.size = size

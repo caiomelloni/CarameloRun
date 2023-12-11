@@ -59,9 +59,7 @@ class RemotePlayer: GKEntity {
         body.mass = Constants.playerMass
         
         spriteComponent.physicsBody = body
-        spriteComponent.zPosition = 4
-        
-        Zposition.player.rawValue
+        spriteComponent.zPosition = Zposition.player.rawValue
         
         return spriteComponent
     }
