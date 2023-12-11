@@ -57,10 +57,6 @@ class GameScene: SKScene {
         
         // set jump button
         jumpButton.addToScene(self)
-        
-
-//        addChild(timer.node)
-
 
         addChild(hud?.hudNode ?? SKNode())
 
@@ -118,18 +114,9 @@ class GameScene: SKScene {
         sceneCamera.update(deltaTime)
         joystick.update(sceneCamera, frame, entityManager.localPlayer!)
         jumpButton.update(sceneCamera, frame)
-//        timer.update(sceneCamera, frame)
         hud?.update(sceneCamera, frame, entityManager.allPlayers, numberOfTasksCompleted())
 
-        //game center online updates
-        //updatePlayerPositionForOtherPlayers()
-        
-        //handlePlayerCollision()
-
-        //verifyDoingTask()
-
-        NTasksCompleted.update(sceneCamera, frame)
-        
+        NTasksCompleted.update(sceneCamera, frame)    
         if !dogsCanBeAdopted {
             verifyDoingTask(task1)
             verifyDoingTask(task2)
