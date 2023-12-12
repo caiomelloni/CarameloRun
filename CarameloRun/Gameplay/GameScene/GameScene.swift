@@ -60,7 +60,7 @@ class GameScene: SKScene {
 
         addChild(hud?.hudNode ?? SKNode())
 
-        addChild(NTasksCompleted.node)
+//        addChild(NTasksCompleted.node)
         
         task1 = Tasks(scene! as! GameScene, (scene?.childNode(withName: "task1")!.frame)!, Constants.timerTask1BeAvaiable)
         task2 = Tasks(scene! as! GameScene, (scene?.childNode(withName: "task2")!.frame)!, Constants.timerTask2BeAvaiable)
@@ -116,7 +116,7 @@ class GameScene: SKScene {
         jumpButton.update(sceneCamera, frame)
         hud?.update(sceneCamera, frame, entityManager.allPlayers, numberOfTasksCompleted())
 
-        NTasksCompleted.update(sceneCamera, frame)    
+//        NTasksCompleted.update(sceneCamera, frame)    
         if !dogsCanBeAdopted {
             verifyDoingTask(task1)
             verifyDoingTask(task2)

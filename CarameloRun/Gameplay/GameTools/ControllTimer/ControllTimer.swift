@@ -20,7 +20,7 @@ class ControllTimer {
         let timerImage = timerAsset()
         number.text = "0\(m):0\(s)"
         number.fontSize = 48
-        number.fontColor = .black
+        number.fontColor = .white
 
         timerImage.position = CGPoint(x: -(Int(timerImage.size.width * 0.7)), y: 0)
         number.position = CGPoint(x: Int(timerImage.position.x) + Int(timerImage.size.width), y: -(Dimensions.buttonHeight.rawValue)/4)
