@@ -39,6 +39,8 @@ class ProgressBarComponent: GKComponent {
         progressBar.fillColor = SKColor.black
         progressBar.position = CGPoint(x: frame.midX, y: frame.midY+50)
         progressBar.xScale = 0.00
+        progressBar.zPosition = Zposition.hud.rawValue
+        progressBar.fillColor = .purple
         scene.addChild(progressBar)
         
     }
@@ -47,7 +49,9 @@ class ProgressBarComponent: GKComponent {
         timerOfTheTaskAvaiableThatApearsForThePlayer.text = ""
         timerOfTheTaskAvaiableThatApearsForThePlayer.fontName = .localizedName(of: .symbol)
         timerOfTheTaskAvaiableThatApearsForThePlayer.fontColor = .black
-        timerOfTheTaskAvaiableThatApearsForThePlayer.position = CGPoint(x: frame.midX, y: frame.maxY - 60)
+        timerOfTheTaskAvaiableThatApearsForThePlayer.position = CGPoint(x: frame.midX, y: frame.midY + 70)
+        timerOfTheTaskAvaiableThatApearsForThePlayer.fontName = "Crang"
+        timerOfTheTaskAvaiableThatApearsForThePlayer.fontSize = 30
         scene.addChild(timerOfTheTaskAvaiableThatApearsForThePlayer)
     }
     
@@ -155,5 +159,7 @@ class ProgressBarComponent: GKComponent {
             z = "0"
         }
         timerOfTheTaskAvaiableThatApearsForThePlayer.text = "Disponível: 0\(minutos):\(z)\(segundos)"
+        timerOfTheTaskAvaiableThatApearsForThePlayer.fontColor = .purple
+        timerOfTheTaskAvaiableThatApearsForThePlayer.zPosition = 1000
     }
 }

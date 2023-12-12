@@ -33,7 +33,7 @@ extension GameScene {
         
         //TODO: fazer o update da barra de tarefas completas aqui
         let nTasksCompleted = numberOfTasksCompleted()
-        NTasksCompleted.updateNumberOfTasksCompleted(nTasksCompleted)
+//        NTasksCompleted.updateNumberOfTasksCompleted(nTasksCompleted)
         
         if nTasksCompleted >= Constants.numberOfTasksThatTheDogsNeedToBeAdopted {
             dogsCanBeAdopted = true

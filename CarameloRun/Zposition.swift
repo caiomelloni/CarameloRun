@@ -8,6 +8,6 @@ import Foundation
 
 enum Zposition: CGFloat {
     case player = 4
-    case joystick = 5
+    case joystick = 2000
     case hud
 }

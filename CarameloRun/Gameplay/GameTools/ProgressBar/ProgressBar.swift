@@ -76,7 +76,7 @@ class ProgressBar {
         let counter = SKLabelNode(fontNamed: "Crang")
         counter.text = "\(taskDone)/\(taskTotal)"
         counter.fontSize = 48
-        counter.fontColor = .black
+        counter.fontColor = .white
         counter.zPosition = Zposition.hud.rawValue + 3
         return counter
     }

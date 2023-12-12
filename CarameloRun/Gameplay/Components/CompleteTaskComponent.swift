@@ -31,6 +31,10 @@ class CompleteTaskComponent: GKComponent {
         completeLabel.fontName = .localizedName(of: .symbol)
         completeLabel.position = CGPoint(x: frame.midX, y: frame.midY+30)
         completeLabel.fontColor = SKColor.black
+        completeLabel.zPosition = Zposition.hud.rawValue
+        completeLabel.fontName = "Crang"
+        completeLabel.fontSize = 30
+        completeLabel.fontColor = .purple
         scene.addChild(completeLabel)
     }
     
@@ -48,9 +52,12 @@ class CompleteTaskComponent: GKComponent {
         } else {
             Label.text = "Indisponível"
         }
-        Label.fontName = .localizedName(of: .symbol)
+        Label.fontName = "Crang"
+        Label.fontSize = 30
         Label.position = CGPoint(x: frame.midX, y: frame.midY+75)
         Label.fontColor = SKColor.black
+        Label.zPosition = Zposition.hud.rawValue
+        Label.fontColor = .purple
         scene.addChild(Label)
     }
     
