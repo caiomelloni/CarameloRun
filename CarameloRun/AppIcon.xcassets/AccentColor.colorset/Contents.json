@@ -1,6 +1,10 @@
 {
   "colors" : [
     {
+      "color" : {
+        "platform" : "universal",
+        "reference" : "systemBrownColor"
+      },
       "filename" : "AppIcons.png",
       "idiom" : "universal"
     }
