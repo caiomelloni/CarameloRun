@@ -25,6 +25,7 @@ enum dogMatchState: String {
     case halfLife = "halfLife"
     case arrested = "arrested"
     case catched = "catched"
+    case winner = "winner"
 }
 enum dogPlayerColor: String {
     case blue = "Blue"

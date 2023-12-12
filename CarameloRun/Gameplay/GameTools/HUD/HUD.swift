@@ -53,6 +53,8 @@ class HUD {
                     dogState = .arrested
                 } else if playerState == .deadState{
                     dogState = .catched
+                } else if playerState == .winnerState {
+                    dogState = .winner
                 }
                 let dogColors: [dogPlayerColor] = [.blue, .green, .pink, .red, .yellow]
                 avatar = Avatar(playerName: player.displayName, playerType: player.type, dogColor: dogColors[player.playerNumber], dogState: dogState)
